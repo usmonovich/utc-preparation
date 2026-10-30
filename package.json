@@ -1,0 +1,48 @@
+{
+  "name": "utc-preparation",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "UTC Preparation — подготовка к вступительному экзамену: физика по собственным конспектам и математика по книге",
+  "scripts": {
+    "content:build": "tsx tools/build-content.ts && tsx tools/build-content.ts --subject math",
+    "content:build:physics": "tsx tools/build-content.ts",
+    "content:build:math": "tsx tools/build-content.ts --subject math",
+    "build": "node tools/build.mjs",
+    "serve": "node tools/serve.mjs 4173",
+    "test:unit": "tsx --test tests/unit/*.test.ts",
+    "test:e2e": "npm run build:test && node tests/e2e/flows.mjs",
+    "test:db": "bash tests/db/run.sh",
+    "test": "npm run content:build && npm run test:unit && npm run build",
+    "cap:sync": "npm run build:release && npx cap sync",
+    "android": "npm run cap:sync && npx cap open android",
+    "ios": "npm run cap:sync && npx cap open ios",
+    "test:e2e:cloud": "npm run build:test && node tests/e2e/cloud.mjs",
+    "release:pack": "tsx tools/release-pack.ts",
+    "build:release": "node tools/build.mjs --release",
+    "build:test": "node tools/build.mjs --test-pin 1234"
+  },
+  "dependencies": {
+    "katex": "0.16.47",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "@capacitor/core": "^8.5.3",
+    "@capacitor/android": "^8.5.3",
+    "@capacitor/ios": "^8.5.3"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^8.5.3",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "esbuild": "0.28.2",
+    "js-yaml": "3.15.1",
+    "playwright": "1.56.0",
+    "tsx": "4.23.12",
+    "typescript": "6.0.3"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

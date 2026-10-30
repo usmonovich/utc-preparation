@@ -1,0 +1,702 @@
+# 3.8–3.9 Система координат и векторы (книга, ч. 2, с. 282–292).
+# Теория, формулы, примеры и задачи составлены по открытым источникам (ссылки — в web); задания книги не копируются.
+
+subsection: ma-3-9
+
+x-sources:
+  ca-21: &ca-21 { title: 'College Algebra 2e, 2.1 The Rectangular Coordinate Systems and Graphs', org: 'OpenStax, Rice University (открытый учебник)', url: 'https://openstax.org/books/college-algebra-2e/pages/2-1-the-rectangular-coordinate-systems-and-graphs', checked: '2026-10-25', note: 'адрес найден поиском; расстояние между точками, середина отрезка' }
+  at-108: &at-108 { title: 'Algebra and Trigonometry, 10.8 Vectors', org: 'OpenStax, Rice University', url: 'https://openstax.org/books/algebra-and-trigonometry/pages/10-8-vectors', checked: '2026-10-25', note: 'адрес найден поиском; координаты, длина, скалярное произведение, угол между векторами' }
+  lyc: &lyc { title: 'Руцкая Е. Ю. Учебное пособие по повторению планиметрии (10 класс)', org: 'ГБОУ «Лицей № 1502 при МЭИ», Москва', url: 'https://1502.moscow/files/ucheb_m/10kl_geom_povtorenie_planimetrii.pdf', checked: '2026-10-25' }
+
+topics:
+  # ───────────────────────────── 3.8 ─────────────────────────────
+  - id: ma-3-8
+    subsection: ma-3-8
+    num: '3.8'
+    title: Система координат
+    pages: [b282, b283, b284]
+    book:
+      place: 'Ч. 2, раздел «Геометрия», пункт 3.8'
+      summary: 'Задания на расстояние между точками, координаты середины отрезка, уравнение окружности, периметры и площади фигур по координатам вершин.'
+    stage: verified
+    stageNote: 'Ответы пересчитаны.'
+    sourcesChecked: '2026-10-25'
+    web: [*ca-21]
+    theory:
+      - kind: law
+        title: Расстояние и середина отрезка
+        body: |
+          Для точек $A(x_1; y_1)$ и $B(x_2; y_2)$:
+          - $AB = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$ (теорема Пифагора);
+          - середина $M\left(\frac{x_1 + x_2}{2}; \frac{y_1 + y_2}{2}\right)$.
+          В пространстве добавляется третья координата $z$.
+        src: b282
+      - kind: definition
+        title: Уравнение окружности
+        body: |
+          Окружность с центром $(a; b)$ и радиусом $R$: $(x - a)^2 + (y - b)^2 = R^2$.
+          Уравнение вида $x^2 + y^2 + px + qy + c = 0$ приводят к этому виду выделением полных квадратов.
+        src: b283
+    formulas:
+      - title: Расстояние между точками
+        tex: 'AB = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}'
+        meaning: '$A(x_1; y_1)$, $B(x_2; y_2)$.'
+        use: 'Длины отрезков, периметры.'
+        src: b282
+      - title: Середина отрезка
+        tex: 'M = \left(\frac{x_1 + x_2}{2};\ \frac{y_1 + y_2}{2}\right)'
+        meaning: '$M$ — середина $AB$.'
+        use: 'Середины, медианы, центр симметрии.'
+        src: b282
+      - title: Уравнение окружности
+        tex: '(x - a)^2 + (y - b)^2 = R^2'
+        meaning: '$(a; b)$ — центр, $R$ — радиус.'
+        use: 'Центр и радиус по уравнению.'
+        src: b283
+    examples:
+      - title: Расстояние
+        given: 'Найдите расстояние между $A(1; 2)$ и $B(4; 6)$.'
+        find: '$AB$.'
+        method: 'Формула расстояния.'
+        steps:
+          - '$\sqrt{3^2 + 4^2}$.'
+          - '$= 5$.'
+        check: 'Прямоугольный треугольник 3, 4, 5 ✓.'
+        answer: '$5$'
+        src: b282
+      - title: Середина
+        given: 'Найдите середину отрезка с концами $(-2; 3)$ и $(6; -1)$.'
+        find: '$M$.'
+        method: 'Полусуммы координат.'
+        steps:
+          - '$x = \frac{-2 + 6}{2} = 2$.'
+          - '$y = \frac{3 - 1}{2} = 1$.'
+        check: 'Расстояния от $M$ до концов равны $\sqrt{32}$ ✓.'
+        answer: '$(2; 1)$'
+        src: b282
+      - title: Окружность
+        given: 'Окружность с центром $(1; -2)$ проходит через $(4; 2)$. Найдите радиус и уравнение.'
+        find: '$R$, уравнение.'
+        method: 'Радиус — расстояние до центра.'
+        steps:
+          - '$R = \sqrt{9 + 16} = 5$.'
+          - '$(x - 1)^2 + (y + 2)^2 = 25$.'
+        check: '$(4 - 1)^2 + (2 + 2)^2 = 25$ ✓.'
+        answer: '$R = 5$'
+        src: b283
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Найдите расстояние от начала координат до точки $(6; 8)$.'
+        num: { value: 10, unit: '', check: 'Math.hypot(6,8)' }
+        hint: '$\sqrt{36 + 64}$.'
+        explain: '$10$.'
+        f: [1]
+        sol: { method: 'Формула расстояния.', steps: ['$\sqrt{36 + 64} = 10$.'], answer: '10' }
+        src: b282
+      - type: numeric
+        cat: problem
+        q: 'Найдите абсциссу середины отрезка с концами $(3; 7)$ и $(-5; 1)$.'
+        num: { value: -1, unit: '', check: '(3-5)/2' }
+        hint: 'Полусумма абсцисс.'
+        explain: '$-1$.'
+        f: [2]
+        sol: { method: 'Середина отрезка.', steps: ['$\frac{3 - 5}{2} = -1$.'], answer: '−1' }
+        src: b282
+      - type: numeric
+        cat: problem
+        q: 'Найдите радиус окружности $x^2 + y^2 - 6x + 8y = 0$.'
+        num: { value: 5, unit: '', check: 'Math.sqrt(9+16)' }
+        hint: 'Выделите полные квадраты.'
+        explain: '$(x - 3)^2 + (y + 4)^2 = 25$.'
+        f: [3]
+        sol: { method: 'Полные квадраты.', steps: ['$(x - 3)^2 - 9 + (y + 4)^2 - 16 = 0$.', '$R^2 = 25$, $R = 5$.'], answer: '5' }
+        src: b283
+      - type: numeric
+        cat: problem
+        q: '$M(4; 1)$ — середина отрезка $AB$, $A(2; 5)$. Найдите ординату точки $B$.'
+        num: { value: -3, unit: '', check: '2*1-5' }
+        hint: '$y_B = 2y_M - y_A$.'
+        explain: '$2 - 5 = -3$.'
+        f: [2]
+        sol: { method: 'Середина отрезка.', steps: ['$y_B = 2 \cdot 1 - 5 = -3$.'], answer: '−3' }
+        src: b282
+      - type: numeric
+        cat: problem
+        q: 'Найдите периметр треугольника с вершинами $(0; 0)$, $(3; 0)$, $(0; 4)$.'
+        num: { value: 12, unit: '', check: '3+4+5' }
+        hint: 'Гипотенуза 5.'
+        explain: '$3 + 4 + 5 = 12$.'
+        f: [1]
+        sol: { method: 'Длины сторон.', steps: ['$3$, $4$, $\sqrt{9 + 16} = 5$.', '$P = 12$.'], answer: '12' }
+        src: b283
+      - type: numeric
+        cat: problem
+        q: 'Найдите площадь треугольника с вершинами $(0; 0)$, $(4; 0)$, $(0; 6)$.'
+        num: { value: 12, unit: '', check: '4*6/2' }
+        hint: 'Прямоугольный треугольник.'
+        explain: '$\frac{4 \cdot 6}{2} = 12$.'
+        sol: { method: 'Площадь по катетам.', steps: ['$\frac12 \cdot 4 \cdot 6 = 12$.'], answer: '12' }
+        src: b283
+      - type: single
+        cat: theory
+        q: 'Центр окружности $(x + 2)^2 + (y - 3)^2 = 16$:'
+        opts: ['$(-2; 3)$', '$(2; -3)$', '$(2; 3)$', '$(-2; -3)$']
+        ans: a
+        hint: '$(x - a)^2$ — центр $a$.'
+        explain: '$x + 2 = x - (-2)$.'
+        f: [3]
+        src: b283
+      - type: single
+        cat: theory
+        q: 'На чём основана формула расстояния между точками?'
+        opts: ['на теореме Пифагора', 'на теореме синусов', 'на подобии', 'на теореме Виета']
+        ans: a
+        hint: 'Разности координат — катеты.'
+        explain: 'Отрезок — гипотенуза прямоугольного треугольника с катетами $|\Delta x|$, $|\Delta y|$.'
+        f: [1]
+        src: b282
+
+  # ───────────────────────────── 3.9.1 ─────────────────────────────
+  - id: ma-3-9-1
+    num: '3.9.1'
+    title: Координаты вектора
+    pages: [b284, b285]
+    book:
+      place: 'Ч. 2, раздел «Геометрия», 3.9 «Векторы», пункт 3.9.1'
+      summary: 'Задания на координаты вектора, сложение векторов и умножение на число, коллинеарность.'
+    stage: verified
+    stageNote: 'Ответы пересчитаны.'
+    sourcesChecked: '2026-10-25'
+    web: [*at-108]
+    theory:
+      - kind: definition
+        title: Координаты вектора
+        body: |
+          Вектор $\overrightarrow{AB}$ с началом $A(x_1; y_1)$ и концом $B(x_2; y_2)$ имеет координаты $(x_2 - x_1;\ y_2 - y_1)$ — «конец минус начало».
+          - Сумма: $\vec a + \vec b = (a_1 + b_1;\ a_2 + b_2)$ (правило треугольника или параллелограмма).
+          - Умножение на число: $k\vec a = (ka_1;\ ka_2)$.
+          - Векторы **коллинеарны**, если координаты пропорциональны: $\frac{a_1}{b_1} = \frac{a_2}{b_2}$ (то есть $a_1b_2 - a_2b_1 = 0$).
+        src: b284
+        fig: vector-sum
+    formulas:
+      - title: Координаты вектора по точкам
+        tex: '\overrightarrow{AB} = (x_2 - x_1;\ y_2 - y_1)'
+        meaning: '$A$ — начало, $B$ — конец.'
+        use: 'Векторы по точкам.'
+        src: b284
+      - title: Действия с векторами
+        tex: '\vec a + \vec b = (a_1 + b_1;\ a_2 + b_2),\qquad k\vec a = (ka_1;\ ka_2)'
+        meaning: 'Покоординатно.'
+        use: 'Сумма, разность, умножение на число.'
+        src: b284
+      - title: Коллинеарность
+        tex: '\vec a \parallel \vec b \iff a_1b_2 - a_2b_1 = 0'
+        meaning: 'Координаты пропорциональны.'
+        use: 'Параллельность векторов.'
+        src: b285
+    examples:
+      - title: Вектор по точкам
+        given: '$A(1; 2)$, $B(4; -2)$. Найдите $\overrightarrow{AB}$.'
+        find: 'координаты.'
+        method: 'Конец минус начало.'
+        steps:
+          - '$x = 4 - 1 = 3$.'
+          - '$y = -2 - 2 = -4$.'
+        check: '$A + \overrightarrow{AB} = (1 + 3; 2 - 4) = B$ ✓.'
+        answer: '$(3; -4)$'
+        src: b284
+      - title: Линейная комбинация
+        given: '$\vec a = (2; -1)$, $\vec b = (1; 3)$. Найдите $2\vec a - \vec b$.'
+        find: 'координаты.'
+        method: 'Покоординатно.'
+        steps:
+          - '$2\vec a = (4; -2)$.'
+          - '$2\vec a - \vec b = (3; -5)$.'
+        check: '$4 - 1 = 3$, $-2 - 3 = -5$ ✓.'
+        answer: '$(3; -5)$'
+        src: b284
+      - title: Коллинеарность
+        given: 'При каком $k$ векторы $(2; k)$ и $(4; 6)$ коллинеарны?'
+        find: '$k$.'
+        method: 'Пропорциональность координат.'
+        steps:
+          - '$2 \cdot 6 - 4k = 0$.'
+          - '$k = 3$.'
+        check: '$(4; 6) = 2 \cdot (2; 3)$ ✓.'
+        answer: '$3$'
+        src: b285
+    questions:
+      - type: numeric
+        cat: problem
+        q: '$A(-1; 4)$, $B(3; 1)$. Найдите абсциссу вектора $\overrightarrow{AB}$.'
+        num: { value: 4, unit: '', check: '3-(-1)' }
+        hint: 'Конец минус начало.'
+        explain: '$3 - (-1) = 4$.'
+        f: [1]
+        sol: { method: 'Координаты вектора.', steps: ['$x = 3 + 1 = 4$.'], answer: '4' }
+        src: b284
+      - type: numeric
+        cat: problem
+        q: '$\vec a = (3; 2)$, $\vec b = (-1; 5)$. Найдите ординату вектора $\vec a + \vec b$.'
+        num: { value: 7, unit: '', check: '2+5' }
+        hint: 'Сложите ординаты.'
+        explain: '$7$.'
+        f: [2]
+        sol: { method: 'Сумма векторов.', steps: ['$2 + 5 = 7$.'], answer: '7' }
+        src: b284
+      - type: numeric
+        cat: problem
+        q: 'При каком $m$ векторы $(m; 6)$ и $(2; 3)$ коллинеарны?'
+        num: { value: 4, unit: '', check: '2*6/3' }
+        hint: '$3m - 12 = 0$.'
+        explain: '$m = 4$.'
+        f: [3]
+        sol: { method: 'Коллинеарность.', steps: ['$m \cdot 3 - 6 \cdot 2 = 0$.', '$m = 4$.'], answer: '4' }
+        src: b285
+      - type: numeric
+        cat: problem
+        q: '$ABCD$ — параллелограмм, $A(0; 0)$, $B(3; 1)$, $C(5; 4)$. Найдите абсциссу $D$.'
+        num: { value: 2, unit: '', check: '0+5-3' }
+        hint: '$\overrightarrow{AD} = \overrightarrow{BC}$.'
+        explain: '$D = A + C - B = (2; 3)$.'
+        f: [1]
+        sol: { method: 'Равные векторы.', steps: ['$\overrightarrow{BC} = (2; 3)$.', '$D = A + (2; 3) = (2; 3)$.'], answer: '2' }
+        src: b285
+      - type: numeric
+        cat: problem
+        q: '$\vec a = (-2; 4)$. Найдите абсциссу вектора $3\vec a$.'
+        num: { value: -6, unit: '', check: '3*(-2)' }
+        hint: 'Умножьте координаты на 3.'
+        explain: '$-6$.'
+        f: [2]
+        sol: { method: 'Умножение на число.', steps: ['$3 \cdot (-2) = -6$.'], answer: '−6' }
+        src: b284
+      - type: numeric
+        cat: problem
+        q: 'При каком $k$ вектор $(k; 2)$ коллинеарен вектору $(-3; -6)$?'
+        num: { value: 1, unit: '', check: '-3*2/(-6)' }
+        hint: '$-6k + 6 = 0$.'
+        explain: '$k = 1$.'
+        f: [3]
+        sol: { method: 'Коллинеарность.', steps: ['$k \cdot (-6) - 2 \cdot (-3) = 0$.', '$k = 1$.'], answer: '1' }
+        src: b285
+      - type: single
+        cat: theory
+        q: 'Координаты вектора $\overrightarrow{AB}$ равны…'
+        opts: ['координатам $B$ минус координаты $A$', 'координатам $A$ минус координаты $B$', 'сумме координат $A$ и $B$', 'полусумме координат']
+        ans: a
+        hint: '«Конец минус начало».'
+        explain: '$\overrightarrow{AB} = B - A$.'
+        f: [1]
+        src: b284
+      - type: single
+        cat: theory
+        q: 'Сумма векторов по правилу параллелограмма — это…'
+        opts: ['диагональ параллелограмма, построенного на векторах', 'сторона параллелограмма', 'меньшая диагональ', 'периметр']
+        ans: a
+        hint: 'Векторы откладывают от одной точки.'
+        explain: 'Диагональ, выходящая из общего начала векторов.'
+        f: [2]
+        src: b284
+
+  # ───────────────────────────── 3.9.2 ─────────────────────────────
+  - id: ma-3-9-2
+    num: '3.9.2'
+    title: Длина вектора
+    pages: [b285, b286, b287]
+    book:
+      place: 'Ч. 2, раздел «Геометрия», 3.9 «Векторы», пункт 3.9.2'
+      summary: 'Задания на длину вектора на плоскости и в пространстве.'
+    stage: verified
+    stageNote: 'Ответы пересчитаны.'
+    sourcesChecked: '2026-10-25'
+    web: [*at-108]
+    theory:
+      - kind: law
+        title: Длина вектора
+        body: |
+          $$|\vec a| = \sqrt{a_1^2 + a_2^2}\quad \text{(на плоскости)},\qquad |\vec a| = \sqrt{a_1^2 + a_2^2 + a_3^2}\quad \text{(в пространстве)}.$$
+          $|k\vec a| = |k| \cdot |\vec a|$. Длина суммы обычно не равна сумме длин: $|\vec a + \vec b| \le |\vec a| + |\vec b|$.
+        src: b285
+    formulas:
+      - title: Длина вектора
+        tex: '|\vec a| = \sqrt{a_1^2 + a_2^2 + a_3^2}'
+        meaning: 'На плоскости $a_3 = 0$.'
+        use: 'Длины векторов и отрезков.'
+        src: b285
+      - title: Длина произведения на число
+        tex: '|k\vec a| = |k|\,|\vec a|'
+        meaning: '$k$ — число.'
+        use: 'Растяжение вектора.'
+        src: b286
+    examples:
+      - title: На плоскости
+        given: 'Найдите длину вектора $(3; -4)$.'
+        find: '$|\vec a|$.'
+        method: 'Формула длины.'
+        steps:
+          - '$\sqrt{9 + 16}$.'
+          - '$= 5$.'
+        check: 'Тройка 3, 4, 5 ✓.'
+        answer: '$5$'
+        src: b285
+      - title: По точкам
+        given: '$A(1; 1)$, $B(4; 5)$. Найдите $|\overrightarrow{AB}|$.'
+        find: 'длину.'
+        method: 'Сначала координаты.'
+        steps:
+          - '$\overrightarrow{AB} = (3; 4)$.'
+          - '$|\overrightarrow{AB}| = 5$.'
+        check: 'Совпадает с расстоянием $AB$ ✓.'
+        answer: '$5$'
+        src: b286
+      - title: Длина суммы
+        given: '$\vec a = (1; 2)$, $\vec b = (3; 1)$. Найдите $|\vec a + \vec b|$.'
+        find: 'длину.'
+        method: 'Сначала сумма.'
+        steps:
+          - '$\vec a + \vec b = (4; 3)$.'
+          - '$|\vec a + \vec b| = 5$.'
+        check: '$|\vec a| + |\vec b| = \sqrt5 + \sqrt{10} \approx 5{,}4 > 5$ ✓.'
+        answer: '$5$'
+        src: b286
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Найдите длину вектора $(6; 8)$.'
+        num: { value: 10, unit: '', check: 'Math.hypot(6,8)' }
+        hint: '$\sqrt{36 + 64}$.'
+        explain: '$10$.'
+        f: [1]
+        sol: { method: 'Длина вектора.', steps: ['$\sqrt{100} = 10$.'], answer: '10' }
+        src: b285
+      - type: numeric
+        cat: problem
+        q: 'Найдите длину вектора $(1; 2; 2)$.'
+        num: { value: 3, unit: '', check: 'Math.hypot(1,2,2)' }
+        hint: 'Три координаты.'
+        explain: '$\sqrt{1 + 4 + 4} = 3$.'
+        f: [1]
+        sol: { method: 'Длина в пространстве.', steps: ['$\sqrt9 = 3$.'], answer: '3' }
+        src: b285
+      - type: numeric
+        cat: problem
+        q: 'При каком положительном $m$ длина вектора $(m; 12)$ равна 13?'
+        num: { value: 5, unit: '', check: 'Math.sqrt(169-144)' }
+        hint: '$m^2 + 144 = 169$.'
+        explain: '$m = 5$.'
+        f: [1]
+        sol: { method: 'Уравнение для длины.', steps: ['$m^2 = 25$, $m = 5$.'], answer: '5' }
+        src: b286
+      - type: numeric
+        cat: problem
+        q: '$|\vec a| = 3$. Найдите $|-2\vec a|$.'
+        num: { value: 6, unit: '', check: '2*3' }
+        hint: '$|k| \cdot |\vec a|$.'
+        explain: '$6$.'
+        f: [2]
+        sol: { method: 'Длина произведения.', steps: ['$|-2| \cdot 3 = 6$.'], answer: '6' }
+        src: b286
+      - type: numeric
+        cat: problem
+        q: '$\vec a = (5; 1)$, $\vec b = (2; -3)$. Найдите $|\vec a - \vec b|$.'
+        num: { value: 5, unit: '', check: 'Math.hypot(3,4)' }
+        hint: '$\vec a - \vec b = (3; 4)$.'
+        explain: '$5$.'
+        f: [1]
+        sol: { method: 'Длина разности.', steps: ['$(3; 4)$, длина $5$.'], answer: '5' }
+        src: b286
+      - type: numeric
+        cat: problem
+        q: 'Найдите длину вектора $(2; 3; 6)$.'
+        num: { value: 7, unit: '', check: 'Math.hypot(2,3,6)' }
+        hint: '$\sqrt{4 + 9 + 36}$.'
+        explain: '$7$.'
+        f: [1]
+        sol: { method: 'Длина в пространстве.', steps: ['$\sqrt{49} = 7$.'], answer: '7' }
+        src: b285
+      - type: single
+        cat: theory
+        q: 'Всегда ли $|\vec a + \vec b| = |\vec a| + |\vec b|$?'
+        opts: ['нет, только для сонаправленных векторов', 'да', 'только для перпендикулярных', 'только для равных']
+        ans: a
+        hint: 'Неравенство треугольника.'
+        explain: 'В общем случае $|\vec a + \vec b| < |\vec a| + |\vec b|$.'
+        src: b286
+      - type: single
+        cat: theory
+        q: 'Длина вектора $(a_1; a_2)$:'
+        opts: ['$\sqrt{a_1^2 + a_2^2}$', '$a_1 + a_2$', '$|a_1| + |a_2|$', '$a_1^2 + a_2^2$']
+        ans: a
+        hint: 'Теорема Пифагора.'
+        explain: 'Координаты — катеты прямоугольного треугольника.'
+        f: [1]
+        src: b285
+
+  # ───────────────────────────── 3.9.3 ─────────────────────────────
+  - id: ma-3-9-3
+    num: '3.9.3'
+    title: Скалярное произведение векторов
+    pages: [b287, b288, b289]
+    book:
+      place: 'Ч. 2, раздел «Геометрия», 3.9 «Векторы», пункт 3.9.3'
+      summary: 'Задания на скалярное произведение в координатах и через длины и угол, перпендикулярность векторов.'
+    stage: verified
+    stageNote: 'Ответы пересчитаны.'
+    sourcesChecked: '2026-10-25'
+    web: [*at-108]
+    theory:
+      - kind: law
+        title: Скалярное произведение
+        body: |
+          $$\vec a \cdot \vec b = |\vec a|\,|\vec b|\cos\varphi = a_1b_1 + a_2b_2\ (+\,a_3b_3).$$
+          - $\vec a \perp \vec b \iff \vec a \cdot \vec b = 0$.
+          - $\vec a \cdot \vec a = |\vec a|^2$.
+          - Знак: $> 0$ — угол острый, $< 0$ — тупой.
+          - $(\vec a + \vec b) \cdot (\vec a - \vec b) = |\vec a|^2 - |\vec b|^2$.
+        src: b287
+    formulas:
+      - title: Скалярное произведение
+        tex: '\vec a \cdot \vec b = |\vec a|\,|\vec b|\cos\varphi = a_1b_1 + a_2b_2 + a_3b_3'
+        meaning: '$\varphi$ — угол между векторами.'
+        use: 'Перпендикулярность, углы, длины.'
+        src: b287
+      - title: Условие перпендикулярности
+        tex: '\vec a \perp \vec b \iff a_1b_1 + a_2b_2 = 0'
+        meaning: 'Ненулевые векторы.'
+        use: 'Найти параметр, при котором векторы перпендикулярны.'
+        src: b288
+    examples:
+      - title: В координатах
+        given: 'Найдите $(2; 3) \cdot (4; -1)$.'
+        find: 'произведение.'
+        method: 'Сумма произведений координат.'
+        steps:
+          - '$2 \cdot 4 + 3 \cdot (-1)$.'
+          - '$= 5$.'
+        check: 'Положительно — угол острый ✓.'
+        answer: '$5$'
+        src: b287
+      - title: Через угол
+        given: '$|\vec a| = 2$, $|\vec b| = 3$, угол $60^\circ$. Найдите $\vec a \cdot \vec b$.'
+        find: 'произведение.'
+        method: '$|\vec a||\vec b|\cos\varphi$.'
+        steps:
+          - '$2 \cdot 3 \cdot \frac12$.'
+          - '$= 3$.'
+        check: '$\cos 60^\circ = 0{,}5$ ✓.'
+        answer: '$3$'
+        src: b287
+      - title: Перпендикулярность
+        given: 'При каком $k$ векторы $(k; 2)$ и $(3; -6)$ перпендикулярны?'
+        find: '$k$.'
+        method: 'Скалярное произведение равно 0.'
+        steps:
+          - '$3k - 12 = 0$.'
+          - '$k = 4$.'
+        check: '$(4; 2) \cdot (3; -6) = 12 - 12 = 0$ ✓.'
+        answer: '$4$'
+        src: b288
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Найдите $(1; -2) \cdot (3; 4)$.'
+        num: { value: -5, unit: '', check: '1*3+(-2)*4' }
+        hint: '$3 - 8$.'
+        explain: '$-5$.'
+        f: [1]
+        sol: { method: 'В координатах.', steps: ['$3 - 8 = -5$.'], answer: '−5' }
+        src: b287
+      - type: numeric
+        cat: problem
+        q: '$|\vec a| = 4$, $|\vec b| = 5$, угол $120^\circ$. Найдите $\vec a \cdot \vec b$.'
+        num: { value: -10, unit: '', check: '20*Math.cos(2*Math.PI/3)' }
+        hint: '$\cos 120^\circ = -\frac12$.'
+        explain: '$-10$.'
+        f: [1]
+        sol: { method: 'Через угол.', steps: ['$20 \cdot (-0{,}5) = -10$.'], answer: '−10' }
+        src: b287
+      - type: numeric
+        cat: problem
+        q: 'При каком $m$ векторы $(m; 3)$ и $(2; -4)$ перпендикулярны?'
+        num: { value: 6, unit: '', check: '12/2' }
+        hint: '$2m - 12 = 0$.'
+        explain: '$m = 6$.'
+        f: [2]
+        sol: { method: 'Перпендикулярность.', steps: ['$2m - 12 = 0$, $m = 6$.'], answer: '6' }
+        src: b288
+      - type: numeric
+        cat: problem
+        q: 'Найдите $\vec a \cdot \vec a$ для $\vec a = (3; 4)$.'
+        num: { value: 25, unit: '', check: '9+16' }
+        hint: 'Квадрат длины.'
+        explain: '$25$.'
+        f: [1]
+        sol: { method: 'Скалярный квадрат.', steps: ['$9 + 16 = 25$.'], answer: '25' }
+        src: b287
+      - type: numeric
+        cat: problem
+        q: '$|\vec a| = 5$, $|\vec b| = 3$. Найдите $(\vec a + \vec b) \cdot (\vec a - \vec b)$.'
+        num: { value: 16, unit: '', check: '25-9' }
+        hint: '$|\vec a|^2 - |\vec b|^2$.'
+        explain: '$16$.'
+        sol: { method: 'Раскрытие скобок.', steps: ['$\vec a^2 - \vec b^2 = 25 - 9 = 16$.'], answer: '16' }
+        src: b288
+      - type: numeric
+        cat: problem
+        q: 'Найдите $(1; 2; 3) \cdot (4; 0; -1)$.'
+        num: { value: 1, unit: '', check: '4+0-3' }
+        hint: 'Три слагаемых.'
+        explain: '$4 + 0 - 3 = 1$.'
+        f: [1]
+        sol: { method: 'В координатах.', steps: ['$4 + 0 - 3 = 1$.'], answer: '1' }
+        src: b287
+      - type: single
+        cat: theory
+        q: 'Скалярное произведение ненулевых векторов отрицательно. Угол между ними…'
+        opts: ['тупой', 'острый', 'прямой', 'нулевой']
+        ans: a
+        hint: 'Знак косинуса.'
+        explain: '$\cos\varphi < 0$ при $90^\circ < \varphi \le 180^\circ$.'
+        f: [1]
+        src: b287
+      - type: single
+        cat: theory
+        q: 'Когда скалярное произведение ненулевых векторов равно нулю?'
+        opts: ['когда векторы перпендикулярны', 'когда коллинеарны', 'когда равны', 'никогда']
+        ans: a
+        hint: '$\cos 90^\circ = 0$.'
+        explain: 'Условие перпендикулярности.'
+        f: [2]
+        src: b288
+
+  # ───────────────────────────── 3.9.4 ─────────────────────────────
+  - id: ma-3-9-4
+    num: '3.9.4'
+    title: Угол между двумя векторами
+    pages: [b289, b290, b291, b292]
+    book:
+      place: 'Ч. 2, раздел «Геометрия», 3.9 «Векторы», пункт 3.9.4'
+      summary: 'Задания на угол между векторами на плоскости и в пространстве по их координатам.'
+    stage: verified
+    stageNote: 'Углы пересчитаны через Math.acos.'
+    sourcesChecked: '2026-10-25'
+    web: [*at-108]
+    theory:
+      - kind: law
+        title: Косинус угла между векторами
+        body: |
+          $$\cos\varphi = \frac{\vec a \cdot \vec b}{|\vec a|\,|\vec b|} = \frac{a_1b_1 + a_2b_2 + a_3b_3}{\sqrt{a_1^2 + a_2^2 + a_3^2}\,\sqrt{b_1^2 + b_2^2 + b_3^2}}.$$
+          Угол между векторами берётся от $0^\circ$ до $180^\circ$. Так же находят углы треугольника по координатам вершин: угол при $A$ — угол между $\overrightarrow{AB}$ и $\overrightarrow{AC}$.
+        src: b289
+    formulas:
+      - title: Угол между векторами
+        tex: '\cos\varphi = \frac{\vec a \cdot \vec b}{|\vec a|\,|\vec b|}'
+        meaning: '$0^\circ \le \varphi \le 180^\circ$.'
+        use: 'Углы по координатам.'
+        src: b289
+    examples:
+      - title: Угол 45°
+        given: 'Найдите угол между $(1; 0)$ и $(1; 1)$.'
+        find: '$\varphi$.'
+        method: 'Формула косинуса.'
+        steps:
+          - '$\cos\varphi = \frac{1}{1 \cdot \sqrt2}$.'
+          - '$\varphi = 45^\circ$.'
+        check: 'Вектор $(1; 1)$ — биссектриса первого угла ✓.'
+        answer: '$45^\circ$'
+        src: b289
+      - title: Косинус угла
+        given: 'Найдите косинус угла между $(3; 4)$ и $(4; 3)$.'
+        find: '$\cos\varphi$.'
+        method: 'Формула косинуса.'
+        steps:
+          - '$\frac{12 + 12}{5 \cdot 5}$.'
+          - '$= 0{,}96$.'
+        check: 'Угол $\approx 16{,}3^\circ$ — векторы почти сонаправлены ✓.'
+        answer: '$0{,}96$'
+        src: b290
+      - title: Прямой угол
+        given: 'Найдите угол между $(1; 2)$ и $(2; -1)$.'
+        find: '$\varphi$.'
+        method: 'Скалярное произведение.'
+        steps:
+          - '$2 - 2 = 0$.'
+          - '$\varphi = 90^\circ$.'
+        check: '$\cos\varphi = 0$ ✓.'
+        answer: '$90^\circ$'
+        src: b290
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Найдите угол между векторами $(1; \sqrt3)$ и $(1; 0)$ (в градусах).'
+        num: { value: 60, unit: '°', check: 'Math.acos(1/2)*180/Math.PI' }
+        hint: '$\cos\varphi = \frac{1}{2 \cdot 1}$.'
+        explain: '$60^\circ$.'
+        f: [1]
+        sol: { method: 'Формула косинуса.', steps: ['$|\vec a| = 2$, $\vec a \cdot \vec b = 1$.', '$\cos\varphi = \frac12$, $\varphi = 60^\circ$.'], answer: '60°' }
+        src: b289
+      - type: numeric
+        cat: problem
+        q: 'Найдите угол между векторами $(2; 2)$ и $(-1; 1)$ (в градусах).'
+        num: { value: 90, unit: '°', check: 'Math.acos(0)*180/Math.PI' }
+        hint: 'Скалярное произведение.'
+        explain: '$-2 + 2 = 0$.'
+        f: [1]
+        sol: { method: 'Перпендикулярность.', steps: ['$\vec a \cdot \vec b = 0$.', '$90^\circ$.'], answer: '90°' }
+        src: b290
+      - type: numeric
+        cat: problem
+        q: 'Найдите угол между векторами $(1; 0)$ и $(-1; 1)$ (в градусах).'
+        num: { value: 135, unit: '°', check: 'Math.acos(-1/Math.SQRT2)*180/Math.PI' }
+        hint: '$\cos\varphi = -\frac{1}{\sqrt2}$.'
+        explain: '$135^\circ$.'
+        f: [1]
+        sol: { method: 'Формула косинуса.', steps: ['$\cos\varphi = \frac{-1}{1 \cdot \sqrt2}$.', '$\varphi = 135^\circ$.'], answer: '135°' }
+        src: b290
+      - type: numeric
+        cat: problem
+        q: 'Найдите косинус угла между векторами $(3; 4)$ и $(0; 5)$.'
+        num: { value: 0.8, unit: '', check: '20/25' }
+        hint: '$\frac{20}{5 \cdot 5}$.'
+        explain: '$0{,}8$.'
+        f: [1]
+        sol: { method: 'Формула косинуса.', steps: ['$\frac{0 + 20}{25} = 0{,}8$.'], answer: '0,8' }
+        src: b290
+      - type: numeric
+        cat: problem
+        q: 'Найдите угол между векторами $(1; 1; 0)$ и $(1; 0; 1)$ (в градусах).'
+        num: { value: 60, unit: '°', check: 'Math.acos(1/2)*180/Math.PI' }
+        hint: '$\cos\varphi = \frac{1}{\sqrt2\sqrt2}$.'
+        explain: '$60^\circ$.'
+        f: [1]
+        sol: { method: 'Угол в пространстве.', steps: ['$\vec a \cdot \vec b = 1$, длины $\sqrt2$.', '$\cos\varphi = \frac12$, $60^\circ$.'], answer: '60°' }
+        src: b291
+      - type: numeric
+        cat: problem
+        q: 'Даны точки $A(0; 0)$, $B(3; 0)$, $C(3; 3)$. Найдите угол $BAC$ (в градусах).'
+        num: { value: 45, unit: '°', check: 'Math.acos(9/(3*Math.sqrt(18)))*180/Math.PI' }
+        hint: 'Угол между $\overrightarrow{AB}$ и $\overrightarrow{AC}$.'
+        explain: '$\cos = \frac{9}{3 \cdot 3\sqrt2} = \frac{1}{\sqrt2}$.'
+        f: [1]
+        sol: { method: 'Угол треугольника по координатам.', steps: ['$\overrightarrow{AB} = (3; 0)$, $\overrightarrow{AC} = (3; 3)$.', '$\cos = \frac{9}{3 \cdot 3\sqrt2}$, $45^\circ$.'], answer: '45°' }
+        src: b291
+      - type: single
+        cat: theory
+        q: 'В каких пределах лежит угол между векторами?'
+        opts: ['от $0^\circ$ до $180^\circ$', 'от $0^\circ$ до $90^\circ$', 'от $0^\circ$ до $360^\circ$', 'от $-90^\circ$ до $90^\circ$']
+        ans: a
+        hint: 'Арккосинус.'
+        explain: 'Значения $\arccos$ лежат в $[0; \pi]$.'
+        f: [1]
+        src: b289
+      - type: single
+        cat: theory
+        q: 'Векторы $(2; 4)$ и $(1; 2)$. Угол между ними…'
+        opts: ['$0^\circ$', '$90^\circ$', '$180^\circ$', '$45^\circ$']
+        ans: a
+        hint: 'Они сонаправлены.'
+        explain: '$(2; 4) = 2(1; 2)$, $\cos\varphi = 1$.'
+        f: [1]
+        src: b289

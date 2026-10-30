@@ -1,0 +1,1078 @@
+subsection: emw
+# Колебательный контур, переменный ток, трансформатор, электромагнитные волны (стр. e20–e28).
+# Этот файл стоит перед 89-emw.yaml: темы со стр. o01 (13.03.25) идут после тем со стр. e20–e28.
+
+symbols:
+  lambda_em: { tex: '\lambda', meaning: 'длина электромагнитной волны', unit: 'м', src: e28, web: true }
+  omega_res: { tex: '\omega_0', meaning: 'резонансная циклическая частота цепи RLC', unit: 'рад/с', src: e26, web: true }
+  I_res: { tex: 'I_{рез}', meaning: 'сила тока в цепи при резонансе', unit: 'А', src: e26, web: true }
+  U_src_res: { tex: 'U', meaning: 'напряжение источника', unit: 'В', src: e26, web: true }
+  q_t: { tex: 'q(t),\ q_0', meaning: 'заряд конденсатора в момент t и его наибольшее значение', unit: 'Кл', src: e20 }
+  U0_amp: { tex: 'U_0', meaning: 'максимальное напряжение', unit: 'В', src: e22 }
+  U_inst: { tex: 'U(t)', meaning: 'моментальное напряжение', unit: 'В', src: e22 }
+  I_t: { tex: 'I(t)', meaning: 'моментальная сила тока', unit: 'А', src: e22 }
+  W_C: { tex: 'W_C,\ W_{C0}', meaning: 'энергия электрического поля конденсатора и её наибольшее значение', unit: 'Дж', src: e20 }
+  W_L: { tex: 'W_L,\ W_{L0}', meaning: 'энергия магнитного поля катушки и её наибольшее значение', unit: 'Дж', src: e20 }
+  W_lc: { tex: 'W', meaning: 'полная электромагнитная энергия контура', unit: 'Дж', src: e20 }
+  N_frame: { tex: 'N', meaning: 'в конспекте не расшифровано; по смыслу — число витков рамки', unit: '', src: null }
+  U_eff: { tex: 'U_{эф}', meaning: 'эффективное (действующее) напряжение — показание вольтметра', unit: 'В', src: e22 }
+  I_eff: { tex: 'I_{эф}', meaning: 'эффективный (действующий) ток — показание амперметра', unit: 'А', src: e22 }
+  rho_r: { tex: '\rho', meaning: 'удельное сопротивление', unit: 'Ом·м', src: c19 }
+  P_t: { tex: 'P(t)', meaning: 'моментальная мощность', unit: 'Вт', src: e23 }
+  P_avg: { tex: '\bar P', meaning: 'средняя мощность', unit: 'Вт', src: e23 }
+  X_C: { tex: 'X_C', meaning: 'ёмкостное сопротивление', unit: 'Ом', src: e23 }
+  X_L: { tex: 'X_L', meaning: 'индуктивное сопротивление', unit: 'Ом', src: e23 }
+  Z_imp: { tex: 'Z', meaning: 'полное сопротивление цепи', unit: 'Ом', src: e25 }
+  dphi_ac: { tex: '\Delta\varphi', meaning: 'разность фаз между током и напряжением', unit: 'рад', src: e25 }
+  U_RCL: { tex: 'U_R,\ U_C,\ U_L', meaning: 'напряжения на резисторе, конденсаторе и катушке', unit: 'В', src: e25 }
+  N12: { tex: 'N_1,\ N_2', meaning: 'числа витков первичной и вторичной обмоток', unit: '', src: e27 }
+  U12: { tex: 'U_1,\ U_2', meaning: 'напряжения на первичной и вторичной обмотках', unit: 'В', src: e27 }
+  I12_tr: { tex: 'I_1,\ I_2', meaning: 'токи в первичной и вторичной обмотках', unit: 'А', src: e27 }
+  k_tr: { tex: 'k', meaning: 'коэффициент трансформации', unit: '', src: e27 }
+  P_pow: { tex: 'P', meaning: 'мощность', unit: 'Вт', src: e27 }
+
+errata:
+  - id: EM15
+    page: e22
+    severity: unclear
+    original: '«R ~ ν» рядом с графиком R(ν) — горизонтальной прямой'
+    issue: 'Знак «~» обычно означает «пропорционально», а график показывает, что R от частоты не зависит. Вероятно, имелось в виду «R не ~ ν».'
+    target: 'Подпись «R ~ ν» у графика R(ν)'
+    suggestion: 'Записать «R не зависит от ν» — как показывает график (горизонтальная прямая).'
+  - id: EM10
+    page: e25
+    severity: error
+    original: '\(Z = (X_L - X_C)^2 + R^2\)'
+    issue: 'Потерян корень. По диаграмме сопротивлений и по формуле \(U = \sqrt{(U_C - U_L)^2 + U_R^2}\) с той же страницы (при \(U = IZ\), \(U_R = IR\), \(U_C = IX_C\), \(U_L = IX_L\)) получается корень. Без корня и единицы не сходятся: Ом² вместо Ом.'
+    target: 'Полное сопротивление цепи RLC'
+    suggestion: '\(Z = \sqrt{(X_L - X_C)^2 + R^2}\).'
+  - id: EM11
+    page: e26
+    severity: note
+    original: '«В резонансе амплитуда системы резко меняется»'
+    issue: При резонансе амплитуда резко возрастает. Слово «меняется» не говорит, в какую сторону.
+    target: 'Определение резонанса'
+    suggestion: 'Записать: «В резонансе амплитуда колебаний резко возрастает».'
+    todo: 'Условие резонанса для цепи RLC по вашей просьбе добавлено из интернета (Википедия: «Резонанс напряжений») в эту же тему с пометкой «из интернета». Утвердите его или отклоните.'
+  - id: EM12
+    page: e28
+    severity: error
+    original: '«Когда заряженная частица покоится или двигается криволинейно и равномерно, то не распространяет электромагнитную волну»'
+    issue: 'Противоречит примеру со стр. e27: частица, которая «вращается по окружности», излучает. Движение по окружности — криволинейное и равномерное, но с ускорением.'
+    target: 'Условие, при котором заряженная частица не излучает волну'
+    suggestion: '«…покоится или двигается прямолинейно и равномерно…».'
+  - id: EM13
+    page: e28
+    severity: typo
+    original: '«…за счёт комбинаций электромагнитного и магнитного поля. За счёт изменения электромагнитного поля возникает магнитное поле…»'
+    issue: По смыслу (дальше — «за счёт магнитного поля возникает электрическое») речь об электрическом поле.
+    target: 'Описание того, как образуется электромагнитная волна'
+    suggestion: '«…комбинации электрического и магнитного поля. За счёт изменения электрического поля возникает магнитное…».'
+  - id: EM14
+    page: e28
+    severity: note
+    original: '«Основная особенность электромагнитной волны» — конец записи'
+    issue: Фраза не закончена, шкала электромагнитных волн не записана.
+    target: 'Незаконченная фраза в конце страницы об электромагнитных волнах'
+    suggestion: 'Дописать фразу по лекции. Сам я ничего не дописывал.'
+    todo: 'По вашей просьбе шкала электромагнитных волн добавлена из интернета в тему «Электромагнитные волны» с пометкой «из интернета». Утвердите её или отклоните.'
+
+topics:
+  - id: em-lc
+    title: Колебательный контур. Свободные колебания
+    pages: [e20, e21]
+    theory:
+      - kind: definition
+        title: Колебательный контур
+        body: Для того чтобы получить колебательный контур, как минимум нужен один конденсатор и одна индуктивная катушка. В колебательном контуре возникают свободные электромагнитные колебания.
+        src: e20
+      - kind: text
+        title: Заряд, напряжение и ток
+        body: 'Конденсатор заряжают от источника (ключ в положении 1) и замыкают на катушку (положение 2): $q(t) = q_0\cos(\omega t)$, $U(t) = U_0\cos(\omega t)$, $I(t) = -I_0\sin(\omega t)$; $q_0 = CU_0$, $I_0 = q_0\omega$.'
+        src: e20
+        fig: lc
+      - kind: definition
+        title: Идеальный колебательный контур
+        body: Если в колебательном контуре отсутствует R — активное сопротивление, то полная электромагнитная энергия контура сохраняется. Такой контур называется идеальным колебательным контуром.
+        src: e20
+      - kind: rule
+        title: Энергия в контуре
+        body: 'В идеальном контуре энергия электрического поля конденсатора и энергия магнитного поля катушки меняются гармоническим образом, но частота их колебания в два раза больше, чем частота колебания самой системы. $W = W_{C0} = W_{L0} = \text{const}$.'
+        src: [e20, e21]
+    formulas:
+      - title: Заряд конденсатора
+        tex: 'q(t) = q_0\cos(\omega t)'
+        sym: [q_t, omega_per]
+        src: e20
+      - title: Напряжение на конденсаторе
+        tex: 'U(t) = U_0\cos(\omega t)'
+        sym: [U_inst, U0_amp, omega_per]
+        src: e20
+      - title: Ток в контуре
+        tex: 'I(t) = -I_0\sin(\omega t)'
+        sym: [I_t, I0_amp, omega_per]
+        src: e20
+      - title: Амплитуда тока
+        tex: 'I_0 = q_0\omega'
+        sym: [I0_amp, q_t, omega_per]
+        boxed: true
+        src: e20
+      - title: Наибольший заряд
+        tex: 'q_0 = CU_0'
+        sym: [q_t, C_cap, U0_amp]
+        src: e20
+      - title: Частота, период, циклическая частота контура
+        tex: '\nu = \frac{1}{2\pi}\cdot\frac{1}{\sqrt{LC}},\qquad T = 2\pi\sqrt{LC},\qquad \omega = \frac{1}{\sqrt{LC}}'
+        sym: [nu_osc, T_osc, omega_osc, L_ind, C_cap]
+        boxed: true
+        src: e20
+      - title: Наибольшие энергии
+        tex: 'W_{C0} = \frac{q_0^2}{2C},\qquad W_{L0} = \frac{LI_0^2}{2},\qquad W = W_{C0} = W_{L0} = \text{const}'
+        sym: [W_C, W_L, W_lc, q_t, C_cap, L_ind, I0_amp]
+        src: e20
+      - title: Энергия конденсатора во времени
+        tex: 'W_C(t) = \frac{q_0^2}{2C}\cos^2\omega t = W_{C0}\cos^2\omega t = \frac12W_{C0}(1 + \cos2\omega t)'
+        sym: [W_C, q_t, C_cap, omega_per]
+        src: e21
+      - title: Энергия катушки во времени
+        tex: 'W_L(t) = \frac{LI_0^2}{2}\sin^2\omega t = W_{L0}\sin^2\omega t = \frac12W_{L0}(1 - \cos2\omega t)'
+        sym: [W_L, L_ind, I0_amp, omega_per]
+        src: e21
+    questions:
+      - type: numeric
+        cat: problem
+        q: Конденсатор ёмкостью 2 мкФ заряжен до 10 В. Найдите наибольший заряд.
+        num: { value: 2.0e-5, unit: 'Кл', check: '2e-6*10' }
+        hint: '$q_0 = CU_0$; 1 мкФ = 10⁻⁶ Ф.'
+        explain: '$q_0 = 2\cdot10^{-6}\cdot10 = 2\cdot10^{-5}$ Кл.'
+        f: [5]
+        sol: { given: ['C = 2 мкФ', 'U₀ = 10 В'], si: ['C = 2·10⁻⁶ Ф'], find: 'q₀', formula: 'q_0 = CU_0', calc: 'q_0 = 2\cdot10^{-5}', answer: '2·10⁻⁵ Кл' }
+        src: e20
+      - type: numeric
+        cat: problem
+        q: 'Наибольший заряд $10^{-4}$ Кл, циклическая частота 1000 рад/с. Найдите амплитуду тока.'
+        num: { value: 0.1, unit: 'А', check: '1e-4*1000' }
+        hint: '$I_0 = q_0\omega$.'
+        explain: '$I_0 = 10^{-4}\cdot10^3 = 0{,}1$ А.'
+        f: [4]
+        sol: { given: ['q₀ = 10⁻⁴ Кл', 'ω = 1000 рад/с'], find: 'I₀', formula: 'I_0 = q_0\omega', calc: 'I_0 = 0{,}1', answer: '0,1 А' }
+        src: e20
+      - type: numeric
+        cat: problem
+        q: 'q₀ = $2\cdot10^{-4}$ Кл, C = 1 мкФ. Найдите наибольшую энергию конденсатора.'
+        num: { value: 0.02, unit: 'Дж', check: '(2e-4)**2/(2*1e-6)' }
+        hint: '$W_{C0} = \frac{q_0^2}{2C}$.'
+        explain: '$W_{C0} = \frac{4\cdot10^{-8}}{2\cdot10^{-6}} = 0{,}02$ Дж.'
+        f: [7]
+        sol: { given: ['q₀ = 2·10⁻⁴ Кл', 'C = 10⁻⁶ Ф'], find: 'W_C0', formula: 'W_{C0} = \frac{q_0^2}{2C}', calc: 'W_{C0} = 0{,}02', answer: '0,02 Дж' }
+        src: e20
+      - type: numeric
+        cat: problem
+        q: 'L = 0,05 Гн, I₀ = 0,2 А. Найдите наибольшую энергию катушки.'
+        num: { value: 0.001, unit: 'Дж', check: '0.05*0.2**2/2' }
+        hint: '$W_{L0} = \frac{LI_0^2}{2}$.'
+        explain: '$W_{L0} = \frac{0{,}05\cdot0{,}04}{2} = 10^{-3}$ Дж.'
+        f: [7]
+        sol: { given: ['L = 0,05 Гн', 'I₀ = 0,2 А'], find: 'W_L0', formula: 'W_{L0} = \frac{LI_0^2}{2}', calc: 'W_{L0} = 10^{-3}', answer: '10⁻³ Дж' }
+        src: e20
+      - type: numeric
+        cat: problem
+        q: 'В идеальном контуре C = 1 мкФ, U₀ = 100 В, L = 0,1 Гн. Найдите амплитуду тока.'
+        num: { value: 0.31623, unit: 'А', check: 'Math.sqrt(2*((1e-6*100)**2/(2*1e-6))/0.1)' }
+        hint: 'Энергия сохраняется: $W_{C0} = W_{L0}$, то есть $\frac{q_0^2}{2C} = \frac{LI_0^2}{2}$.'
+        explain: '$q_0 = 10^{-4}$ Кл, $W = \frac{10^{-8}}{2\cdot10^{-6}} = 5\cdot10^{-3}$ Дж; $I_0 = \sqrt{\frac{2W}{L}} = \sqrt{0{,}1} \approx 0{,}32$ А.'
+        f: [5, 7]
+        sol: { given: ['C = 10⁻⁶ Ф', 'U₀ = 100 В', 'L = 0,1 Гн'], find: 'I₀', formula: '\frac{q_0^2}{2C} = \frac{LI_0^2}{2}', calc: 'q_0 = 10^{-4};\ W = 5\cdot10^{-3};\ I_0 = \sqrt{\frac{2W}{L}} \approx 0{,}32', answer: '≈ 0,32 А' }
+        src: e20
+      - type: numeric
+        cat: problem
+        q: Период колебаний в контуре 4 мс. С каким периодом меняется энергия конденсатора (в мс)?
+        num: { value: 2, unit: 'мс', check: '4/2' }
+        hint: Частота колебаний энергии в два раза больше частоты системы.
+        explain: 'Период энергии вдвое меньше: 2 мс.'
+        f: [8]
+        sol: { given: ['T = 4 мс'], find: 'T_W', calc: 'T_W = \frac{T}{2} = 2', answer: '2 мс' }
+        src: e20
+      - type: numeric
+        cat: problem
+        q: '$W_{C0} = 8$ мДж. Найдите энергию конденсатора при $\omega t = \frac\pi4$ (в мДж).'
+        num: { value: 4, unit: 'мДж', check: '8*Math.cos(Math.PI/4)**2' }
+        hint: '$W_C = W_{C0}\cos^2\omega t$, $\cos^2\frac\pi4 = \frac12$.'
+        explain: '$W_C = 8\cdot\frac12 = 4$ мДж — в этот момент энергия поровну у конденсатора и катушки.'
+        f: [8]
+        sol: { given: ['W_C0 = 8 мДж', 'ωt = π/4'], find: 'W_C', formula: 'W_C = W_{C0}\cos^2\omega t', calc: 'W_C = 8\cdot\tfrac12 = 4', answer: '4 мДж' }
+        src: e21
+      - type: multiple
+        cat: theory
+        q: Что, по конспекту, как минимум нужно для колебательного контура? Выберите все.
+        opts: ['Один конденсатор', 'Одна индуктивная катушка', 'Резистор', 'Трансформатор']
+        ans: [a, b]
+        hint: Первая фраза темы.
+        explain: Как минимум нужен один конденсатор и одна индуктивная катушка.
+        src: e20
+      - type: single
+        cat: theory
+        q: Какой колебательный контур называется идеальным?
+        opts: ['Без активного сопротивления R — энергия сохраняется', 'С очень большой ёмкостью', 'С источником тока', 'С резистором']
+        ans: a
+        hint: В нём полная электромагнитная энергия сохраняется.
+        explain: Если в контуре отсутствует R — активное сопротивление, контур идеальный.
+        src: e20
+
+# ───────────────────────────────────────────────────────────────
+  - id: ac-basics
+    title: Переменный ток. Действующие значения
+    pages: [e21, e22, e23]
+    theory:
+      - kind: definition
+        title: Переменный ток
+        body: Ток, у которого значение и направление меняются гармоническим образом, называется переменным.
+        src: e21
+      - kind: text
+        title: Источник переменного тока
+        body: 'Источником переменного тока является контур из проводника, который вращается в магнитном поле. Поток через рамку $\Phi = BS\cos(\omega t)$, ЭДС $\varepsilon_и = NBS\omega\sin(\omega t) = \varepsilon_0\sin(\omega t)$, где $\varepsilon_0 = NBS\omega$. Напряжение $U(t) = U_0\sin(\omega t)$.'
+        src: [e21, e22]
+        fig: generator
+      - kind: text
+        title: ① Резистор в цепи переменного тока
+        body: '$U(t) = U_0\sin(\omega t)$, $I(t) = \frac{U_0}{R}\sin(\omega t) = I_0\sin(\omega t)$, $I_0 = \frac{U_0}{R}$. $R = \rho\frac lS$; по графику R от частоты не зависит.'
+        src: e22
+        errata: [EM15]
+      - kind: definition
+        title: Моментальное, максимальное и эффективное значения
+        body: '$U(t)$ — моментальное напряжение, $U_0$ — максимальное, $U_{эф}$ — эффективное: значение при фазе π/4, действующее значение, показание вольтметра. $U_{эф} = U_0\sin\frac\pi4 = \frac{U_0}{\sqrt2}$. Для тока так же: $I_{эф} = \frac{I_0}{\sqrt2}$ — показание амперметра.'
+        src: e22
+      - kind: rule
+        title: Сеть, которой мы пользуемся
+        body: '$U_{эф} = 220$ В, $U_0 \approx 310$ В, ν = 50 Гц.'
+        src: e23
+      - kind: text
+        title: Мощность
+        body: '$P(t) = IU = I_0U_0\sin^2(\omega t)$ — моментальная мощность. Средняя: $\bar P = \frac{I_0U_0}{2} = \frac{I_0^2R}{2} = \frac{U_0^2}{2R} = I_{эф}U_{эф} = I_{эф}^2R = \frac{U_{эф}^2}{R}$.'
+        src: e23
+    formulas:
+      - title: Поток через вращающуюся рамку
+        tex: '\Phi = BS\cos(\omega t)'
+        sym: [Phi_m, B_mag, S_area, omega_per]
+        src: e22
+      - title: ЭДС генератора
+        tex: '\varepsilon_{и} = NBS\omega\sin(\omega t),\qquad \varepsilon_0 = NBS\omega'
+        sym: [eps_i, N_frame, B_mag, S_area, omega_per, eps0]
+        src: e22
+      - title: Мгновенная ЭДС и напряжение
+        tex: '\varepsilon_{и}(t) = \varepsilon_0\sin(\omega t),\qquad U(t) = U_0\sin(\omega t)'
+        sym: [eps_i, eps0, U_inst, U0_amp, omega_per]
+        src: e22
+      - title: Ток через резистор
+        tex: 'I(t) = \frac{U_0}{R}\sin(\omega t) = I_0\sin(\omega t),\qquad I_0 = \frac{U_0}{R}'
+        sym: [I_t, U0_amp, R_res, I0_amp, omega_per]
+        src: e22
+      - title: Сопротивление проводника
+        tex: 'R = \rho\frac{l}{S}'
+        sym: [R_res, rho_r, l_wire, S_area]
+        src: e22
+      - title: Эффективное напряжение
+        tex: 'U_{эф} = U_0\sin\frac{\pi}{4} = \frac{U_0}{\sqrt{2}}'
+        sym: [U_eff, U0_amp]
+        boxed: true
+        src: e22
+      - title: Эффективный ток
+        tex: 'I_{эф} = I_0\sin\frac{\pi}{4} = \frac{I_0}{\sqrt{2}}'
+        sym: [I_eff, I0_amp]
+        boxed: true
+        src: e22
+      - title: Моментальная мощность
+        tex: 'P(t) = I\cdot U = I_0U_0\sin^2(\omega t)'
+        sym: [P_t, I_cur, U_volt, I0_amp, U0_amp, omega_per]
+        src: e23
+      - title: Средняя мощность через амплитуды
+        tex: '\bar P = \frac{I_0U_0}{2} = \frac{I_0^2R}{2} = \frac{U_0^2}{2R}'
+        sym: [P_avg, I0_amp, U0_amp, R_res]
+        src: e23
+      - title: Средняя мощность через действующие значения
+        tex: '\bar P = I_{эф}U_{эф} = I_{эф}^2R = \frac{U_{эф}^2}{R}'
+        sym: [P_avg, I_eff, U_eff, R_res]
+        src: e23
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Рамка из 100 витков площадью 0,05 м² вращается с ω = 100 рад/с в поле 0,2 Тл. Найдите максимальную ЭДС.'
+        num: { value: 100, unit: 'В', check: '100*0.2*0.05*100' }
+        hint: '$\varepsilon_0 = NBS\omega$.'
+        explain: '$\varepsilon_0 = 100\cdot0{,}2\cdot0{,}05\cdot100 = 100$ В.'
+        f: [2]
+        sol: { given: ['N = 100', 'B = 0,2 Тл', 'S = 0,05 м²', 'ω = 100 рад/с'], find: 'ε₀', formula: '\varepsilon_0 = NBS\omega', calc: '\varepsilon_0 = 100', answer: '100 В' }
+        src: e22
+      - type: numeric
+        cat: problem
+        q: Максимальное напряжение 310 В. Найдите эффективное (действующее) напряжение.
+        num: { value: 219.2, unit: 'В', check: '310/Math.sqrt(2)' }
+        hint: '$U_{эф} = \frac{U_0}{\sqrt2}$.'
+        explain: '$\frac{310}{1{,}414} \approx 219$ В — это и есть «220 В» в розетке.'
+        f: [6]
+        sol: { given: ['U₀ = 310 В'], find: 'U_эф', formula: 'U_{эф} = \frac{U_0}{\sqrt{2}}', calc: 'U_{эф} \approx 219', answer: '≈ 219 В' }
+        src: [e22, e23]
+      - type: numeric
+        cat: problem
+        q: Амперметр в цепи переменного тока показывает 2 А. Найдите максимальную силу тока.
+        num: { value: 2.8284, unit: 'А', check: '2*Math.sqrt(2)' }
+        hint: Амперметр показывает действующее значение; $I_0 = I_{эф}\sqrt2$.
+        explain: '$I_0 = 2\sqrt2 \approx 2{,}83$ А.'
+        f: [7]
+        sol: { given: ['I_эф = 2 А'], find: 'I₀', formula: 'I_0 = I_{эф}\sqrt{2}', calc: 'I_0 \approx 2{,}83', answer: '≈ 2,83 А' }
+        src: e22
+      - type: numeric
+        cat: problem
+        q: 'Резистор 50 Ом подключён к переменному напряжению с амплитудой 100 В. Найдите амплитуду тока.'
+        num: { value: 2, unit: 'А', check: '100/50' }
+        hint: '$I_0 = \frac{U_0}{R}$.'
+        explain: '$I_0 = \frac{100}{50} = 2$ А.'
+        f: [4]
+        sol: { given: ['U₀ = 100 В', 'R = 50 Ом'], find: 'I₀', formula: 'I_0 = \frac{U_0}{R}', calc: 'I_0 = 2', answer: '2 А' }
+        src: e22
+      - type: numeric
+        cat: problem
+        q: 'Амплитуда тока 2 А, амплитуда напряжения 100 В (резистор). Найдите среднюю мощность.'
+        num: { value: 100, unit: 'Вт', check: '2*100/2' }
+        hint: '$\bar P = \frac{I_0U_0}{2}$.'
+        explain: '$\bar P = \frac{200}{2} = 100$ Вт.'
+        f: [9]
+        sol: { given: ['I₀ = 2 А', 'U₀ = 100 В'], find: 'P̄', formula: '\bar P = \frac{I_0U_0}{2}', calc: '\bar P = 100', answer: '100 Вт' }
+        src: e23
+      - type: numeric
+        cat: problem
+        q: Нагреватель сопротивлением 100 Ом включён в сеть 220 В (действующее). Найдите среднюю мощность.
+        num: { value: 484, unit: 'Вт', check: '220**2/100' }
+        hint: '$\bar P = \frac{U_{эф}^2}{R}$.'
+        explain: '$\bar P = \frac{48\,400}{100} = 484$ Вт.'
+        f: [10]
+        sol: { given: ['U_эф = 220 В', 'R = 100 Ом'], find: 'P̄', formula: '\bar P = \frac{U_{эф}^2}{R}', calc: '\bar P = 484', answer: '484 Вт' }
+        src: e23
+      - type: numeric
+        cat: problem
+        q: 'Максимальное напряжение 20 В. Найдите значение напряжения при фазе $\frac\pi4$.'
+        num: { value: 14.142, unit: 'В', check: '20*Math.sin(Math.PI/4)' }
+        hint: 'По конспекту это и есть эффективное значение: $U_0\sin\frac\pi4$.'
+        explain: '$20\cdot\frac{\sqrt2}{2} \approx 14{,}1$ В.'
+        f: [6]
+        sol: { given: ['U₀ = 20 В'], find: 'U(π/4)', formula: 'U = U_0\sin\frac{\pi}{4}', calc: 'U \approx 14{,}1', answer: '≈ 14,1 В' }
+        src: e22
+      - type: single
+        cat: theory
+        q: Какое значение напряжения показывает вольтметр в цепи переменного тока?
+        opts: ['Эффективное (действующее)', 'Максимальное', 'Моментальное', 'Среднее за период — ноль']
+        ans: a
+        hint: В списке определений $U_{эф}$ есть слова «показание вольтметра».
+        explain: '$U_{эф}$ — эффективное, действующее значение, показание вольтметра.'
+        src: e22
+      - type: single
+        cat: theory
+        q: Какова частота сети, которой мы пользуемся (по конспекту)?
+        opts: ['50 Гц', '220 Гц', '310 Гц', '60 Гц']
+        ans: a
+        hint: '«$U_{эф} = 220$ В, $U_0 \approx 310$ В, ν = …»'
+        explain: 'ν = 50 Гц.'
+        src: e23
+      - type: single
+        cat: theory
+        q: Как сопротивление резистора зависит от частоты переменного тока (по графику в конспекте)?
+        opts: ['Не зависит', 'Растёт с частотой', 'Убывает с частотой', 'Равно нулю при ν = 0']
+        ans: a
+        hint: На графике R(ν) — горизонтальная прямая.
+        explain: 'По графику R от частоты не зависит (см. замечание EM15 о знаке «~»).'
+        src: e22
+
+# ───────────────────────────────────────────────────────────────
+  - id: ac-cl
+    title: Конденсатор и катушка в цепи переменного тока
+    pages: [e23, e24]
+    theory:
+      - kind: text
+        title: ② Конденсатор
+        body: '$U(t) = U_0\cos(\omega t)$, $I(t) = -I_0\sin(\omega t)$, $I_0 = U_0\omega C = U_0\cdot2\pi\nu C$. Из $I_0 = \frac{U_0}{X_C}$: ёмкостное сопротивление $X_C = \frac1{\omega C} = \frac1{2\pi\nu C}$ — убывает с ростом частоты.'
+        src: e23
+      - kind: rule
+        title: Конденсатор и постоянный ток
+        body: 'При ν = 0 (постоянный ток) $X_C \to \infty$, поэтому $I_C = 0$. Моментальная мощность $P(t) = -\frac12I_0U_0\sin(2\omega t)$, средняя $\bar P = 0$.'
+        src: e23
+      - kind: text
+        title: ③ Индуктивная катушка
+        body: '$U(t) = U_0\cos(\omega t)$, $I(t) = I_0\sin(\omega t)$, $I_0 = \frac{U_0}{\omega L} = \frac{U_0}{2\pi\nu L}$. Из $I_0 = \frac{U_0}{X_L}$: индуктивное сопротивление $X_L = \omega L = 2\pi\nu L$ — растёт прямо пропорционально.'
+        src: e23
+      - kind: rule
+        title: Катушка и постоянный ток
+        body: 'При ν = 0 $X_L \to 0$, поэтому $I_L \ne 0$. $P(t) = \frac12I_0U_0\sin(2\omega t)$, $\bar P = 0$.'
+        src: e24
+      - kind: rule
+        title: Сдвиг фаз между током и напряжением
+        body: 'Резистор: $\Delta\varphi = 0$ — ток и напряжение в фазе. Конденсатор: $I = I_0\cos\left(\frac\pi2 + \omega t\right)$, $\Delta\varphi = \frac\pi2$ — ток впереди. Катушка: $I = I_0\cos\left(\omega t - \frac\pi2\right)$, $\Delta\varphi = \frac\pi2$ — ток позади.'
+        src: e24
+        fig: ac-phase
+    formulas:
+      - title: Амплитуда тока через конденсатор
+        tex: 'I_0 = U_0\omega C = U_0\cdot2\pi\nu C'
+        sym: [I0_amp, U0_amp, omega_per, nu_per, C_cap]
+        boxed: true
+        src: e23
+      - title: Ёмкостное сопротивление
+        tex: 'X_C = \frac{1}{\omega C} = \frac{1}{2\pi\nu C}'
+        sym: [X_C, omega_per, nu_per, C_cap]
+        boxed: true
+        src: e23
+      - title: Мощность на конденсаторе
+        tex: 'P(t) = -\frac12I_0U_0\sin(2\omega t),\qquad \bar P = 0'
+        sym: [P_t, P_avg, I0_amp, U0_amp, omega_per]
+        src: e23
+      - title: Амплитуда тока через катушку
+        tex: 'I_0 = \frac{U_0}{\omega L} = \frac{U_0}{2\pi\nu L}'
+        sym: [I0_amp, U0_amp, omega_per, nu_per, L_ind]
+        boxed: true
+        src: e23
+      - title: Индуктивное сопротивление
+        tex: 'X_L = \omega L = 2\pi\nu L'
+        sym: [X_L, omega_per, nu_per, L_ind]
+        boxed: true
+        src: e23
+      - title: Мощность на катушке
+        tex: 'P(t) = \frac12I_0U_0\sin(2\omega t),\qquad \bar P = 0'
+        sym: [P_t, P_avg, I0_amp, U0_amp, omega_per]
+        src: e24
+      - title: Ток через конденсатор опережает напряжение
+        tex: 'I(t) = -I_0\sin(\omega t) = I_0\cos\left(\frac{\pi}{2} + \omega t\right)'
+        sym: [I_t, I0_amp, omega_per]
+        src: e24
+      - title: Ток через катушку отстаёт от напряжения
+        tex: 'I(t) = I_0\sin(\omega t) = I_0\cos\left(\omega t - \frac{\pi}{2}\right)'
+        sym: [I_t, I0_amp, omega_per]
+        src: e24
+    questions:
+      - type: numeric
+        cat: problem
+        q: Конденсатор ёмкостью 10 мкФ в сети 50 Гц. Найдите ёмкостное сопротивление.
+        num: { value: 318.31, unit: 'Ом', check: '1/(2*Math.PI*50*10e-6)' }
+        hint: '$X_C = \frac1{2\pi\nu C}$.'
+        explain: '$X_C = \frac{1}{2\pi\cdot50\cdot10^{-5}} \approx 318$ Ом.'
+        f: [2]
+        sol: { given: ['C = 10 мкФ', 'ν = 50 Гц'], si: ['C = 10⁻⁵ Ф'], find: 'X_C', formula: 'X_C = \frac{1}{2\pi\nu C}', calc: 'X_C = \frac{1}{\pi\cdot10^{-3}} \approx 318', answer: '≈ 318 Ом' }
+        src: e23
+      - type: numeric
+        cat: problem
+        q: Катушка индуктивностью 0,5 Гн в сети 50 Гц. Найдите индуктивное сопротивление.
+        num: { value: 157.08, unit: 'Ом', check: '2*Math.PI*50*0.5' }
+        hint: '$X_L = 2\pi\nu L$.'
+        explain: '$X_L = 2\pi\cdot50\cdot0{,}5 = 50\pi \approx 157$ Ом.'
+        f: [5]
+        sol: { given: ['L = 0,5 Гн', 'ν = 50 Гц'], find: 'X_L', formula: 'X_L = 2\pi\nu L', calc: 'X_L = 50\pi \approx 157', answer: '≈ 157 Ом' }
+        src: e23
+      - type: numeric
+        cat: problem
+        q: 'U₀ = 100 В, ω = 1000 рад/с, C = 10 мкФ. Найдите амплитуду тока через конденсатор.'
+        num: { value: 1, unit: 'А', check: '100*1000*1e-5' }
+        hint: '$I_0 = U_0\omega C$.'
+        explain: '$I_0 = 100\cdot1000\cdot10^{-5} = 1$ А.'
+        f: [1]
+        sol: { given: ['U₀ = 100 В', 'ω = 1000 рад/с', 'C = 10⁻⁵ Ф'], find: 'I₀', formula: 'I_0 = U_0\omega C', calc: 'I_0 = 1', answer: '1 А' }
+        src: e23
+      - type: numeric
+        cat: problem
+        q: 'U₀ = 200 В, ω = 100 рад/с, L = 2 Гн. Найдите амплитуду тока через катушку.'
+        num: { value: 1, unit: 'А', check: '200/(100*2)' }
+        hint: '$I_0 = \frac{U_0}{\omega L}$.'
+        explain: '$I_0 = \frac{200}{200} = 1$ А.'
+        f: [4]
+        sol: { given: ['U₀ = 200 В', 'ω = 100 рад/с', 'L = 2 Гн'], find: 'I₀', formula: 'I_0 = \frac{U_0}{\omega L}', calc: 'I_0 = 1', answer: '1 А' }
+        src: e23
+      - type: single
+        cat: theory
+        q: Конденсатор подключили к постоянному току (ν = 0). Что будет с током через него?
+        opts: ['Ток не пойдёт: X_C → ∞', 'Ток будет очень большим', 'Ток будет переменным', 'X_C станет равным нулю']
+        ans: a
+        hint: 'В конспекте: $I_C = 0$ в рамке.'
+        explain: 'При ν = 0 $X_C = \frac1{2\pi\nu C} \to \infty$, $I_C = 0$.'
+        f: [2]
+        src: e23
+      - type: single
+        cat: theory
+        q: Катушку подключили к постоянному току. Чему стремится её индуктивное сопротивление?
+        opts: ['К нулю', 'К бесконечности', 'К 1 Ом', 'Не меняется']
+        ans: a
+        hint: '$X_L = 2\pi\nu L$ при ν = 0.'
+        explain: '$X_L \to 0$, ток через катушку идёт ($I_L \ne 0$).'
+        f: [5]
+        src: e24
+      - type: single
+        cat: formula
+        q: Частоту переменного тока увеличили в 2 раза. Как изменилось ёмкостное сопротивление?
+        opts: ['Уменьшилось в 2 раза', 'Увеличилось в 2 раза', 'Не изменилось', 'Уменьшилось в 4 раза']
+        ans: a
+        hint: 'ν в знаменателе: $X_C = \frac1{2\pi\nu C}$.'
+        explain: '$X_C \sim \frac1\nu$, график $X_C(\nu)$ в конспекте убывает.'
+        f: [2]
+        src: e23
+      - type: single
+        cat: theory
+        q: Как сдвинуты по фазе ток и напряжение на конденсаторе?
+        opts: ['Ток впереди на π/2', 'Ток позади на π/2', 'В фазе', 'Ток впереди на π']
+        ans: a
+        hint: '$I = I_0\cos\left(\frac\pi2 + \omega t\right)$.'
+        explain: 'На конденсаторе $\Delta\varphi = \frac\pi2$, ток впереди.'
+        f: [7]
+        src: e24
+      - type: single
+        cat: theory
+        q: Как сдвинуты по фазе ток и напряжение на индуктивной катушке?
+        opts: ['Ток позади на π/2', 'Ток впереди на π/2', 'В фазе', 'Ток позади на π']
+        ans: a
+        hint: '$I = I_0\cos\left(\omega t - \frac\pi2\right)$.'
+        explain: 'На катушке $\Delta\varphi = \frac\pi2$, ток позади.'
+        f: [8]
+        src: e24
+      - type: single
+        cat: theory
+        q: Чему равна средняя мощность переменного тока на конденсаторе и на катушке (по конспекту)?
+        opts: ['Нулю', 'I₀U₀/2', 'I₀²R/2', 'U₀²/R']
+        ans: a
+        hint: 'В рамках: $\bar P_0 = 0$ и $\bar P = 0$.'
+        explain: 'Моментальная мощность меняется как $\sin(2\omega t)$, её среднее за период — ноль.'
+        f: [3, 6]
+        src: [e23, e24]
+      - type: matching
+        cat: theory
+        q: Сопоставьте элемент цепи и сдвиг фаз между током и напряжением.
+        pairs:
+          - ['Резистор R', 'Δφ = 0, в фазе']
+          - ['Конденсатор C', 'Δφ = π/2, ток впереди']
+          - ['Катушка L', 'Δφ = π/2, ток позади']
+        hint: §1, §2, §3 на стр. e24.
+        explain: Сдвиги фаз со стр. e24.
+        src: e24
+
+# ───────────────────────────────────────────────────────────────
+  - id: ac-rlc
+    title: Последовательная цепь RLC. Полное сопротивление
+    pages: [e25, e26]
+    theory:
+      - kind: rule
+        title: Ток в последовательной цепи
+        body: 'Резистор, конденсатор и катушка соединены последовательно: ток через них одинаков, $I = I_R = I_C = I_L$.'
+        src: e25
+      - kind: text
+        title: Векторная диаграмма напряжений
+        body: '$U_R$ направлено вверх, $U_C$ и $U_L$ — в противоположные стороны по горизонтали. Полное напряжение $U = \sqrt{(U_C - U_L)^2 + U_R^2}$, Δφ — разность фаз между током и напряжением.'
+        src: e25
+      - kind: text
+        title: Полное сопротивление
+        body: '$U_R = I_RR$, $U_C = I_CX_C$, $U_L = I_LX_L$, $U = IZ$, где Z — полное сопротивление. В конспекте записано $Z = (X_L - X_C)^2 + R^2$ — см. замечание EM10. $\operatorname{tg}\Delta\varphi = \frac{|X_L - X_C|}{R}$, $\cos\Delta\varphi = \frac RZ$ — коэффициент мощности.'
+        src: e25
+        errata: [EM10]
+      - kind: text
+        title: Мощность в цепи RLC
+        body: '$\bar P = \frac{I_0U_0}{2}\cos\Delta\varphi$; $U_0 = I_0Z$, $U_{эф} = I_{эф}Z$; $\bar P = \frac{I_0^2R}{2} = \frac{U_0^2}{2Z^2}R$.'
+        src: e25
+      - kind: definition
+        title: Реактивные сопротивления
+        body: Ёмкостное и индуктивное сопротивления называются реактивными, потому что в них не выделяется теплота, то есть закон Джоуля–Ленца не работает.
+        src: e26
+    formulas:
+      - title: Ток в последовательной цепи
+        tex: 'I = I_R = I_C = I_L'
+        sym: [I_cur]
+        src: e25
+      - title: Полное напряжение
+        tex: 'U = \sqrt{(U_C - U_L)^2 + U_R^2}'
+        sym: [U_volt, U_RCL]
+        boxed: true
+        src: e25
+      - title: Напряжения на элементах
+        tex: 'U_R = I_R\cdot R,\qquad U_C = I_C\cdot X_C,\qquad U_L = I_L\cdot X_L'
+        sym: [U_RCL, I_cur, R_res, X_C, X_L]
+        src: e25
+      - title: Закон Ома для цепи RLC
+        tex: 'U = IZ'
+        sym: [U_volt, I_cur, Z_imp]
+        src: e25
+      - title: Полное сопротивление (как в конспекте)
+        tex: 'Z = (X_L - X_C)^2 + R^2'
+        sym: [Z_imp, X_L, X_C, R_res]
+        src: e25
+        errata: [EM10]
+      - title: Тангенс разности фаз
+        tex: '\operatorname{tg}\Delta\varphi = \frac{|X_L - X_C|}{R},\qquad \Delta\varphi = \operatorname{arctg}\frac{|X_L - X_C|}{R}'
+        sym: [dphi_ac, X_L, X_C, R_res]
+        src: e25
+      - title: Коэффициент мощности
+        tex: '\cos\Delta\varphi = \frac{R}{Z}'
+        sym: [dphi_ac, R_res, Z_imp]
+        boxed: true
+        src: e25
+      - title: Средняя мощность в цепи RLC
+        tex: '\bar P = \frac{I_0U_0}{2}\cdot\cos\Delta\varphi'
+        sym: [P_avg, I0_amp, U0_amp, dphi_ac]
+        boxed: true
+        src: e25
+      - title: Амплитуды и действующие значения
+        tex: 'U_0 = I_0Z,\qquad U_{эф} = I_{эф}\cdot Z'
+        sym: [U0_amp, I0_amp, U_eff, I_eff, Z_imp]
+        src: e25
+      - title: Средняя мощность через R
+        tex: '\bar P = \frac{I_0^2R}{2} = \frac{U_0^2}{2Z^2}\cdot R'
+        sym: [P_avg, I0_amp, R_res, U0_amp, Z_imp]
+        boxed: true
+        src: e25
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'В последовательной цепи $U_R = 30$ В, $U_C = 70$ В, $U_L = 30$ В. Найдите полное напряжение.'
+        num: { value: 50, unit: 'В', check: 'Math.sqrt((70-30)**2+30**2)' }
+        hint: '$U = \sqrt{(U_C - U_L)^2 + U_R^2}$ — напряжения нельзя просто сложить.'
+        explain: '$\sqrt{40^2 + 30^2} = 50$ В, хотя $30 + 70 + 30 = 130$.'
+        f: [2]
+        sol: { given: ['U_R = 30 В', 'U_C = 70 В', 'U_L = 30 В'], find: 'U', formula: 'U = \sqrt{(U_C - U_L)^2 + U_R^2}', calc: 'U = \sqrt{1600 + 900} = 50', answer: '50 В' }
+        src: e25
+      - type: numeric
+        cat: problem
+        q: Напряжение на цепи RLC 100 В, ток 2 А. Найдите полное сопротивление.
+        num: { value: 50, unit: 'Ом', check: '100/2' }
+        hint: '$U = IZ$.'
+        explain: '$Z = \frac{100}{2} = 50$ Ом.'
+        f: [4]
+        sol: { given: ['U = 100 В', 'I = 2 А'], find: 'Z', formula: 'Z = \frac{U}{I}', calc: 'Z = 50', answer: '50 Ом' }
+        src: e25
+      - type: numeric
+        cat: problem
+        q: 'R = 30 Ом, полное сопротивление Z = 50 Ом. Найдите коэффициент мощности.'
+        num: { value: 0.6, unit: '', check: '30/50' }
+        hint: '$\cos\Delta\varphi = \frac RZ$.'
+        explain: '$\cos\Delta\varphi = 0{,}6$.'
+        f: [7]
+        sol: { given: ['R = 30 Ом', 'Z = 50 Ом'], find: 'cos Δφ', formula: '\cos\Delta\varphi = \frac{R}{Z}', calc: '\cos\Delta\varphi = 0{,}6', answer: '0,6' }
+        src: e25
+      - type: numeric
+        cat: problem
+        q: 'I₀ = 2 А, U₀ = 100 В, cos Δφ = 0,6. Найдите среднюю мощность.'
+        num: { value: 60, unit: 'Вт', check: '2*100/2*0.6' }
+        hint: '$\bar P = \frac{I_0U_0}{2}\cos\Delta\varphi$.'
+        explain: '$\bar P = 100\cdot0{,}6 = 60$ Вт.'
+        f: [8]
+        sol: { given: ['I₀ = 2 А', 'U₀ = 100 В', 'cos Δφ = 0,6'], find: 'P̄', formula: '\bar P = \frac{I_0U_0}{2}\cos\Delta\varphi', calc: '\bar P = 60', answer: '60 Вт' }
+        src: e25
+      - type: numeric
+        cat: problem
+        q: 'В той же цепи I₀ = 2 А, R = 30 Ом. Найдите среднюю мощность через сопротивление R.'
+        num: { value: 60, unit: 'Вт', check: '2**2*30/2' }
+        hint: '$\bar P = \frac{I_0^2R}{2}$.'
+        explain: '$\bar P = \frac{4\cdot30}{2} = 60$ Вт — столько же, сколько через $\cos\Delta\varphi$: теплота выделяется только на R.'
+        f: [10]
+        sol: { given: ['I₀ = 2 А', 'R = 30 Ом'], find: 'P̄', formula: '\bar P = \frac{I_0^2R}{2}', calc: '\bar P = 60', answer: '60 Вт' }
+        src: e25
+      - type: numeric
+        cat: problem
+        q: '$X_L = 50$ Ом, $X_C = 20$ Ом, R = 30 Ом. Найдите разность фаз между током и напряжением (в градусах).'
+        num: { value: 45, unit: '°', check: 'Math.atan(Math.abs(50-20)/30)*180/Math.PI' }
+        hint: '$\operatorname{tg}\Delta\varphi = \frac{|X_L - X_C|}{R}$.'
+        explain: '$\operatorname{tg}\Delta\varphi = \frac{30}{30} = 1$, $\Delta\varphi = 45°$.'
+        f: [6]
+        sol: { given: ['X_L = 50 Ом', 'X_C = 20 Ом', 'R = 30 Ом'], find: 'Δφ', formula: '\operatorname{tg}\Delta\varphi = \frac{|X_L - X_C|}{R}', calc: '\operatorname{tg}\Delta\varphi = 1 \Rightarrow \Delta\varphi = 45°', answer: '45°' }
+        src: e25
+      - type: numeric
+        cat: problem
+        q: 'Ток в цепи 0,5 А, ёмкостное сопротивление 200 Ом. Найдите напряжение на конденсаторе.'
+        num: { value: 100, unit: 'В', check: '0.5*200' }
+        hint: '$U_C = I_CX_C$.'
+        explain: '$U_C = 0{,}5\cdot200 = 100$ В.'
+        f: [3]
+        sol: { given: ['I = 0,5 А', 'X_C = 200 Ом'], find: 'U_C', formula: 'U_C = I X_C', calc: 'U_C = 100', answer: '100 В' }
+        src: e25
+      - type: single
+        cat: theory
+        q: Почему ёмкостное и индуктивное сопротивления называют реактивными?
+        opts: ['В них не выделяется теплота — закон Джоуля–Ленца не работает', 'Они быстро реагируют на ток', 'Они всегда равны нулю', 'Они зависят от температуры']
+        ans: a
+        hint: Первая фраза на стр. e26.
+        explain: Ёмкостное и индуктивное сопротивления называются реактивными, потому что в них не выделяется теплота.
+        src: e26
+      - type: single
+        cat: theory
+        q: Что одинаково для всех элементов последовательной цепи RLC?
+        opts: ['Сила тока', 'Напряжение', 'Сопротивление', 'Мощность']
+        ans: a
+        hint: '$I = I_R = I_C = I_L$.'
+        explain: При последовательном соединении через все элементы идёт один и тот же ток.
+        f: [1]
+        src: e25
+
+# ───────────────────────────────────────────────────────────────
+  - id: ac-resonance
+    title: Вынужденные колебания. Резонанс
+    pages: [e26]
+    theory:
+      - kind: definition
+        title: Вынужденные колебания
+        body: Если колебания возникают и совершаются под воздействием внешней силы, такие колебания называются вынужденными.
+        src: e26
+      - kind: definition
+        title: Резонанс
+        body: Когда частота вынуждающей силы принимает близкое значение к собственной частоте системы, в системе возникает резонанс. В резонансе амплитуда системы резко меняется.
+        src: e26
+        errata: [EM11]
+      - kind: note
+        title: Что не записано
+        body: Под темой нарисована цепь R–C–L с источником переменного тока; условие резонанса для этой цепи в конспекте не записано.
+        src: e26
+      - kind: law
+        title: Резонанс напряжений в цепи RLC
+        body: |
+          Условие резонанса для последовательной цепи R–C–L в конспекте не записано. По учебным материалам:
+          - Резонанс наступает, когда индуктивное сопротивление равно ёмкостному: $X_L = X_C$, то есть $\omega_0L = \frac{1}{\omega_0C}$. Отсюда резонансная частота $\omega_0 = \frac{1}{\sqrt{LC}}$ — та же, что собственная частота контура (стр. e20).
+          - Полное сопротивление при этом наименьшее и равно активному: $Z = R$, а сила тока наибольшая: $I = \frac UR$. Ток и напряжение совпадают по фазе.
+          - Напряжения на катушке и конденсаторе равны между собой и при малом R могут во много раз превысить напряжение источника — поэтому этот резонанс называют резонансом напряжений.
+        src: e26
+        fig: rlc-resonance
+        web:
+          - { title: 'Википедия: Резонанс напряжений', url: 'https://ru.wikipedia.org/wiki/Резонанс_напряжений' }
+    questions:
+      - type: single
+        cat: theory
+        q: Какие колебания называются вынужденными?
+        opts: ['Совершающиеся под воздействием внешней силы', 'Происходящие без внешних сил', 'Колебания в идеальном контуре', 'Колебания с постоянной амплитудой']
+        ans: a
+        hint: Ключевые слова — «внешняя сила».
+        explain: Колебания под воздействием внешней силы называются вынужденными.
+        src: e26
+      - type: single
+        cat: theory
+        q: Когда возникает резонанс?
+        opts: ['Частота вынуждающей силы близка к собственной частоте системы', 'Внешняя сила очень большая', 'Сопротивление цепи равно нулю', 'Частота внешней силы равна нулю']
+        ans: a
+        hint: Сравниваются две частоты.
+        explain: Резонанс — когда частота вынуждающей силы принимает значение, близкое к собственной частоте системы.
+        src: e26
+      - type: numeric
+        cat: problem
+        q: 'Контур: L = 0,1 Гн, C = 10 мкФ. При какой частоте внешнего переменного напряжения возникнет резонанс?'
+        num: { value: 159.15, unit: 'Гц', check: '1/(2*Math.PI*Math.sqrt(0.1*1e-5))' }
+        hint: 'Резонанс — при частоте, близкой к собственной; собственная частота контура $\nu = \frac1{2\pi\sqrt{LC}}$ (стр. e20).'
+        explain: '$\sqrt{LC} = 10^{-3}$, $\nu = \frac{1}{2\pi\cdot10^{-3}} \approx 159$ Гц.'
+        f: [em-lc-f6]
+        sol: { given: ['L = 0,1 Гн', 'C = 10⁻⁵ Ф'], find: 'ν', formula: '\nu = \frac{1}{2\pi\sqrt{LC}}', calc: '\nu = \frac{1}{2\pi\cdot10^{-3}} \approx 159', answer: '≈ 159 Гц' }
+        src: [e20, e26]
+      - type: text
+        cat: theory
+        q: Дайте определение резонанса.
+        ref: Когда частота вынуждающей силы принимает близкое значение к собственной частоте системы, в системе возникает резонанс; при этом амплитуда колебаний резко меняется (возрастает).
+        criteria: ['Сравниваются частота вынуждающей силы и собственная частота системы', 'Сказано о резком изменении (росте) амплитуды']
+        hint: Две частоты и амплитуда.
+        explain: Определение со стр. e26 (см. замечание EM11).
+        src: e26
+      - type: single
+        cat: formula
+        q: При каком условии в последовательной цепи RLC наступает резонанс напряжений?
+        opts: ['$X_L = X_C$', '$X_L = R$', '$X_C = 0$', '$Z = X_L + X_C$']
+        ans: a
+        hint: Индуктивное и ёмкостное сопротивления компенсируют друг друга.
+        explain: 'Резонанс — при $X_L = X_C$; тогда $Z = R$ и ток наибольший.'
+        f: [ac-resonance-fx]
+        src: e26
+        web:
+          - { title: 'Википедия: Резонанс напряжений', url: 'https://ru.wikipedia.org/wiki/Резонанс_напряжений' }
+      - type: numeric
+        cat: problem
+        q: 'Цепь RLC: L = 0,1 Гн, C = 10 мкФ. Найдите резонансную циклическую частоту.'
+        num: { value: 1000, unit: 'рад/с', check: '1/Math.sqrt(0.1*1e-5)' }
+        hint: '$\omega_0 = \frac{1}{\sqrt{LC}}$.'
+        explain: '$\omega_0 = \frac{1}{\sqrt{0{,}1\cdot10^{-5}}} = \frac{1}{10^{-3}} = 1000$ рад/с.'
+        f: [ac-resonance-fw]
+        sol: { given: ['L = 0,1 Гн', 'C = 10⁻⁵ Ф'], find: 'ω₀', formula: '\omega_0 = \frac{1}{\sqrt{LC}}', calc: '\omega_0 = \frac{1}{\sqrt{10^{-6}}} = 1000', answer: '1000 рад/с' }
+        src: e26
+        web:
+          - { title: 'Википедия: Резонанс напряжений', url: 'https://ru.wikipedia.org/wiki/Резонанс_напряжений' }
+      - type: numeric
+        cat: problem
+        q: 'В цепи RLC при резонансе: R = 20 Ом, напряжение источника 100 В. Найдите силу тока.'
+        num: { value: 5, unit: 'А', check: '100/20' }
+        hint: 'При резонансе $Z = R$, $I = \frac UR$.'
+        explain: '$I = \frac{100}{20} = 5$ А — наибольший ток для этой цепи.'
+        f: [ac-resonance-fi]
+        sol: { given: ['R = 20 Ом', 'U = 100 В'], find: 'I', formula: 'I_{рез} = \frac{U}{R}', calc: 'I = \frac{100}{20} = 5', answer: '5 А' }
+        src: e26
+        web:
+          - { title: 'Википедия: Резонанс напряжений', url: 'https://ru.wikipedia.org/wiki/Резонанс_напряжений' }
+      - type: single
+        cat: theory
+        q: Каким становится полное сопротивление цепи RLC при резонансе?
+        opts: ['Наименьшим и равным R', 'Наибольшим', 'Равным нулю', 'Равным $X_L + X_C$']
+        ans: a
+        hint: '$Z = \sqrt{(X_L - X_C)^2 + R^2}$ при $X_L = X_C$.'
+        explain: 'При $X_L = X_C$ реактивные сопротивления компенсируются: $Z = R$ — минимум.'
+        f: [ac-resonance-fi]
+        src: e26
+        web:
+          - { title: 'Википедия: Резонанс напряжений', url: 'https://ru.wikipedia.org/wiki/Резонанс_напряжений' }
+    formulas:
+      - id: ac-resonance-fx
+        title: Условие резонанса напряжений
+        tex: 'X_L = X_C'
+        sym: [X_L, X_C]
+        src: e26
+        web:
+          - { title: 'Википедия: Резонанс напряжений', url: 'https://ru.wikipedia.org/wiki/Резонанс_напряжений' }
+      - id: ac-resonance-fw
+        title: Резонансная частота
+        tex: '\omega_0 = \frac{1}{\sqrt{LC}}'
+        sym: [omega_res, L_ind, C_cap]
+        src: e26
+        web:
+          - { title: 'Википедия: Резонанс напряжений', url: 'https://ru.wikipedia.org/wiki/Резонанс_напряжений' }
+      - id: ac-resonance-fi
+        title: Ток при резонансе
+        tex: 'Z = R,\qquad I_{рез} = \frac{U}{R}'
+        sym: [Z_imp, R_res, I_res, U_src_res]
+        src: e26
+        web:
+          - { title: 'Википедия: Резонанс напряжений', url: 'https://ru.wikipedia.org/wiki/Резонанс_напряжений' }
+
+# ───────────────────────────────────────────────────────────────
+  - id: transformer
+    title: Трансформатор
+    pages: [e26, e27]
+    theory:
+      - kind: definition
+        title: Трансформатор
+        body: Прибор, который, не меняя мощность переменного тока, меняет напряжение и силу тока, называется трансформатором. Трансформатор работает по принципу закона электромагнитной индукции.
+        src: e26
+      - kind: text
+        title: Коэффициент трансформации
+        body: 'Мощность $P = IU$ не меняется: $I_1U_1 = I_2U_2$, значит $\frac{I_1}{I_2} = \frac{U_2}{U_1}$. Коэффициент трансформации $k = \frac{N_1}{N_2} = \frac{U_1}{U_2} = \frac{I_2}{I_1}$.'
+        src: e27
+        fig: transformer
+      - kind: list
+        title: Понижающий и повышающий
+        body: 'Понижающий: k > 1, $N_1 > N_2$, $U_1 > U_2$, $I_1 < I_2$. Повышающий: k < 1, $N_1 < N_2$, $U_1 < U_2$, $I_1 > I_2$.'
+        src: e27
+      - kind: text
+        title: КПД трансформатора
+        body: '$\eta = \frac{I_2U_2}{I_1U_1}\cdot100\%$. У идеального трансформатора η = 100 % и $I_1U_1 = I_2U_2$. На рисунке — автотрансформатор: одна обмотка, на входе ~10 В, с отвода — 5 В.'
+        src: e27
+    formulas:
+      - title: Мощность сохраняется
+        tex: 'P = IU,\qquad I_1U_1 = I_2U_2,\qquad \frac{I_1}{I_2} = \frac{U_2}{U_1}'
+        sym: [P_pow, I12_tr, U12]
+        src: e27
+      - title: Коэффициент трансформации
+        tex: 'k = \frac{N_1}{N_2} = \frac{U_1}{U_2} = \frac{I_2}{I_1}'
+        sym: [k_tr, N12, U12, I12_tr]
+        boxed: true
+        src: e27
+      - title: КПД трансформатора
+        tex: '\eta = \frac{I_2U_2}{I_1U_1}\cdot100\%'
+        sym: [eta, I12_tr, U12]
+        boxed: true
+        src: e27
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Первичная обмотка — 1000 витков, вторичная — 50, напряжение на первичной 220 В. Найдите напряжение на вторичной.'
+        num: { value: 11, unit: 'В', check: '220*50/1000' }
+        hint: '$\frac{N_1}{N_2} = \frac{U_1}{U_2}$.'
+        explain: '$k = 20$, $U_2 = \frac{220}{20} = 11$ В.'
+        f: [2]
+        sol: { given: ['N₁ = 1000', 'N₂ = 50', 'U₁ = 220 В'], find: 'U₂', formula: 'U_2 = U_1\frac{N_2}{N_1}', calc: 'U_2 = 11', answer: '11 В' }
+        src: e27
+      - type: numeric
+        cat: problem
+        q: 'N₁ = 1000, N₂ = 50. Найдите коэффициент трансформации.'
+        num: { value: 20, unit: '', check: '1000/50' }
+        hint: '$k = \frac{N_1}{N_2}$.'
+        explain: '$k = 20 > 1$ — трансформатор понижающий.'
+        f: [2]
+        sol: { given: ['N₁ = 1000', 'N₂ = 50'], find: 'k', formula: 'k = \frac{N_1}{N_2}', calc: 'k = 20', answer: '20' }
+        src: e27
+      - type: numeric
+        cat: problem
+        q: 'Идеальный трансформатор: U₁ = 220 В, I₁ = 0,5 А, U₂ = 11 В. Найдите ток во вторичной обмотке.'
+        num: { value: 10, unit: 'А', check: '220*0.5/11' }
+        hint: '$I_1U_1 = I_2U_2$.'
+        explain: '$I_2 = \frac{110}{11} = 10$ А.'
+        f: [1]
+        sol: { given: ['U₁ = 220 В', 'I₁ = 0,5 А', 'U₂ = 11 В'], find: 'I₂', formula: 'I_2 = \frac{I_1U_1}{U_2}', calc: 'I_2 = 10', answer: '10 А' }
+        src: e27
+      - type: numeric
+        cat: problem
+        q: 'I₁ = 1 А, U₁ = 220 В, I₂ = 4 А, U₂ = 50 В. Найдите КПД трансформатора (в %).'
+        num: { value: 90.909, unit: '%', check: '4*50/(1*220)*100' }
+        hint: '$\eta = \frac{I_2U_2}{I_1U_1}\cdot100\%$.'
+        explain: '$\eta = \frac{200}{220}\cdot100\% \approx 90{,}9\%$.'
+        f: [3]
+        sol: { given: ['I₁ = 1 А', 'U₁ = 220 В', 'I₂ = 4 А', 'U₂ = 50 В'], find: 'η', formula: '\eta = \frac{I_2U_2}{I_1U_1}\cdot100\%', calc: '\eta \approx 90{,}9\%', answer: '≈ 90,9 %' }
+        src: e27
+      - type: single
+        cat: theory
+        q: Коэффициент трансформации k > 1. Какой это трансформатор?
+        opts: ['Понижающий', 'Повышающий', 'Идеальный', 'Автотрансформатор']
+        ans: a
+        hint: 'k > 1 значит $N_1 > N_2$ и $U_1 > U_2$.'
+        explain: 'k > 1 — понижающий трансформатор.'
+        f: [2]
+        src: e27
+      - type: single
+        cat: theory
+        q: Какое соотношение витков у повышающего трансформатора?
+        opts: ['N₁ < N₂', 'N₁ > N₂', 'N₁ = N₂', 'Любое']
+        ans: a
+        hint: Повышающий — k < 1.
+        explain: 'Повышающий: k < 1, $N_1 < N_2$, $U_1 < U_2$.'
+        src: e27
+      - type: single
+        cat: theory
+        q: Что не меняет трансформатор?
+        opts: ['Мощность переменного тока', 'Напряжение', 'Силу тока', 'Число витков']
+        ans: a
+        hint: В определении — «не меняя…».
+        explain: Трансформатор, не меняя мощность, меняет напряжение и силу тока.
+        src: e26
+      - type: single
+        cat: theory
+        q: На каком законе основана работа трансформатора?
+        opts: ['Закон электромагнитной индукции', 'Закон Ома', 'Закон Кулона', 'Закон сохранения импульса']
+        ans: a
+        hint: Последнее предложение на стр. e26.
+        explain: Трансформатор работает по принципу закона электромагнитной индукции.
+        src: e26
+
+# ───────────────────────────────────────────────────────────────
+  - id: em-waves
+    title: Электромагнитные волны
+    pages: [e27, e28]
+    theory:
+      - kind: rule
+        title: Кто излучает электромагнитную волну
+        body: 'Заряженная частица, которая двигается с ускорением, распространяет электромагнитную волну. Примеры: частица двигается равноускоренно или равнозамедленно по прямой, вращается по окружности, гармонически колеблется.'
+        src: e27
+      - kind: rule
+        title: Кто не излучает
+        body: 'По конспекту не распространяет электромагнитную волну частица, которая покоится или «двигается криволинейно и равномерно» — см. замечание EM12.'
+        src: e28
+        errata: [EM12]
+      - kind: text
+        title: Как возникает и распространяется волна
+        body: Электромагнитная волна возникает и распространяется по пространству за счёт комбинации электрического и магнитного поля. За счёт изменения электрического поля возникает магнитное поле, за счёт магнитного поля возникает электрическое.
+        src: e28
+        errata: [EM13]
+        fig: em-wave
+      - kind: rule
+        title: Направление распространения
+        body: 'Направление распространения находим через правило буравчика: если повернуть буравчик от $\vec E$ к $\vec B$, наконечник буравчика покажет направление распространения электромагнитной волны.'
+        src: e28
+      - kind: note
+        title: Шкала электромагнитных волн
+        body: В зависимости от частоты электромагнитные волны можно разделить на несколько частей — так получается шкала электромагнитных волн. Дальше запись не закончена.
+        src: e28
+        errata: [EM14]
+      - kind: list
+        title: Шкала электромагнитных волн (дополнено)
+        body: |
+          Диапазоны по длине волны в порядке её уменьшения (границы условны и плавно переходят друг в друга):
+          - **радиоволны** — больше 1 мм;
+          - **инфракрасное излучение** — от 780 нм до 1 мм;
+          - **видимый свет** — от 380 до 780 нм (в других источниках 400–780 нм);
+          - **ультрафиолетовое излучение** — от 10 до 380–400 нм;
+          - **рентгеновское излучение** — от 5 пм до 10 нм; его получают в рентгеновской трубке и применяют в медицине и дефектоскопии;
+          - **гамма-излучение** — меньше 5 пм.
+          Чем меньше длина волны, тем больше частота $\nu = \frac{c}{\lambda}$ и энергия фотона.
+        src: e28
+        fig: em-scale
+        web:
+          - { title: 'ЕГЭ-Study: Электромагнитные волны (шкала)', url: 'https://ege-study.ru/ru/ege/materialy/fizika/elektromagnitnye-volny/' }
+          - { title: 'Открытая физика: Развитие представлений о природе света', url: 'https://physics.ru/courses/op25part2/content/chapter3/section/paragraph6/theory.html' }
+          - { title: 'БРЭ: Ультрафиолетовое излучение', url: 'https://bigenc.ru/c/ul-trafioletovoe-izluchenie-227754' }
+          - { title: 'БРЭ: Рентгеновское излучение', url: 'https://bigenc.ru/c/rentgenovskoe-izluchenie-2669d6' }
+    questions:
+      - type: multiple
+        cat: theory
+        q: При каком движении заряженная частица, по конспекту, распространяет электромагнитную волну? Выберите все.
+        opts: ['Равноускоренно по прямой', 'Равнозамедленно по прямой', 'Вращается по окружности', 'Гармонически колеблется', 'Покоится']
+        ans: [a, b, c, d]
+        hint: Общее у примеров — ускорение.
+        explain: Излучает частица, движущаяся с ускорением; покоящаяся не излучает.
+        src: [e27, e28]
+      - type: single
+        cat: theory
+        q: Излучает ли электромагнитную волну покоящаяся заряженная частица?
+        opts: ['Нет', 'Да, всегда', 'Только положительная', 'Только в магнитном поле']
+        ans: a
+        hint: Первое условие во фразе на стр. e28.
+        explain: Покоящаяся частица электромагнитную волну не распространяет.
+        src: e28
+      - type: single
+        cat: theory
+        q: Что должно быть у движения заряженной частицы, чтобы она излучала электромагнитную волну?
+        opts: ['Ускорение', 'Большая масса', 'Постоянная скорость', 'Большой заряд']
+        ans: a
+        hint: Первое предложение темы.
+        explain: Заряженная частица, которая двигается с ускорением, распространяет электромагнитную волну.
+        src: e27
+      - type: single
+        cat: theory
+        q: Как определить направление распространения электромагнитной волны?
+        opts: ['Буравчик поворачивают от E к B — наконечник показывает направление', 'Буравчик поворачивают от B к E', 'Правилом левой руки', 'По направлению вектора E']
+        ans: a
+        hint: Тоже правило буравчика, но для векторов E и B.
+        explain: Если повернуть буравчик от $\vec E$ к $\vec B$, наконечник покажет направление распространения волны.
+        src: e28
+      - type: single
+        cat: theory
+        q: За счёт чего распространяется электромагнитная волна?
+        opts: ['Изменение электрического поля порождает магнитное, а магнитное — электрическое', 'За счёт колебаний молекул среды', 'За счёт силы тяжести', 'За счёт тока в проводах']
+        ans: a
+        hint: Два поля по очереди порождают друг друга.
+        explain: 'За счёт изменения электрического поля возникает магнитное, за счёт магнитного — электрическое (см. EM13).'
+        src: e28
+      - type: single
+        cat: theory
+        q: Электромагнитная волна — поперечная или продольная (по конспекту)?
+        opts: ['Поперечная', 'Продольная', 'Бывает и такой, и такой', 'Ни та, ни другая']
+        ans: a
+        hint: Это сказано в теме «Волны» на стр. e14.
+        explain: Электромагнитные волны — поперечные.
+        src: e14
+      - type: sequence
+        cat: theory
+        q: Расположите излучения в порядке уменьшения длины волны.
+        seq: ['Радиоволны', 'Инфракрасное', 'Видимый свет', 'Ультрафиолетовое', 'Рентгеновское', 'Гамма-излучение']
+        hint: Самые длинные — радиоволны, самые короткие — гамма.
+        explain: 'Радиоволны (> 1 мм) → ИК → видимый свет → УФ → рентгеновское → гамма (< 5 пм).'
+        src: e28
+        web:
+          - { title: 'ЕГЭ-Study: Электромагнитные волны (шкала)', url: 'https://ege-study.ru/ru/ege/materialy/fizika/elektromagnitnye-volny/' }
+      - type: single
+        cat: theory
+        q: В каком диапазоне длин волн лежит видимый свет?
+        opts: ['Примерно 380–780 нм', '1–10 мм', '5–10 пм', '10–100 м']
+        ans: a
+        hint: Красный свет — около 700 нм, фиолетовый — около 400 нм.
+        explain: Видимый свет — от 380 (400) до 780 нм.
+        src: e28
+        web:
+          - { title: 'ЕГЭ-Study: Электромагнитные волны (шкала)', url: 'https://ege-study.ru/ru/ege/materialy/fizika/elektromagnitnye-volny/' }
+          - { title: 'Открытая физика: Развитие представлений о природе света', url: 'https://physics.ru/courses/op25part2/content/chapter3/section/paragraph6/theory.html' }
+      - type: single
+        cat: theory
+        q: К какому диапазону относится излучение с длиной волны 200 нм?
+        opts: ['Ультрафиолетовое', 'Инфракрасное', 'Видимое', 'Радиоволны']
+        ans: a
+        hint: Короче фиолетового (380 нм), но длиннее 10 нм.
+        explain: 'Ультрафиолет — от 10 до 380–400 нм; 200 нм — ближний УФ (БРЭ).'
+        src: e28
+        web:
+          - { title: 'ЕГЭ-Study: Электромагнитные волны (шкала)', url: 'https://ege-study.ru/ru/ege/materialy/fizika/elektromagnitnye-volny/' }
+          - { title: 'БРЭ: Ультрафиолетовое излучение', url: 'https://bigenc.ru/c/ul-trafioletovoe-izluchenie-227754' }
+      - type: numeric
+        cat: problem
+        q: 'Найдите частоту радиоволны длиной 3 м ($c = 3\cdot10^8$ м/с).'
+        num: { value: 1.0e8, unit: 'Гц', check: '3e8/3' }
+        hint: '$\nu = \frac{c}{\lambda}$.'
+        explain: '$\nu = \frac{3\cdot10^8}{3} = 10^8$ Гц = 100 МГц.'
+        sol: { given: ['λ = 3 м', 'c = 3·10⁸ м/с'], find: 'ν', formula: '\nu = \frac{c}{\lambda}', calc: '\nu = \frac{3\cdot10^8}{3} = 10^8', answer: '10⁸ Гц' }
+        src: e28
+        web:
+          - { title: 'ЕГЭ-Study: Электромагнитные волны (шкала)', url: 'https://ege-study.ru/ru/ege/materialy/fizika/elektromagnitnye-volny/' }

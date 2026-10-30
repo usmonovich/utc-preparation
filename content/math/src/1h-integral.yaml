@@ -1,0 +1,443 @@
+# 1.17 Первообразная и интеграл (книга, ч. 2, с. 215–227).
+# Теория, формулы, примеры и задачи составлены по открытым источникам (ссылки — в web); задания книги не копируются.
+
+subsection: ma-1-17
+
+x-sources:
+  c410: &c410 { title: 'Calculus Volume 1, 4.10 Antiderivatives', org: 'OpenStax, Rice University (открытый учебник)', url: 'https://openstax.org/books/calculus-volume-1/pages/4-10-antiderivatives', checked: '2026-10-25', note: 'адрес найден поиском' }
+  c52: &c52 { title: 'Calculus Volume 1, 5.2 The Definite Integral', org: 'OpenStax, Rice University', url: 'https://openstax.org/books/calculus-volume-1/pages/5-2-the-definite-integral', checked: '2026-10-25', note: 'адрес взят из оглавления главы 5' }
+  c53: &c53 { title: 'Calculus Volume 1, 5.3 The Fundamental Theorem of Calculus', org: 'OpenStax, Rice University', url: 'https://openstax.org/books/calculus-volume-1/pages/5-3-the-fundamental-theorem-of-calculus', checked: '2026-10-25', note: 'формула Ньютона — Лейбница' }
+  c61: &c61 { title: 'Calculus Volume 1, 6.1 Areas between Curves', org: 'OpenStax, Rice University', url: 'https://openstax.org/books/calculus-volume-1/pages/6-1-areas-between-curves', checked: '2026-10-25', note: 'адрес найден поиском' }
+
+topics:
+  # ───────────────────────────── 1.17.1 ─────────────────────────────
+  - id: ma-1-17-1
+    num: '1.17.1'
+    title: Правила вычисления первообразных
+    pages: [b215, b216, b217, b218, b219, b220]
+    book:
+      place: 'Ч. 2, 1.17 «Первообразная и интеграл», пункт 1.17.1'
+      summary: 'Задания на нахождение первообразных по таблице и правилам, в том числе первообразной, проходящей через заданную точку.'
+    stage: verified
+    stageNote: 'Каждая первообразная проверена дифференцированием (численно).'
+    sourcesChecked: '2026-10-25'
+    web: [*c410]
+    theory:
+      - kind: definition
+        title: Первообразная
+        body: |
+          Функция $F$ — **первообразная** для $f$ на промежутке, если $F'(x) = f(x)$. Все первообразные отличаются на постоянную: $F(x) + C$ (неопределённый интеграл $\int f(x)\,dx$).
+          Чтобы выбрать одну первообразную, нужно условие: например, график проходит через точку $(x_0; y_0)$ — тогда $C$ находят из $F(x_0) = y_0$.
+        src: b215
+      - kind: rule
+        title: Таблица и правила
+        body: |
+          | $f(x)$ | $F(x)$ | $f(x)$ | $F(x)$ |
+          | --- | --- | --- | --- |
+          | $x^n$ ($n \ne -1$) | $\frac{x^{n+1}}{n+1}$ | $\sin x$ | $-\cos x$ |
+          | $\frac1x$ | $\ln|x|$ | $\cos x$ | $\sin x$ |
+          | $e^x$ | $e^x$ | $\frac{1}{\cos^2x}$ | $\operatorname{tg} x$ |
+          | $\frac{1}{\sqrt x}$ | $2\sqrt x$ | $a^x$ | $\frac{a^x}{\ln a}$ |
+          **Правила**: первообразная суммы — сумма первообразных; постоянный множитель выносится; для $f(kx + b)$ первообразная $\frac1k F(kx + b)$.
+        src: b216
+    formulas:
+      - title: Первообразная степени
+        tex: '\int x^n\,dx = \frac{x^{n+1}}{n+1} + C\quad (n \ne -1)'
+        meaning: '$C$ — произвольная постоянная.'
+        use: 'Многочлены, корни, степени.'
+        limits: 'При $n = -1$: $\int \frac{dx}{x} = \ln|x| + C$.'
+        src: b216
+      - title: Линейная замена
+        tex: '\int f(kx + b)\,dx = \frac1k F(kx + b) + C'
+        meaning: '$F$ — первообразная $f$, $k \ne 0$.'
+        use: '$\int \cos 3x\,dx = \frac13\sin 3x + C$; $\int (2x + 1)^2dx = \frac{(2x + 1)^3}{6} + C$.'
+        src: b217
+      - title: Основные первообразные
+        tex: '\int e^x dx = e^x + C,\quad \int \sin x\,dx = -\cos x + C,\quad \int \cos x\,dx = \sin x + C'
+        meaning: 'Таблица первообразных.'
+        use: 'Вместе с правилами — суммы функций.'
+        src: b216
+    examples:
+      - title: Многочлен
+        given: 'Найдите первообразные для $f(x) = 3x^2 - 4x + 1$.'
+        find: '$F(x)$.'
+        method: 'Почленно по таблице.'
+        steps:
+          - '$\int 3x^2dx = x^3$, $\int 4x\,dx = 2x^2$, $\int 1\,dx = x$.'
+          - '$F(x) = x^3 - 2x^2 + x + C$.'
+        check: '$F''(x) = 3x^2 - 4x + 1$ ✓.'
+        answer: '$x^3 - 2x^2 + x + C$'
+        src: b216
+      - title: Через заданную точку
+        given: 'Найдите первообразную для $f(x) = 2x$, график которой проходит через $(1; 4)$.'
+        find: '$F(x)$.'
+        method: 'Найти $C$ из условия.'
+        steps:
+          - '$F(x) = x^2 + C$; $1 + C = 4$.'
+          - '$C = 3$, $F(x) = x^2 + 3$.'
+        check: '$F(1) = 4$, $F''(x) = 2x$ ✓.'
+        answer: '$F(x) = x^2 + 3$'
+        src: b217
+      - title: Линейная замена
+        given: 'Найдите первообразные для $f(x) = \cos 3x$.'
+        find: '$F(x)$.'
+        method: '$\frac1k F(kx)$.'
+        steps:
+          - '$\int\cos 3x\,dx = \frac13\sin 3x + C$.'
+          - 'Проверка дифференцированием: $\left(\frac13\sin 3x\right)'' = \cos 3x$.'
+        check: '$\frac13 \cdot 3\cos 3x = \cos 3x$ ✓.'
+        answer: '$\frac13\sin 3x + C$'
+        src: b217
+    questions:
+      - type: numeric
+        cat: problem
+        q: '$F$ — первообразная для $f(x) = 3x^2$, $F(0) = 2$. Найдите $F(2)$.'
+        num: { value: 10, unit: '', check: '8+2' }
+        hint: '$F(x) = x^3 + C$.'
+        explain: '$C = 2$, $F(2) = 10$.'
+        f: [1]
+        sol: { method: 'Первообразная через точку.', steps: ['$F(x) = x^3 + C$, $F(0) = C = 2$.', '$F(2) = 8 + 2 = 10$.'], answer: '10' }
+        src: b217
+      - type: numeric
+        cat: problem
+        q: '$F$ — первообразная для $f(x) = e^x$, $F(0) = 3$. Найдите $F(1)$ (с точностью до 0,01).'
+        num: { value: 4.7183, unit: '', tolAbs: 0.01, check: 'Math.E+2' }
+        hint: '$F(x) = e^x + C$.'
+        explain: '$C = 2$, $F(1) = e + 2 \approx 4{,}72$.'
+        f: [3]
+        sol: { method: 'Первообразная через точку.', steps: ['$F(0) = 1 + C = 3 \Rightarrow C = 2$.', '$F(1) = e + 2 \approx 4{,}72$.'], answer: '4,72' }
+        src: b217
+      - type: numeric
+        cat: problem
+        q: '$F$ — первообразная для $f(x) = 4x^3 + 1$, $F(1) = 0$. Найдите $F(2)$.'
+        num: { value: 16, unit: '', check: '16+2-2' }
+        hint: '$F(x) = x^4 + x + C$.'
+        explain: '$C = -2$, $F(2) = 16 + 2 - 2 = 16$.'
+        f: [1]
+        sol: { method: 'Первообразная через точку.', steps: ['$F(1) = 1 + 1 + C = 0 \Rightarrow C = -2$.', '$F(2) = 16$.'], answer: '16' }
+        src: b217
+      - type: numeric
+        cat: problem
+        q: '$F$ — первообразная для $f(x) = \sin x$, $F(0) = 0$. Найдите $F(\pi)$.'
+        num: { value: 2, unit: '', check: '-Math.cos(Math.PI)+1' }
+        hint: '$F(x) = -\cos x + C$.'
+        explain: '$C = 1$, $F(\pi) = 1 + 1 = 2$.'
+        f: [3]
+        sol: { method: 'Первообразная через точку.', steps: ['$F(0) = -1 + C = 0 \Rightarrow C = 1$.', '$F(\pi) = -\cos\pi + 1 = 2$.'], answer: '2' }
+        src: b217
+      - type: numeric
+        cat: problem
+        q: '$F$ — первообразная для $f(x) = (2x + 1)^2$, $F(0) = \frac16$. Найдите $F(1)$.'
+        num: { value: 4.5, unit: '', check: '27/6' }
+        hint: '$F(x) = \frac{(2x + 1)^3}{6} + C$.'
+        explain: '$C = 0$, $F(1) = \frac{27}{6} = 4{,}5$.'
+        f: [2]
+        sol: { method: 'Линейная замена.', steps: ['$F(x) = \frac{(2x + 1)^3}{2 \cdot 3} + C$.', '$F(0) = \frac16 + C \Rightarrow C = 0$.', '$F(1) = 4{,}5$.'], answer: '4,5' }
+        src: b218
+      - type: numeric
+        cat: problem
+        q: '$F$ — первообразная для $f(x) = \dfrac{1}{\sqrt x}$, $F(1) = 2$. Найдите $F(4)$.'
+        num: { value: 4, unit: '', check: '2*Math.sqrt(4)' }
+        hint: '$F(x) = 2\sqrt x + C$.'
+        explain: '$C = 0$, $F(4) = 4$.'
+        f: [1]
+        sol: { method: 'Первообразная степени $x^{-1/2}$.', steps: ['$F(x) = 2\sqrt x + C$, $F(1) = 2 + C = 2 \Rightarrow C = 0$.', '$F(4) = 4$.'], answer: '4' }
+        src: b217
+      - type: single
+        cat: theory
+        q: 'Чем отличаются любые две первообразные одной функции на промежутке?'
+        opts: ['на постоянное слагаемое', 'на постоянный множитель', 'ничем', 'на $x$']
+        ans: a
+        hint: 'Производная постоянной равна нулю.'
+        explain: 'Если $F_1'' = F_2''$, то $(F_1 - F_2)'' = 0$ и $F_1 - F_2 = C$.'
+        src: b215
+      - type: single
+        cat: theory
+        q: 'Первообразная для $f(x) = \frac1x$ ($x > 0$):'
+        opts: ['$\ln x + C$', '$-\frac{1}{x^2} + C$', '$\frac{x^0}{0} + C$', '$x^{-1} + C$']
+        ans: a
+        hint: 'Формула степени при $n = -1$ не работает.'
+        explain: '$(\ln x)'' = \frac1x$.'
+        f: [1]
+        src: b216
+
+  # ───────────────────────────── 1.17.2 ─────────────────────────────
+  - id: ma-1-17-2
+    num: '1.17.2'
+    title: Определённый интеграл
+    pages: [b220, b221, b222, b223, b224, b225]
+    book:
+      place: 'Ч. 2, 1.17 «Первообразная и интеграл», пункт 1.17.2'
+      summary: 'Задания на вычисление определённых интегралов по формуле Ньютона — Лейбница и на свойства интеграла.'
+    stage: verified
+    stageNote: 'Интегралы пересчитаны численно методом трапеций.'
+    sourcesChecked: '2026-10-25'
+    web: [*c52, *c53]
+    theory:
+      - kind: law
+        title: Формула Ньютона — Лейбница
+        body: |
+          Если $F$ — первообразная непрерывной на $[a; b]$ функции $f$, то
+          $$\int_a^b f(x)\,dx = F(b) - F(a).$$
+          Постоянная $C$ при вычитании сокращается, поэтому её не пишут.
+        src: b220
+      - kind: rule
+        title: Свойства определённого интеграла
+        body: |
+          - $\int_a^b (f \pm g) = \int_a^b f \pm \int_a^b g$; $\int_a^b kf = k\int_a^b f$;
+          - $\int_a^b f = \int_a^c f + \int_c^b f$; $\int_a^a f = 0$; $\int_b^a f = -\int_a^b f$;
+          - для **нечётной** $f$: $\int_{-a}^{a} f(x)\,dx = 0$; для **чётной**: $\int_{-a}^a f = 2\int_0^a f$.
+        src: b221
+    formulas:
+      - title: Формула Ньютона — Лейбница
+        tex: '\int_a^b f(x)\,dx = F(b) - F(a)'
+        meaning: '$F'' = f$ на $[a; b]$, $f$ непрерывна.'
+        use: 'Вычисление любых определённых интегралов.'
+        src: b220
+      - title: Интеграл нечётной функции
+        tex: 'f(-x) = -f(x) \Rightarrow \int_{-a}^{a} f(x)\,dx = 0'
+        meaning: 'Площади над и под осью взаимно уничтожаются.'
+        use: '$\int_{-1}^1 x^3dx = 0$, $\int_{-\pi}^{\pi}\sin x\,dx = 0$.'
+        src: b221
+    examples:
+      - title: Степень
+        given: 'Вычислите $\int_0^2 x^2\,dx$.'
+        find: 'значение.'
+        method: 'Ньютон — Лейбниц.'
+        steps:
+          - '$F(x) = \frac{x^3}{3}$.'
+          - '$F(2) - F(0) = \frac83$.'
+        check: 'Метод трапеций с шагом 0,001 даёт $2{,}6667$ ✓.'
+        answer: '$\frac83$'
+        src: b220
+      - title: Синус
+        given: 'Вычислите $\int_0^\pi \sin x\,dx$.'
+        find: 'значение.'
+        method: 'Ньютон — Лейбниц.'
+        steps:
+          - '$F(x) = -\cos x$.'
+          - '$-\cos\pi - (-\cos 0) = 1 + 1 = 2$.'
+        check: 'Численно $2{,}0000$ ✓.'
+        answer: '$2$'
+        src: b221
+      - title: Логарифм
+        given: 'Вычислите $\int_1^e \frac{dx}{x}$.'
+        find: 'значение.'
+        method: 'Первообразная $\ln x$.'
+        steps:
+          - '$\ln e - \ln 1$.'
+          - '$= 1$.'
+        check: 'Численно $1{,}0000$ ✓.'
+        answer: '$1$'
+        src: b221
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\int_0^1 (3x^2 + 2x)\,dx$.'
+        num: { value: 2, unit: '', check: '1+1' }
+        hint: '$F(x) = x^3 + x^2$.'
+        explain: '$1 + 1 = 2$.'
+        f: [1]
+        sol: { method: 'Ньютон — Лейбниц.', steps: ['$F(x) = x^3 + x^2$.', '$F(1) - F(0) = 2$.'], answer: '2' }
+        src: b220
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\int_1^4 \sqrt x\,dx$ (с точностью до 0,01).'
+        num: { value: 4.6667, unit: '', tolAbs: 0.01, check: '2/3*(8-1)' }
+        hint: '$F(x) = \frac23x^{3/2}$.'
+        explain: '$\frac23(8 - 1) = \frac{14}3$.'
+        f: [1]
+        sol: { method: 'Ньютон — Лейбниц.', steps: ['$F(x) = \frac23 x\sqrt x$.', '$\frac23 \cdot 8 - \frac23 = \frac{14}{3} \approx 4{,}67$.'], answer: '14/3 ≈ 4,67' }
+        src: b220
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\int_0^{\pi/2}\cos x\,dx$.'
+        num: { value: 1, unit: '', check: 'Math.sin(Math.PI/2)' }
+        hint: '$F(x) = \sin x$.'
+        explain: '$1 - 0 = 1$.'
+        f: [1]
+        sol: { method: 'Ньютон — Лейбниц.', steps: ['$\sin\frac\pi2 - \sin 0 = 1$.'], answer: '1' }
+        src: b221
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\int_0^1 e^x\,dx$ (с точностью до 0,01).'
+        num: { value: 1.7183, unit: '', tolAbs: 0.01, check: 'Math.E-1' }
+        hint: '$F(x) = e^x$.'
+        explain: '$e - 1 \approx 1{,}72$.'
+        f: [1]
+        sol: { method: 'Ньютон — Лейбниц.', steps: ['$e^1 - e^0 = e - 1 \approx 1{,}72$.'], answer: '1,72' }
+        src: b221
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\int_{-1}^{1} x^3\,dx$.'
+        num: { value: 0, unit: '', tolAbs: 0.001, check: '1/4-1/4' }
+        hint: 'Функция нечётная.'
+        explain: '$\frac14 - \frac14 = 0$.'
+        f: [2]
+        sol: { method: 'Нечётная функция на симметричном отрезке.', steps: ['$\frac{x^4}{4}\Big|_{-1}^{1} = \frac14 - \frac14 = 0$.'], answer: '0' }
+        src: b221
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\int_0^2 (2x - 1)\,dx$.'
+        num: { value: 2, unit: '', check: '4-2' }
+        hint: '$F(x) = x^2 - x$.'
+        explain: '$4 - 2 = 2$.'
+        f: [1]
+        sol: { method: 'Ньютон — Лейбниц.', steps: ['$F(2) - F(0) = (4 - 2) - 0 = 2$.'], answer: '2' }
+        src: b220
+      - type: single
+        cat: theory
+        q: 'Чему равен $\int_b^a f(x)\,dx$, если $\int_a^b f(x)\,dx = 5$?'
+        opts: ['$-5$', '$5$', '$0$', '$\frac15$']
+        ans: a
+        hint: 'Перестановка пределов.'
+        explain: '$F(a) - F(b) = -(F(b) - F(a))$.'
+        src: b221
+      - type: single
+        cat: theory
+        q: 'Почему в формуле Ньютона — Лейбница не пишут постоянную $C$?'
+        opts: ['она сокращается при вычитании $F(b) - F(a)$', 'она равна нулю', 'её нельзя найти', 'её пишут всегда']
+        ans: a
+        hint: '$(F(b) + C) - (F(a) + C)$.'
+        explain: 'Постоянная входит в оба значения и сокращается.'
+        f: [1]
+        src: b220
+
+  # ───────────────────────────── 1.17.3 ─────────────────────────────
+  - id: ma-1-17-3
+    num: '1.17.3'
+    title: Площадь криволинейной трапеции
+    pages: [b225, b226, b227]
+    book:
+      place: 'Ч. 2, 1.17 «Первообразная и интеграл», пункт 1.17.3'
+      summary: 'Задания на площади фигур, ограниченных графиками функций, осью абсцисс и прямыми.'
+    stage: verified
+    stageNote: 'Площади пересчитаны численно методом трапеций.'
+    sourcesChecked: '2026-10-25'
+    web: [*c61, *c52]
+    theory:
+      - kind: law
+        title: Площадь через интеграл
+        body: |
+          **Криволинейная трапеция** — фигура под графиком неотрицательной функции $f$ на $[a; b]$. Её площадь
+          $$S = \int_a^b f(x)\,dx.$$
+          Это предел сумм площадей узких прямоугольников: чем их больше, тем точнее приближение.
+          Площадь между графиками $f(x) \ge g(x)$ на $[a; b]$: $S = \int_a^b \big(f(x) - g(x)\big)dx$; пределы — абсциссы точек пересечения графиков.
+          Если $f \le 0$, площадь равна $-\int_a^b f$ (интеграл отрицателен).
+        src: b225
+        fig: riemann-area
+    formulas:
+      - title: Площадь криволинейной трапеции
+        tex: 'S = \int_a^b f(x)\,dx\qquad (f \ge 0)'
+        meaning: 'Фигура между графиком, осью $Ox$ и прямыми $x = a$, $x = b$.'
+        use: 'Площадь под графиком.'
+        src: b225
+      - title: Площадь между кривыми
+        tex: 'S = \int_a^b \big(f(x) - g(x)\big)\,dx\qquad (f \ge g)'
+        meaning: '$a$, $b$ — абсциссы точек пересечения графиков (или заданные границы).'
+        use: 'Площадь фигуры между двумя графиками.'
+        src: b226
+    examples:
+      - title: Под параболой
+        given: 'Найдите площадь под графиком $y = x^2$ на $[0; 3]$.'
+        find: '$S$.'
+        method: 'Интеграл.'
+        steps:
+          - '$S = \int_0^3 x^2dx = \frac{x^3}3\Big|_0^3$.'
+          - '$= 9$.'
+        check: 'Численно $9{,}000$ ✓.'
+        answer: '$9$'
+        src: b225
+      - title: Между параболой и прямой
+        given: 'Найдите площадь фигуры между $y = x$ и $y = x^2$.'
+        find: '$S$.'
+        method: 'Точки пересечения $0$ и $1$; на $[0; 1]$ $x \ge x^2$.'
+        steps:
+          - '$S = \int_0^1 (x - x^2)\,dx = \frac12 - \frac13$.'
+          - '$= \frac16$.'
+        check: 'Численно $0{,}1667$ ✓.'
+        answer: '$\frac16$'
+        src: b226
+      - title: Под синусоидой
+        given: 'Найдите площадь под одной «аркой» $y = \sin x$, $0 \le x \le \pi$.'
+        find: '$S$.'
+        method: 'Интеграл синуса.'
+        steps:
+          - '$S = -\cos x\Big|_0^\pi$.'
+          - '$= 1 + 1 = 2$.'
+        check: 'Численно $2{,}000$ ✓.'
+        answer: '$2$'
+        src: b226
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Найдите площадь под графиком $y = x^2 + 1$ на отрезке $[0; 3]$.'
+        num: { value: 12, unit: '', check: '9+3' }
+        hint: '$\frac{x^3}{3} + x$.'
+        explain: '$9 + 3 = 12$.'
+        f: [1]
+        sol: { method: 'Площадь под графиком.', steps: ['$\int_0^3 (x^2 + 1)dx = 9 + 3 = 12$.'], answer: '12' }
+        src: b225
+      - type: numeric
+        cat: problem
+        q: 'Найдите площадь фигуры, ограниченной параболой $y = 4 - x^2$ и осью $Ox$ (с точностью до 0,01).'
+        num: { value: 10.6667, unit: '', tolAbs: 0.01, check: '32/3' }
+        hint: 'Пределы $\pm2$.'
+        explain: '$\int_{-2}^{2}(4 - x^2)dx = 16 - \frac{16}3 = \frac{32}3$.'
+        f: [1]
+        sol: { method: 'Площадь под графиком.', steps: ['Нули: $x = \pm2$.', '$\left(4x - \frac{x^3}3\right)\Big|_{-2}^{2} = \frac{16}{3} + \frac{16}{3} = \frac{32}{3}$.'], answer: '32/3 ≈ 10,67' }
+        src: b225
+      - type: numeric
+        cat: problem
+        q: 'Найдите площадь фигуры между $y = x^2$ и $y = 2x$ (с точностью до 0,01).'
+        num: { value: 1.3333, unit: '', tolAbs: 0.01, check: '4-8/3' }
+        hint: 'Пересечение при $x = 0$ и $x = 2$.'
+        explain: '$\int_0^2 (2x - x^2)dx = 4 - \frac83 = \frac43$.'
+        f: [2]
+        sol: { method: 'Площадь между кривыми.', steps: ['На $[0; 2]$: $2x \ge x^2$.', '$\left(x^2 - \frac{x^3}{3}\right)\Big|_0^2 = \frac43$.'], answer: '4/3' }
+        src: b226
+      - type: numeric
+        cat: problem
+        q: 'Найдите площадь под графиком $y = \dfrac1x$ на отрезке $[1; e^2]$.'
+        num: { value: 2, unit: '', check: 'Math.log(Math.E**2)' }
+        hint: 'Первообразная $\ln x$.'
+        explain: '$\ln e^2 - \ln 1 = 2$.'
+        f: [1]
+        sol: { method: 'Площадь под графиком.', steps: ['$\ln x\Big|_1^{e^2} = 2$.'], answer: '2' }
+        src: b226
+      - type: numeric
+        cat: problem
+        q: 'Найдите площадь под графиком $y = \sqrt x$ на отрезке $[0; 4]$ (с точностью до 0,01).'
+        num: { value: 5.3333, unit: '', tolAbs: 0.01, check: '2/3*8' }
+        hint: '$\frac23x^{3/2}$.'
+        explain: '$\frac23 \cdot 8 = \frac{16}3$.'
+        f: [1]
+        sol: { method: 'Площадь под графиком.', steps: ['$\frac23 x^{3/2}\Big|_0^4 = \frac{16}{3}$.'], answer: '16/3 ≈ 5,33' }
+        src: b225
+      - type: numeric
+        cat: problem
+        q: 'Найдите площадь под графиком $y = e^x$ на отрезке $[0; \ln 3]$.'
+        num: { value: 2, unit: '', check: 'Math.exp(Math.log(3))-1' }
+        hint: '$e^{\ln 3} = 3$.'
+        explain: '$3 - 1 = 2$.'
+        f: [1]
+        sol: { method: 'Площадь под графиком.', steps: ['$e^x\Big|_0^{\ln 3} = 3 - 1 = 2$.'], answer: '2' }
+        src: b226
+      - type: single
+        cat: theory
+        q: 'Как найти площадь фигуры между графиками $f(x) \ge g(x)$ на $[a; b]$?'
+        opts: ['$\int_a^b (f - g)\,dx$', '$\int_a^b (f + g)\,dx$', '$\int_a^b f\,dx \cdot \int_a^b g\,dx$', '$\int_a^b (g - f)\,dx$']
+        ans: a
+        hint: 'Площадь под верхним минус площадь под нижним.'
+        explain: '$\int_a^b f - \int_a^b g = \int_a^b (f - g)$.'
+        f: [2]
+        src: b226
+      - type: single
+        cat: theory
+        q: 'Чему равна площадь фигуры, если $f(x) \le 0$ на $[a; b]$?'
+        opts: ['$-\int_a^b f(x)\,dx$', '$\int_a^b f(x)\,dx$', '$0$', '$\int_b^a |f|\,dx$']
+        ans: a
+        hint: 'Интеграл отрицателен, а площадь — нет.'
+        explain: 'Площадь равна модулю интеграла.'
+        f: [1]
+        src: b225

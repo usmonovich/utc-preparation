@@ -1,0 +1,12 @@
+node_modules/
+dist/
+artifact/
+android/app/build/
+ios/App/build/
+.env
+*.keystore
+*.jks
+release/
+android/local.properties
+# хеш PIN администратора — только у владельца
+.admin-pin

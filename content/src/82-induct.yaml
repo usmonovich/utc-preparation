@@ -1,0 +1,565 @@
+subsection: induct
+
+symbols:
+  Phi_m: { tex: '\Phi', meaning: 'магнитный поток', unit: 'Вб (вебер)', src: e16 }
+  Phi12: { tex: '\Phi_1,\ \Phi_2', meaning: 'начальный и конечный магнитный поток', unit: 'Вб', src: e16 }
+  alpha_Bn: { tex: '\alpha', meaning: 'угол между вектором B и нормалью n к контуру', unit: '°', src: e16 }
+  eps_i: { tex: '\varepsilon_{и}', meaning: 'ЭДС индукции (индукционная электродвижущая сила)', unit: 'В', src: e16 }
+  k_rate: { tex: 'k', meaning: 'коэффициент в законе Φ(t) = kt + b (скорость роста потока)', unit: 'Вб/с', src: e17 }
+  N_turns: { tex: 'N', meaning: 'количество витков', unit: '', src: e17 }
+  dPhi_dt: { tex: '\frac{\Delta\Phi}{\Delta t}', meaning: 'скорость изменения магнитного потока', unit: 'Вб/с', src: e17 }
+  L_coil: { tex: 'L', meaning: 'индуктивность катушки', unit: 'Гн (генри)', src: e18 }
+  l0_sol: { tex: 'l_0', meaning: 'длина соленоида', unit: 'м', src: e18 }
+  S_sol: { tex: 'S', meaning: 'площадь сечения соленоида (витка)', unit: 'м²', src: e18 }
+  dI_dt: { tex: '\frac{\Delta I}{\Delta t}', meaning: 'скорость изменения тока', unit: 'А/с', src: e18 }
+  I0_amp: { tex: 'I_0', meaning: 'максимальная (амплитудная) сила тока', unit: 'А', src: e22 }
+  eps0: { tex: '\varepsilon_0', meaning: 'максимальная ЭДС', unit: 'В', src: e18 }
+  W_mag: { tex: 'W', meaning: 'энергия магнитного поля катушки', unit: 'Дж', src: e18 }
+  w_mag: { tex: 'w', meaning: 'плотность энергии магнитного поля (в конспекте обозначена W)', unit: 'Дж/м³', src: e19 }
+  L1n: { tex: 'L_1 \dots L_n', meaning: 'индуктивности соединённых катушек', unit: 'Гн', src: e21 }
+  L_tot: { tex: 'L_{об}', meaning: 'общая индуктивность', unit: 'Гн', src: e21 }
+
+errata:
+  - id: EM08
+    page: e15
+    severity: note
+    original: '«Магнитный поток — это силовые линии магнитного поля, которые проходят через закрытый контур нормальным образом»'
+    issue: 'Магнитный поток — физическая величина (число), а не сами линии: он показывает, сколько силовых линий проходит через контур, и считается по формуле \(\Phi = BS\cos\alpha\) со следующей страницы.'
+    target: 'Определение магнитного потока'
+    suggestion: 'Записать: «Магнитный поток — величина, которая показывает, сколько силовых линий проходит через контур: \(\Phi = BS\cos\alpha\)» (формула со следующей страницы).'
+  - id: EM09
+    page: e18
+    severity: error
+    original: '\(W = \frac{\Phi^2}{LI}\)'
+    issue: 'Из \(W = \frac{LI^2}{2}\) и \(\Phi = LI\) (та же страница) следует \(W = \frac{\Phi^2}{2L}\). Запись \(\frac{\Phi^2}{LI}\) после подстановки \(\Phi = LI\) равна \(LI = \Phi\) — это магнитный поток (в веберах), а не энергия.'
+    target: 'Энергия магнитного поля через поток'
+    suggestion: '\(W = \frac{\Phi^2}{2L}\).'
+
+topics:
+  - id: ind-flux
+    title: Магнитный поток
+    pages: [e15, e16]
+    theory:
+      - kind: definition
+        title: Магнитный поток
+        body: Магнитный поток — это силовые линии магнитного поля, которые проходят через закрытый контур нормальным образом.
+        src: e15
+        errata: [EM08]
+      - kind: text
+        title: Формула магнитного потока
+        body: '$\Phi = BS\cos\alpha$ [Вб] (вебер), где $\alpha$ — угол между $\vec B$ и нормалью $\vec n$ к контуру площадью S. Когда контур поворачивается, угол α меняется, и поток меняется вместе с ним.'
+        src: e16
+        fig: flux
+      - kind: list
+        title: Как может меняться поток
+        body: '$\Delta\Phi = \Phi_2 - \Phi_1$. Меняется только B: $\Delta\Phi = \Delta B\,S\cos\alpha$. Меняется только S: $\Delta\Phi = B\,\Delta S\cos\alpha$. Меняется только угол: $\Delta\Phi = BS(\cos\alpha_2 - \cos\alpha_1)$.'
+        src: e16
+    formulas:
+      - title: Магнитный поток
+        tex: '\Phi = BS\cos\alpha\quad[\text{Вб}]'
+        sym: [Phi_m, B_mag, S_area, alpha_Bn]
+        boxed: true
+        src: e16
+      - title: Изменение потока
+        tex: '\Delta\Phi = \Phi_2 - \Phi_1'
+        sym: [Phi12]
+        src: e16
+      - title: Меняется индукция
+        tex: '\Delta\Phi = \Delta B\cdot S\cos\alpha'
+        sym: [B_mag, S_area, alpha_Bn]
+        cond: 'B ≠ const, S = const, α = const'
+        src: e16
+      - title: Меняется площадь
+        tex: '\Delta\Phi = B\cdot\Delta S\cdot\cos\alpha'
+        sym: [B_mag, S_area, alpha_Bn]
+        cond: 'B = const, S ≠ const, α = const'
+        src: e16
+      - title: Меняется угол
+        tex: '\Delta\Phi = B\cdot S\cdot(\cos\alpha_2 - \cos\alpha_1)'
+        sym: [B_mag, S_area, alpha_Bn]
+        cond: 'B = const, S = const, α ≠ const'
+        src: e16
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'B = 0,2 Тл, площадь контура 0,5 м², линии параллельны нормали (α = 0°). Найдите магнитный поток.'
+        num: { value: 0.1, unit: 'Вб', check: '0.2*0.5*Math.cos(0)' }
+        hint: '$\Phi = BS\cos\alpha$, $\cos0° = 1$.'
+        explain: '$\Phi = 0{,}2\cdot0{,}5 = 0{,}1$ Вб.'
+        f: [1]
+        sol: { given: ['B = 0,2 Тл', 'S = 0,5 м²', 'α = 0°'], find: 'Φ', formula: '\Phi = BS\cos\alpha', calc: '\Phi = 0{,}1', answer: '0,1 Вб' }
+        src: e16
+      - type: numeric
+        cat: problem
+        q: 'B = 0,4 Тл, S = 0,25 м², угол между B и нормалью 60°. Найдите магнитный поток.'
+        num: { value: 0.05, unit: 'Вб', check: '0.4*0.25*Math.cos(Math.PI/3)' }
+        hint: '$\cos60° = 0{,}5$.'
+        explain: '$\Phi = 0{,}4\cdot0{,}25\cdot0{,}5 = 0{,}05$ Вб.'
+        f: [1]
+        sol: { given: ['B = 0,4 Тл', 'S = 0,25 м²', 'α = 60°'], find: 'Φ', formula: '\Phi = BS\cos\alpha', calc: '\Phi = 0{,}05', answer: '0,05 Вб' }
+        src: e16
+      - type: numeric
+        cat: problem
+        q: 'Индукция выросла с 0,1 до 0,5 Тл, S = 0,2 м², α = 0°. Найдите изменение потока.'
+        num: { value: 0.08, unit: 'Вб', check: '(0.5-0.1)*0.2*1' }
+        hint: '$\Delta\Phi = \Delta B\,S\cos\alpha$.'
+        explain: '$\Delta\Phi = 0{,}4\cdot0{,}2 = 0{,}08$ Вб.'
+        f: [3]
+        sol: { given: ['B₁ = 0,1 Тл', 'B₂ = 0,5 Тл', 'S = 0,2 м²', 'α = 0°'], find: 'ΔΦ', formula: '\Delta\Phi = \Delta B\,S\cos\alpha', calc: '\Delta\Phi = 0{,}4\cdot0{,}2 = 0{,}08', answer: '0,08 Вб' }
+        src: e16
+      - type: numeric
+        cat: problem
+        q: 'Контур (B = 0,5 Тл, S = 0,2 м²) повернули: угол α изменился с 0° до 90°. Найдите изменение потока.'
+        num: { value: -0.1, unit: 'Вб', check: '0.5*0.2*(Math.cos(Math.PI/2)-Math.cos(0))' }
+        hint: '$\Delta\Phi = BS(\cos\alpha_2 - \cos\alpha_1)$.'
+        explain: '$\Delta\Phi = 0{,}1\cdot(0 - 1) = -0{,}1$ Вб — поток уменьшился.'
+        f: [5]
+        sol: { given: ['B = 0,5 Тл', 'S = 0,2 м²', 'α₁ = 0°', 'α₂ = 90°'], find: 'ΔΦ', formula: '\Delta\Phi = BS(\cos\alpha_2 - \cos\alpha_1)', calc: '\Delta\Phi = 0{,}1\cdot(0 - 1) = -0{,}1', answer: '−0,1 Вб' }
+        src: e16
+      - type: numeric
+        cat: problem
+        q: 'B = 2 Тл, площадь контура увеличили с 0,1 до 0,3 м², α = 60°. Найдите изменение потока.'
+        num: { value: 0.2, unit: 'Вб', check: '2*(0.3-0.1)*Math.cos(Math.PI/3)' }
+        hint: '$\Delta\Phi = B\,\Delta S\cos\alpha$.'
+        explain: '$\Delta\Phi = 2\cdot0{,}2\cdot0{,}5 = 0{,}2$ Вб.'
+        f: [4]
+        sol: { given: ['B = 2 Тл', 'ΔS = 0,2 м²', 'α = 60°'], find: 'ΔΦ', formula: '\Delta\Phi = B\,\Delta S\cos\alpha', calc: '\Delta\Phi = 0{,}2', answer: '0,2 Вб' }
+        src: e16
+      - type: single
+        cat: formula
+        q: Линии поля идут вдоль плоскости контура (α = 90°). Чему равен поток?
+        opts: ['Нулю', 'BS', 'BS/2', 'Бесконечности']
+        ans: a
+        hint: '$\cos90° = 0$.'
+        explain: '$\Phi = BS\cos90° = 0$ — линии не проходят сквозь контур.'
+        f: [1]
+        src: e16
+      - type: single
+        cat: theory
+        q: В каких единицах измеряется магнитный поток?
+        opts: ['Вб (вебер)', 'Тл (тесла)', 'Гн (генри)', 'А/м']
+        ans: a
+        hint: В квадратных скобках подписано «Вебер».
+        explain: '$[\Phi]$ = Вб.'
+        src: e16
+
+# ───────────────────────────────────────────────────────────────
+  - id: ind-faraday
+    title: Закон Фарадея (электромагнитная индукция)
+    pages: [e16, e17]
+    theory:
+      - kind: law
+        title: Закон Фарадея
+        body: 'Изменение магнитного потока является источником индукционной электродвижущей силы: $\varepsilon_и = -\frac{\Delta\Phi}{\Delta t}$. В замкнутом контуре с сопротивлением R: $\varepsilon_и = IR$.'
+        src: e16
+      - kind: text
+        title: Опыт с магнитом и катушкой
+        body: 'Магнит вдвигают в катушку: $\Phi_0 = 0$, $\Phi = 1000$, $\Delta\Phi \ne 0$ — стрелка гальванометра отклоняется. Магнит лежит в катушке: $\Phi_0 = \Phi = 1000$, $\Delta\Phi = 0$ — тока нет. Магнит вынимают: $\Phi_0 = 1000$, $\Phi = 0$ — стрелка отклоняется в другую сторону.'
+        src: e16
+        fig: faraday
+      - kind: rule
+        title: Поток меняется равномерно
+        body: 'Если $\Phi(t) = kt + b$, то $\varepsilon_и = -k = \text{const}$ (на графике — горизонтальная прямая). Если $\Phi = \text{const}$, то $\varepsilon = 0$.'
+        src: e17
+      - kind: text
+        title: Катушка из N витков
+        body: '$\varepsilon_и = -N\frac{\Delta\Phi}{\Delta t}$, где N — количество витков, $\frac{\Delta\Phi}{\Delta t}$ — скорость изменения магнитного потока [Вб/с].'
+        src: e17
+    formulas:
+      - title: Закон Фарадея
+        tex: '\varepsilon_{и} = -\frac{\Delta\Phi}{\Delta t}'
+        sym: [eps_i, Phi_m, dt]
+        boxed: true
+        src: [e16, e17]
+      - title: ЭДС и ток в контуре
+        tex: '\varepsilon_{и} = I\cdot R'
+        sym: [eps_i, I_cur, R_res]
+        src: e16
+      - title: Равномерное изменение потока
+        tex: '\Phi(t) = kt + b\ \Rightarrow\ \varepsilon_{и} = -k = \text{const}'
+        sym: [Phi_m, k_rate, eps_i]
+        boxed: true
+        src: e17
+      - title: Катушка из N витков
+        tex: '\varepsilon_{и} = -N\frac{\Delta\Phi}{\Delta t}'
+        sym: [eps_i, N_turns, dPhi_dt]
+        src: e17
+    questions:
+      - type: numeric
+        cat: problem
+        q: Магнитный поток через контур изменился на 0,06 Вб за 0,02 с. Найдите модуль ЭДС индукции.
+        num: { value: 3, unit: 'В', check: '0.06/0.02' }
+        hint: '$|\varepsilon_и| = \frac{\Delta\Phi}{\Delta t}$.'
+        explain: '$\frac{0{,}06}{0{,}02} = 3$ В.'
+        f: [1]
+        sol: { given: ['ΔΦ = 0,06 Вб', 'Δt = 0,02 с'], find: '|ε|', formula: '|\varepsilon_{и}| = \frac{\Delta\Phi}{\Delta t}', calc: '|\varepsilon| = 3', answer: '3 В' }
+        src: e16
+      - type: numeric
+        cat: problem
+        q: 'Катушка из 100 витков; поток через каждый виток меняется со скоростью 0,05 Вб/с. Найдите модуль ЭДС.'
+        num: { value: 5, unit: 'В', check: '100*0.05' }
+        hint: '$|\varepsilon_и| = N\frac{\Delta\Phi}{\Delta t}$.'
+        explain: '$100\cdot0{,}05 = 5$ В.'
+        f: [4]
+        sol: { given: ['N = 100', 'ΔΦ/Δt = 0,05 Вб/с'], find: '|ε|', formula: '|\varepsilon_{и}| = N\frac{\Delta\Phi}{\Delta t}', calc: '|\varepsilon| = 5', answer: '5 В' }
+        src: e17
+      - type: numeric
+        cat: problem
+        q: 'Поток меняется по закону $\Phi(t) = 3t + 2$ (Вб). Найдите ЭДС индукции (со знаком).'
+        num: { value: -3, unit: 'В', check: '-3' }
+        hint: 'При $\Phi = kt + b$: $\varepsilon_и = -k$.'
+        explain: '$k = 3$, значит $\varepsilon_и = -3$ В — постоянная величина.'
+        f: [3]
+        sol: { given: ['Φ = 3t + 2'], find: 'ε', formula: '\varepsilon_{и} = -k', calc: '\varepsilon = -3', answer: '−3 В' }
+        src: e17
+      - type: numeric
+        cat: problem
+        q: ЭДС индукции в контуре 6 В, сопротивление контура 2 Ом. Найдите индукционный ток.
+        num: { value: 3, unit: 'А', check: '6/2' }
+        hint: '$\varepsilon_и = IR$.'
+        explain: '$I = \frac62 = 3$ А.'
+        f: [2]
+        sol: { given: ['ε = 6 В', 'R = 2 Ом'], find: 'I', formula: 'I = \frac{\varepsilon_{и}}{R}', calc: 'I = 3', answer: '3 А' }
+        src: e16
+      - type: single
+        cat: theory
+        q: Магнит неподвижно лежит внутри катушки. Что показывает гальванометр?
+        opts: ['Ноль: поток не меняется', 'Наибольший ток', 'Ток в одну сторону, пока лежит магнит', 'Ток то в одну, то в другую сторону']
+        ans: a
+        hint: 'На рисунке: $\Phi_0 = 1000$, $\Phi = 1000$.'
+        explain: '$\Delta\Phi = 0$, значит ЭДС индукции нет.'
+        src: e16
+      - type: single
+        cat: theory
+        q: Магнит вдвигали в катушку, затем вынимают. Что происходит со стрелкой гальванометра при вынимании?
+        opts: ['Отклоняется в другую сторону', 'Отклоняется в ту же сторону', 'Остаётся на нуле', 'Прибор ломается']
+        ans: a
+        hint: Сравните рисунки 2 и 4 на стр. e16.
+        explain: 'При вдвигании поток растёт, при вынимании — убывает; знак ΔΦ, а с ним и направление тока, меняются.'
+        src: e16
+      - type: single
+        cat: theory
+        q: 'В каких единицах измеряется скорость изменения магнитного потока $\frac{\Delta\Phi}{\Delta t}$?'
+        opts: ['Вб/с', 'Вб', 'Тл·с', 'Гн/с']
+        ans: a
+        hint: Поток делим на время.
+        explain: 'В конспекте: $\left[\frac{Вб}{с}\right]$.'
+        f: [4]
+        src: e17
+      - type: text
+        cat: theory
+        q: Сформулируйте закон Фарадея своими словами по конспекту.
+        ref: Изменение магнитного потока является источником индукционной электродвижущей силы; ЭДС индукции равна скорости изменения потока со знаком минус.
+        criteria: ['Сказано, что источник ЭДС — изменение магнитного потока', 'Упомянута формула ε = −ΔΦ/Δt или скорость изменения потока']
+        hint: Источник ЭДС — не сам поток, а его изменение.
+        explain: Закон со стр. e16.
+        f: [1]
+        src: e16
+
+# ───────────────────────────────────────────────────────────────
+  - id: ind-lenz
+    title: Правило Ленца
+    pages: [e17]
+    theory:
+      - kind: rule
+        title: Цепочка явлений
+        body: Изменение магнитного потока является источником ЭДС индукции. За счёт ЭДС индукции в замкнутом контуре возникает индукционный ток, а он в свою очередь создаёт собственное поле индукционного тока.
+        src: e17
+      - kind: law
+        title: Правило Ленца
+        body: Собственное поле индукционного тока всегда противодействует изменению магнитного потока.
+        src: e17
+    questions:
+      - type: single
+        cat: theory
+        q: Чему противодействует собственное поле индукционного тока?
+        opts: ['Изменению магнитного потока', 'Самому магнитному потоку', 'Движению электронов', 'Сопротивлению проводника']
+        ans: a
+        hint: Не потоку, а его…
+        explain: Собственное поле индукционного тока всегда противодействует изменению магнитного потока.
+        src: e17
+      - type: sequence
+        cat: theory
+        q: Расположите явления в порядке, в котором они описаны в конспекте.
+        seq: ['Изменение магнитного потока', 'ЭДС индукции', 'Индукционный ток', 'Собственное поле индукционного тока']
+        hint: Всё начинается с изменения потока.
+        explain: Цепочка из правила Ленца на стр. e17.
+        src: e17
+      - type: single
+        cat: theory
+        q: Поток внешнего поля через контур растёт. Как направлено собственное поле индукционного тока?
+        opts: ['Против внешнего поля — мешает росту', 'По внешнему полю — помогает росту', 'Перпендикулярно внешнему полю', 'Поле не возникает']
+        ans: a
+        hint: Противодействовать росту — значит уменьшать.
+        explain: 'По правилу Ленца поле индукционного тока противодействует изменению: при росте потока оно направлено против внешнего поля.'
+        src: e17
+      - type: single
+        cat: theory
+        q: Поток внешнего поля через контур убывает. Как направлено собственное поле индукционного тока?
+        opts: ['По внешнему полю — поддерживает поток', 'Против внешнего поля', 'Перпендикулярно', 'Поле не возникает']
+        ans: a
+        hint: Противодействовать убыванию — значит поддерживать.
+        explain: При убывании потока поле индукционного тока направлено так же, как внешнее, и мешает потоку уменьшаться.
+        src: e17
+      - type: text
+        cat: theory
+        q: Сформулируйте правило Ленца.
+        ref: Собственное поле индукционного тока всегда противодействует изменению магнитного потока.
+        criteria: ['Упомянуто собственное поле индукционного тока', 'Сказано, что оно противодействует изменению магнитного потока']
+        hint: Одно предложение на стр. e17.
+        explain: Правило со стр. e17.
+        src: e17
+
+# ───────────────────────────────────────────────────────────────
+  - id: ind-self
+    title: Индуктивность и самоиндукция
+    pages: [e17, e18, e19]
+    theory:
+      - kind: definition
+        title: Индуктивность
+        body: Индуктивность — это магнитный поток, который возникает в индуктивной катушке при прохождении через неё тока, равного 1 А.
+        src: e17
+      - kind: text
+        title: Индуктивность соленоида
+        body: 'Для соленоида длиной $l_0$ с площадью сечения S и N витками: $L = \mu\mu_0\frac{N^2S}{l_0}$ [Гн] (генри). Поток $\Phi = LI = NBS$; отсюда напряжённость поля в соленоиде $H = \frac{NI}{l_0}$.'
+        src: e18
+      - kind: text
+        title: При включении и при выключении
+        body: '① При включении: ток растёт от $I_0 = 0$ до $I_к = I$, поток от 0 до LI, $\Delta\Phi = LI > 0$ — индукционный ток в катушке направлен против основного. ② При выключении: ток падает от I до 0, $\Delta\Phi = -LI < 0$ — индукционный ток направлен по основному.'
+        src: e18
+        fig: self-ind
+      - kind: text
+        title: ЭДС самоиндукции
+        body: '$\varepsilon_и = -L\frac{\Delta I}{\Delta t}$, где $\frac{\Delta I}{\Delta t}$ — скорость изменения тока. Если $I(t) = I_0\cos(\omega t)$, то $\varepsilon_и = LI_0\omega\sin(\omega t)$, $\varepsilon_0 = LI_0\omega$.'
+        src: e18
+      - kind: text
+        title: Энергия магнитного поля
+        body: '$W = \frac{LI^2}{2}$, $W = \frac{\Phi I}{2}$; в конспекте также $W = \frac{\Phi^2}{LI}$ — см. замечание EM09. Работа $A = I(\Phi_2 - \Phi_1)$. Плотность энергии магнитного поля $w = \frac{\mu\mu_0}{2}H^2$ (в конспекте обозначена W).'
+        src: [e18, e19]
+        errata: [EM09]
+    formulas:
+      - title: Индуктивность соленоида
+        tex: 'L = \mu\mu_0\frac{N^2S}{l_0}\quad[\text{Гн}]'
+        sym: [L_coil, mu_m, mu0, N_turns, S_sol, l0_sol]
+        boxed: true
+        src: e18
+      - title: Поток через катушку
+        tex: '\Phi = LI'
+        sym: [Phi_m, L_coil, I_cur]
+        boxed: true
+        src: e18
+      - title: Поток через витки
+        tex: '\Phi = LI = NBS'
+        sym: [Phi_m, L_coil, I_cur, N_turns, B_mag, S_sol]
+        src: e18
+      - title: Напряжённость поля в соленоиде
+        tex: 'H = \frac{NI}{l_0}'
+        sym: [H_mag, N_turns, I_cur, l0_sol]
+        boxed: true
+        src: e18
+      - title: ЭДС самоиндукции
+        tex: '\varepsilon_{и} = -L\frac{\Delta I}{\Delta t}'
+        sym: [eps_i, L_coil, dI_dt]
+        src: e18
+      - title: ЭДС при токе I₀cos ωt
+        tex: '\varepsilon_{и} = LI_0\omega\sin(\omega t),\qquad \varepsilon_0 = LI_0\omega'
+        sym: [eps_i, L_coil, I0_amp, omega_per, eps0]
+        src: e18
+      - title: Энергия катушки
+        tex: 'W = \frac{LI^2}{2}'
+        sym: [W_mag, L_coil, I_cur]
+        src: e18
+      - title: Энергия через поток (как в конспекте)
+        tex: 'W = \frac{\Phi^2}{LI}'
+        sym: [W_mag, Phi_m, L_coil, I_cur]
+        src: e18
+        errata: [EM09]
+      - title: Энергия через поток и ток
+        tex: 'W = \frac{\Phi I}{2}'
+        sym: [W_mag, Phi_m, I_cur]
+        src: e18
+      - title: Работа при изменении потока
+        tex: 'A = I(\Phi_2 - \Phi_1)'
+        sym: [A, I_cur, Phi12]
+        src: e19
+      - title: Плотность энергии магнитного поля
+        tex: 'w = \frac{\mu\mu_0}{2}H^2'
+        sym: [w_mag, mu_m, mu0, H_mag]
+        boxed: true
+        src: e19
+    questions:
+      - type: numeric
+        cat: problem
+        q: Индуктивность катушки 0,2 Гн, ток 3 А. Найдите магнитный поток.
+        num: { value: 0.6, unit: 'Вб', check: '0.2*3' }
+        hint: '$\Phi = LI$.'
+        explain: '$\Phi = 0{,}2\cdot3 = 0{,}6$ Вб.'
+        f: [2]
+        sol: { given: ['L = 0,2 Гн', 'I = 3 А'], find: 'Φ', formula: '\Phi = LI', calc: '\Phi = 0{,}6', answer: '0,6 Вб' }
+        src: e18
+      - type: numeric
+        cat: problem
+        q: Индуктивность 0,4 Гн, ток 5 А. Найдите энергию магнитного поля катушки.
+        num: { value: 5, unit: 'Дж', check: '0.4*5**2/2' }
+        hint: '$W = \frac{LI^2}{2}$.'
+        explain: '$W = \frac{0{,}4\cdot25}{2} = 5$ Дж.'
+        f: [7]
+        sol: { given: ['L = 0,4 Гн', 'I = 5 А'], find: 'W', formula: 'W = \frac{LI^2}{2}', calc: 'W = 5', answer: '5 Дж' }
+        src: e18
+      - type: numeric
+        cat: problem
+        q: 'Ток в катушке (L = 0,5 Гн) изменился на 4 А за 0,1 с. Найдите модуль ЭДС самоиндукции.'
+        num: { value: 20, unit: 'В', check: '0.5*4/0.1' }
+        hint: '$|\varepsilon_и| = L\frac{\Delta I}{\Delta t}$.'
+        explain: '$0{,}5\cdot\frac{4}{0{,}1} = 20$ В.'
+        f: [5]
+        sol: { given: ['L = 0,5 Гн', 'ΔI = 4 А', 'Δt = 0,1 с'], find: '|ε|', formula: '|\varepsilon_{и}| = L\frac{\Delta I}{\Delta t}', calc: '|\varepsilon| = 20', answer: '20 В' }
+        src: e18
+      - type: numeric
+        cat: problem
+        q: 'Соленоид: N = 1000 витков, S = $10^{-3}$ м², длина 0,5 м, μ = 1. Найдите индуктивность.'
+        num: { value: 2.5133e-3, unit: 'Гн', check: '1*4*Math.PI*1e-7*1000**2*1e-3/0.5' }
+        hint: '$L = \mu\mu_0\frac{N^2S}{l_0}$.'
+        explain: '$L = \frac{4\pi\cdot10^{-7}\cdot10^6\cdot10^{-3}}{0{,}5} \approx 2{,}51\cdot10^{-3}$ Гн.'
+        f: [1]
+        sol: { given: ['N = 1000', 'S = 10⁻³ м²', 'l₀ = 0,5 м', 'μ = 1'], find: 'L', formula: 'L = \mu\mu_0\frac{N^2S}{l_0}', calc: 'L = \frac{4\pi\cdot10^{-4}}{0{,}5} \approx 2{,}51\cdot10^{-3}', answer: '≈ 2,51 мГн' }
+        src: e18
+      - type: numeric
+        cat: problem
+        q: 'Соленоид: 500 витков, длина 0,25 м, ток 2 А. Найдите напряжённость поля внутри.'
+        num: { value: 4000, unit: 'А/м', check: '500*2/0.25' }
+        hint: '$H = \frac{NI}{l_0}$.'
+        explain: '$H = \frac{1000}{0{,}25} = 4000$ А/м.'
+        f: [4]
+        sol: { given: ['N = 500', 'I = 2 А', 'l₀ = 0,25 м'], find: 'H', formula: 'H = \frac{NI}{l_0}', calc: 'H = 4000', answer: '4000 А/м' }
+        src: e18
+      - type: numeric
+        cat: problem
+        q: Поток через катушку 0,3 Вб при токе 2 А. Найдите энергию магнитного поля.
+        num: { value: 0.3, unit: 'Дж', check: '0.3*2/2' }
+        hint: '$W = \frac{\Phi I}{2}$.'
+        explain: '$W = \frac{0{,}3\cdot2}{2} = 0{,}3$ Дж.'
+        f: [9]
+        sol: { given: ['Φ = 0,3 Вб', 'I = 2 А'], find: 'W', formula: 'W = \frac{\Phi I}{2}', calc: 'W = 0{,}3', answer: '0,3 Дж' }
+        src: e18
+      - type: numeric
+        cat: problem
+        q: 'L = 0,1 Гн, ток $I = 2\cos(100t)$ А. Найдите максимальную ЭДС самоиндукции.'
+        num: { value: 20, unit: 'В', check: '0.1*2*100' }
+        hint: '$\varepsilon_0 = LI_0\omega$.'
+        explain: '$\varepsilon_0 = 0{,}1\cdot2\cdot100 = 20$ В.'
+        f: [6]
+        sol: { given: ['L = 0,1 Гн', 'I₀ = 2 А', 'ω = 100 рад/с'], find: 'ε₀', formula: '\varepsilon_0 = LI_0\omega', calc: '\varepsilon_0 = 20', answer: '20 В' }
+        src: e18
+      - type: numeric
+        cat: problem
+        q: 'Напряжённость поля 1000 А/м, μ = 1. Найдите плотность энергии магнитного поля.'
+        num: { value: 0.62832, unit: 'Дж/м³', check: '1*4*Math.PI*1e-7/2*1000**2' }
+        hint: '$w = \frac{\mu\mu_0}{2}H^2$.'
+        explain: '$w = \frac{4\pi\cdot10^{-7}}{2}\cdot10^6 = 0{,}2\pi \approx 0{,}63$ Дж/м³.'
+        f: [11]
+        sol: { given: ['H = 1000 А/м', 'μ = 1'], find: 'w', formula: 'w = \frac{\mu\mu_0}{2}H^2', calc: 'w = 2\pi\cdot10^{-7}\cdot10^6 \approx 0{,}63', answer: '≈ 0,63 Дж/м³' }
+        src: e19
+      - type: numeric
+        cat: problem
+        q: 'Ток 2 А, поток через контур изменился с 0,1 до 0,4 Вб. Найдите работу.'
+        num: { value: 0.6, unit: 'Дж', check: '2*(0.4-0.1)' }
+        hint: '$A = I(\Phi_2 - \Phi_1)$.'
+        explain: '$A = 2\cdot0{,}3 = 0{,}6$ Дж.'
+        f: [10]
+        sol: { given: ['I = 2 А', 'Φ₁ = 0,1 Вб', 'Φ₂ = 0,4 Вб'], find: 'A', formula: 'A = I(\Phi_2 - \Phi_1)', calc: 'A = 0{,}6', answer: '0,6 Дж' }
+        src: e19
+      - type: single
+        cat: theory
+        q: Цепь с катушкой включили. Как направлен индукционный ток в катушке?
+        opts: ['Против основного тока', 'По основному току', 'Индукционного тока нет', 'Перпендикулярно проводу']
+        ans: a
+        hint: 'При включении $\Delta\Phi = LI > 0$.'
+        explain: На рисунке «при включении» красная стрелка $I_и$ направлена против тока — по правилу Ленца он мешает росту тока.
+        src: e18
+      - type: single
+        cat: theory
+        q: Цепь с катушкой выключили. Как направлен индукционный ток?
+        opts: ['По основному току', 'Против основного тока', 'Тока нет', 'Сначала против, потом по']
+        ans: a
+        hint: 'При выключении $\Delta\Phi = -LI < 0$.'
+        explain: 'На рисунке «при выключении» $I_и$ направлен так же, как ток I: он поддерживает убывающий ток.'
+        src: e18
+      - type: single
+        cat: formula
+        q: Число витков соленоида увеличили в 2 раза (остальное без изменений). Как изменилась индуктивность?
+        opts: ['Увеличилась в 4 раза', 'Увеличилась в 2 раза', 'Не изменилась', 'Уменьшилась в 2 раза']
+        ans: a
+        hint: 'В формуле $N^2$.'
+        explain: '$L \sim N^2$: $2^2 = 4$.'
+        f: [1]
+        src: e18
+
+# ───────────────────────────────────────────────────────────────
+  - id: ind-coils
+    title: Соединение индуктивных катушек
+    pages: [e21]
+    theory:
+      - kind: rule
+        title: Последовательное соединение
+        body: '$I = I_1 = I_2 = \dots = I_n$; $\Phi = \Phi_1 + \Phi_2 + \dots + \Phi_n$; $L_{об} = L_1 + L_2 + \dots + L_n$.'
+        src: e21
+      - kind: rule
+        title: Параллельное соединение
+        body: '$I = I_1 + I_2 + \dots + I_n$; $\Phi = \Phi_1 = \Phi_2 = \dots = \Phi_n$; $L_{об} = \left(\frac1{L_1} + \frac1{L_2} + \dots + \frac1{L_n}\right)^{-1}$.'
+        src: e21
+    formulas:
+      - title: Последовательное соединение катушек
+        tex: 'I = I_1 = \dots = I_n,\quad \Phi = \Phi_1 + \dots + \Phi_n,\quad L_{об} = L_1 + L_2 + \dots + L_n'
+        sym: [I_cur, Phi_m, L_tot, L1n]
+        boxed: true
+        src: e21
+      - title: Параллельное соединение катушек
+        tex: 'I = I_1 + \dots + I_n,\quad \Phi = \Phi_1 = \dots = \Phi_n,\quad L_{об} = \left(\frac{1}{L_1} + \frac{1}{L_2} + \dots + \frac{1}{L_n}\right)^{-1}'
+        sym: [I_cur, Phi_m, L_tot, L1n]
+        boxed: true
+        src: e21
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Катушки 2 мГн, 3 мГн и 5 мГн соединены последовательно. Найдите общую индуктивность (в мГн).'
+        num: { value: 10, unit: 'мГн', check: '2+3+5' }
+        hint: Последовательно — индуктивности складываются.
+        explain: '$2 + 3 + 5 = 10$ мГн.'
+        f: [1]
+        sol: { given: ['L₁ = 2 мГн', 'L₂ = 3 мГн', 'L₃ = 5 мГн'], find: 'L_об', formula: 'L_{об} = L_1 + L_2 + L_3', calc: 'L_{об} = 10', answer: '10 мГн' }
+        src: e21
+      - type: numeric
+        cat: problem
+        q: Две катушки по 2 Гн соединены параллельно. Найдите общую индуктивность.
+        num: { value: 1, unit: 'Гн', check: '1/(1/2+1/2)' }
+        hint: Параллельно — складываются обратные величины.
+        explain: '$\left(\frac12 + \frac12\right)^{-1} = 1$ Гн.'
+        f: [2]
+        sol: { given: ['L₁ = L₂ = 2 Гн'], find: 'L_об', formula: 'L_{об} = \left(\frac1{L_1} + \frac1{L_2}\right)^{-1}', calc: 'L_{об} = 1', answer: '1 Гн' }
+        src: e21
+      - type: numeric
+        cat: problem
+        q: Катушки 3 Гн и 6 Гн соединены параллельно. Найдите общую индуктивность.
+        num: { value: 2, unit: 'Гн', check: '1/(1/3+1/6)' }
+        hint: '$\frac13 + \frac16 = \frac12$.'
+        explain: '$L_{об} = 2$ Гн.'
+        f: [2]
+        sol: { given: ['L₁ = 3 Гн', 'L₂ = 6 Гн'], find: 'L_об', formula: 'L_{об} = \left(\frac1{L_1} + \frac1{L_2}\right)^{-1}', calc: 'L_{об} = \left(\frac12\right)^{-1} = 2', answer: '2 Гн' }
+        src: e21
+      - type: single
+        cat: theory
+        q: Что одинаково у всех катушек при последовательном соединении?
+        opts: ['Сила тока', 'Магнитный поток', 'Индуктивность', 'Ничего']
+        ans: a
+        hint: '$I = I_1 = I_2 = \dots$'
+        explain: При последовательном соединении ток одинаков, а потоки складываются.
+        src: e21
+      - type: single
+        cat: theory
+        q: Что одинаково у всех катушек при параллельном соединении?
+        opts: ['Магнитный поток', 'Сила тока', 'Число витков', 'Длина']
+        ans: a
+        hint: '$\Phi = \Phi_1 = \Phi_2 = \dots$'
+        explain: При параллельном соединении потоки одинаковы, а токи складываются.
+        src: e21

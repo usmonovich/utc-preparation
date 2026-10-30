@@ -1,0 +1,889 @@
+subsection: osc
+# Механические колебания, волны и звук — из конспекта по магнетизму (стр. e09–e15).
+
+symbols:
+  x_off: { tex: 'x', meaning: 'смещение от точки равновесия', unit: 'м', src: e09 }
+  A_osc: { tex: 'A', meaning: 'амплитуда — наибольшее смещение, A = x_max', unit: 'м', src: e09 }
+  l_pend: { tex: 'l', meaning: 'длина нити маятника', unit: 'м', src: e09 }
+  d_ball: { tex: 'd', meaning: 'размер (диаметр) шарика маятника', unit: 'м', src: e09 }
+  N_osc: { tex: 'N', meaning: 'число колебаний', unit: '', src: e10 }
+  T_per: { tex: 'T', meaning: 'период колебаний', unit: 'с', src: e10 }
+  nu_per: { tex: '\nu', meaning: 'частота колебаний (волны)', unit: 'Гц = с⁻¹', src: e10 }
+  omega_per: { tex: '\omega', meaning: 'циклическая частота', unit: 'рад/с', src: e10 }
+  phi_ph: { tex: '\varphi', meaning: 'фаза колебаний', unit: 'рад', src: e11 }
+  phi0_ph: { tex: '\varphi_0', meaning: 'начальная фаза', unit: 'рад', src: e11 }
+  v_max: { tex: '\upsilon_{max}', meaning: 'наибольшая скорость при колебаниях', unit: 'м/с', src: e10 }
+  a_max: { tex: 'a_{max}', meaning: 'наибольшее ускорение при колебаниях', unit: 'м/с²', src: e10 }
+  E_kin: { tex: 'E_{к}', meaning: 'кинетическая энергия колебаний', unit: 'Дж', src: e12 }
+  E_pot: { tex: 'E_{п}', meaning: 'потенциальная энергия колебаний', unit: 'Дж', src: e12 }
+  E_tot: { tex: 'E', meaning: 'полная механическая энергия колебаний', unit: 'Дж', src: e12 }
+  v_wave: { tex: '\upsilon', meaning: 'скорость распространения волны', unit: 'м/с', src: e14 }
+
+errata:
+  - id: EM04
+    page: e11
+    severity: error
+    original: '\(a(t) = a_{max}\cdot\cos(\omega t)\) (в рамке)'
+    issue: 'Строкой выше записано \(a(t) = -A\omega^2\cos(\omega t)\), а \(a_{max} = \omega^2A\). Значит, в рамке потерян минус. Без него не выполняется \(a(x) = -\omega^2x\) с той же страницы.'
+    target: 'Формула ускорения при колебаниях (в рамке)'
+    suggestion: '\(a(t) = -a_{max}\cos(\omega t)\).'
+  - id: EM05
+    page: e11
+    severity: unclear
+    original: '\(\upsilon = 4\cos\left(\frac{\pi}{9} + \frac{\pi}{8}t\right)\) — первая дробь'
+    issue: 'Знаменатель первой дроби читается как 9 или 5. На ответ примера (υ при фазе π/3 равна 2) это не влияет.'
+    target: 'Начальная фаза в примере \(\upsilon = 4\cos(\dots)\)'
+    suggestion: 'По фото это скорее \(\frac{\pi}{5}\): \(\upsilon = 4\cos\left(\frac{\pi}{5} + \frac{\pi}{8}t\right)\). На ответ примера (υ = 2 при фазе π/3) это не влияет.'
+    todo: 'Сверьте цифру с тетрадью.'
+  - id: EM06
+    page: e14
+    severity: note
+    original: '«Волны на поверхности воды … — это поперечные волны» и «Механические поперечные волны распространяются только в твёрдых телах»'
+    issue: 'Два утверждения на одной странице противоречат друг другу: вода не твёрдое тело. Второе утверждение относится к волнам внутри вещества; волны на поверхности жидкости — особый случай (частицы воды движутся и вверх-вниз, и вперёд-назад).'
+    target: 'Два утверждения о поперечных волнах на одной странице'
+    suggestion: 'Записать второе утверждение так: «внутри вещества механические поперечные волны распространяются только в твёрдых телах; волны на поверхности воды — особый случай».'
+  - id: EM07
+    page: e15
+    severity: note
+    original: 'υ = 1340 м/с — вода'
+    issue: Для скорости звука в воде обычно приводят около 1450–1500 м/с (зависит от температуры).
+    target: 'Скорость звука в воде'
+    suggestion: 'Записать ≈ 1450–1500 м/с (по справочным данным; зависит от температуры).'
+    todo: 'Значение не из конспекта. Если на занятии называли 1340 м/с — «Оставить как в конспекте». В задачах приложения скорость звука в воде не используется.'
+
+topics:
+  - id: mosc-basics
+    title: Механические колебания. Период и частота
+    pages: [e09, e10]
+    theory:
+      - kind: definition
+        title: Механические колебания
+        body: Движение, которое происходит периодическим образом вокруг точки равновесия, называется механическими колебаниями.
+        src: e09
+      - kind: definition
+        title: Гармонические колебания
+        body: Колебания, где параметры меняются по закону синуса или косинуса, называются гармоническими колебаниями.
+        src: e09
+      - kind: rule
+        title: Математический маятник
+        body: 'Нить длиной $l$ с шариком размером $d$: $l \gg d$, масса нити много меньше массы шарика ($m_н \ll m_ш$). O — точка равновесия. $x$ — смещение, $x_{max} = A$ — амплитуда. В крайней точке A скорость $\upsilon = 0$, по пути $\upsilon \ne 0$.'
+        src: e09
+        fig: pendulum
+      - kind: rule
+        title: За одно полное колебание
+        body: 'Маятник проходит путь A → O → A → O → A: перемещение $\vec S = 0$, путь $L = 4A$.'
+        src: e10
+      - kind: text
+        title: Период, частота, циклическая частота
+        body: '$T = \frac tN$ — период колебаний [с]; $\nu = \frac Nt$ — частота колебаний [Гц], [с⁻¹]; $\omega = \frac\varphi t$ — циклическая частота [рад/с]. Связь: $T = \frac1\nu$, $\nu = \frac1T$, $\omega = 2\pi\nu$, $\omega = \frac{2\pi}{T}$.'
+        src: e10
+    formulas:
+      - title: Перемещение за полное колебание
+        tex: '\vec S = 0'
+        sym: [S]
+        boxed: true
+        src: e10
+      - title: Путь за полное колебание
+        tex: 'L = 4A'
+        sym: [L_path, A_osc]
+        boxed: true
+        src: e10
+      - title: Период
+        tex: 'T = \frac{t}{N}'
+        sym: [T_per, t, N_osc]
+        src: e10
+      - title: Частота
+        tex: '\nu = \frac{N}{t}'
+        sym: [nu_per, N_osc, t]
+        src: e10
+      - title: Циклическая частота
+        tex: '\omega = \frac{\varphi}{t}'
+        sym: [omega_per, phi_ph, t]
+        src: e10
+      - title: Период и частота
+        tex: 'T = \frac{1}{\nu},\qquad \nu = \frac{1}{T}'
+        sym: [T_per, nu_per]
+        boxed: true
+        src: e10
+      - title: Циклическая частота через ν и T
+        tex: '\omega = 2\pi\nu,\qquad \omega = \frac{2\pi}{T}'
+        sym: [omega_per, nu_per, T_per]
+        boxed: true
+        src: e10
+    examples:
+      - title: Чтение уравнений колебаний
+        steps:
+          - '$x = 5\sin\left(\frac\pi2t\right)$: $\omega = \frac\pi2$, $x_{max} = A = 5$'
+          - '$\upsilon = 14\cos(2\pi t)$: $\omega = 2\pi$, $\upsilon_{max} = 14$'
+          - '$I = 10^{-4}\sin\left(\frac\pi8 + \frac\pi6t\right)$: $\omega = \frac\pi6$, $I_{max} = 10^{-4}$'
+          - '$a = 4\sin\left(\frac\pi2t\right)$, при $t = 2$: $a = 4\sin\pi = 0$'
+        src: e10
+    questions:
+      - type: numeric
+        cat: problem
+        q: Маятник совершил 20 колебаний за 40 с. Найдите период.
+        num: { value: 2, unit: 'с', check: '40/20' }
+        hint: '$T = \frac tN$.'
+        explain: Период — время одного колебания.
+        f: [3]
+        sol: { given: ['N = 20', 't = 40 с'], find: 'T', formula: 'T = \frac{t}{N}', calc: 'T = \frac{40}{20} = 2', answer: '2 с' }
+        src: e10
+      - type: numeric
+        cat: problem
+        q: Тело совершает 30 колебаний за 10 с. Найдите частоту.
+        num: { value: 3, unit: 'Гц', check: '30/10' }
+        hint: '$\nu = \frac Nt$.'
+        explain: Частота — число колебаний за 1 с.
+        f: [4]
+        sol: { given: ['N = 30', 't = 10 с'], find: 'ν', formula: '\nu = \frac{N}{t}', calc: '\nu = \frac{30}{10} = 3', answer: '3 Гц' }
+        src: e10
+      - type: numeric
+        cat: problem
+        q: Амплитуда колебаний 5 см. Какой путь проходит тело за одно полное колебание (в см)?
+        num: { value: 20, unit: 'см', check: '4*5' }
+        hint: 'В конспекте: $L = 4A$.'
+        explain: 'За полное колебание тело проходит A → O → A → O → A, то есть четыре амплитуды.'
+        f: [2]
+        sol: { given: ['A = 5 см'], find: 'L', formula: 'L = 4A', calc: 'L = 4\cdot5 = 20', answer: '20 см' }
+        src: e10
+      - type: single
+        cat: theory
+        q: Чему равно перемещение тела за одно полное колебание?
+        opts: ['Нулю', 'Амплитуде A', 'Двум амплитудам', 'Четырём амплитудам']
+        ans: a
+        hint: После полного колебания тело возвращается в ту же точку.
+        explain: 'За полное колебание $\vec S = 0$, а путь $L = 4A$.'
+        f: [1]
+        src: e10
+      - type: numeric
+        cat: problem
+        q: Период колебаний 0,5 с. Найдите циклическую частоту.
+        num: { value: 12.566, unit: 'рад/с', check: '2*Math.PI/0.5' }
+        hint: '$\omega = \frac{2\pi}{T}$.'
+        explain: '$\omega = \frac{2\pi}{0{,}5} = 4\pi \approx 12{,}57$ рад/с.'
+        f: [7]
+        sol: { given: ['T = 0,5 с'], find: 'ω', formula: '\omega = \frac{2\pi}{T}', calc: '\omega = \frac{2\pi}{0{,}5} = 4\pi \approx 12{,}57', answer: '≈ 12,57 рад/с' }
+        src: e10
+      - type: numeric
+        cat: problem
+        q: Частота колебаний 4 Гц. Найдите период.
+        num: { value: 0.25, unit: 'с', check: '1/4' }
+        hint: '$T = \frac1\nu$.'
+        explain: Период и частота — взаимно обратные величины.
+        f: [6]
+        sol: { given: ['ν = 4 Гц'], find: 'T', formula: 'T = \frac{1}{\nu}', calc: 'T = \frac14 = 0{,}25', answer: '0,25 с' }
+        src: e10
+      - type: single
+        cat: formula
+        q: 'Чему равна циклическая частота в уравнении $x = 5\sin\left(\frac\pi2t\right)$?'
+        opts: ['$\frac\pi2$ рад/с', '5 рад/с', '$2\pi$ рад/с', '$\frac\pi4$ рад/с']
+        ans: a
+        hint: 'Циклическая частота стоит множителем при $t$ под синусом.'
+        explain: 'В уравнении $x = A\sin(\omega t)$: $\omega = \frac\pi2$, а 5 — это амплитуда.'
+        src: e10
+      - type: numeric
+        cat: problem
+        q: 'Ускорение меняется по закону $a = 4\sin\left(\frac\pi2t\right)$. Найдите $a$ при $t = 1$ с.'
+        num: { value: 4, unit: 'м/с²', check: '4*Math.sin(Math.PI/2*1)' }
+        hint: 'Подставьте $t = 1$: под синусом будет $\frac\pi2$.'
+        explain: '$a = 4\sin\frac\pi2 = 4\cdot1 = 4$. Для сравнения в конспекте: при $t = 2$ получается $a = 0$.'
+        sol: { given: ['a = 4sin(πt/2)', 't = 1 с'], find: 'a', calc: 'a = 4\sin\frac{\pi}{2} = 4', answer: '4 м/с²' }
+        src: e10
+      - type: numeric
+        cat: problem
+        q: 'Скорость меняется по закону $\upsilon = 14\cos(2\pi t)$. Найдите частоту колебаний.'
+        num: { value: 1, unit: 'Гц', check: '(2*Math.PI)/(2*Math.PI)' }
+        hint: 'Сначала $\omega$ из уравнения, потом $\nu = \frac{\omega}{2\pi}$.'
+        explain: '$\omega = 2\pi$, значит $\nu = 1$ Гц.'
+        f: [7]
+        sol: { given: ['υ = 14cos(2πt)'], find: 'ν', formula: '\omega = 2\pi\nu', calc: '\nu = \frac{2\pi}{2\pi} = 1', answer: '1 Гц' }
+        src: e10
+      - type: single
+        cat: theory
+        q: Какие колебания называются гармоническими?
+        opts: ['Колебания, где параметры меняются по закону синуса или косинуса', 'Любые колебания маятника', 'Колебания с уменьшающейся амплитудой', 'Колебания под действием внешней силы']
+        ans: a
+        hint: Определение — сразу после определения механических колебаний.
+        explain: Колебания, где параметры меняются по закону синуса или косинуса, называются гармоническими.
+        src: e09
+      - type: multiple
+        cat: theory
+        q: Какие условия математического маятника записаны в конспекте? Выберите все.
+        opts: ['Длина нити много больше размера шарика', 'Масса нити много меньше массы шарика', 'Шарик заряжен', 'Нить растягивается']
+        ans: [a, b]
+        hint: 'В конспекте: $l \gg d$, $m_н \ll m_ш$.'
+        explain: 'Математический маятник: $l \gg d$ и $m_н \ll m_ш$.'
+        src: e09
+
+# ───────────────────────────────────────────────────────────────
+  - id: mosc-eq
+    title: Уравнения гармонических колебаний
+    pages: [e10, e11]
+    theory:
+      - kind: text
+        title: ① Колебания начинаются из точки равновесия
+        body: '$x(t) = A\sin(\omega t)$; $\upsilon(t) = A\omega\cos(\omega t) = \upsilon_{max}\cos(\omega t)$; $a(t) = -A\omega^2\sin(\omega t) = -a_{max}\sin(\omega t)$.'
+        src: e10
+      - kind: text
+        title: ② Тело вывели из равновесия и отпустили
+        body: '$x(t) = A\cos(\omega t)$; $\upsilon(t) = -A\omega\sin(\omega t) = -\upsilon_{max}\sin(\omega t)$; $a(t) = -A\omega^2\cos(\omega t)$. На графике $x = A\cos\omega t$ период T — расстояние между соседними максимумами.'
+        src: [e11, e13]
+        errata: [EM04]
+        fig: osc-graph
+      - kind: text
+        title: ③ Вывели из равновесия и дали толчок
+        body: '$x(t) = A\sin(\omega t + \varphi_0)$; $\varphi(t) = \omega t + \varphi_0$ — фаза; $\varphi_0$ — начальная фаза.'
+        src: e11
+      - kind: rule
+        title: Наибольшие значения
+        body: '$\upsilon_{max} = \omega A$, $a_{max} = \omega^2A$; при любом начале $a(x) = -\omega^2x$.'
+        src: [e10, e11]
+    formulas:
+      - title: Смещение (из точки равновесия)
+        tex: 'x(t) = A\sin(\omega t)'
+        sym: [x_off, A_osc, omega_per, t]
+        boxed: true
+        src: e10
+      - title: Скорость (из точки равновесия)
+        tex: '\upsilon(t) = A\omega\cos(\omega t) = \upsilon_{max}\cos(\omega t)'
+        sym: [v, A_osc, omega_per, v_max]
+        boxed: true
+        src: e10
+      - title: Ускорение (из точки равновесия)
+        tex: 'a(t) = -A\omega^2\sin(\omega t) = -a_{max}\sin(\omega t)'
+        sym: [a, A_osc, omega_per, a_max]
+        boxed: true
+        src: e10
+      - title: Наибольшая скорость и ускорение
+        tex: '\upsilon_{max} = \omega A,\qquad a_{max} = \omega^2A'
+        sym: [v_max, a_max, omega_per, A_osc]
+        boxed: true
+        src: e10
+      - title: Ускорение через смещение
+        tex: 'a(x) = -\omega^2x'
+        sym: [a, omega_per, x_off]
+        boxed: true
+        src: e10
+      - title: Смещение (отвели и отпустили)
+        tex: 'x(t) = A\cos(\omega t)'
+        sym: [x_off, A_osc, omega_per, t]
+        boxed: true
+        src: e11
+      - title: Скорость (отвели и отпустили)
+        tex: '\upsilon(t) = -A\omega\sin(\omega t) = -\upsilon_{max}\sin(\omega t)'
+        sym: [v, A_osc, omega_per, v_max]
+        boxed: true
+        src: e11
+      - title: Ускорение (отвели и отпустили)
+        tex: 'a(t) = -A\omega^2\cos(\omega t)'
+        sym: [a, A_osc, omega_per]
+        src: e11
+      - title: Ускорение (как в рамке конспекта)
+        tex: 'a(t) = a_{max}\cos(\omega t)'
+        sym: [a, a_max, omega_per]
+        boxed: true
+        src: e11
+        errata: [EM04]
+      - title: Смещение (отвели и толкнули)
+        tex: 'x(t) = A\sin(\omega t + \varphi_0)'
+        sym: [x_off, A_osc, omega_per, phi0_ph]
+        boxed: true
+        src: e11
+      - title: Фаза
+        tex: '\varphi(t) = \omega t + \varphi_0'
+        sym: [phi_ph, omega_per, phi0_ph]
+        boxed: true
+        src: e11
+    examples:
+      - title: Скорость при заданной фазе
+        given: 'Скорость меняется по закону косинуса с амплитудой 4; найти υ при фазе $\frac\pi3$'
+        steps: ['$\upsilon = 4\cos\frac\pi3 = 4\cdot\frac12 = 2$']
+        answer: '$\upsilon = 2$'
+        src: e11
+        errata: [EM05]
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Амплитуда колебаний 0,1 м, циклическая частота 10 рад/с. Найдите наибольшую скорость.'
+        num: { value: 1, unit: 'м/с', check: '10*0.1' }
+        hint: '$\upsilon_{max} = \omega A$.'
+        explain: '$\upsilon_{max} = 10\cdot0{,}1 = 1$ м/с.'
+        f: [4]
+        sol: { given: ['A = 0,1 м', 'ω = 10 рад/с'], find: 'υ_max', formula: '\upsilon_{max} = \omega A', calc: '\upsilon_{max} = 10\cdot0{,}1 = 1', answer: '1 м/с' }
+        src: e10
+      - type: numeric
+        cat: problem
+        q: 'Амплитуда 0,1 м, циклическая частота 10 рад/с. Найдите наибольшее ускорение.'
+        num: { value: 10, unit: 'м/с²', check: '10**2*0.1' }
+        hint: '$a_{max} = \omega^2A$.'
+        explain: '$a_{max} = 100\cdot0{,}1 = 10$ м/с².'
+        f: [4]
+        sol: { given: ['A = 0,1 м', 'ω = 10 рад/с'], find: 'a_max', formula: 'a_{max} = \omega^2A', calc: 'a_{max} = 10^2\cdot0{,}1 = 10', answer: '10 м/с²' }
+        src: e10
+      - type: numeric
+        cat: problem
+        q: 'Циклическая частота 5 рад/с. Чему равно ускорение тела при смещении $x = 0{,}02$ м?'
+        num: { value: -0.5, unit: 'м/с²', check: '-(5**2)*0.02' }
+        hint: '$a(x) = -\omega^2x$ — не забудьте знак.'
+        explain: '$a = -25\cdot0{,}02 = -0{,}5$ м/с²: ускорение направлено к точке равновесия.'
+        f: [5]
+        sol: { given: ['ω = 5 рад/с', 'x = 0,02 м'], find: 'a', formula: 'a = -\omega^2x', calc: 'a = -25\cdot0{,}02 = -0{,}5', answer: '−0,5 м/с²' }
+        src: e10
+      - type: numeric
+        cat: problem
+        q: 'Скорость меняется по закону $\upsilon = 6\cos\varphi$. Найдите скорость при фазе $\varphi = \frac\pi3$.'
+        num: { value: 3, unit: 'м/с', check: '6*Math.cos(Math.PI/3)' }
+        hint: '$\cos\frac\pi3 = \frac12$.'
+        explain: 'Как в примере конспекта: подставляем фазу целиком, $\upsilon = 6\cdot\frac12 = 3$.'
+        sol: { given: ['υ = 6cos φ', 'φ = π/3'], find: 'υ', calc: '\upsilon = 6\cos\frac{\pi}{3} = 3', answer: '3 м/с' }
+        src: e11
+      - type: numeric
+        cat: problem
+        q: '$x = 0{,}2\sin\left(\frac\pi2t + \frac\pi6\right)$. Найдите фазу колебаний при $t = 1$ с (в радианах).'
+        num: { value: 2.0944, unit: 'рад', check: 'Math.PI/2*1+Math.PI/6' }
+        hint: '$\varphi = \omega t + \varphi_0$.'
+        explain: '$\varphi = \frac\pi2 + \frac\pi6 = \frac{2\pi}{3} \approx 2{,}09$ рад.'
+        f: [11]
+        sol: { given: ['ω = π/2 рад/с', 'φ₀ = π/6', 't = 1 с'], find: 'φ', formula: '\varphi = \omega t + \varphi_0', calc: '\varphi = \frac{\pi}{2} + \frac{\pi}{6} = \frac{2\pi}{3} \approx 2{,}09', answer: '2π/3 ≈ 2,09 рад' }
+        src: e11
+      - type: single
+        cat: formula
+        q: Тело отвели из положения равновесия и отпустили. Какое уравнение описывает смещение?
+        opts: ['$x = A\cos(\omega t)$', '$x = A\sin(\omega t)$', '$x = A\sin(\omega t + \varphi_0)$', '$x = -A\omega^2\cos(\omega t)$']
+        ans: a
+        hint: 'В момент $t = 0$ смещение должно быть равно $A$.'
+        explain: 'Случай ②: $x(t) = A\cos(\omega t)$, при $t = 0$ получается $x = A$.'
+        f: [6]
+        src: e11
+      - type: single
+        cat: formula
+        q: Колебания начинаются из точки равновесия. Какое уравнение смещения?
+        opts: ['$x = A\sin(\omega t)$', '$x = A\cos(\omega t)$', '$x = \omega A\cos(\omega t)$', '$x = -\omega^2A$']
+        ans: a
+        hint: 'При $t = 0$ смещение равно нулю.'
+        explain: 'Случай ①: $x(t) = A\sin(\omega t)$, $\sin0 = 0$.'
+        f: [1]
+        src: e10
+      - type: single
+        cat: formula
+        q: 'Что означает минус в формуле $a(x) = -\omega^2x$?'
+        opts: ['Ускорение направлено противоположно смещению, к точке равновесия', 'Ускорение всегда отрицательное число', 'Тело тормозит всё время', 'Смещение отрицательно']
+        ans: a
+        hint: 'Знак $a$ всегда противоположен знаку $x$.'
+        explain: 'При $x > 0$ получается $a < 0$, при $x < 0$ — $a > 0$: ускорение возвращает тело к точке O.'
+        f: [5]
+        src: e10
+      - type: matching
+        cat: formula
+        q: Сопоставьте начало колебаний и уравнение смещения.
+        pairs:
+          - ['Из точки равновесия', '$x = A\sin(\omega t)$']
+          - ['Отвели и отпустили', '$x = A\cos(\omega t)$']
+          - ['Отвели и дали толчок', '$x = A\sin(\omega t + \varphi_0)$']
+        hint: Три случая пронумерованы в конспекте ①, ②, ③.
+        explain: 'Случаи ①–③ со стр. e10–e11.'
+        f: [1, 6, 10]
+        src: [e10, e11]
+      - type: single
+        cat: theory
+        q: 'Что такое $\varphi_0$ в уравнении $x = A\sin(\omega t + \varphi_0)$?'
+        opts: ['Начальная фаза', 'Амплитуда', 'Период', 'Циклическая частота']
+        ans: a
+        hint: '$\varphi = \omega t + \varphi_0$ — это фаза; при $t = 0$ остаётся…'
+        explain: '$\varphi_0$ — начальная фаза, фаза в момент $t = 0$.'
+        f: [11]
+        src: e11
+
+# ───────────────────────────────────────────────────────────────
+  - id: mosc-pend
+    title: Математический и пружинный маятники
+    pages: [e11, e12]
+    theory:
+      - kind: rule
+        title: Математический маятник
+        body: 'T, ν, ω зависят от $l$ и $g$ и не зависят от массы $m$ и амплитуды $A$: $T = 2\pi\sqrt{\frac lg}$, $\nu = \frac{1}{2\pi}\sqrt{\frac gl}$, $\omega = \sqrt{\frac gl}$.'
+        src: e11
+      - kind: rule
+        title: Пружинный маятник
+        body: 'T, ν, ω зависят от жёсткости $k$ и массы $m$ и не зависят от $g$ и амплитуды $A$: $T = 2\pi\sqrt{\frac mk}$, $\nu = \frac1{2\pi}\sqrt{\frac km}$, $\omega = \sqrt{\frac km}$. На рисунке брусок на пружине колеблется между крайними положениями A.'
+        src: [e11, e12]
+        fig: spring
+    formulas:
+      - title: Период математического маятника
+        tex: 'T = 2\pi\sqrt{\frac{l}{g}}'
+        sym: [T_per, l_pend, g]
+        src: e11
+      - title: Частота математического маятника
+        tex: '\nu = \frac{1}{2\pi}\sqrt{\frac{g}{l}}'
+        sym: [nu_per, g, l_pend]
+        src: e11
+      - title: Циклическая частота математического маятника
+        tex: '\omega = \sqrt{\frac{g}{l}}'
+        sym: [omega_per, g, l_pend]
+        src: e11
+      - title: Период пружинного маятника
+        tex: 'T = 2\pi\sqrt{\frac{m}{k}}'
+        sym: [T_per, m, k]
+        src: e12
+      - title: Частота пружинного маятника
+        tex: '\nu = \frac{1}{2\pi}\sqrt{\frac{k}{m}}'
+        sym: [nu_per, k, m]
+        src: e12
+      - title: Циклическая частота пружинного маятника
+        tex: '\omega = \sqrt{\frac{k}{m}}'
+        sym: [omega_per, k, m]
+        src: e12
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Длина нити математического маятника 2,5 м, $g = 10$ м/с². Найдите период.'
+        num: { value: 3.1416, unit: 'с', check: '2*Math.PI*Math.sqrt(2.5/10)' }
+        hint: '$T = 2\pi\sqrt{\frac lg}$.'
+        explain: '$\sqrt{0{,}25} = 0{,}5$, $T = 2\pi\cdot0{,}5 = \pi \approx 3{,}14$ с.'
+        f: [1]
+        sol: { given: ['l = 2,5 м', 'g = 10 м/с²'], find: 'T', formula: 'T = 2\pi\sqrt{\frac{l}{g}}', calc: 'T = 2\pi\sqrt{0{,}25} = \pi \approx 3{,}14', answer: '≈ 3,14 с' }
+        src: e11
+      - type: numeric
+        cat: problem
+        q: 'Груз массой 0,4 кг на пружине жёсткостью 40 Н/м. Найдите период колебаний.'
+        num: { value: 0.6283, unit: 'с', check: '2*Math.PI*Math.sqrt(0.4/40)' }
+        hint: '$T = 2\pi\sqrt{\frac mk}$.'
+        explain: '$\sqrt{0{,}01} = 0{,}1$, $T = 0{,}2\pi \approx 0{,}63$ с.'
+        f: [4]
+        sol: { given: ['m = 0,4 кг', 'k = 40 Н/м'], find: 'T', formula: 'T = 2\pi\sqrt{\frac{m}{k}}', calc: 'T = 2\pi\cdot0{,}1 \approx 0{,}63', answer: '≈ 0,63 с' }
+        src: e12
+      - type: numeric
+        cat: problem
+        q: 'Пружина жёсткостью 100 Н/м, груз 1 кг. Найдите циклическую частоту.'
+        num: { value: 10, unit: 'рад/с', check: 'Math.sqrt(100/1)' }
+        hint: '$\omega = \sqrt{\frac km}$.'
+        explain: '$\omega = \sqrt{100} = 10$ рад/с.'
+        f: [6]
+        sol: { given: ['k = 100 Н/м', 'm = 1 кг'], find: 'ω', formula: '\omega = \sqrt{\frac{k}{m}}', calc: '\omega = \sqrt{100} = 10', answer: '10 рад/с' }
+        src: e12
+      - type: numeric
+        cat: problem
+        q: 'Нить маятника длиной 0,1 м, $g = 10$ м/с². Найдите частоту колебаний.'
+        num: { value: 1.5915, unit: 'Гц', check: '1/(2*Math.PI)*Math.sqrt(10/0.1)' }
+        hint: '$\nu = \frac1{2\pi}\sqrt{\frac gl}$.'
+        explain: '$\sqrt{100} = 10$, $\nu = \frac{10}{2\pi} \approx 1{,}59$ Гц.'
+        f: [2]
+        sol: { given: ['l = 0,1 м', 'g = 10 м/с²'], find: 'ν', formula: '\nu = \frac{1}{2\pi}\sqrt{\frac{g}{l}}', calc: '\nu = \frac{10}{2\pi} \approx 1{,}59', answer: '≈ 1,59 Гц' }
+        src: e11
+      - type: single
+        cat: formula
+        q: Длину нити математического маятника увеличили в 4 раза. Как изменился период?
+        opts: ['Увеличился в 2 раза', 'Увеличился в 4 раза', 'Уменьшился в 2 раза', 'Не изменился']
+        ans: a
+        hint: 'Длина стоит под корнем: $T = 2\pi\sqrt{\frac lg}$.'
+        explain: '$\sqrt4 = 2$.'
+        f: [1]
+        src: e11
+      - type: single
+        cat: formula
+        q: Массу груза пружинного маятника увеличили в 4 раза. Как изменился период?
+        opts: ['Увеличился в 2 раза', 'Увеличился в 4 раза', 'Уменьшился в 2 раза', 'Не изменился']
+        ans: a
+        hint: '$T = 2\pi\sqrt{\frac mk}$.'
+        explain: 'Масса под корнем: $\sqrt4 = 2$.'
+        f: [4]
+        src: e12
+      - type: multiple
+        cat: theory
+        q: От чего, по конспекту, НЕ зависит период математического маятника? Выберите все.
+        opts: ['От массы шарика', 'От амплитуды', 'От длины нити', 'От ускорения свободного падения']
+        ans: [a, b]
+        hint: 'В конспекте: «T, ν, ω не зависят от m, A».'
+        explain: Период математического маятника зависит только от l и g.
+        f: [1]
+        src: e11
+      - type: single
+        cat: theory
+        q: Пружинный маятник перенесли туда, где ускорение свободного падения меньше. Как изменится период?
+        opts: ['Не изменится', 'Увеличится', 'Уменьшится', 'Маятник перестанет колебаться']
+        ans: a
+        hint: 'Для пружинного маятника: «T, ν, ω не зависят от g, A».'
+        explain: 'В формулу $T = 2\pi\sqrt{\frac mk}$ ускорение $g$ не входит.'
+        f: [4]
+        src: e12
+      - type: single
+        cat: theory
+        q: Математический маятник перенесли туда, где ускорение свободного падения меньше. Как изменится период?
+        opts: ['Увеличится', 'Уменьшится', 'Не изменится', 'Станет равен нулю']
+        ans: a
+        hint: '$g$ стоит в знаменателе под корнем.'
+        explain: 'При меньшем $g$ дробь $\frac lg$ больше, значит $T = 2\pi\sqrt{\frac lg}$ больше.'
+        f: [1]
+        src: e11
+
+# ───────────────────────────────────────────────────────────────
+  - id: mosc-energy
+    title: Энергия колебаний
+    pages: [e12, e13]
+    theory:
+      - kind: law
+        title: Сохранение энергии колебаний
+        body: Если в колебательной системе отсутствуют сила трения либо сила сопротивления, то полная механическая энергия колебания сохраняется.
+        src: e12
+      - kind: rule
+        title: Превращение энергии
+        body: 'В крайней точке A: $E_к \to 0$, $E_п \to \max$. В точке равновесия O: $E_к \to \max$, $E_п \to 0$. $E_{к\,max} = E_{п\,max} = E = \text{const}$ — для обоих маятников.'
+        src: e12
+        fig: pend-energy
+      - kind: text
+        title: Энергия во времени
+        body: '$E_к(t) = \frac{m\upsilon_{max}^2}{2}\cos^2\omega t = E_{к\,max}\cos^2\omega t = \frac12E_{к\,max}(1 + \cos2\omega t)$; $E_п(t) = \frac{kA^2}{2}\sin^2\omega t = E_{п\,max}\sin^2\omega t = \frac12E_{к\,max}(1 - \cos2\omega t)$; $E_{п\,max} = \frac{kA^2}{2}$.'
+        src: e12
+      - kind: rule
+        title: Удвоенная частота
+        body: И в пружинном, и в математическом маятнике кинетическая (потенциальная) энергия тоже меняется гармоническим образом, но частота этих колебаний в два раза больше, чем частота колебаний самой системы.
+        src: [e12, e13]
+    formulas:
+      - title: Кинетическая энергия во времени
+        tex: 'E_{к}(t) = \frac{m\upsilon_{max}^2}{2}\cos^2\omega t = E_{к\,max}\cos^2\omega t'
+        sym: [E_kin, m, v_max, omega_per]
+        boxed: true
+        src: e12
+      - title: Кинетическая энергия через cos 2ωt
+        tex: 'E_{к}(t) = \frac12E_{к\,max}(1 + \cos2\omega t)'
+        sym: [E_kin, omega_per]
+        boxed: true
+        src: e12
+      - title: Сохранение энергии
+        tex: 'E_{к\,max} = E_{п\,max} = E = \text{const}'
+        sym: [E_kin, E_pot, E_tot]
+        boxed: true
+        src: e12
+      - title: Потенциальная энергия во времени
+        tex: 'E_{п}(t) = \frac{kA^2}{2}\sin^2\omega t = E_{п\,max}\sin^2\omega t'
+        sym: [E_pot, k, A_osc, omega_per]
+        boxed: true
+        src: e12
+      - title: Потенциальная энергия через cos 2ωt
+        tex: 'E_{п}(t) = \frac12E_{к\,max}(1 - \cos2\omega t)'
+        sym: [E_pot, E_kin, omega_per]
+        boxed: true
+        src: e12
+      - title: Наибольшая потенциальная энергия пружинного маятника
+        tex: 'E_{п\,max} = \frac{kA^2}{2}'
+        sym: [E_pot, k, A_osc]
+        boxed: true
+        src: e12
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Пружина жёсткостью 200 Н/м, амплитуда 0,1 м. Найдите наибольшую потенциальную энергию.'
+        num: { value: 1, unit: 'Дж', check: '200*0.1**2/2' }
+        hint: '$E_{п\,max} = \frac{kA^2}{2}$.'
+        explain: '$E = \frac{200\cdot0{,}01}{2} = 1$ Дж.'
+        f: [6]
+        sol: { given: ['k = 200 Н/м', 'A = 0,1 м'], find: 'E_п max', formula: 'E_{п\,max} = \frac{kA^2}{2}', calc: 'E = \frac{200\cdot0{,}01}{2} = 1', answer: '1 Дж' }
+        src: e12
+      - type: numeric
+        cat: problem
+        q: 'Масса шарика 0,2 кг, наибольшая скорость 3 м/с. Найдите наибольшую кинетическую энергию.'
+        num: { value: 0.9, unit: 'Дж', check: '0.2*3**2/2' }
+        hint: '$E_{к\,max} = \frac{m\upsilon_{max}^2}{2}$.'
+        explain: '$E = \frac{0{,}2\cdot9}{2} = 0{,}9$ Дж.'
+        f: [1]
+        sol: { given: ['m = 0,2 кг', 'υ_max = 3 м/с'], find: 'E_к max', formula: 'E_{к\,max} = \frac{m\upsilon_{max}^2}{2}', calc: 'E = \frac{0{,}2\cdot9}{2} = 0{,}9', answer: '0,9 Дж' }
+        src: e12
+      - type: numeric
+        cat: problem
+        q: Полная энергия колебаний 2 Дж. В некоторый момент потенциальная энергия 0,5 Дж. Найдите кинетическую энергию.
+        num: { value: 1.5, unit: 'Дж', check: '2-0.5' }
+        hint: Без трения полная энергия сохраняется.
+        explain: '$E_к = E - E_п = 2 - 0{,}5 = 1{,}5$ Дж.'
+        f: [3]
+        sol: { given: ['E = 2 Дж', 'E_п = 0,5 Дж'], find: 'E_к', calc: 'E_{к} = 2 - 0{,}5 = 1{,}5', answer: '1,5 Дж' }
+        src: e12
+      - type: numeric
+        cat: problem
+        q: Период колебаний маятника 2 с. С каким периодом меняется его кинетическая энергия?
+        num: { value: 1, unit: 'с', check: '2/2' }
+        hint: Частота колебаний энергии в два раза больше частоты системы.
+        explain: 'Частота вдвое больше — период вдвое меньше: 1 с.'
+        f: [2]
+        sol: { given: ['T = 2 с'], find: 'T_E', calc: 'T_E = \frac{T}{2} = 1', answer: '1 с' }
+        src: [e12, e13]
+      - type: numeric
+        cat: problem
+        q: Частота колебаний пружинного маятника 3 Гц. С какой частотой меняется его потенциальная энергия?
+        num: { value: 6, unit: 'Гц', check: '2*3' }
+        hint: 'В формуле стоит $\cos2\omega t$.'
+        explain: 'Частота колебаний энергии в два раза больше: 6 Гц.'
+        f: [5]
+        sol: { given: ['ν = 3 Гц'], find: 'ν_E', calc: '\nu_E = 2\cdot3 = 6', answer: '6 Гц' }
+        src: [e12, e13]
+      - type: numeric
+        cat: problem
+        q: '$E_{к\,max} = 4$ Дж. Найдите кинетическую энергию в момент, когда $\omega t = \frac\pi3$.'
+        num: { value: 1, unit: 'Дж', check: '4*Math.cos(Math.PI/3)**2' }
+        hint: '$E_к = E_{к\,max}\cos^2\omega t$, $\cos\frac\pi3 = \frac12$.'
+        explain: '$E_к = 4\cdot\frac14 = 1$ Дж.'
+        f: [1]
+        sol: { given: ['E_к max = 4 Дж', 'ωt = π/3'], find: 'E_к', formula: 'E_{к} = E_{к\,max}\cos^2\omega t', calc: 'E_{к} = 4\cdot\left(\tfrac12\right)^2 = 1', answer: '1 Дж' }
+        src: e12
+      - type: single
+        cat: theory
+        q: Какая энергия у маятника в крайней точке A?
+        opts: ['Кинетическая → 0, потенциальная → max', 'Кинетическая → max, потенциальная → 0', 'Обе равны нулю', 'Обе максимальны']
+        ans: a
+        hint: В крайней точке скорость равна нулю.
+        explain: 'В точке A: $E_к \to 0$, $E_п \to \max$; в точке O — наоборот.'
+        src: e12
+      - type: single
+        cat: theory
+        q: При каком условии полная механическая энергия колебаний сохраняется?
+        opts: ['Если нет силы трения и силы сопротивления', 'Если амплитуда большая', 'Только для пружинного маятника', 'Всегда']
+        ans: a
+        hint: Первая фраза темы «Энергия колебания».
+        explain: Если в колебательной системе отсутствуют сила трения либо сила сопротивления, то полная механическая энергия колебания сохраняется.
+        src: e12
+
+# ───────────────────────────────────────────────────────────────
+  - id: waves
+    title: Волны. Длина волны
+    pages: [e13, e14]
+    theory:
+      - kind: definition
+        title: Волны
+        body: Колебания, которые распространяются в одном направлении или по всему пространству, называются волнами. Волна бывает двух типов — поперечная и продольная.
+        src: e13
+      - kind: definition
+        title: Поперечная волна
+        body: 'Если направление распространения волны и плоскость колебания волны перпендикулярны, то эта волна называется поперечной. Волны на поверхности воды и электромагнитные волны — поперечные. На рисунке конспекта волна идёт вправо: точки перед гребнем движутся вверх, за гребнем — вниз.'
+        src: [e13, e14]
+        errata: [EM06]
+        fig: wave-trans
+      - kind: definition
+        title: Продольная волна
+        body: Если направление распространения и плоскость колебания волны параллельны, то эта волна называется продольной. Все звуковые волны — продольные.
+        src: [e13, e14]
+        fig: wave-long
+      - kind: definition
+        title: Длина волны
+        body: 'Путь, пройденный за одно полное колебание, называется длиной волны: $\lambda = \upsilon T = \frac\upsilon\nu$.'
+        src: e14
+      - kind: rule
+        title: Где распространяются механические волны
+        body: Механические поперечные волны распространяются только в твёрдых телах. Механические продольные волны распространяются во всех средах.
+        src: e14
+        errata: [EM06]
+      - kind: rule
+        title: Переход в другую среду
+        body: Скорость распространения и длина волны зависят от среды, а частота не зависит. Когда волна переходит из одной среды в другую, скорость распространения и длина волны меняются, а частота не меняется.
+        src: e14
+    formulas:
+      - title: Длина волны через период
+        tex: '\lambda = \upsilon\cdot T'
+        sym: [lambda_w, v_wave, T_per]
+        boxed: true
+        src: e14
+      - title: Длина волны через частоту
+        tex: '\lambda = \frac{\upsilon}{\nu}'
+        sym: [lambda_w, v_wave, nu_per]
+        boxed: true
+        src: e14
+    examples:
+      - title: Расстояние между пиками
+        given: 'Между 2-м и 4-м пиком волны 30 м'
+        steps: ['Между 2-м и 4-м пиком укладываются две длины волны: $2\lambda = 30$', '$\lambda = 15$ м']
+        answer: '$\lambda = 15$ м'
+        src: e14
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Волна идёт со скоростью 340 м/с, частота 170 Гц. Найдите длину волны.'
+        num: { value: 2, unit: 'м', check: '340/170' }
+        hint: '$\lambda = \frac\upsilon\nu$.'
+        explain: '$\lambda = \frac{340}{170} = 2$ м.'
+        f: [2]
+        sol: { given: ['υ = 340 м/с', 'ν = 170 Гц'], find: 'λ', formula: '\lambda = \frac{\upsilon}{\nu}', calc: '\lambda = \frac{340}{170} = 2', answer: '2 м' }
+        src: e14
+      - type: numeric
+        cat: problem
+        q: Длина волны 3 м, период 0,01 с. Найдите скорость волны.
+        num: { value: 300, unit: 'м/с', check: '3/0.01' }
+        hint: 'Из $\lambda = \upsilon T$: $\upsilon = \frac\lambda T$.'
+        explain: '$\upsilon = \frac{3}{0{,}01} = 300$ м/с.'
+        f: [1]
+        sol: { given: ['λ = 3 м', 'T = 0,01 с'], find: 'υ', formula: '\upsilon = \frac{\lambda}{T}', calc: '\upsilon = \frac{3}{0{,}01} = 300', answer: '300 м/с' }
+        src: e14
+      - type: numeric
+        cat: problem
+        q: Между 1-м и 5-м гребнем волны 20 м. Найдите длину волны.
+        num: { value: 5, unit: 'м', check: '20/4' }
+        hint: 'Как в примере конспекта: между 1-м и 5-м гребнем — четыре длины волны.'
+        explain: '$4\lambda = 20$, $\lambda = 5$ м.'
+        sol: { given: ['между 1-м и 5-м гребнем 20 м'], find: 'λ', calc: '4\lambda = 20 \Rightarrow \lambda = 5', answer: '5 м' }
+        src: e14
+      - type: numeric
+        cat: problem
+        q: 'Длина волны 0,5 м, скорость 2 м/с. Найдите частоту.'
+        num: { value: 4, unit: 'Гц', check: '2/0.5' }
+        hint: '$\nu = \frac\upsilon\lambda$.'
+        explain: '$\nu = \frac{2}{0{,}5} = 4$ Гц.'
+        f: [2]
+        sol: { given: ['λ = 0,5 м', 'υ = 2 м/с'], find: 'ν', formula: '\nu = \frac{\upsilon}{\lambda}', calc: '\nu = 4', answer: '4 Гц' }
+        src: e14
+      - type: single
+        cat: theory
+        q: Какая волна называется продольной?
+        opts: ['Направление распространения и плоскость колебаний параллельны', 'Направление распространения и плоскость колебаний перпендикулярны', 'Волна, которая идёт только в твёрдых телах', 'Волна на поверхности воды']
+        ans: a
+        hint: Сравните с определением поперечной волны.
+        explain: 'Продольная — направления параллельны, поперечная — перпендикулярны.'
+        src: e13
+      - type: multiple
+        cat: theory
+        q: Какие волны в конспекте названы поперечными? Выберите все.
+        opts: ['Волны на поверхности воды', 'Электромагнитные волны', 'Звуковые волны']
+        ans: [a, b]
+        hint: Звуковые волны — «все продольные».
+        explain: Волны на поверхности воды и электромагнитные волны — поперечные; все звуковые — продольные.
+        src: e14
+      - type: single
+        cat: theory
+        q: Что не меняется, когда волна переходит из одной среды в другую?
+        opts: ['Частота', 'Скорость', 'Длина волны', 'Все три меняются']
+        ans: a
+        hint: Так же было и со светом в оптике.
+        explain: Скорость и длина волны меняются, а частота не меняется.
+        src: e14
+      - type: single
+        cat: theory
+        q: В каких средах распространяются механические продольные волны?
+        opts: ['Во всех средах', 'Только в твёрдых телах', 'Только в газах', 'Только в вакууме']
+        ans: a
+        hint: Звук — продольная волна, и он идёт и в воздухе, и в воде, и в металле.
+        explain: 'Механические продольные волны распространяются во всех средах; поперечные — только в твёрдых телах (см. замечание EM06).'
+        src: e14
+      - type: matching
+        cat: theory
+        q: Сопоставьте понятие и определение.
+        pairs:
+          - ['Поперечная волна', 'Распространение перпендикулярно плоскости колебаний']
+          - ['Продольная волна', 'Распространение параллельно плоскости колебаний']
+          - ['Длина волны', 'Путь, пройденный за одно полное колебание']
+        hint: Определения на стр. e13–e14.
+        explain: Определения из темы «Волны».
+        src: [e13, e14]
+
+# ───────────────────────────────────────────────────────────────
+  - id: sound
+    title: Звук
+    pages: [e15]
+    theory:
+      - kind: definition
+        title: Звук, инфразвук, ультразвук
+        body: Механические волны частотой от 16 Гц до 20 000 Гц называются звуком. Механические волны меньше 16 Гц называются инфразвуком. Волны частотой больше 20 000 Гц называются ультразвуком.
+        src: e15
+      - kind: rule
+        title: Высота и громкость
+        body: Высота звука зависит от частоты, а громкость звука зависит от амплитуды.
+        src: e15
+      - kind: rule
+        title: Скорость звука
+        body: 'Скорость распространения и длина волны звука зависят от среды, а частота не зависит. Чем плотнее среда, тем с большей скоростью распространяется звук. Например: воздух — 340 м/с, вода — 1340 м/с, металлы — 5000 м/с.'
+        src: e15
+        errata: [EM07]
+      - kind: definition
+        title: Интенсивность
+        body: 'Интенсивность — это энергия потока, которая проходит через единицу площади за единицу времени: $I = \frac{W}{S\cdot t}$. Для механических волн $I \sim \nu^2$, $I \sim A^2$.'
+        src: e15
+    formulas:
+      - title: Интенсивность
+        tex: 'I = \frac{W}{S\cdot t}\quad\left[\frac{Дж}{м^2\cdot с}\right]'
+        sym: [I_int, W, S_area, t]
+        boxed: true
+        src: e15
+      - title: Интенсивность механической волны
+        tex: 'I \sim \nu^2,\qquad I \sim A^2'
+        sym: [I_int, nu_per, A_amp]
+        src: e15
+    questions:
+      - type: single
+        cat: theory
+        q: Механическая волна частотой 10 Гц — это…
+        opts: ['Инфразвук', 'Звук', 'Ультразвук', 'Электромагнитная волна']
+        ans: a
+        hint: Граница звука снизу — 16 Гц.
+        explain: Меньше 16 Гц — инфразвук.
+        src: e15
+      - type: single
+        cat: theory
+        q: Механическая волна частотой 30 000 Гц — это…
+        opts: ['Ультразвук', 'Звук', 'Инфразвук', 'Свет']
+        ans: a
+        hint: Граница звука сверху — 20 000 Гц.
+        explain: Больше 20 000 Гц — ультразвук.
+        src: e15
+      - type: single
+        cat: theory
+        q: От чего зависит громкость звука?
+        opts: ['От амплитуды', 'От частоты', 'От длины волны', 'От скорости звука']
+        ans: a
+        hint: Высота — от частоты, а громкость…
+        explain: Громкость звука зависит от амплитуды.
+        src: e15
+      - type: single
+        cat: theory
+        q: От чего зависит высота звука?
+        opts: ['От частоты', 'От амплитуды', 'От интенсивности', 'От плотности воздуха']
+        ans: a
+        hint: Тонкий голос — частые колебания.
+        explain: Высота звука зависит от частоты.
+        src: e15
+      - type: numeric
+        cat: problem
+        q: 'Звук частотой 680 Гц распространяется в воздухе (340 м/с, как в конспекте). Найдите длину волны.'
+        num: { value: 0.5, unit: 'м', check: '340/680' }
+        hint: '$\lambda = \frac\upsilon\nu$.'
+        explain: '$\lambda = \frac{340}{680} = 0{,}5$ м.'
+        f: [waves-f2]
+        sol: { given: ['υ = 340 м/с', 'ν = 680 Гц'], find: 'λ', formula: '\lambda = \frac{\upsilon}{\nu}', calc: '\lambda = 0{,}5', answer: '0,5 м' }
+        src: [e14, e15]
+      - type: numeric
+        cat: problem
+        q: 'Звук частотой 2500 Гц распространяется в металле (5000 м/с, как в конспекте). Найдите длину волны.'
+        num: { value: 2, unit: 'м', check: '5000/2500' }
+        hint: '$\lambda = \frac\upsilon\nu$.'
+        explain: '$\lambda = \frac{5000}{2500} = 2$ м — та же частота, но длина волны больше, чем в воздухе.'
+        f: [waves-f2]
+        sol: { given: ['υ = 5000 м/с', 'ν = 2500 Гц'], find: 'λ', formula: '\lambda = \frac{\upsilon}{\nu}', calc: '\lambda = 2', answer: '2 м' }
+        src: [e14, e15]
+      - type: single
+        cat: formula
+        q: Амплитуду механической волны увеличили в 2 раза. Как изменилась интенсивность?
+        opts: ['Увеличилась в 4 раза', 'Увеличилась в 2 раза', 'Увеличилась в 16 раз', 'Не изменилась']
+        ans: a
+        hint: '$I \sim A^2$.'
+        explain: '$2^2 = 4$.'
+        f: [2]
+        src: e15
+      - type: single
+        cat: formula
+        q: Частоту механической волны увеличили в 3 раза. Как изменилась интенсивность?
+        opts: ['Увеличилась в 9 раз', 'Увеличилась в 3 раза', 'Увеличилась в 81 раз', 'Не изменилась']
+        ans: a
+        hint: 'Для механических волн $I \sim \nu^2$ (для электромагнитных в конспекте — $\nu^4$).'
+        explain: '$3^2 = 9$.'
+        f: [2]
+        src: e15
+      - type: numeric
+        cat: problem
+        q: Через площадку 2 м² за 3 с звуковая волна перенесла энергию 60 Дж. Найдите интенсивность.
+        num: { value: 10, unit: 'Дж/(м²·с)', check: '60/(2*3)' }
+        hint: '$I = \frac{W}{S\cdot t}$.'
+        explain: '$I = \frac{60}{6} = 10$ Дж/(м²·с).'
+        f: [1]
+        sol: { given: ['W = 60 Дж', 'S = 2 м²', 't = 3 с'], find: 'I', formula: 'I = \frac{W}{S\cdot t}', calc: 'I = \frac{60}{2\cdot3} = 10', answer: '10 Дж/(м²·с)' }
+        src: e15
+      - type: sequence
+        cat: theory
+        q: Расположите среды по возрастанию скорости звука (по конспекту).
+        seq: ['Воздух', 'Вода', 'Металлы']
+        hint: Чем плотнее среда, тем быстрее звук.
+        explain: '340 м/с < 1340 м/с < 5000 м/с.'
+        src: e15

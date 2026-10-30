@@ -1,0 +1,11 @@
+{
+  "appId": "uz.husniddin.utcprep",
+  "appName": "UTC Preparation",
+  "webDir": "dist",
+  "android": {
+    "allowMixedContent": false
+  },
+  "ios": {
+    "contentInset": "automatic"
+  }
+}

@@ -1,0 +1,476 @@
+subsection: rel
+
+symbols:
+  m0_rel: { tex: 'm_0', meaning: 'масса тела в покое (при υ = 0, по графику)', unit: 'кг', src: o10 }
+  m_rel: { tex: 'm', meaning: 'масса движущегося тела', unit: 'кг', src: o10 }
+  gamma_rel: { tex: '\gamma', meaning: 'в конспекте: γ = √(1 − υ²/c²); см. замечание O11', unit: '', src: o10 }
+  l_rel: { tex: 'l', meaning: 'длина тела по направлению движения', unit: 'м', src: o10 }
+  l0_rel: { tex: 'l_0', meaning: 'длина тела в покое', unit: 'м', src: o10 }
+  S_rel: { tex: 'S,\ S_0', meaning: 'площадь поперечного сечения движущегося тела и тела в покое', unit: 'м²', src: o10 }
+  V_rel: { tex: 'V,\ V_0', meaning: 'объём движущегося тела и тела в покое', unit: 'м³', src: o11 }
+  rho_rel: { tex: '\rho,\ \rho_0', meaning: 'плотность движущегося тела и тела в покое', unit: 'кг/м³', src: o11 }
+  q_rel: { tex: 'q,\ q_0', meaning: 'заряд движущегося тела и тела в покое', unit: 'Кл', src: o11 }
+  t_rest: { tex: 't', meaning: 'время для системы, которая покоится', unit: 'с', src: o11 }
+  tau_mov: { tex: '\tau', meaning: 'время для системы, которая двигается', unit: 'с', src: o11 }
+  E_en: { tex: 'E', meaning: 'энергия тела', unit: 'Дж', src: o11 }
+  E0_rest: { tex: 'E_0', meaning: 'энергия при υ = 0; из двух формул на стр. o12 следует E₀ = m₀c²', unit: 'Дж', src: o12 }
+  dE_en: { tex: '\Delta E', meaning: 'изменение энергии', unit: 'Дж', src: o11 }
+  dm_mass: { tex: '\Delta m', meaning: 'изменение массы', unit: 'кг', src: o11 }
+  p_rel: { tex: 'p', meaning: 'импульс тела', unit: 'кг·м/с', src: o12 }
+  dx_spring: { tex: '\Delta x', meaning: 'деформация пружины (в конспекте не расшифровано)', unit: 'м', src: null }
+
+errata:
+  - id: O11
+    page: o10
+    severity: note
+    original: '\(\gamma = \sqrt{1 - \frac{\upsilon^2}{c^2}}\), \(\gamma \in (0; 1]\)'
+    issue: 'Внутри конспекта обозначение последовательно. Но во многих учебниках буквой \(\gamma\) обозначают обратную величину \(\frac{1}{\sqrt{1 - \upsilon^2/c^2}} \ge 1\) (лоренц-фактор). При работе с другими источниками легко перепутать.'
+    target: 'Обозначение γ в теории относительности'
+    suggestion: Оставить обозначение конспекта; в задачах из других источников проверять, что значит γ.
+  - id: O12
+    page: o11
+    severity: typo
+    original: '«\(\upsilon_0\) — относительная скорость», в формуле — \(\upsilon_{от}\)'
+    issue: 'Подпись и формула используют разные обозначения; \(\upsilon_0\) обычно — начальная скорость (так и в механике конспекта).'
+    target: 'Подпись к обозначению относительной скорости'
+    suggestion: '«\(\upsilon_{от}\) — относительная скорость».'
+  - id: O13
+    page: o12
+    severity: typo
+    original: '\(\Delta E = \frac{k\Delta x}{2}\)'
+    issue: 'Энергия деформированной пружины пропорциональна квадрату деформации; в конспекте по механике (стр. p35R) — \(W_п = \frac{k\Delta l^2}{2}\).'
+    target: 'Энергия деформированной пружины'
+    suggestion: '\(\Delta E = \frac{k\Delta x^2}{2}\).'
+
+topics:
+  - id: rel-postulates
+    title: Релятивистская физика. Постулаты Эйнштейна
+    pages: [o09, o10]
+    theory:
+      - kind: definition
+        title: Релятивистская физика
+        body: Релятивистская физика — это раздел физики, который изучает особенные свойства пространства и времени. Формулы релятивистской физики работают в основном в случаях, когда скорость тел принимает близкое значение к скорости распространения света в вакууме.
+        src: o09
+      - kind: law
+        title: Первый постулат Эйнштейна
+        body: Все физические процессы во всех инерциальных системах отсчёта происходят одинаковым образом. Уравнение движения во всех инерциальных системах отсчёта имеет одинаковый вид.
+        src: [o09, o10]
+      - kind: law
+        title: Второй постулат Эйнштейна
+        body: Скорость распространения света в вакууме — это абсолютная величина, её значения во всех системах отсчёта одинаковы. То есть в вакууме свет относительно любого тела распространяется с одинаковой скоростью.
+        src: o10
+      - kind: rule
+        title: Предельная скорость
+        body: 'По теории скорость света в вакууме — это максимально возможная скорость; большей скорости не существует: $\upsilon < c$, $\upsilon \in [0; c)$.'
+        src: o10
+    formulas:
+      - title: Скорость тела меньше скорости света
+        tex: '\upsilon < c,\qquad \upsilon \in [0;\ c)'
+        sym: [v, c_light]
+        boxed: true
+        src: o10
+      - title: Скорость света в вакууме
+        tex: 'c = 3\cdot10^8\ \text{м/с} = 300\,000\ \text{км/с}'
+        sym: [c_light]
+        src: o10
+    questions:
+      - type: single
+        cat: theory
+        q: Что изучает релятивистская физика?
+        opts: ['Особенные свойства пространства и времени', 'Тепловое движение молекул', 'Преломление света в линзах', 'Электрические цепи']
+        ans: a
+        hint: Определение — первая фраза темы на стр. o09.
+        explain: Релятивистская физика — это раздел физики, который изучает особенные свойства пространства и времени.
+        src: o09
+      - type: single
+        cat: theory
+        q: В каких случаях в основном работают формулы релятивистской физики?
+        opts: ['Когда скорость тел близка к скорости света в вакууме', 'При любых скоростях одинаково', 'Только для покоящихся тел', 'Только в жидкостях']
+        ans: a
+        hint: Сравните скорость тела с $c$.
+        explain: Формулы работают в основном, когда скорость тел принимает близкое значение к скорости света в вакууме.
+        src: o09
+      - type: text
+        cat: theory
+        q: Сформулируйте второй постулат Эйнштейна.
+        ref: Скорость распространения света в вакууме — это абсолютная величина, её значения во всех системах отсчёта одинаковы. То есть в вакууме свет относительно любого тела распространяется с одинаковой скоростью.
+        criteria: ['Речь о скорости света в вакууме', 'Сказано, что она одинакова во всех системах отсчёта (относительно любого тела)']
+        hint: Постулат — о скорости света.
+        explain: Второй постулат со стр. o10.
+        src: o10
+      - type: single
+        cat: theory
+        q: Может ли тело, по конспекту, двигаться быстрее скорости света в вакууме?
+        opts: ['Нет, большей скорости не существует', 'Да, если долго разгонять', 'Да, в среде с большим показателем преломления', 'Только электрон']
+        ans: a
+        hint: 'В рамке: $\upsilon < c$.'
+        explain: По теории скорость света в вакууме — максимально возможная скорость.
+        f: [1]
+        src: o10
+      - type: multiple
+        cat: theory
+        q: Что утверждает первый постулат Эйнштейна? Выберите все.
+        opts: ['Все физические процессы во всех инерциальных системах отсчёта происходят одинаково', 'Уравнение движения во всех инерциальных системах имеет одинаковый вид', 'Скорость света зависит от скорости источника', 'Время во всех системах течёт одинаково']
+        ans: [a, b]
+        hint: Оба верных утверждения записаны под цифрой I.
+        explain: 'Постулат I: процессы во всех ИСО происходят одинаковым образом, уравнение движения имеет одинаковый вид.'
+        src: [o09, o10]
+      - type: numeric
+        cat: problem
+        q: 'Выразите скорость света $c = 3\cdot10^8$ м/с в км/с.'
+        num: { value: 300000, unit: 'км/с', check: '3e8/1000' }
+        hint: 1 км = 1000 м.
+        explain: '$3\cdot10^8$ м/с $= 3\cdot10^5$ км/с $= 300\,000$ км/с.'
+        f: [2]
+        sol: { given: ['c = 3·10⁸ м/с'], find: 'c в км/с', calc: '\frac{3\cdot10^8}{10^3} = 3\cdot10^5', answer: '300 000 км/с' }
+        src: o10
+      - type: numeric
+        cat: problem
+        q: 'За какое время свет проходит в вакууме путь $1{,}5\cdot10^{11}$ м ($c = 3\cdot10^8$ м/с)?'
+        num: { value: 500, unit: 'с', check: '1.5e11/3e8' }
+        hint: Свет в вакууме движется равномерно со скоростью $c$.
+        explain: '$t = \frac{S}{c} = \frac{1{,}5\cdot10^{11}}{3\cdot10^8} = 500$ с.'
+        f: [2]
+        sol: { given: ['S = 1,5·10¹¹ м', 'c = 3·10⁸ м/с'], find: 't', formula: 't = \frac{S}{c}', calc: 't = \frac{1{,}5\cdot10^{11}}{3\cdot10^8} = 500', answer: '500 с' }
+        src: o10
+
+# ───────────────────────────────────────────────────────────────
+  - id: rel-effects
+    title: 'Релятивистские эффекты: масса, размеры, плотность, время'
+    pages: [o10, o11]
+    theory:
+      - kind: text
+        title: Общий множитель
+        body: 'Во всех формулах темы стоит множитель $\sqrt{1 - \frac{\upsilon^2}{c^2}}$. В конспекте он обозначен $\gamma$: $\gamma = \sqrt{1 - \frac{\upsilon^2}{c^2}}$; при $\upsilon \in [0; c)$ получается $\gamma \in (0; 1]$.'
+        src: o10
+        errata: [O11]
+      - kind: rule
+        title: Увеличение массы
+        body: '$m = \frac{m_0}{\sqrt{1 - \upsilon^2/c^2}}$. На графике масса растёт от $m_0$ и неограниченно увеличивается при приближении скорости к $c$.'
+        src: o10
+      - kind: rule
+        title: Уменьшение длины
+        fig: rel-length
+        body: '$l$ — длина тела по направлению движения: $l = l_0\sqrt{1 - \upsilon^2/c^2}$. Площадь поперечного сечения не меняется: $S = S_0 = \text{const}$.'
+        src: o10
+      - kind: rule
+        title: Объём и плотность
+        body: '$V = V_0\sqrt{1 - \upsilon^2/c^2}$ — уменьшение объёма; $\rho = \frac{\rho_0}{1 - \upsilon^2/c^2}$ — увеличение плотности.'
+        src: o11
+      - kind: rule
+        title: Заряд
+        body: 'Заряд не меняется: $q = q_0 = \text{const}$.'
+        src: o11
+      - kind: rule
+        title: Время
+        body: '$t = \frac{\tau}{\sqrt{1 - \upsilon^2/c^2}}$, $\tau = t\sqrt{1 - \upsilon^2/c^2}$. $t$ — время для системы, которая покоится; $\tau$ — время для системы, которая двигается.'
+        src: o11
+    formulas:
+      - title: Увеличение массы
+        tex: 'm = \frac{m_0}{\sqrt{1 - \frac{\upsilon^2}{c^2}}}'
+        sym: [m_rel, m0_rel, v, c_light]
+        boxed: true
+        src: o10
+      - title: Множитель γ (обозначение конспекта)
+        tex: '\gamma = \sqrt{1 - \frac{\upsilon^2}{c^2}},\qquad \gamma \in (0;\ 1]'
+        sym: [gamma_rel, v, c_light]
+        src: o10
+        errata: [O11]
+      - title: Уменьшение длины
+        tex: 'l = l_0\sqrt{1 - \frac{\upsilon^2}{c^2}}'
+        sym: [l_rel, l0_rel, v, c_light]
+        boxed: true
+        src: o10
+      - title: Площадь поперечного сечения
+        tex: 'S = S_0 = \text{const}'
+        sym: [S_rel]
+        boxed: true
+        src: o10
+      - title: Уменьшение объёма
+        tex: 'V = V_0\sqrt{1 - \frac{\upsilon^2}{c^2}}'
+        sym: [V_rel, v, c_light]
+        boxed: true
+        src: o11
+      - title: Увеличение плотности
+        tex: '\rho = \frac{\rho_0}{1 - \frac{\upsilon^2}{c^2}}'
+        sym: [rho_rel, v, c_light]
+        boxed: true
+        src: o11
+      - title: Заряд
+        tex: 'q = q_0 = \text{const}'
+        sym: [q_rel]
+        boxed: true
+        src: o11
+      - title: Время в покоящейся системе
+        tex: 't = \frac{\tau}{\sqrt{1 - \frac{\upsilon^2}{c^2}}}'
+        sym: [t_rest, tau_mov, v, c_light]
+        boxed: true
+        src: o11
+      - title: Время в движущейся системе
+        tex: '\tau = t\sqrt{1 - \frac{\upsilon^2}{c^2}}'
+        sym: [tau_mov, t_rest, v, c_light]
+        boxed: true
+        src: o11
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Тело массой покоя 1 кг движется со скоростью $0{,}6c$. Найдите его массу.'
+        num: { value: 1.25, unit: 'кг', check: '1/Math.sqrt(1-0.36)' }
+        hint: '$\frac{\upsilon^2}{c^2} = 0{,}36$, $\sqrt{1 - 0{,}36} = 0{,}8$.'
+        explain: '$m = \frac{1}{0{,}8} = 1{,}25$ кг.'
+        f: [1]
+        sol: { given: ['m₀ = 1 кг', 'υ = 0,6c'], find: 'm', formula: 'm = \frac{m_0}{\sqrt{1 - \upsilon^2/c^2}}', calc: 'm = \frac{1}{\sqrt{1 - 0{,}36}} = \frac{1}{0{,}8} = 1{,}25', answer: '1,25 кг' }
+        src: o10
+      - type: numeric
+        cat: problem
+        q: 'Стержень длиной 10 м движется вдоль своей длины со скоростью $0{,}8c$. Какова его длина?'
+        num: { value: 6, unit: 'м', check: '10*Math.sqrt(1-0.64)' }
+        hint: '$\sqrt{1 - 0{,}64} = 0{,}6$.'
+        explain: '$l = 10\cdot0{,}6 = 6$ м — длина по направлению движения уменьшается.'
+        f: [3]
+        sol: { given: ['l₀ = 10 м', 'υ = 0,8c'], find: 'l', formula: 'l = l_0\sqrt{1 - \upsilon^2/c^2}', calc: 'l = 10\sqrt{1 - 0{,}64} = 10\cdot0{,}6 = 6', answer: '6 м' }
+        src: o10
+      - type: numeric
+        cat: problem
+        q: 'Объём тела в покое 2 м³. Каким он станет при скорости $0{,}6c$?'
+        num: { value: 1.6, unit: 'м³', check: '2*Math.sqrt(1-0.36)' }
+        hint: '$V = V_0\sqrt{1 - \upsilon^2/c^2}$.'
+        explain: '$V = 2\cdot0{,}8 = 1{,}6$ м³.'
+        f: [5]
+        sol: { given: ['V₀ = 2 м³', 'υ = 0,6c'], find: 'V', formula: 'V = V_0\sqrt{1 - \upsilon^2/c^2}', calc: 'V = 2\cdot0{,}8 = 1{,}6', answer: '1,6 м³' }
+        src: o11
+      - type: numeric
+        cat: problem
+        q: 'Плотность тела в покое 1000 кг/м³. Найдите его плотность при скорости $0{,}6c$.'
+        num: { value: 1562.5, unit: 'кг/м³', check: '1000/(1-0.36)' }
+        hint: 'В формуле плотности корня нет: $\rho = \frac{\rho_0}{1 - \upsilon^2/c^2}$.'
+        explain: '$\rho = \frac{1000}{0{,}64} = 1562{,}5$ кг/м³: масса растёт, а объём уменьшается.'
+        f: [6]
+        sol: { given: ['ρ₀ = 1000 кг/м³', 'υ = 0,6c'], find: 'ρ', formula: '\rho = \frac{\rho_0}{1 - \upsilon^2/c^2}', calc: '\rho = \frac{1000}{0{,}64} = 1562{,}5', answer: '1562,5 кг/м³' }
+        src: o11
+      - type: numeric
+        cat: problem
+        q: 'В системе, которая движется со скоростью $0{,}6c$, прошло 8 с ($\tau$). Сколько времени прошло в покоящейся системе?'
+        num: { value: 10, unit: 'с', check: '8/Math.sqrt(1-0.36)' }
+        hint: '$t = \frac{\tau}{\sqrt{1 - \upsilon^2/c^2}}$.'
+        explain: '$t = \frac{8}{0{,}8} = 10$ с.'
+        f: [8]
+        sol: { given: ['τ = 8 с', 'υ = 0,6c'], find: 't', formula: 't = \frac{\tau}{\sqrt{1 - \upsilon^2/c^2}}', calc: 't = \frac{8}{0{,}8} = 10', answer: '10 с' }
+        src: o11
+      - type: numeric
+        cat: problem
+        q: 'Найдите множитель $\gamma$ (в обозначении конспекта) при скорости $0{,}8c$.'
+        num: { value: 0.6, unit: '', check: 'Math.sqrt(1-0.64)' }
+        hint: 'В конспекте $\gamma = \sqrt{1 - \upsilon^2/c^2}$.'
+        explain: '$\gamma = \sqrt{1 - 0{,}64} = 0{,}6$ — значение из промежутка $(0; 1]$.'
+        f: [2]
+        sol: { given: ['υ = 0,8c'], find: 'γ', formula: '\gamma = \sqrt{1 - \upsilon^2/c^2}', calc: '\gamma = \sqrt{0{,}36} = 0{,}6', answer: '0,6' }
+        src: o10
+      - type: multiple
+        cat: theory
+        q: Какие величины, по конспекту, не меняются при движении тела? Выберите все.
+        opts: ['Площадь поперечного сечения', 'Заряд', 'Масса', 'Длина по направлению движения', 'Объём', 'Плотность']
+        ans: [a, b]
+        hint: Ищите в конспекте записи «= const».
+        explain: '$S = S_0 = \text{const}$, $q = q_0 = \text{const}$; масса и плотность растут, длина и объём уменьшаются.'
+        f: [4, 7]
+        src: [o10, o11]
+      - type: matching
+        cat: theory
+        q: Сопоставьте величину и то, как она меняется при движении тела.
+        pairs:
+          - ['Масса', 'Увеличивается']
+          - ['Длина по направлению движения', 'Уменьшается']
+          - ['Заряд', 'Не меняется']
+        hint: Под формулами в конспекте подписано «увеличение» или «уменьшение».
+        explain: 'Увеличение массы, уменьшение длины, $q = q_0 = \text{const}$.'
+        src: [o10, o11]
+      - type: single
+        cat: theory
+        q: Какое время в конспекте обозначено буквой τ?
+        opts: ['Время для системы, которая двигается', 'Время для системы, которая покоится', 'Период колебаний', 'Время жизни фотона']
+        ans: a
+        hint: t — для системы, которая покоится.
+        explain: 't — время для системы, которая покоится; τ — время для системы, которая двигается.'
+        src: o11
+
+# ───────────────────────────────────────────────────────────────
+  - id: rel-velocity
+    title: Релятивистское сложение скоростей
+    pages: [o11]
+    theory:
+      - kind: text
+        title: Относительная скорость
+        body: 'Относительная скорость двух тел (на рисунке два шарика движутся навстречу друг другу): $\upsilon_{от} = \frac{\upsilon_1 \pm \upsilon_2}{1 \pm \frac{\upsilon_1\upsilon_2}{c^2}}$.'
+        src: o11
+        errata: [O12]
+    formulas:
+      - title: Релятивистская относительная скорость
+        tex: '\upsilon_{от} = \frac{\upsilon_1 \pm \upsilon_2}{1 \pm \frac{\upsilon_1\upsilon_2}{c^2}}'
+        sym: [v_rel, v1v2, c_light]
+        boxed: true
+        src: o11
+        errata: [O12]
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Два тела движутся навстречу друг другу, каждое со скоростью $0{,}5c$. Найдите их относительную скорость (в долях $c$).'
+        num: { value: 0.8, unit: 'c', check: '(0.5+0.5)/(1+0.5*0.5)' }
+        hint: 'Навстречу — знаки «+»: $\upsilon_{от} = \frac{\upsilon_1 + \upsilon_2}{1 + \upsilon_1\upsilon_2/c^2}$.'
+        explain: '$\upsilon_{от} = \frac{c}{1 + 0{,}25} = 0{,}8c$ — меньше $c$, хотя «по-обычному» получилось бы $c$.'
+        f: [1]
+        sol: { given: ['υ₁ = υ₂ = 0,5c'], find: 'υ_от', formula: '\upsilon_{от} = \frac{\upsilon_1 + \upsilon_2}{1 + \frac{\upsilon_1\upsilon_2}{c^2}}', calc: '\upsilon_{от} = \frac{1{,}0c}{1 + 0{,}25} = 0{,}8c', answer: '0,8c' }
+        src: o11
+      - type: numeric
+        cat: problem
+        q: 'Тела движутся навстречу со скоростями $0{,}6c$ и $0{,}8c$. Найдите относительную скорость (в долях $c$).'
+        num: { value: 0.946, unit: 'c', check: '(0.6+0.8)/(1+0.6*0.8)' }
+        hint: '$\frac{\upsilon_1\upsilon_2}{c^2} = 0{,}6\cdot0{,}8$.'
+        explain: '$\upsilon_{от} = \frac{1{,}4c}{1{,}48} \approx 0{,}946c$.'
+        f: [1]
+        sol: { given: ['υ₁ = 0,6c', 'υ₂ = 0,8c'], find: 'υ_от', formula: '\upsilon_{от} = \frac{\upsilon_1 + \upsilon_2}{1 + \frac{\upsilon_1\upsilon_2}{c^2}}', calc: '\upsilon_{от} = \frac{1{,}4c}{1{,}48} \approx 0{,}946c', answer: '≈ 0,946c' }
+        src: o11
+      - type: numeric
+        cat: problem
+        q: 'Свет ($\upsilon_1 = c$) и тело со скоростью $0{,}5c$ движутся навстречу. Найдите их относительную скорость по формуле конспекта (в долях $c$).'
+        num: { value: 1, unit: 'c', check: '(1+0.5)/(1+1*0.5)' }
+        hint: 'Подставьте $\upsilon_1 = c$ — результат сравните со вторым постулатом.'
+        explain: '$\frac{1{,}5c}{1 + 0{,}5} = c$: свет относительно любого тела распространяется с одной и той же скоростью — это второй постулат.'
+        f: [1]
+        sol: { given: ['υ₁ = c', 'υ₂ = 0,5c'], find: 'υ_от', formula: '\upsilon_{от} = \frac{\upsilon_1 + \upsilon_2}{1 + \frac{\upsilon_1\upsilon_2}{c^2}}', calc: '\upsilon_{от} = \frac{1{,}5c}{1{,}5} = c', answer: 'c' }
+        src: [o10, o11]
+      - type: single
+        cat: theory
+        q: Два тела летят навстречу друг другу со скоростями, близкими к c. Что можно сказать об их относительной скорости?
+        opts: ['Она меньше c', 'Она почти 2c', 'Она равна сумме скоростей', 'Она равна нулю']
+        ans: a
+        hint: 'Большей скорости, чем $c$, не существует.'
+        explain: 'Знаменатель $1 + \frac{\upsilon_1\upsilon_2}{c^2}$ не даёт результату превысить $c$ — это согласуется с постулатом о предельной скорости.'
+        f: [1]
+        src: [o10, o11]
+
+# ───────────────────────────────────────────────────────────────
+  - id: rel-energy
+    title: Связь энергии и массы
+    pages: [o11, o12]
+    theory:
+      - kind: law
+        title: Связь энергии и массы
+        body: '$E = mc^2$; изменение энергии и изменение массы связаны: $\Delta E = \Delta mc^2$.'
+        src: o11
+      - kind: text
+        title: Изменение энергии в разных процессах
+        body: 'Под этой формулой в конспекте перечислены формулы изменения энергии: $\Delta E = mgh$, $\Delta E = \frac{m\upsilon^2}{2}$, $\Delta E = cm\Delta t$, $\Delta E = \frac{k\Delta x}{2}$.'
+        src: o12
+        errata: [O13]
+      - kind: text
+        title: Релятивистские энергия и импульс
+        body: '$E = \frac{m_0c^2}{\sqrt{1 - \upsilon^2/c^2}}$, $E = \frac{E_0}{\sqrt{1 - \upsilon^2/c^2}}$, $p = \frac{m_0\upsilon}{\sqrt{1 - \upsilon^2/c^2}}$.'
+        src: o12
+    formulas:
+      - title: Связь энергии и массы
+        tex: 'E = mc^2'
+        sym: [E_en, m_rel, c_light]
+        boxed: true
+        src: o11
+      - title: Изменение энергии и массы
+        tex: '\Delta E = \Delta m\,c^2'
+        sym: [dE_en, dm_mass, c_light]
+        boxed: true
+        src: o11
+      - title: Изменение потенциальной энергии
+        tex: '\Delta E = mgh'
+        sym: [dE_en, m, g, h]
+        src: o12
+      - title: Изменение кинетической энергии
+        tex: '\Delta E = \frac{m\upsilon^2}{2}'
+        sym: [dE_en, m, v]
+        src: o12
+      - title: Изменение энергии при нагревании
+        tex: '\Delta E = cm\Delta t'
+        sym: [dE_en, c_sp, m, dt_cel]
+        src: o12
+      - title: Энергия пружины (как в конспекте)
+        tex: '\Delta E = \frac{k\Delta x}{2}'
+        sym: [dE_en, k, dx_spring]
+        src: o12
+        errata: [O13]
+      - title: Релятивистская энергия
+        tex: 'E = \frac{m_0c^2}{\sqrt{1 - \frac{\upsilon^2}{c^2}}}'
+        sym: [E_en, m0_rel, v, c_light]
+        boxed: true
+        src: o12
+      - title: Энергия через энергию покоя
+        tex: 'E = \frac{E_0}{\sqrt{1 - \frac{\upsilon^2}{c^2}}}'
+        sym: [E_en, E0_rest, v, c_light]
+        boxed: true
+        src: o12
+      - title: Релятивистский импульс
+        tex: 'p = \frac{m_0\upsilon}{\sqrt{1 - \frac{\upsilon^2}{c^2}}}'
+        sym: [p_rel, m0_rel, v, c_light]
+        boxed: true
+        src: o12
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Масса тела изменилась на 1 г. На сколько изменилась его энергия ($c = 3\cdot10^8$ м/с)?'
+        num: { value: 9.0e13, unit: 'Дж', check: '1e-3*(3e8)**2' }
+        hint: '$\Delta E = \Delta mc^2$; 1 г = 10⁻³ кг.'
+        explain: '$\Delta E = 10^{-3}\cdot9\cdot10^{16} = 9\cdot10^{13}$ Дж.'
+        f: [2]
+        sol: { given: ['Δm = 1 г', 'c = 3·10⁸ м/с'], si: ['Δm = 10⁻³ кг'], find: 'ΔE', formula: '\Delta E = \Delta m\,c^2', calc: '\Delta E = 10^{-3}\cdot(3\cdot10^8)^2 = 9\cdot10^{13}', answer: '9·10¹³ Дж' }
+        src: o11
+      - type: numeric
+        cat: problem
+        q: 'Найдите энергию $E = mc^2$ тела массой 2 кг.'
+        num: { value: 1.8e17, unit: 'Дж', check: '2*(3e8)**2' }
+        hint: '$c^2 = 9\cdot10^{16}$ м²/с².'
+        explain: '$E = 2\cdot9\cdot10^{16} = 1{,}8\cdot10^{17}$ Дж.'
+        f: [1]
+        sol: { given: ['m = 2 кг', 'c = 3·10⁸ м/с'], find: 'E', formula: 'E = mc^2', calc: 'E = 2\cdot9\cdot10^{16} = 1{,}8\cdot10^{17}', answer: '1,8·10¹⁷ Дж' }
+        src: o11
+      - type: numeric
+        cat: problem
+        q: 'Тело получило энергию $9\cdot10^{10}$ Дж. На сколько увеличилась его масса?'
+        num: { value: 1.0e-6, unit: 'кг', check: '9e10/(3e8)**2' }
+        hint: '$\Delta m = \frac{\Delta E}{c^2}$.'
+        explain: '$\Delta m = \frac{9\cdot10^{10}}{9\cdot10^{16}} = 10^{-6}$ кг.'
+        f: [2]
+        sol: { given: ['ΔE = 9·10¹⁰ Дж'], find: 'Δm', formula: '\Delta m = \frac{\Delta E}{c^2}', calc: '\Delta m = \frac{9\cdot10^{10}}{9\cdot10^{16}} = 10^{-6}', answer: '10⁻⁶ кг' }
+        src: o11
+      - type: numeric
+        cat: problem
+        q: 'Энергия тела в покое $E_0 = 9\cdot10^{16}$ Дж. Найдите его энергию при скорости $0{,}6c$.'
+        num: { value: 1.125e17, unit: 'Дж', check: '9e16/Math.sqrt(1-0.36)' }
+        hint: '$E = \frac{E_0}{\sqrt{1 - \upsilon^2/c^2}}$, корень равен 0,8.'
+        explain: '$E = \frac{9\cdot10^{16}}{0{,}8} = 1{,}125\cdot10^{17}$ Дж.'
+        f: [8]
+        sol: { given: ['E₀ = 9·10¹⁶ Дж', 'υ = 0,6c'], find: 'E', formula: 'E = \frac{E_0}{\sqrt{1 - \upsilon^2/c^2}}', calc: 'E = \frac{9\cdot10^{16}}{0{,}8} = 1{,}125\cdot10^{17}', answer: '1,125·10¹⁷ Дж' }
+        src: o12
+      - type: numeric
+        cat: problem
+        q: 'Тело массой покоя 1 кг движется со скоростью $0{,}6c$ ($c = 3\cdot10^8$ м/с). Найдите его импульс.'
+        num: { value: 2.25e8, unit: 'кг·м/с', check: '1*0.6*3e8/Math.sqrt(1-0.36)' }
+        hint: '$\upsilon = 1{,}8\cdot10^8$ м/с, корень равен 0,8.'
+        explain: '$p = \frac{1\cdot1{,}8\cdot10^8}{0{,}8} = 2{,}25\cdot10^8$ кг·м/с.'
+        f: [9]
+        sol: { given: ['m₀ = 1 кг', 'υ = 0,6c'], find: 'p', formula: 'p = \frac{m_0\upsilon}{\sqrt{1 - \upsilon^2/c^2}}', calc: 'p = \frac{1{,}8\cdot10^8}{0{,}8} = 2{,}25\cdot10^8', answer: '2,25·10⁸ кг·м/с' }
+        src: o12
+      - type: single
+        cat: formula
+        q: 'Тело нагрели, его энергия выросла ($\Delta E = cm\Delta t > 0$). Что, по формуле $\Delta E = \Delta mc^2$, произошло с его массой?'
+        opts: ['Немного увеличилась', 'Немного уменьшилась', 'Не изменилась', 'Стала равна нулю']
+        ans: a
+        hint: '$\Delta m = \frac{\Delta E}{c^2}$ — знак тот же, что у $\Delta E$.'
+        explain: 'При $\Delta E > 0$ получается $\Delta m > 0$; из-за огромного $c^2$ изменение очень мало.'
+        f: [2, 5]
+        src: [o11, o12]
+      - type: single
+        cat: formula
+        q: Какая формула в конспекте выражает связь энергии и массы?
+        opts: ['$E = mc^2$', '$E = \frac{mc^2}{2}$', '$E = mc$', '$E = \frac{m\upsilon^2}{2}$']
+        ans: a
+        hint: Заголовок «Связь энергии и массы» на стр. o11.
+        explain: '$E = mc^2$ и $\Delta E = \Delta mc^2$ — в рамках.'
+        f: [1]
+        src: o11

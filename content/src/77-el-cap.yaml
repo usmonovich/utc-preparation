@@ -1,0 +1,752 @@
+subsection: capac
+# Конспект «Электричество»: электроёмкость и конденсаторы, стр. c13–c23 (метод потенциалов — стр. c20).
+
+symbols:
+  C_el: { tex: 'C', meaning: 'электроёмкость (тела, конденсатора)', unit: 'Ф (фарад) = Кл/В', src: c13 }
+  S_pl: { tex: 'S', meaning: 'площадь пластины конденсатора', unit: 'м²', src: c15 }
+  d_pl: { tex: 'd', meaning: 'расстояние между пластинами конденсатора', unit: 'м', src: c15 }
+  U_c: { tex: 'U_c', meaning: 'напряжение конденсатора (разность потенциалов обкладок)', unit: 'В', src: c15 }
+  C1n: { tex: 'C_1 \dots C_n', meaning: 'ёмкости отдельных конденсаторов', unit: 'Ф', src: c16 }
+  C_ob: { tex: 'C_{об}', meaning: 'общая (эквивалентная) ёмкость соединения', unit: 'Ф', src: c16 }
+  U1n: { tex: 'U_1 \dots U_n', meaning: 'напряжения на отдельных элементах цепи', unit: 'В', src: c16 }
+  q1n_cap: { tex: 'q_{об},\ q_1 \dots q_n', meaning: 'общий заряд и заряды отдельных конденсаторов', unit: 'Кл', src: c16 }
+  n_cap: { tex: 'n', meaning: 'число одинаковых конденсаторов', unit: '', src: c17 }
+  sigma12: { tex: '\sigma_1,\ \sigma_2', meaning: 'поверхностные плотности зарядов двух пластин', unit: 'Кл/м²', src: c21 }
+  E_in_out: { tex: 'E_{внутр},\ E_{внеш}', meaning: 'напряжённость между пластинами и снаружи', unit: 'В/м', src: c21 }
+  W_cap: { tex: 'W', meaning: 'энергия заряженного конденсатора (шара)', unit: 'Дж', src: c22 }
+  w_el: { tex: 'w', meaning: 'плотность энергии электрического поля — энергия единицы объёма', unit: 'Дж/м³', src: c23 }
+  V_cap: { tex: 'V', meaning: 'объём между пластинами конденсатора, V = S·d', unit: 'м³', src: c23 }
+
+errata:
+  - id: EL05
+    page: c17
+    severity: note
+    original: '\(C_{об} < C_1\cdot C_2\cdot C_3\cdot\dots\cdot C_n\) (в рамке, последовательное соединение)'
+    issue: 'По смыслу записано, что общая ёмкость меньше каждой из ёмкостей (в том числе наименьшей); точки, видимо, разделители. Как произведение запись неверна: например, для 2 мкФ и 3 мкФ общая ёмкость 1,2 мкФ, а произведение — 6·10⁻¹² Ф², величина другой размерности.'
+    target: 'Неравенство для общей ёмкости при последовательном соединении'
+    suggestion: '«\(C_{об}\) меньше наименьшей из ёмкостей \(C_1, C_2, \dots, C_n\)».'
+  - id: EL06
+    page: c20
+    severity: error
+    original: '«…если потенциалы равны, то U = 0 ⇒ C = 0»'
+    issue: 'При U = 0 равен нулю заряд конденсатора: \(q = CU = 0\). Ёмкость от напряжения не зависит — это сказано на стр. c15 («C ≁ q, U»).'
+    target: 'Объяснение, почему конденсатор с одинаковыми потенциалами «не работает»'
+    suggestion: '«…если потенциалы равны, то U = 0 ⇒ q = 0: конденсатор не заряжается, и его можно убрать из схемы».'
+
+topics:
+  - id: cap-capacity
+    title: Электроёмкость. Ёмкость шара
+    pages: [c13, c14]
+    theory:
+      - kind: definition
+        title: Электроёмкость
+        body: 'Электроёмкость — это необходимый заряд для зарядки тела до потенциала 1 В: $C = \frac q\varphi$ [Кл/В] = [Ф] (фарад).'
+        src: c13
+      - kind: text
+        title: Ёмкость шара
+        body: 'Потенциал шара $\varphi = k\frac{q}{\varepsilon R} = \frac{q}{4\pi\varepsilon_0\varepsilon R}$, поэтому $C = \frac q\varphi = 4\pi\varepsilon_0\varepsilon R$. Здесь π = 3,14, $\varepsilon_0 = 8{,}85\cdot10^{-12}$ Ф/м — электрическая постоянная, ε — диэлектрическая проницаемость.'
+        src: c14
+      - kind: rule
+        title: Формулы электростатики в среде
+        body: 'В среде с диэлектрической проницаемостью ε во все формулы входит ε: $F_к = k\frac{q_1q_2}{\varepsilon R^2}$, $E = k\frac{q}{\varepsilon R^2}$, $W_п = k\frac{q_1q_2}{\varepsilon R}$, $\varphi = k\frac{q}{\varepsilon R}$.'
+        src: c14
+      - kind: list
+        title: Дольные единицы ёмкости
+        body: |
+          - 1 мкФ = $10^{-6}$ Ф;
+          - 1 нФ = $10^{-9}$ Ф;
+          - 1 пФ = $10^{-12}$ Ф.
+        src: c14
+    formulas:
+      - title: Электроёмкость
+        tex: 'C = \frac{q}{\varphi}'
+        sym: [C_el, q_el, phi_el]
+        src: c13
+      - title: Ёмкость шара
+        tex: 'C = \frac{q}{\varphi} = 4\pi\varepsilon_0\varepsilon R'
+        sym: [C_el, eps0_el, eps_d, R_sph]
+        boxed: true
+        src: c14
+      - title: Электрическая постоянная
+        tex: '\varepsilon_0 = 8{,}85\cdot10^{-12}\ \frac{\text{Ф}}{\text{м}}'
+        sym: [eps0_el]
+        src: c14
+      - title: Сила, напряжённость, энергия и потенциал в среде
+        tex: 'F_{к} = k\frac{q_1q_2}{\varepsilon R^2},\quad E = k\frac{q}{\varepsilon R^2},\quad W_{п} = k\frac{q_1q_2}{\varepsilon R},\quad \varphi = k\frac{q}{\varepsilon R}'
+        sym: [F_coul, E_el, W_el, phi_el, k_coul, q12, eps_d, r_q]
+        src: c14
+      - title: Дольные единицы ёмкости
+        tex: '1\ \text{мкФ} = 10^{-6}\ \text{Ф},\quad 1\ \text{нФ} = 10^{-9}\ \text{Ф},\quad 1\ \text{пФ} = 10^{-12}\ \text{Ф}'
+        sym: []
+        src: c14
+    examples:
+      - title: Радиус шара ёмкостью 1 Ф (задача из конспекта)
+        given: 'ε = 1, C = 1 Ф, R — ?'
+        steps: ['$C = 4\pi\varepsilon_0\varepsilon R$', '$R = \frac{C}{4\pi\varepsilon_0\varepsilon} = \frac{1}{4\pi\varepsilon_0} = k$']
+        answer: '$R = 9\cdot10^9$ м'
+        src: c14
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Найдите ёмкость металлического шара радиусом 9 см в воздухе.'
+        num: { value: 1e-11, unit: 'Ф', check: '4*Math.PI*8.85e-12*1*0.09' }
+        hint: '$C = 4\pi\varepsilon_0\varepsilon R$, ε = 1.'
+        explain: '$C = 4\cdot3{,}14\cdot8{,}85\cdot10^{-12}\cdot0{,}09 \approx 10^{-11}$ Ф = 10 пФ.'
+        f: [2]
+        sol: { given: ['R = 0,09 м', 'ε = 1'], find: 'C', formula: 'C = 4\pi\varepsilon_0\varepsilon R', calc: 'C = 4\cdot3{,}14\cdot8{,}85\cdot10^{-12}\cdot0{,}09 \approx 10^{-11}', answer: '≈ 10⁻¹¹ Ф (10 пФ)' }
+        src: c14
+      - type: numeric
+        cat: problem
+        q: 'Телу сообщили заряд 2 мкКл, его потенциал стал 400 В. Найдите электроёмкость тела.'
+        num: { value: 5e-9, unit: 'Ф', check: '2e-6/400' }
+        hint: '$C = \frac q\varphi$.'
+        explain: '$C = \frac{2\cdot10^{-6}}{400} = 5\cdot10^{-9}$ Ф = 5 нФ.'
+        f: [1]
+        sol: { given: ['q = 2·10⁻⁶ Кл', 'φ = 400 В'], find: 'C', formula: 'C = \frac{q}{\varphi}', calc: 'C = \frac{2\cdot10^{-6}}{400} = 5\cdot10^{-9}', answer: '5·10⁻⁹ Ф' }
+        src: c13
+      - type: numeric
+        cat: problem
+        q: 'Оцените ёмкость шара размером с Землю ($R = 6400$ км, ε = 1).'
+        num: { value: 7.12e-4, unit: 'Ф', check: '4*Math.PI*8.85e-12*6.4e6' }
+        hint: 'Радиус Земли из конспекта по механике: $6{,}4\cdot10^6$ м.'
+        explain: '$C = 4\cdot3{,}14\cdot8{,}85\cdot10^{-12}\cdot6{,}4\cdot10^6 \approx 7{,}1\cdot10^{-4}$ Ф — меньше одного миллифарада.'
+        f: [2]
+        sol: { given: ['R = 6,4·10⁶ м', 'ε = 1'], find: 'C', formula: 'C = 4\pi\varepsilon_0\varepsilon R', calc: 'C = 4\cdot3{,}14\cdot8{,}85\cdot10^{-12}\cdot6{,}4\cdot10^6 \approx 7{,}1\cdot10^{-4}', answer: '≈ 7,1·10⁻⁴ Ф' }
+        src: [c14, p16R]
+      - type: numeric
+        cat: problem
+        q: 'Какой радиус должен быть у шара в вакууме, чтобы его ёмкость была 1 Ф? (Пример конспекта.)'
+        num: { value: 9e9, unit: 'м', check: '1/(4*Math.PI*8.85e-12*1)' }
+        hint: '$R = \frac{C}{4\pi\varepsilon_0\varepsilon}$.'
+        explain: '$R = \frac{1}{4\pi\varepsilon_0} = k = 9\cdot10^9$ м.'
+        f: [2]
+        sol: { given: ['C = 1 Ф', 'ε = 1'], find: 'R', formula: 'R = \frac{C}{4\pi\varepsilon_0\varepsilon}', calc: 'R = \frac{1}{4\pi\varepsilon_0} = k = 9\cdot10^9', answer: '9·10⁹ м' }
+        src: c14
+      - type: numeric
+        cat: problem
+        q: Шар перенесли из воздуха в масло с диэлектрической проницаемостью 2. Во сколько раз увеличилась его ёмкость?
+        num: { value: 2, unit: '', check: '2/1' }
+        hint: '$C \sim \varepsilon$.'
+        explain: '$C = 4\pi\varepsilon_0\varepsilon R$ — ёмкость выросла в 2 раза.'
+        f: [2]
+        sol: { given: ['ε₁ = 1', 'ε₂ = 2'], find: 'C₂/C₁', formula: 'C \sim \varepsilon', calc: '\frac{C_2}{C_1} = \frac{2}{1} = 2', answer: 'в 2 раза' }
+        src: c14
+      - type: single
+        cat: theory
+        q: Чему равен 1 фарад?
+        opts: ['1 Кл/В', '1 В/Кл', '1 Кл·В', '1 Дж/Кл']
+        ans: a
+        hint: '$C = \frac q\varphi$.'
+        explain: '$[C] = \frac{Кл}{В} = $ Ф.'
+        f: [1]
+        src: c13
+      - type: sequence
+        cat: theory
+        q: Расположите ёмкости от меньшей к большей.
+        seq: ['1 пФ', '1 нФ', '1 мкФ', '1 Ф']
+        hint: Пико — $10^{-12}$, нано — $10^{-9}$, микро — $10^{-6}$.
+        explain: '$10^{-12} < 10^{-9} < 10^{-6} < 1$ Ф.'
+        f: [5]
+        src: c14
+      - type: text
+        cat: theory
+        q: Что такое электроёмкость по определению конспекта?
+        ref: Электроёмкость — это заряд, необходимый для зарядки тела до потенциала 1 В.
+        criteria: ['Речь о заряде', 'Заряд, необходимый для потенциала 1 В']
+        hint: Определение на стр. c13.
+        explain: '$C = \frac q\varphi$ — заряд, приходящийся на 1 В потенциала.'
+        src: c13
+
+# ───────────────────────────────────────────────────────────────
+  - id: cap-flat
+    title: Конденсатор. Плоский конденсатор
+    pages: [c14, c15]
+    theory:
+      - kind: definition
+        title: Конденсатор
+        body: 'Прибор, предназначенный для накопления электрического заряда, называется конденсатором. Бывает трёх видов: плоский, цилиндрический, сферический. Конденсатор состоит из двух металлических пластинок, расположенных очень близко друг к другу, но не касающихся друг друга. Между пластинками всегда располагается диэлектрик. На пластинках накапливаются одинаковые, но разные по знаку заряды.'
+        src: c14
+        fig: capacitor-charge
+      - kind: text
+        title: Ёмкость плоского конденсатора
+        body: 'Ёмкость растёт с площадью пластин S и проницаемостью диэлектрика ε и убывает с расстоянием d: $C \sim S,\ \varepsilon$; $C \sim \frac1d$; $C = \frac{\varepsilon\varepsilon_0S}{d}$.'
+        src: c15
+      - kind: list
+        title: Основные элементы электрической схемы
+        body: |
+          - источник — длинная черта «+», короткая «−» (U = const);
+          - ключ;
+          - провод;
+          - конденсатор — две параллельные черты.
+        src: c15
+      - kind: rule
+        title: Заряд и напряжение конденсатора
+        body: 'Заряд конденсатора — заряд одной обкладки: при +7 Кл и −7 Кл $q = 7$ Кл. $q = CU_c$, где $U_c = \varphi_1 - \varphi_2$ — напряжение конденсатора. Ёмкость не зависит от q и U ($C = \frac{q}{U_c}$, но $C \sim S,\ \varepsilon,\ \frac1d$). Если конденсатор подключён к источнику, потенциалы обкладок равны потенциалам полюсов: $U_c = U$.'
+        src: c15
+    formulas:
+      - title: Ёмкость плоского конденсатора
+        tex: 'C = \frac{\varepsilon\varepsilon_0S}{d}'
+        sym: [C_el, eps_d, eps0_el, S_pl, d_pl]
+        boxed: true
+        src: c15
+      - title: Заряд конденсатора
+        tex: 'q = CU_c,\qquad U_c = \varphi_1 - \varphi_2'
+        sym: [q_el, C_el, U_c, phi12_el]
+        boxed: true
+        src: c15
+      - title: Конденсатор подключён к источнику
+        tex: 'U_c = \varphi_1 - \varphi_2 = U'
+        sym: [U_c, phi12_el, U_volt]
+        src: c15
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Площадь пластин воздушного конденсатора 100 см², расстояние между ними 1 мм. Найдите ёмкость.'
+        num: { value: 8.85e-11, unit: 'Ф', check: '1*8.85e-12*0.01/0.001' }
+        hint: '$C = \frac{\varepsilon\varepsilon_0S}{d}$, 100 см² = 0,01 м².'
+        explain: '$C = \frac{8{,}85\cdot10^{-12}\cdot0{,}01}{0{,}001} = 8{,}85\cdot10^{-11}$ Ф.'
+        f: [1]
+        sol: { given: ['S = 0,01 м²', 'd = 10⁻³ м', 'ε = 1'], find: 'C', formula: 'C = \frac{\varepsilon\varepsilon_0S}{d}', calc: 'C = \frac{8{,}85\cdot10^{-12}\cdot0{,}01}{10^{-3}} = 8{,}85\cdot10^{-11}', answer: '8,85·10⁻¹¹ Ф' }
+        src: c15
+      - type: numeric
+        cat: problem
+        q: Расстояние между пластинами конденсатора уменьшили в 2 раза. Во сколько раз изменилась ёмкость?
+        num: { value: 2, unit: '', check: '1/(1/2)' }
+        hint: '$C \sim \frac1d$.'
+        explain: Ёмкость увеличилась в 2 раза.
+        f: [1]
+        sol: { given: ["d' = d/2"], find: "C'/C", formula: 'C \sim \frac{1}{d}', calc: "\\frac{C'}{C} = 2", answer: 'увеличилась в 2 раза' }
+        src: c15
+      - type: numeric
+        cat: problem
+        q: Между пластинами воздушного конденсатора поместили диэлектрик с ε = 7. Во сколько раз увеличилась ёмкость?
+        num: { value: 7, unit: '', check: '7/1' }
+        hint: '$C \sim \varepsilon$.'
+        explain: Ёмкость увеличилась в 7 раз.
+        f: [1]
+        sol: { given: ['ε = 7'], find: "C'/C", formula: 'C \sim \varepsilon', calc: "\\frac{C'}{C} = 7", answer: 'в 7 раз' }
+        src: c15
+      - type: numeric
+        cat: problem
+        q: 'Конденсатор ёмкостью 2 мкФ подключён к источнику 50 В. Найдите его заряд.'
+        num: { value: 1e-4, unit: 'Кл', check: '2e-6*50' }
+        hint: '$q = CU$.'
+        explain: '$q = 2\cdot10^{-6}\cdot50 = 10^{-4}$ Кл.'
+        f: [2]
+        sol: { given: ['C = 2·10⁻⁶ Ф', 'U = 50 В'], find: 'q', formula: 'q = CU', calc: 'q = 2\cdot10^{-6}\cdot50 = 10^{-4}', answer: '10⁻⁴ Кл' }
+        src: c15
+      - type: numeric
+        cat: problem
+        q: 'Заряд конденсатора 6 мкКл, ёмкость 3 мкФ. Найдите напряжение конденсатора.'
+        num: { value: 2, unit: 'В', check: '6e-6/3e-6' }
+        hint: '$U_c = \frac qC$.'
+        explain: '$U_c = \frac{6\cdot10^{-6}}{3\cdot10^{-6}} = 2$ В.'
+        f: [2]
+        sol: { given: ['q = 6·10⁻⁶ Кл', 'C = 3·10⁻⁶ Ф'], find: 'U_c', formula: 'U_c = \frac{q}{C}', calc: 'U_c = 2', answer: '2 В' }
+        src: c15
+      - type: single
+        cat: theory
+        q: 'На обкладках конденсатора заряды +7 Кл и −7 Кл. Чему равен заряд конденсатора?'
+        opts: ['7 Кл', '0', '14 Кл', '−7 Кл']
+        ans: a
+        hint: Рисунок на стр. c15.
+        explain: 'Заряд конденсатора — заряд одной обкладки: $q = 7$ Кл.'
+        src: c15
+      - type: single
+        cat: theory
+        q: Зависит ли ёмкость конденсатора от его заряда и напряжения?
+        opts: ['Нет: зависит только от S, ε и d', 'Да, растёт с зарядом', 'Да, растёт с напряжением', 'Да, падает с напряжением']
+        ans: a
+        hint: 'Запись «C ≁ q, U» на стр. c15.'
+        explain: 'Ёмкость определяется устройством конденсатора: $C \sim S,\ \varepsilon,\ \frac1d$.'
+        f: [1]
+        src: c15
+      - type: multiple
+        cat: theory
+        q: Как можно увеличить ёмкость плоского конденсатора? Выберите все верные варианты.
+        opts: ['Увеличить площадь пластин', 'Поместить между пластинами диэлектрик с большим ε', 'Уменьшить расстояние между пластинами', 'Увеличить напряжение на нём', 'Увеличить заряд на нём']
+        ans: [a, b, c]
+        hint: '$C = \frac{\varepsilon\varepsilon_0S}{d}$.'
+        explain: Ёмкость растёт с S и ε и убывает с d; от заряда и напряжения она не зависит.
+        f: [1]
+        src: c15
+      - type: single
+        cat: theory
+        q: Что всегда располагается между пластинками конденсатора?
+        opts: ['Диэлектрик', 'Проводник', 'Источник тока', 'Резистор']
+        ans: a
+        hint: Слово обведено на стр. c14.
+        explain: Между пластинками всегда располагается диэлектрик.
+        src: c14
+
+# ───────────────────────────────────────────────────────────────
+  - id: cap-connect
+    title: Соединение конденсаторов
+    pages: [c16, c17, c18]
+    theory:
+      - kind: definition
+        title: Последовательное соединение
+        body: 'Существует три вида соединения: последовательное, параллельное и смешанное. Два элемента соединены последовательно, если к «выходу» первого присоединён только «вход» другого: заряд без выбора проходит с первого на второй конденсатор. $U = U_1 + U_2 + \dots + U_n$, $q_{об} = q_1 = q_2 = \dots = q_n$, $C_{об} = \left(\frac1{C_1} + \dots + \frac1{C_n}\right)^{-1}$; для n одинаковых $C_{об} = \frac Cn$. Общая ёмкость меньше каждой из ёмкостей (см. EL05).'
+        src: [c16, c17]
+        errata: [EL05]
+        fig: cap-series
+      - kind: definition
+        title: Параллельное соединение
+        body: 'Элементы соединены параллельно, если их «входы» и «выходы» соединены одновременно. Если между входами есть помеха (другой элемент), это уже не параллельное соединение. $C_{об} = C_1 + C_2 + \dots + C_n$, $U_{об} = U_1 = U_2 = \dots = U_n$, $q_{об} = q_1 + q_2 + \dots + q_n$.'
+        src: c17
+      - kind: text
+        title: Смешанное соединение — примеры конспекта
+        body: |
+          - Два C последовательно ($\frac C2$) и параллельно им C: $C_{об} = \frac C2 + C = \frac{3C}{2}$.
+          - Три C последовательно, два C последовательно и одна C — всё параллельно: $C_{об} = \frac C3 + \frac C2 + C = \frac{11C}{6}$.
+          - Две C параллельно (2C) и последовательно с ними C: $C_{об} = \left(\frac1{2C} + \frac1C\right)^{-1} = \frac{2C}{3}$.
+          - «Ромб» из четырёх C и пятая C прямо между выводами: $C_{об} = \frac C2 + C + \frac C2 = 2C$.
+        src: c18
+    formulas:
+      - title: Последовательное соединение
+        tex: 'U = U_1 + \dots + U_n,\quad q_{об} = q_1 = \dots = q_n,\quad C_{об} = \left(\frac{1}{C_1} + \frac{1}{C_2} + \dots + \frac{1}{C_n}\right)^{-1}'
+        sym: [U_volt, U1n, q1n_cap, C_ob, C1n]
+        src: c16
+      - title: n одинаковых конденсаторов последовательно
+        tex: 'C_{об} = \frac{C}{n}'
+        sym: [C_ob, C_el, n_cap]
+        boxed: true
+        src: c17
+      - title: Общая ёмкость последовательного соединения (как в конспекте)
+        tex: 'C_{об} < C_1\cdot C_2\cdot C_3\cdot\dots\cdot C_n'
+        sym: [C_ob, C1n]
+        boxed: true
+        src: c17
+        errata: [EL05]
+      - title: Параллельное соединение
+        tex: 'C_{об} = C_1 + C_2 + \dots + C_n,\quad U_{об} = U_1 = U_2 = \dots = U_n,\quad q_{об} = q_1 + q_2 + \dots + q_n'
+        sym: [C_ob, C1n, U1n, q1n_cap]
+        boxed: true
+        src: c17
+    examples:
+      - title: Два последовательных и один параллельный
+        steps: ['$\left(\frac1C + \frac1C\right)^{-1} = \frac C2$ — «убрали один конденсатор»', '$C_{об} = \frac C2 + C = \frac{3C}{2}$']
+        src: c18
+      - title: Три ветви
+        steps: ['$\frac C3$ (три последовательно), $\frac C2$ (два последовательно), $C$', '$C_{об} = \frac C3 + \frac C2 + C = \frac{11C}{6}$']
+        src: c18
+      - title: Параллельная пара и последовательный конденсатор
+        steps: ['$C + C = 2C$', '$C_{об} = \left(\frac{1}{2C} + \frac1C\right)^{-1} = \frac{2C}{3}$']
+        src: c18
+      - title: «Ромб» с конденсатором между выводами
+        steps: ['Каждая сторона ромба: $\left(\frac1C + \frac1C\right)^{-1} = \frac C2$', 'Пятый конденсатор подключён прямо к выводам', '$C_{об} = \frac C2 + C + \frac C2 = 2C$']
+        src: c18
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Конденсаторы 2 мкФ и 3 мкФ соединены последовательно. Найдите общую ёмкость.'
+        num: { value: 1.2e-6, unit: 'Ф', check: '1/(1/2e-6+1/3e-6)' }
+        hint: '$C_{об} = \left(\frac1{C_1} + \frac1{C_2}\right)^{-1}$.'
+        explain: '$C_{об} = \frac{2\cdot3}{2 + 3} = 1{,}2$ мкФ — меньше каждой.'
+        f: [1]
+        sol: { given: ['C₁ = 2 мкФ', 'C₂ = 3 мкФ'], find: 'C_об', formula: 'C_{об} = \left(\frac{1}{C_1} + \frac{1}{C_2}\right)^{-1}', calc: 'C_{об} = \frac{2\cdot3}{5} = 1{,}2', answer: '1,2 мкФ' }
+        src: c16
+      - type: numeric
+        cat: problem
+        q: 'Конденсаторы 2 мкФ и 3 мкФ соединены параллельно. Найдите общую ёмкость.'
+        num: { value: 5e-6, unit: 'Ф', check: '2e-6+3e-6' }
+        hint: При параллельном соединении ёмкости складываются.
+        explain: '$C_{об} = 2 + 3 = 5$ мкФ.'
+        f: [4]
+        sol: { given: ['C₁ = 2 мкФ', 'C₂ = 3 мкФ'], find: 'C_об', formula: 'C_{об} = C_1 + C_2', calc: 'C_{об} = 2 + 3 = 5', answer: '5 мкФ' }
+        src: c17
+      - type: numeric
+        cat: problem
+        q: 'Четыре одинаковых конденсатора по 8 мкФ соединены последовательно. Найдите общую ёмкость.'
+        num: { value: 2e-6, unit: 'Ф', check: '8e-6/4' }
+        hint: '$C_{об} = \frac Cn$.'
+        explain: '$C_{об} = \frac84 = 2$ мкФ.'
+        f: [2]
+        sol: { given: ['C = 8 мкФ', 'n = 4'], find: 'C_об', formula: 'C_{об} = \frac{C}{n}', calc: 'C_{об} = \frac{8}{4} = 2', answer: '2 мкФ' }
+        src: c17
+      - type: numeric
+        cat: problem
+        q: 'Два конденсатора по C = 6 мкФ соединены последовательно, а параллельно им подключён третий такой же. Найдите общую ёмкость.'
+        num: { value: 9e-6, unit: 'Ф', check: '1/(1/6e-6+1/6e-6)+6e-6' }
+        hint: 'Первый пример на стр. c18: $C_{об} = \frac{3C}{2}$.'
+        explain: '$\frac62 + 6 = 9$ мкФ.'
+        f: [1, 4]
+        sol: { given: ['C = 6 мкФ'], find: 'C_об', formula: 'C_{об} = \frac{C}{2} + C = \frac{3C}{2}', calc: 'C_{об} = 3 + 6 = 9', answer: '9 мкФ' }
+        src: c18
+      - type: numeric
+        cat: problem
+        q: 'Три ветви соединены параллельно: три конденсатора по C последовательно, два по C последовательно и один C. Найдите общую ёмкость при C = 6 мкФ.'
+        num: { value: 11e-6, unit: 'Ф', check: '6e-6/3+6e-6/2+6e-6' }
+        hint: 'Второй пример стр. c18: $\frac{11C}{6}$.'
+        explain: '$2 + 3 + 6 = 11$ мкФ.'
+        f: [2, 4]
+        sol: { given: ['C = 6 мкФ'], find: 'C_об', formula: 'C_{об} = \frac{C}{3} + \frac{C}{2} + C = \frac{11C}{6}', calc: 'C_{об} = 2 + 3 + 6 = 11', answer: '11 мкФ' }
+        src: c18
+      - type: numeric
+        cat: problem
+        q: 'Два конденсатора по 3 мкФ соединены параллельно, и последовательно с ними подключён ещё один на 3 мкФ. Найдите общую ёмкость.'
+        num: { value: 2e-6, unit: 'Ф', check: '1/(1/6e-6+1/3e-6)' }
+        hint: 'Третий пример стр. c18: $\frac{2C}{3}$.'
+        explain: '$(\frac16 + \frac13)^{-1} = 2$ мкФ.'
+        f: [1, 4]
+        sol: { given: ['C = 3 мкФ'], find: 'C_об', formula: 'C_{об} = \left(\frac{1}{2C} + \frac{1}{C}\right)^{-1} = \frac{2C}{3}', calc: 'C_{об} = \frac{2\cdot3}{3} = 2', answer: '2 мкФ' }
+        src: c18
+      - type: numeric
+        cat: problem
+        q: 'Схема «ромб» из четырёх конденсаторов по C = 5 мкФ и пятый такой же прямо между выводами (как на стр. c18). Найдите общую ёмкость.'
+        num: { value: 10e-6, unit: 'Ф', check: '5e-6/2+5e-6+5e-6/2' }
+        hint: 'Стороны ромба дают по $\frac C2$, всё вместе — параллельно.'
+        explain: '$2{,}5 + 5 + 2{,}5 = 10$ мкФ ($2C$).'
+        f: [1, 4]
+        sol: { given: ['C = 5 мкФ'], find: 'C_об', formula: 'C_{об} = \frac{C}{2} + C + \frac{C}{2} = 2C', calc: 'C_{об} = 2\cdot5 = 10', answer: '10 мкФ' }
+        src: c18
+      - type: numeric
+        cat: problem
+        q: 'Конденсаторы 2 мкФ и 3 мкФ соединены последовательно и подключены к 10 В. Найдите заряд каждого.'
+        num: { value: 1.2e-5, unit: 'Кл', check: '1/(1/2e-6+1/3e-6)*10' }
+        hint: 'При последовательном соединении заряды равны: $q = C_{об}U$.'
+        explain: '$q = 1{,}2\cdot10^{-6}\cdot10 = 1{,}2\cdot10^{-5}$ Кл на каждом.'
+        f: [1]
+        sol: { given: ['C₁ = 2 мкФ', 'C₂ = 3 мкФ', 'U = 10 В'], find: 'q', formula: 'q = C_{об}U', calc: 'q = 1{,}2\cdot10^{-6}\cdot10 = 1{,}2\cdot10^{-5}', answer: '1,2·10⁻⁵ Кл' }
+        src: c16
+      - type: single
+        cat: theory
+        q: Что одинаково у последовательно соединённых конденсаторов?
+        opts: ['Заряд', 'Напряжение', 'Ёмкость', 'Энергия']
+        ans: a
+        hint: '«Заряд безвыборочно проходит с первого на второй».'
+        explain: '$q_{об} = q_1 = q_2 = \dots = q_n$.'
+        f: [1]
+        src: c16
+      - type: single
+        cat: theory
+        q: Что одинаково у параллельно соединённых конденсаторов?
+        opts: ['Напряжение', 'Заряд', 'Ёмкость', 'Ничего']
+        ans: a
+        hint: Входы и выходы соединены одновременно.
+        explain: '$U_{об} = U_1 = U_2 = \dots = U_n$.'
+        f: [4]
+        src: c17
+      - type: single
+        cat: theory
+        q: Как общая ёмкость последовательного соединения соотносится с ёмкостями конденсаторов?
+        opts: ['Меньше наименьшей из них', 'Больше наибольшей', 'Равна их сумме', 'Равна их произведению']
+        ans: a
+        hint: См. замечание EL05.
+        explain: 'Например, 2 мкФ и 3 мкФ дают 1,2 мкФ. Запись конспекта как произведения неверна (EL05).'
+        f: [1, 3]
+        src: c17
+        errata: [EL05]
+      - type: matching
+        cat: theory
+        q: Сопоставьте величину и правило для параллельного соединения.
+        pairs:
+          - ['$C_{об}$', 'Сумма ёмкостей']
+          - ['$U_{об}$', 'Одинаково на всех конденсаторах']
+          - ['$q_{об}$', 'Сумма зарядов']
+        hint: Три формулы в рамке на стр. c17.
+        explain: 'Параллельно: ёмкости и заряды складываются, напряжение общее.'
+        f: [4]
+        src: c17
+
+# ───────────────────────────────────────────────────────────────
+  - id: cap-potmethod
+    title: Метод потенциалов
+    pages: [c20]
+    theory:
+      - kind: rule
+        title: Метод потенциалов
+        body: 'Узлы схемы нумеруют: точки, соединённые проводом, получают одинаковый номер (одинаковый потенциал). Конденсаторы с одинаковыми номерами по бокам соединены параллельно. Конденсатор, у которого с обеих сторон один и тот же номер, не работает: потенциалы равны, U = 0 (в конспекте «⇒ C = 0», правильно — заряд $q = 0$, см. EL06).'
+        src: c20
+        errata: [EL06]
+      - kind: text
+        title: Пример — ключ в схеме
+        body: 'Сверху C и 2C последовательно, снизу 2C и C, ключ K соединяет средние точки. Ключ разомкнут: $C_{об} = \frac{2C}{3} + \frac{2C}{3} = \frac{4C}{3}$. Ключ замкнут: (C ∥ 2C) последовательно с (2C ∥ C), то есть 3C и 3C: $C_{об} = \frac{3C}{2}$ — ёмкость увеличилась в $\frac98$ раз.'
+        src: c20
+        fig: key-circuit
+    formulas:
+      - title: Ключ разомкнут
+        tex: 'C_{об} = \frac{4C}{3}'
+        sym: [C_ob, C_el]
+        src: c20
+      - title: Ключ замкнут
+        tex: 'C_{об} = \frac{3C}{2}'
+        sym: [C_ob, C_el]
+        src: c20
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'В схеме с ключом из конспекта C = 3 мкФ, ключ разомкнут. Найдите общую ёмкость.'
+        num: { value: 4e-6, unit: 'Ф', check: '1/(1/3e-6+1/6e-6)*2' }
+        hint: 'Две ветви «C и 2C последовательно» соединены параллельно.'
+        explain: 'Каждая ветвь $\frac{2C}{3} = 2$ мкФ, вместе $\frac{4C}{3} = 4$ мкФ.'
+        f: [1]
+        sol: { given: ['C = 3 мкФ', 'ключ разомкнут'], find: 'C_об', formula: 'C_{об} = 2\cdot\frac{C\cdot2C}{C + 2C} = \frac{4C}{3}', calc: 'C_{об} = \frac{4\cdot3}{3} = 4', answer: '4 мкФ' }
+        src: c20
+      - type: numeric
+        cat: problem
+        q: 'Та же схема (C = 3 мкФ), ключ замкнут. Найдите общую ёмкость.'
+        num: { value: 4.5e-6, unit: 'Ф', check: '1/(1/9e-6+1/9e-6)' }
+        hint: 'Получаются две пары «C ∥ 2C», соединённые последовательно.'
+        explain: 'Каждая пара $3C = 9$ мкФ, последовательно — $\frac{3C}{2} = 4{,}5$ мкФ.'
+        f: [2]
+        sol: { given: ['C = 3 мкФ', 'ключ замкнут'], find: 'C_об', formula: 'C_{об} = \left(\frac{1}{3C} + \frac{1}{3C}\right)^{-1} = \frac{3C}{2}', calc: 'C_{об} = \frac{3\cdot3}{2} = 4{,}5', answer: '4,5 мкФ' }
+        src: c20
+      - type: numeric
+        cat: problem
+        q: Во сколько раз увеличивается общая ёмкость этой схемы при замыкании ключа?
+        num: { value: 1.125, unit: '', check: '(3/2)/(4/3)' }
+        hint: Разделите $\frac{3C}{2}$ на $\frac{4C}{3}$.
+        explain: '$\frac{3/2}{4/3} = \frac98 = 1{,}125$ — «увеличилось в $\frac98$ раз».'
+        f: [1, 2]
+        sol: { given: ['C_раз = 4C/3', 'C_зам = 3C/2'], find: 'C_зам/C_раз', formula: '\frac{3C/2}{4C/3}', calc: '\frac{3}{2}\cdot\frac{3}{4} = \frac{9}{8}', answer: '9/8 = 1,125' }
+        src: c20
+      - type: single
+        cat: theory
+        q: У конденсатора с обеих сторон оказался один и тот же номер узла. Что это значит?
+        opts: ['Он не заряжается — его можно убрать из схемы', 'Он соединён параллельно со всеми', 'Его ёмкость удваивается', 'Через него течёт наибольший ток']
+        ans: a
+        hint: Потенциалы с обеих сторон равны.
+        explain: 'U = 0, значит $q = CU = 0$ — конденсатор «не работает» (о записи «C = 0» см. EL06).'
+        src: c20
+        errata: [EL06]
+      - type: single
+        cat: theory
+        q: Как по методу потенциалов узнать, что два конденсатора соединены параллельно?
+        opts: ['У них одинаковые пары номеров по бокам', 'У них одинаковые ёмкости', 'Они нарисованы рядом', 'Между ними нет провода']
+        ans: a
+        hint: Первое правило на стр. c20.
+        explain: Конденсаторы с одинаковыми номерами по бокам параллельны.
+        src: c20
+      - type: single
+        cat: theory
+        q: 'Почему конденсатор между точками с равными потенциалами «не работает»?'
+        opts: ['Напряжение на нём 0, поэтому заряд q = CU = 0', 'Его ёмкость становится равной нулю', 'Он пробивается', 'Через него течёт ток короткого замыкания']
+        ans: a
+        hint: Ёмкость от напряжения не зависит (стр. c15).
+        explain: 'В конспекте написано «U = 0 ⇒ C = 0»; правильно — $q = 0$ (замечание EL06).'
+        src: c20
+        errata: [EL06]
+
+# ───────────────────────────────────────────────────────────────
+  - id: cap-voltage
+    title: Распределение напряжения. Поле конденсатора
+    pages: [c21, c22]
+    theory:
+      - kind: rule
+        title: Напряжения при последовательном соединении
+        body: 'Заряды последовательно соединённых конденсаторов равны: $q_{об} = q_i$, то есть $C_{об}U = C_iU_i$, откуда $U_i = U\frac{C_{об}}{C_i}$. На конденсаторе меньшей ёмкости напряжение больше.'
+        src: c21
+      - kind: text
+        title: Поле заряженной пластины
+        body: 'Положительно заряженная пластина создаёт линии по обе стороны от себя, к отрицательной линии сходятся с обеих сторон. Напряжённость поля пластины $E = \frac{|\sigma|}{2\varepsilon\varepsilon_0}$.'
+        src: c21
+      - kind: text
+        title: Поле двух пластин
+        body: 'Одноимённые пластины ($+\sigma_1$, $+\sigma_2$): между ними $E_{внутр} = E_1 - E_2$, снаружи $E_{внеш} = E_1 + E_2$. Разноимённые ($+\sigma_1$, $-\sigma_2$): между ними $E_{внутр} = E_1 + E_2$, снаружи $E_{внеш} = E_1 - E_2$; здесь $E_1 = \frac{|\sigma_1|}{2\varepsilon\varepsilon_0}$, $E_2 = \frac{|\sigma_2|}{2\varepsilon\varepsilon_0}$.'
+        src: [c21, c22]
+      - kind: rule
+        title: Поле конденсатора
+        body: 'У конденсатора $|\sigma_1| = |\sigma_2| = |\sigma|$: между пластинами $E_{внутр} = \frac{\sigma}{\varepsilon\varepsilon_0}$, снаружи $E_{внеш} = 0$.'
+        src: c22
+        fig: plates-field
+    formulas:
+      - title: Напряжение на i-м конденсаторе (последовательно)
+        tex: 'U_i = U\cdot\frac{C_{об}}{C_i}'
+        sym: [U1n, U_volt, C_ob, C1n]
+        boxed: true
+        src: c21
+      - title: Поле одной пластины
+        tex: 'E = \frac{|\sigma|}{2\varepsilon\varepsilon_0}'
+        sym: [E_el, sigma_el, eps_d, eps0_el]
+        src: c21
+      - title: Две одноимённые пластины
+        tex: 'E_{внутр} = \frac{|\sigma_1| - |\sigma_2|}{2\varepsilon\varepsilon_0},\qquad E_{внеш} = \frac{|\sigma_1| + |\sigma_2|}{2\varepsilon\varepsilon_0}'
+        sym: [E_in_out, sigma12, eps_d, eps0_el]
+        src: c21
+      - title: Две разноимённые пластины
+        tex: 'E_{внутр} = \frac{|\sigma_1| + |\sigma_2|}{2\varepsilon\varepsilon_0},\qquad E_{внеш} = \frac{|\sigma_1| - |\sigma_2|}{2\varepsilon\varepsilon_0}'
+        sym: [E_in_out, sigma12, eps_d, eps0_el]
+        src: c22
+      - title: Поле конденсатора
+        tex: 'E_{внутр} = \frac{\sigma}{\varepsilon\varepsilon_0},\qquad E_{внеш} = 0'
+        sym: [E_in_out, sigma_el, eps_d, eps0_el]
+        boxed: true
+        src: c22
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Конденсаторы 2 мкФ и 3 мкФ соединены последовательно и подключены к 10 В. Найдите напряжение на конденсаторе 2 мкФ.'
+        num: { value: 6, unit: 'В', check: '10*1.2/2' }
+        hint: '$U_i = U\frac{C_{об}}{C_i}$, $C_{об} = 1{,}2$ мкФ.'
+        explain: '$U_1 = 10\cdot\frac{1{,}2}{2} = 6$ В.'
+        f: [1]
+        sol: { given: ['C₁ = 2 мкФ', 'C₂ = 3 мкФ', 'U = 10 В'], find: 'U₁', formula: 'U_1 = U\frac{C_{об}}{C_1}', calc: 'C_{об} = 1{,}2;\ U_1 = 10\cdot\frac{1{,}2}{2} = 6', answer: '6 В' }
+        src: c21
+      - type: numeric
+        cat: problem
+        q: 'В той же цепи (2 мкФ и 3 мкФ последовательно, 10 В) найдите напряжение на конденсаторе 3 мкФ.'
+        num: { value: 4, unit: 'В', check: '10*1.2/3' }
+        hint: 'Проверка: $U_1 + U_2 = U$.'
+        explain: '$U_2 = 10\cdot\frac{1{,}2}{3} = 4$ В; $6 + 4 = 10$ В.'
+        f: [1]
+        sol: { given: ['C₂ = 3 мкФ', 'C_об = 1,2 мкФ', 'U = 10 В'], find: 'U₂', formula: 'U_2 = U\frac{C_{об}}{C_2}', calc: 'U_2 = 10\cdot\frac{1{,}2}{3} = 4', answer: '4 В' }
+        src: c21
+      - type: numeric
+        cat: problem
+        q: 'Поверхностная плотность заряда обкладок воздушного конденсатора $8{,}85\cdot10^{-7}$ Кл/м². Найдите напряжённость поля между обкладками.'
+        num: { value: 1e5, unit: 'В/м', check: '8.85e-7/(1*8.85e-12)' }
+        hint: '$E_{внутр} = \frac{\sigma}{\varepsilon\varepsilon_0}$.'
+        explain: '$E = \frac{8{,}85\cdot10^{-7}}{8{,}85\cdot10^{-12}} = 10^5$ В/м.'
+        f: [5]
+        sol: { given: ['σ = 8,85·10⁻⁷ Кл/м²', 'ε = 1'], find: 'E_внутр', formula: 'E_{внутр} = \frac{\sigma}{\varepsilon\varepsilon_0}', calc: 'E = \frac{8{,}85\cdot10^{-7}}{8{,}85\cdot10^{-12}} = 10^5', answer: '10⁵ В/м' }
+        src: c22
+      - type: numeric
+        cat: problem
+        q: 'Одна пластина с той же плотностью заряда $8{,}85\cdot10^{-7}$ Кл/м² в воздухе. Найдите напряжённость её поля.'
+        num: { value: 5e4, unit: 'В/м', check: '8.85e-7/(2*8.85e-12)' }
+        hint: '$E = \frac{|\sigma|}{2\varepsilon\varepsilon_0}$.'
+        explain: '$E = \frac{8{,}85\cdot10^{-7}}{2\cdot8{,}85\cdot10^{-12}} = 5\cdot10^4$ В/м — вдвое меньше, чем внутри конденсатора.'
+        f: [2]
+        sol: { given: ['σ = 8,85·10⁻⁷ Кл/м²', 'ε = 1'], find: 'E', formula: 'E = \frac{|\sigma|}{2\varepsilon\varepsilon_0}', calc: 'E = \frac{8{,}85\cdot10^{-7}}{1{,}77\cdot10^{-11}} = 5\cdot10^4', answer: '5·10⁴ В/м' }
+        src: c21
+      - type: numeric
+        cat: problem
+        q: 'Две одноимённо заряженные пластины в воздухе: $\sigma_1 = 1{,}77\cdot10^{-8}$ Кл/м², $\sigma_2 = 8{,}85\cdot10^{-9}$ Кл/м². Найдите напряжённость между ними.'
+        num: { value: 500, unit: 'В/м', check: '(1.77e-8-8.85e-9)/(2*8.85e-12)' }
+        hint: 'Одноимённые: $E_{внутр} = \frac{|\sigma_1| - |\sigma_2|}{2\varepsilon\varepsilon_0}$.'
+        explain: '$E = \frac{8{,}85\cdot10^{-9}}{1{,}77\cdot10^{-11}} = 500$ В/м.'
+        f: [3]
+        sol: { given: ['σ₁ = 1,77·10⁻⁸ Кл/м²', 'σ₂ = 8,85·10⁻⁹ Кл/м²', 'одноимённые'], find: 'E_внутр', formula: 'E_{внутр} = \frac{|\sigma_1| - |\sigma_2|}{2\varepsilon\varepsilon_0}', calc: 'E = \frac{8{,}85\cdot10^{-9}}{2\cdot8{,}85\cdot10^{-12}} = 500', answer: '500 В/м' }
+        src: c21
+      - type: single
+        cat: theory
+        q: Чему равна напряжённость поля снаружи заряженного конденсатора?
+        opts: ['Нулю', '$\frac{\sigma}{\varepsilon\varepsilon_0}$', '$\frac{\sigma}{2\varepsilon\varepsilon_0}$', 'Бесконечности']
+        ans: a
+        hint: 'Поля пластин снаружи направлены навстречу.'
+        explain: 'При $|\sigma_1| = |\sigma_2|$: $E_{внеш} = 0$.'
+        f: [5]
+        src: c22
+      - type: single
+        cat: theory
+        q: На каком из последовательно соединённых конденсаторов напряжение больше?
+        opts: ['На конденсаторе меньшей ёмкости', 'На конденсаторе большей ёмкости', 'Напряжения всегда равны', 'На первом по схеме']
+        ans: a
+        hint: '$U_i = U\frac{C_{об}}{C_i}$.'
+        explain: '$U_i \sim \frac{1}{C_i}$ — больше на меньшей ёмкости.'
+        f: [1]
+        src: c21
+
+# ───────────────────────────────────────────────────────────────
+  - id: cap-energy
+    title: Энергия конденсатора. Плотность энергии
+    pages: [c22, c23]
+    theory:
+      - kind: text
+        title: Энергия заряженного шара и конденсатора
+        body: 'Шар: $\varphi = k\frac{q}{\varepsilon R}$, $C = 4\pi\varepsilon\varepsilon_0R$, $q = \varphi C$; $W = \frac{q^2}{2C} = \frac{C\varphi^2}{2} = \frac{\varphi q}{2}$. Конденсатор: $q = UC$, $C = \frac{\varepsilon\varepsilon_0S}{d}$; $W = \frac{q^2}{2C} = \frac{CU^2}{2} = \frac{Uq}{2}$.'
+        src: c22
+      - kind: rule
+        title: Подключён к источнику или отключён
+        body: '① «Соединён к источнику»: U = const, $W = \frac{CU^2}{2}$, W ~ C — W ~ ε, W ~ S, W ~ $\frac1d$. ② «Зарядили и отсоединили от источника»: q = const, $W = \frac{q^2}{2C}$, W ~ $\frac1C$ — W ~ $\frac1\varepsilon$, W ~ $\frac1S$, W ~ d.'
+        src: c23
+        fig: cap-two-cases
+      - kind: definition
+        title: Плотность энергии
+        body: 'Плотность энергии — это энергия единицы объёма: $w = \frac WV$ [Дж/м³]. Для конденсатора $V = Sd$: $w = \frac{CU^2}{2V} = \frac{\varepsilon\varepsilon_0}{2}\left(\frac Ud\right)^2 = \frac{\varepsilon\varepsilon_0E^2}{2} = \frac{\sigma^2}{2\varepsilon\varepsilon_0}$.'
+        src: c23
+    formulas:
+      - title: Энергия конденсатора
+        tex: 'W = \frac{q^2}{2C} = \frac{CU^2}{2} = \frac{Uq}{2}'
+        sym: [W_cap, q_el, C_el, U_volt]
+        boxed: true
+        src: c22
+      - title: Энергия заряженного шара
+        tex: 'W = \frac{q^2}{2C} = \frac{C\varphi^2}{2} = \frac{\varphi q}{2}'
+        sym: [W_cap, q_el, C_el, phi_el]
+        boxed: true
+        src: c22
+      - title: Плотность энергии
+        tex: 'w = \frac{W}{V}'
+        sym: [w_el, W_cap, V_cap]
+        boxed: true
+        src: c23
+      - title: Плотность энергии поля конденсатора
+        tex: 'w = \frac{\varepsilon\varepsilon_0}{2}\left(\frac{U}{d}\right)^2 = \frac{\varepsilon\varepsilon_0E^2}{2} = \frac{\sigma^2}{2\varepsilon\varepsilon_0}'
+        sym: [w_el, eps_d, eps0_el, U_volt, d_pl, E_el, sigma_el]
+        boxed: true
+        src: c23
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Конденсатор ёмкостью 2 мкФ заряжен до 100 В. Найдите его энергию.'
+        num: { value: 0.01, unit: 'Дж', check: '2e-6*100**2/2' }
+        hint: '$W = \frac{CU^2}{2}$.'
+        explain: '$W = \frac{2\cdot10^{-6}\cdot10^4}{2} = 0{,}01$ Дж.'
+        f: [1]
+        sol: { given: ['C = 2·10⁻⁶ Ф', 'U = 100 В'], find: 'W', formula: 'W = \frac{CU^2}{2}', calc: 'W = \frac{2\cdot10^{-6}\cdot10^4}{2} = 0{,}01', answer: '0,01 Дж' }
+        src: c22
+      - type: numeric
+        cat: problem
+        q: 'Заряд конденсатора $4\cdot10^{-4}$ Кл, ёмкость 2 мкФ. Найдите энергию.'
+        num: { value: 0.04, unit: 'Дж', check: '(4e-4)**2/(2*2e-6)' }
+        hint: '$W = \frac{q^2}{2C}$.'
+        explain: '$W = \frac{16\cdot10^{-8}}{4\cdot10^{-6}} = 0{,}04$ Дж.'
+        f: [1]
+        sol: { given: ['q = 4·10⁻⁴ Кл', 'C = 2·10⁻⁶ Ф'], find: 'W', formula: 'W = \frac{q^2}{2C}', calc: 'W = \frac{1{,}6\cdot10^{-7}}{4\cdot10^{-6}} = 0{,}04', answer: '0,04 Дж' }
+        src: c22
+      - type: numeric
+        cat: problem
+        q: Конденсатор подключён к источнику; расстояние между пластинами увеличили в 2 раза. Во сколько раз уменьшилась энергия?
+        num: { value: 2, unit: '', check: '2/1' }
+        hint: 'U = const, W ~ C ~ $\frac1d$.'
+        explain: 'Ёмкость уменьшилась вдвое, при U = const энергия тоже уменьшилась в 2 раза.'
+        f: [1]
+        sol: { given: ['U = const', "d' = 2d"], find: "W/W'", formula: 'W = \frac{CU^2}{2},\ C \sim \frac{1}{d}', calc: "\\frac{W}{W'} = 2", answer: 'в 2 раза' }
+        src: c23
+      - type: numeric
+        cat: problem
+        q: Конденсатор зарядили и отключили от источника; расстояние между пластинами увеличили в 2 раза. Во сколько раз увеличилась энергия?
+        num: { value: 2, unit: '', check: '2/1' }
+        hint: 'q = const, W ~ $\frac1C$ ~ d.'
+        explain: 'Ёмкость уменьшилась вдвое, при q = const энергия выросла в 2 раза.'
+        f: [1]
+        sol: { given: ['q = const', "d' = 2d"], find: "W'/W", formula: 'W = \frac{q^2}{2C},\ C \sim \frac{1}{d}', calc: "\\frac{W'}{W} = 2", answer: 'в 2 раза' }
+        src: c23
+      - type: numeric
+        cat: problem
+        q: 'Найдите плотность энергии электрического поля напряжённостью $10^5$ В/м в воздухе.'
+        num: { value: 0.04425, unit: 'Дж/м³', check: '1*8.85e-12*1e10/2' }
+        hint: '$w = \frac{\varepsilon\varepsilon_0E^2}{2}$.'
+        explain: '$w = \frac{8{,}85\cdot10^{-12}\cdot10^{10}}{2} \approx 0{,}044$ Дж/м³.'
+        f: [4]
+        sol: { given: ['E = 10⁵ В/м', 'ε = 1'], find: 'w', formula: 'w = \frac{\varepsilon\varepsilon_0E^2}{2}', calc: 'w = \frac{8{,}85\cdot10^{-12}\cdot10^{10}}{2} \approx 0{,}044', answer: '≈ 0,044 Дж/м³' }
+        src: c23
+      - type: numeric
+        cat: problem
+        q: 'Металлический шар с зарядом 2 нКл имеет потенциал 300 В. Найдите энергию заряженного шара.'
+        num: { value: 3e-7, unit: 'Дж', check: '300*2e-9/2' }
+        hint: '$W = \frac{\varphi q}{2}$.'
+        explain: '$W = \frac{300\cdot2\cdot10^{-9}}{2} = 3\cdot10^{-7}$ Дж.'
+        f: [2]
+        sol: { given: ['q = 2·10⁻⁹ Кл', 'φ = 300 В'], find: 'W', formula: 'W = \frac{\varphi q}{2}', calc: 'W = \frac{300\cdot2\cdot10^{-9}}{2} = 3\cdot10^{-7}', answer: '3·10⁻⁷ Дж' }
+        src: c22
+      - type: single
+        cat: theory
+        q: Заряженный конденсатор отключили от источника и вставили между пластинами диэлектрик. Как изменилась энергия?
+        opts: ['Уменьшилась', 'Увеличилась', 'Не изменилась', 'Стала равной нулю']
+        ans: a
+        hint: 'q = const, W ~ $\frac1\varepsilon$.'
+        explain: Ёмкость выросла, а при постоянном заряде энергия уменьшилась.
+        f: [1]
+        src: c23
+      - type: single
+        cat: theory
+        q: Конденсатор подключён к источнику; площадь пластин увеличили. Как изменилась энергия?
+        opts: ['Увеличилась', 'Уменьшилась', 'Не изменилась', 'Стала равной нулю']
+        ans: a
+        hint: 'U = const, W ~ S.'
+        explain: 'Ёмкость выросла, при постоянном напряжении растёт и энергия.'
+        f: [1]
+        src: c23

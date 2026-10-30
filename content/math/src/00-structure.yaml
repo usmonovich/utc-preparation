@@ -1,0 +1,214 @@
+# Математика: структура курса по книге-источнику, план по оглавлению, словарь обозначений.
+# Порядок тем — строго как в книге (часть → глава → пункт). Блоки subsections и plan генерирует
+# tools/math/toc.py по оглавлению, извлечённому из сканов; темы с содержанием — в файлах 1x-*.yaml.
+# Страницы — печатная нумерация книги (b005 — с. 5); нумерация сквозная для обеих частей.
+
+course:
+  id: math
+  title: Математика
+  owner: Husniddin
+  language: ru
+  book: 'Математика. Сборник тестовых заданий для абитуриентов. Отсортировано по темам (части 1 и 2)'
+
+sourceFiles:
+  - id: book-1
+    title: 'Математика. Сборник тестовых заданий для абитуриентов. Отсортировано по темам. 1996–2005. Часть 1'
+    fileName: ВЕСТНИК_1.pdf
+    kind: pdf-scan
+    pdfPages: 155
+    bookPages: [5, 156]
+    pdfOffset: 2
+    sha256: da5d278c180ff1240dad76d5fa616c7b127bad55881460aa22a2a2882176e909
+    note: 'Скан книги без текстового слоя: лист 1 — обложка, лист 2 — содержание, листы 3–154 — с. 5–156, лист 155 — пустой.'
+    pagePrefix: b
+    notes:
+      - 'Сборник тестовых заданий вступительных испытаний 1996–2005 гг., отсортированных по темам; у каждого задания — код года и варианта (например, 96-1-12), варианты ответов A–E.'
+      - 'Часть 1: алгебра — пункты 1.1–1.15.1 (с. 5–156). Оглавление (лист 2) перечисляет 31 главу: 18 по алгебре и началам анализа, 13 по геометрии.'
+      - 'Текстового слоя нет; структура извлечена распознаванием (Tesseract, русский язык) и сверена глазами по изображениям страниц.'
+      - 'Задания книги в приложение не перенесены (сборник защищён авторским правом); у каждой темы указаны страницы книги, где решать её задания.'
+  - id: book-2
+    title: 'Математика. Сборник тестовых заданий для абитуриентов. Отсортировано по темам. 1996–2009. Часть 2'
+    fileName: ВЕСТНИК_2.pdf
+    kind: pdf-scan
+    pdfPages: 160
+    bookPages: [157, 315]
+    pdfOffset: 155
+    sha256: dc4ad328fe55f247e37f5db0b9243630dde02b34a6e070c7ecd8b636f10f2f72
+    note: 'Скан книги без текстового слоя: лист 1 — обложка, листы 2–160 — с. 157–315.'
+    pagePrefix: b
+    notes:
+      - 'Продолжение сборника (на обложке — 1996–2009): тригонометрия с 1.15.2, производная, первообразная и интеграл, нестандартные задачи, вся геометрия (3.1–3.13).'
+      - 'Пункт 1.15 «Тригонометрия» начинается в части 1 (с. 156) и продолжается в части 2 — в приложении он один, со ссылками на обе части.'
+      - 'Геометрия в тексте книги пронумерована как 3.1–3.13 (главы с номером 2 в книге нет); первый заголовок напечатан как «1 Угол. Расстояние.».'
+
+sections:
+  - { id: ma-alg, title: 'Алгебра и основы математического анализа', status: active }
+  - { id: ma-geo, title: 'Геометрия', status: active }
+
+subsections:
+  - { id: ma-1-1, sectionId: ma-alg, title: '1.1 Натуральные и целые числа' }
+  - { id: ma-1-2, sectionId: ma-alg, title: '1.2 Дроби' }
+  - { id: ma-1-3, sectionId: ma-alg, title: '1.3 Алгебраические выражения' }
+  - { id: ma-1-4, sectionId: ma-alg, title: '1.4 Корни' }
+  - { id: ma-1-5, sectionId: ma-alg, title: '1.5 Уравнения' }
+  - { id: ma-1-6, sectionId: ma-alg, title: '1.6 Системы уравнений' }
+  - { id: ma-1-7, sectionId: ma-alg, title: '1.7 Неравенства' }
+  - { id: ma-1-8, sectionId: ma-alg, title: '1.8 Модуль' }
+  - { id: ma-1-9, sectionId: ma-alg, title: '1.9 Иррациональные уравнения и неравенства' }
+  - { id: ma-1-10, sectionId: ma-alg, title: '1.10 Прогрессии' }
+  - { id: ma-1-11, sectionId: ma-alg, title: '1.11 Текстовые задачи' }
+  - { id: ma-1-12, sectionId: ma-alg, title: '1.12 Функции' }
+  - { id: ma-1-13, sectionId: ma-alg, title: '1.13 Показательные уравнения и неравенства' }
+  - { id: ma-1-14, sectionId: ma-alg, title: '1.14 Логарифм' }
+  - { id: ma-1-15, sectionId: ma-alg, title: '1.15 Тригонометрия' }
+  - { id: ma-1-16, sectionId: ma-alg, title: '1.16 Производная' }
+  - { id: ma-1-17, sectionId: ma-alg, title: '1.17 Первообразная и интеграл' }
+  - { id: ma-1-18, sectionId: ma-alg, title: '1.18 Нестандартные задачи' }
+  - { id: ma-3-1, sectionId: ma-geo, title: '3.1 Угол. Расстояние', note: 'В книге заголовок напечатан как «1 Угол. Расстояние.»; по следующим пунктам (3.2, 3.3 …) это пункт 3.1.' }
+  - { id: ma-3-2, sectionId: ma-geo, title: '3.2 Параллельные прямые' }
+  - { id: ma-3-3, sectionId: ma-geo, title: '3.3 Треугольники' }
+  - { id: ma-3-4, sectionId: ma-geo, title: '3.4 Четырёхугольники', note: 'В оглавлении книги глава названа «Прямоугольник», в тексте — «Четырёхугольники» (3.4); взято название из текста.' }
+  - { id: ma-3-5, sectionId: ma-geo, title: '3.5 Многоугольники' }
+  - { id: ma-3-6, sectionId: ma-geo, title: '3.6 Окружность и круг' }
+  - { id: ma-3-7, sectionId: ma-geo, title: '3.7 Окружность и многоугольник' }
+  - { id: ma-3-8, sectionId: ma-geo, title: '3.8 Система координат' }
+  - { id: ma-3-9, sectionId: ma-geo, title: '3.9 Векторы' }
+  - { id: ma-3-10, sectionId: ma-geo, title: '3.10 Прямые и плоскости в пространстве' }
+  - { id: ma-3-11, sectionId: ma-geo, title: '3.11 Многогранники' }
+  - { id: ma-3-12, sectionId: ma-geo, title: '3.12 Тела вращения' }
+  - { id: ma-3-13, sectionId: ma-geo, title: '3.13 Комбинации тел' }
+plan:
+  - { num: '1.1.1', subsectionId: ma-1-1, title: 'Начальные понятия. Задачи на вычисления', pages: [b005, b006] }
+  - { num: '1.1.2', subsectionId: ma-1-1, title: 'Признаки делимости', pages: [b006, b007] }
+  - { num: '1.1.3', subsectionId: ma-1-1, title: 'Деление с остатком', pages: [b007, b008] }
+  - { num: '1.1.4', subsectionId: ma-1-1, title: 'Общий делитель и общее кратное. НОД и НОК', pages: [b008, b009] }
+  - { num: '1.1.5', subsectionId: ma-1-1, title: 'Последняя цифра', pages: [b009, b010] }
+  - { num: '1.1.6', subsectionId: ma-1-1, title: 'Целые числа', pages: [b010] }
+  - { num: '1.2.1', subsectionId: ma-1-2, title: 'Обыкновенные дроби', pages: [b010, b011, b012, b013, b014] }
+  - { num: '1.2.2', subsectionId: ma-1-2, title: 'Смешанные дроби', pages: [b014, b015, b016] }
+  - { num: '1.2.3', subsectionId: ma-1-2, title: 'Десятичные дроби', pages: [b016, b017, b018, b019, b020] }
+  - { num: '1.2.4', subsectionId: ma-1-2, title: 'Бесконечные периодические десятичные дроби', pages: [b020, b021, b022] }
+  - { num: '1.3.1', subsectionId: ma-1-3, title: 'Стандартный вид многочлена', pages: [b022, b023, b024] }
+  - { num: '1.3.2', subsectionId: ma-1-3, title: 'Формулы сокращённого умножения', pages: [b024, b025] }
+  - { num: '1.3.3', subsectionId: ma-1-3, title: 'Разложение многочленов на множители', pages: [b025, b026] }
+  - { num: '1.3.4', subsectionId: ma-1-3, title: 'Доказательство тождеств. Упрощение выражений', pages: [b026, b027, b028, b029, b030, b031, b032] }
+  - { num: '1.4.1', subsectionId: ma-1-4, title: 'Применение формул', pages: [b032, b033, b034] }
+  - { num: '1.4.2', subsectionId: ma-1-4, title: 'Квадратные корни. Задачи на вычисление', pages: [b034, b035, b036, b037] }
+  - { num: '1.4.3', subsectionId: ma-1-4, title: 'Упрощение выражений', pages: [b037, b038, b039] }
+  - { num: '1.4.4', subsectionId: ma-1-4, title: 'Корень n-й степени. Степень с рациональным показателем', pages: [b039, b040, b041, b042, b043, b044] }
+  - { num: '1.5.1', subsectionId: ma-1-5, title: 'Линейные уравнения. Пропорции', pages: [b044, b045, b046, b047] }
+  - { num: '1.5.2', subsectionId: ma-1-5, title: 'Квадратные уравнения', pages: [b047, b048] }
+  - { num: '1.5.3', subsectionId: ma-1-5, title: 'Теорема Виета', pages: [b048, b049] }
+  - { num: '1.5.4', subsectionId: ma-1-5, title: 'Рациональные уравнения', pages: [b049, b050, b051, b052] }
+  - { num: '1.5.5', subsectionId: ma-1-5, title: 'Параметрические линейные уравнения', pages: [b052, b053] }
+  - { num: '1.5.6', subsectionId: ma-1-5, title: 'Параметрические квадратные уравнения', pages: [b053, b054, b055, b056, b057, b058, b059] }
+  - { num: '1.6.1', subsectionId: ma-1-6, title: 'Системы линейных уравнений', pages: [b059, b060, b061] }
+  - { num: '1.6.2', subsectionId: ma-1-6, title: 'Системы уравнений первого и второго порядков', pages: [b061, b062, b063] }
+  - { num: '1.6.3', subsectionId: ma-1-6, title: 'Системы уравнений высокого порядка', pages: [b063, b064, b065] }
+  - { num: '1.6.4', subsectionId: ma-1-6, title: 'Системы параметрических уравнений', pages: [b065, b066] }
+  - { num: '1.7.1', subsectionId: ma-1-7, title: 'Линейные неравенства', pages: [b066, b067] }
+  - { num: '1.7.2', subsectionId: ma-1-7, title: 'Системы линейных неравенств', pages: [b067, b068, b069] }
+  - { num: '1.7.3', subsectionId: ma-1-7, title: 'Метод интервалов', pages: [b069, b070, b071, b072, b073, b074, b075, b076] }
+  - { num: '1.7.4', subsectionId: ma-1-7, title: 'Параметрические неравенства', pages: [b076, b077] }
+  - { num: '1.7.5', subsectionId: ma-1-7, title: 'Доказательство неравенств', pages: [b077, b078, b079, b080] }
+  - { num: '1.8.1', subsectionId: ma-1-8, title: 'Выражения с модулем', pages: [b080, b081] }
+  - { num: '1.8.2', subsectionId: ma-1-8, title: 'Уравнения с модулем', pages: [b081, b082, b083, b084] }
+  - { num: '1.8.3', subsectionId: ma-1-8, title: 'Неравенства с модулем', pages: [b084, b085, b086, b087] }
+  - { num: '1.9.1', subsectionId: ma-1-9, title: 'Иррациональные уравнения', pages: [b087, b088, b089, b090, b091] }
+  - { num: '1.9.2', subsectionId: ma-1-9, title: 'Иррациональные неравенства', pages: [b091, b092, b093, b094] }
+  - { num: '1.10.1', subsectionId: ma-1-10, title: 'Арифметическая прогрессия', pages: [b094, b095, b096, b097, b098, b099] }
+  - { num: '1.10.2', subsectionId: ma-1-10, title: 'Геометрическая прогрессия', pages: [b099, b100, b101, b102, b103] }
+  - { num: '1.11.1', subsectionId: ma-1-11, title: 'Задачи на числа', pages: [b103, b104, b105, b106, b107, b108, b109, b110, b111, b112, b113] }
+  - { num: '1.11.2', subsectionId: ma-1-11, title: 'Задачи на проценты', pages: [b113, b114, b115, b116, b117] }
+  - { num: '1.11.3', subsectionId: ma-1-11, title: 'Задачи на движение', pages: [b117, b118, b119] }
+  - { num: '1.11.4', subsectionId: ma-1-11, title: 'Задачи на работу', pages: [b119, b120, b121] }
+  - { num: '1.11.5', subsectionId: ma-1-11, title: 'Задачи на смеси', pages: [b121] }
+  - { num: '1.12.1', subsectionId: ma-1-12, title: 'Свойства функций', pages: [b121, b122] }
+  - { num: '1.12.2', subsectionId: ma-1-12, title: 'Линейная функция', pages: [b122, b123, b124, b125] }
+  - { num: '1.12.3', subsectionId: ma-1-12, title: 'Квадратная функция', pages: [b125, b126, b127, b128, b129] }
+  - { num: '1.12.4', subsectionId: ma-1-12, title: 'Смешанный раздел', pages: [b129, b130, b131, b132], note: 'В книге — смешанный набор задач по функциям; новой теории нет: тема опирается на 1.12.1–1.12.3.' }
+  - { num: '1.12.5', subsectionId: ma-1-12, title: 'Обратная функция', pages: [b132] }
+  - { num: '1.13.1', subsectionId: ma-1-13, title: 'Показательная функция и её свойства', pages: [b132, b133] }
+  - { num: '1.13.2', subsectionId: ma-1-13, title: 'Показательные уравнения', pages: [b133, b134, b135, b136, b137] }
+  - { num: '1.13.3', subsectionId: ma-1-13, title: 'Показательные неравенства', pages: [b137, b138, b139, b140] }
+  - { num: '1.14.1', subsectionId: ma-1-14, title: 'Логарифмическая функция и её свойства', pages: [b140, b141, b142] }
+  - { num: '1.14.2', subsectionId: ma-1-14, title: 'Преобразование логарифмических выражений', pages: [b142, b143, b144, b145, b146, b147] }
+  - { num: '1.14.3', subsectionId: ma-1-14, title: 'Логарифмические уравнения', pages: [b147, b148, b149, b150, b151, b152] }
+  - { num: '1.14.4', subsectionId: ma-1-14, title: 'Логарифмические неравенства', pages: [b152, b153, b154, b155, b156] }
+  - { num: '1.15.1', subsectionId: ma-1-15, title: 'Начальные понятия', pages: [b156, b157, b158] }
+  - { num: '1.15.2', subsectionId: ma-1-15, title: 'Основные тождества тригонометрии', pages: [b158, b159, b160] }
+  - { num: '1.15.3', subsectionId: ma-1-15, title: 'Формулы приведения', pages: [b160, b161, b162] }
+  - { num: '1.15.4', subsectionId: ma-1-15, title: 'Формулы сложения', pages: [b162, b163, b164] }
+  - { num: '1.15.5', subsectionId: ma-1-15, title: 'Формулы двойного угла', pages: [b164, b165, b166, b167, b168] }
+  - { num: '1.15.6', subsectionId: ma-1-15, title: 'Формулы для суммы и разности', pages: [b168, b169] }
+  - { num: '1.15.7', subsectionId: ma-1-15, title: 'Формулы для произведения', pages: [b169, b170] }
+  - { num: '1.15.8', subsectionId: ma-1-15, title: 'Формулы половинного угла', pages: [b170, b171, b172, b173] }
+  - { num: '1.15.9', subsectionId: ma-1-15, title: 'Арксинус, арккосинус, арктангенс и арккотангенс', pages: [b173, b174, b175, b176] }
+  - { num: '1.15.10', subsectionId: ma-1-15, title: 'Тригонометрические уравнения', pages: [b176, b177, b178, b179, b180, b181, b182, b183, b184, b185, b186, b187] }
+  - { num: '1.15.11', subsectionId: ma-1-15, title: 'Тригонометрические неравенства', pages: [b187, b188, b189, b190, b191] }
+  - { num: '1.15.12', subsectionId: ma-1-15, title: 'Смешанный раздел', pages: [b191, b192], note: 'В книге — смешанный набор задач по тригонометрии; новой теории нет: тема опирается на 1.15.1–1.15.11.' }
+  - { num: '1.15.13', subsectionId: ma-1-15, title: 'Тригонометрические функции и их свойства', pages: [b192, b193, b194, b195, b196, b197, b198, b199, b200, b201] }
+  - { num: '1.16.1', subsectionId: ma-1-16, title: 'Производная суммы и разности', pages: [b201, b202] }
+  - { num: '1.16.2', subsectionId: ma-1-16, title: 'Производная произведения', pages: [b202, b203] }
+  - { num: '1.16.3', subsectionId: ma-1-16, title: 'Производная частного', pages: [b203] }
+  - { num: '1.16.4', subsectionId: ma-1-16, title: 'Производная сложной функции', pages: [b203, b204, b205, b206] }
+  - { num: '1.16.5', subsectionId: ma-1-16, title: 'Промежутки возрастания и убывания функции', pages: [b206, b207, b208] }
+  - { num: '1.16.6', subsectionId: ma-1-16, title: 'Экстремумы функции', pages: [b208, b209, b210] }
+  - { num: '1.16.7', subsectionId: ma-1-16, title: 'Наибольшее и наименьшее значения функции на промежутке', pages: [b210, b211] }
+  - { num: '1.16.8', subsectionId: ma-1-16, title: 'Угловой коэффициент касательной', pages: [b211, b212, b213] }
+  - { num: '1.16.9', subsectionId: ma-1-16, title: 'Уравнение касательной', pages: [b213, b214] }
+  - { num: '1.16.10', subsectionId: ma-1-16, title: 'Механический смысл производной', pages: [b214, b215] }
+  - { num: '1.17.1', subsectionId: ma-1-17, title: 'Правила вычисления первообразных', pages: [b215, b216, b217, b218, b219, b220] }
+  - { num: '1.17.2', subsectionId: ma-1-17, title: 'Определённый интеграл', pages: [b220, b221, b222, b223, b224, b225] }
+  - { num: '1.17.3', subsectionId: ma-1-17, title: 'Площадь криволинейной трапеции', pages: [b225, b226, b227] }
+  - { num: '1.18', subsectionId: ma-1-18, title: 'Нестандартные задачи', pages: [b227, b228, b229, b230, b231, b232, b233, b234], note: 'В книге — нестандартные (олимпиадного типа) задачи по разным темам; отдельной теории нет. Для авиационного вступительного экзамена — дополнительный уровень.' }
+  - { num: '3.1', subsectionId: ma-3-1, title: 'Угол. Расстояние', pages: [b235, b236], note: 'В книге заголовок напечатан как «1 Угол. Расстояние.»; по следующим пунктам (3.2, 3.3 …) это пункт 3.1.' }
+  - { num: '3.2', subsectionId: ma-3-2, title: 'Параллельные прямые', pages: [b236, b237] }
+  - { num: '3.3.1', subsectionId: ma-3-3, title: 'Периметр, медиана, биссектриса и высота. Средняя линия треугольника', pages: [b237, b238] }
+  - { num: '3.3.2', subsectionId: ma-3-3, title: 'Сумма углов треугольника', pages: [b238, b239, b240] }
+  - { num: '3.3.3', subsectionId: ma-3-3, title: 'Прямоугольный треугольник', pages: [b240, b241, b242] }
+  - { num: '3.3.4', subsectionId: ma-3-3, title: 'Теоремы косинусов и синусов', pages: [b242, b243] }
+  - { num: '3.3.5', subsectionId: ma-3-3, title: 'Свойства высоты треугольника', pages: [b243, b244] }
+  - { num: '3.3.6', subsectionId: ma-3-3, title: 'Свойства биссектрисы треугольника', pages: [b244, b245, b246] }
+  - { num: '3.3.7', subsectionId: ma-3-3, title: 'Свойства медианы треугольника', pages: [b246] }
+  - { num: '3.3.8', subsectionId: ma-3-3, title: 'Разные задачи', pages: [b246, b247], note: 'В книге — разные задачи на треугольники; новой теории нет.' }
+  - { num: '3.3.9', subsectionId: ma-3-3, title: 'Площадь треугольника', pages: [b247, b248, b249, b250] }
+  - { num: '3.3.10', subsectionId: ma-3-3, title: 'Подобие треугольников', pages: [b250, b251, b252] }
+  - { num: '3.4.1', subsectionId: ma-3-4, title: 'Четырёхугольник, прямоугольник и квадрат', pages: [b252, b253, b254, b255] }
+  - { num: '3.4.2', subsectionId: ma-3-4, title: 'Ромб', pages: [b255, b256, b257] }
+  - { num: '3.4.3', subsectionId: ma-3-4, title: 'Параллелограмм', pages: [b257, b258, b259] }
+  - { num: '3.4.4', subsectionId: ma-3-4, title: 'Трапеция', pages: [b259, b260, b261, b262, b263] }
+  - { num: '3.5', subsectionId: ma-3-5, title: 'Многоугольники', pages: [b263, b264, b265, b266] }
+  - { num: '3.6.1', subsectionId: ma-3-6, title: 'Касательная, хорда, радиус, диаметр', pages: [b266, b267] }
+  - { num: '3.6.2', subsectionId: ma-3-6, title: 'Длина окружности', pages: [b267] }
+  - { num: '3.6.3', subsectionId: ma-3-6, title: 'Длина дуги окружности', pages: [b267, b268] }
+  - { num: '3.6.4', subsectionId: ma-3-6, title: 'Центральный и вписанный углы. Угол между хордой и касательной', pages: [b268, b269] }
+  - { num: '3.6.5', subsectionId: ma-3-6, title: 'Пересекающиеся хорды', pages: [b269] }
+  - { num: '3.6.6', subsectionId: ma-3-6, title: 'Касательная и секущая', pages: [b269, b270] }
+  - { num: '3.6.7', subsectionId: ma-3-6, title: 'Площадь круга', pages: [b270] }
+  - { num: '3.6.8', subsectionId: ma-3-6, title: 'Площадь сектора и сегмента круга', pages: [b270, b271, b272, b273] }
+  - { num: '3.7.1', subsectionId: ma-3-7, title: 'Треугольник и окружность', pages: [b273, b274, b275, b276, b277] }
+  - { num: '3.7.2', subsectionId: ma-3-7, title: 'Квадрат и окружность', pages: [b277, b278] }
+  - { num: '3.7.3', subsectionId: ma-3-7, title: 'Прямоугольник и окружность', pages: [b278] }
+  - { num: '3.7.4', subsectionId: ma-3-7, title: 'Ромб и окружность', pages: [b278, b279] }
+  - { num: '3.7.5', subsectionId: ma-3-7, title: 'Трапеция и окружность', pages: [b279, b280, b281] }
+  - { num: '3.7.6', subsectionId: ma-3-7, title: 'Многоугольник и окружность', pages: [b281, b282] }
+  - { num: '3.8', subsectionId: ma-3-8, title: 'Система координат', pages: [b282, b283, b284] }
+  - { num: '3.9.1', subsectionId: ma-3-9, title: 'Координаты вектора', pages: [b284, b285] }
+  - { num: '3.9.2', subsectionId: ma-3-9, title: 'Длина вектора', pages: [b285, b286, b287] }
+  - { num: '3.9.3', subsectionId: ma-3-9, title: 'Скалярное произведение векторов', pages: [b287, b288, b289] }
+  - { num: '3.9.4', subsectionId: ma-3-9, title: 'Угол между двумя векторами', pages: [b289, b290, b291, b292] }
+  - { num: '3.10', subsectionId: ma-3-10, title: 'Прямые и плоскости в пространстве', pages: [b292, b293, b294, b295] }
+  - { num: '3.11.1', subsectionId: ma-3-11, title: 'Призма', pages: [b295, b296, b297, b298, b299] }
+  - { num: '3.11.2', subsectionId: ma-3-11, title: 'Пирамида', pages: [b299, b300, b301, b302, b303, b304] }
+  - { num: '3.12.1', subsectionId: ma-3-12, title: 'Цилиндр', pages: [b304, b305, b306] }
+  - { num: '3.12.2', subsectionId: ma-3-12, title: 'Конус', pages: [b306, b307, b308, b309] }
+  - { num: '3.12.3', subsectionId: ma-3-12, title: 'Шар и сфера', pages: [b309, b310] }
+  - { num: '3.13.1', subsectionId: ma-3-13, title: 'Призма и шар', pages: [b310, b311] }
+  - { num: '3.13.2', subsectionId: ma-3-13, title: 'Пирамида и шар', pages: [b311, b312] }
+  - { num: '3.13.3', subsectionId: ma-3-13, title: 'Цилиндр и шар', pages: [b312] }
+  - { num: '3.13.4', subsectionId: ma-3-13, title: 'Конус и шар', pages: [b312, b313, b314] }
+  - { num: '3.13.5', subsectionId: ma-3-13, title: 'Разные задачи', pages: [b314, b315], note: 'В книге — разные задачи на комбинации тел; новой теории нет.' }
+
+symbols: {}
+errata: []

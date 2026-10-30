@@ -1,0 +1,426 @@
+# 1.13 Показательная функция (книга, ч. 1, с. 132–140).
+# Теория, формулы, примеры и задачи составлены по открытым источникам (ссылки — в web); задания книги не копируются.
+
+subsection: ma-1-13
+
+x-sources:
+  ca-61: &ca-61 { title: 'College Algebra 2e, 6.1 Exponential Functions', org: 'OpenStax, Rice University (открытый учебник)', url: 'https://openstax.org/books/college-algebra-2e/pages/6-1-exponential-functions', checked: '2026-10-25', note: 'адрес взят из предметного указателя книги' }
+  ca-62: &ca-62 { title: 'College Algebra 2e, 6.2 Graphs of Exponential Functions', org: 'OpenStax, Rice University', url: 'https://openstax.org/books/college-algebra-2e/pages/6-2-graphs-of-exponential-functions', checked: '2026-10-25' }
+  ca-66: &ca-66 { title: 'College Algebra 2e, 6.6 Exponential and Logarithmic Equations', org: 'OpenStax, Rice University', url: 'https://openstax.org/books/college-algebra-2e/pages/6-6-exponential-and-logarithmic-equations', checked: '2026-10-25', note: 'приведение к общему основанию' }
+  rs-pow: &rs-pow { title: 'Элементарная математика, § 7 «Степень с целым показателем»', org: 'РГРТУ (Рязанский радиотехнический университет), пособие для поступающих', url: 'https://rsreu.ru/component/docman/doc_download/1469-7-stepen-s-celym-pokazatelem', checked: '2026-10-25' }
+  rs-frac: &rs-frac { title: 'Элементарная математика, § 8 «Степень с дробным показателем»', org: 'РГРТУ, пособие для поступающих', url: 'https://rsreu.ru/component/docman/doc_download/1470-8-stepen-s-drobnym-pokazatelem', checked: '2026-10-25' }
+
+topics:
+  # ───────────────────────────── 1.13.1 ─────────────────────────────
+  - id: ma-1-13-1
+    num: '1.13.1'
+    title: Показательная функция и её свойства
+    pages: [b132, b133]
+    book:
+      place: 'Ч. 1, 1.13 «Показательная функция», пункт 1.13.1'
+      summary: 'Задания на свойства функции $y = a^x$: вычисление значений, сравнение степеней, множество значений, монотонность.'
+    stage: verified
+    stageNote: 'Значения и сравнения пересчитаны численно.'
+    sourcesChecked: '2026-10-25'
+    web: [*ca-61, *ca-62, *rs-frac]
+    theory:
+      - kind: definition
+        title: Функция y = aˣ
+        body: |
+          **Показательная функция** $y = a^x$, где $a > 0$, $a \ne 1$.
+          - $D = \mathbb R$, $E = (0; +\infty)$: значения **всегда положительны**.
+          - График проходит через $(0; 1)$, ось $Ox$ — горизонтальная асимптота.
+          - $a > 1$ — возрастает; $0 < a < 1$ — убывает.
+        src: b132
+        fig: exp-graphs
+      - kind: law
+        title: Свойства степеней и сравнение
+        body: |
+          $a^xa^y = a^{x+y}$, $\ \frac{a^x}{a^y} = a^{x-y}$, $\ (a^x)^y = a^{xy}$, $\ (ab)^x = a^xb^x$, $\ a^{-x} = \frac{1}{a^x}$.
+          Сравнение: при $a > 1$ $\ a^{x_1} > a^{x_2} \iff x_1 > x_2$; при $0 < a < 1$ — наоборот.
+          Пример: $0{,}5^{-2} = 4 > 0{,}5^3 = 0{,}125$, хотя $-2 < 3$.
+        src: b133
+    formulas:
+      - title: Свойства степени
+        tex: 'a^x a^y = a^{x+y},\quad \frac{a^x}{a^y} = a^{x-y},\quad (a^x)^y = a^{xy},\quad a^{-x} = \frac{1}{a^x}'
+        meaning: '$a > 0$, $x$, $y$ — любые действительные числа.'
+        use: 'Упрощение выражений, приведение к общему основанию.'
+        src: b133
+      - title: Монотонность
+        tex: 'a > 1:\ a^{x_1} > a^{x_2} \iff x_1 > x_2;\qquad 0 < a < 1:\ a^{x_1} > a^{x_2} \iff x_1 < x_2'
+        meaning: 'Сравнение степеней с одинаковым основанием.'
+        use: 'Сравнение чисел, показательные неравенства.'
+        src: b133
+    examples:
+      - title: Сравнение при a > 1
+        given: 'Сравните $2^{\sqrt3}$ и $2^{1{,}7}$.'
+        find: 'знак между числами.'
+        method: 'Основание больше 1 — сравниваем показатели.'
+        steps:
+          - '$\sqrt3 \approx 1{,}732 > 1{,}7$.'
+          - 'Значит, $2^{\sqrt3} > 2^{1{,}7}$.'
+        check: '$2^{1{,}732} \approx 3{,}32$, $2^{1{,}7} \approx 3{,}25$ ✓.'
+        answer: '$2^{\sqrt3} > 2^{1{,}7}$'
+        src: b133
+      - title: Множество значений
+        given: 'Найдите множество значений $y = 3^x + 2$.'
+        find: '$E(y)$.'
+        method: '$3^x > 0$ и принимает все положительные значения.'
+        steps:
+          - '$3^x \in (0; +\infty)$.'
+          - '$3^x + 2 \in (2; +\infty)$.'
+        check: '$x = -10$: $y \approx 2{,}00002$ — близко к 2, но больше ✓.'
+        answer: '$(2; +\infty)$'
+        src: b132
+      - title: Сравнение при 0 < a < 1
+        given: 'Сравните $0{,}5^{-2}$ и $0{,}5^{3}$.'
+        find: 'знак.'
+        method: 'Функция убывает — меньшему показателю соответствует большее значение.'
+        steps:
+          - 'Основание $0{,}5 < 1$ — функция $0{,}5^x$ убывает.'
+          - '$-2 < 3 \Rightarrow 0{,}5^{-2} > 0{,}5^3$.'
+        check: '$4 > 0{,}125$ ✓.'
+        answer: '$0{,}5^{-2} > 0{,}5^3$'
+        src: b133
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $4^{1{,}5}$.'
+        num: { value: 8, unit: '', check: '4**1.5' }
+        hint: '$4^{1{,}5} = (\sqrt4)^3$.'
+        explain: '$2^3 = 8$.'
+        f: [1]
+        sol: { method: 'Свойства степени.', steps: ['$4^{3/2} = (2^2)^{3/2} = 2^3 = 8$.'], answer: '8' }
+        src: b133
+      - type: numeric
+        cat: problem
+        q: 'Множество значений функции $y = 2^x + 3$ — промежуток $(m; +\infty)$. Найдите $m$.'
+        num: { value: 3, unit: '', check: '3' }
+        hint: '$2^x > 0$.'
+        explain: '$2^x + 3 > 3$, $m = 3$.'
+        sol: { method: 'Положительность $a^x$.', steps: ['$2^x \in (0; +\infty)$.', '$y \in (3; +\infty)$.'], answer: '3' }
+        src: b132
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\left(\dfrac13\right)^{-2}$.'
+        num: { value: 9, unit: '', check: '(1/3)**-2' }
+        hint: '$a^{-x} = \frac1{a^x}$.'
+        explain: '$3^2 = 9$.'
+        f: [1]
+        sol: { method: 'Отрицательный показатель.', steps: ['$\left(\frac13\right)^{-2} = 3^2 = 9$.'], answer: '9' }
+        src: b133
+      - type: numeric
+        cat: problem
+        q: '$f(x) = 2^x$. Найдите $f(3) - f(1)$.'
+        num: { value: 6, unit: '', check: '8-2' }
+        hint: 'Подставьте.'
+        explain: '$8 - 2 = 6$.'
+        sol: { method: 'Подстановка.', steps: ['$2^3 - 2^1 = 6$.'], answer: '6' }
+        src: b132
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $(\sqrt2)^6$.'
+        num: { value: 8, unit: '', check: 'Math.sqrt(2)**6' }
+        hint: '$(\sqrt2)^6 = 2^{6/2}$.'
+        explain: '$2^3 = 8$.'
+        f: [1]
+        sol: { method: 'Степень степени.', steps: ['$(2^{1/2})^6 = 2^3 = 8$.'], answer: '8' }
+        src: b133
+      - type: numeric
+        cat: problem
+        q: 'Найдите значение выражения $5^x \cdot 5^{2 - x}$ (при любом $x$).'
+        num: { value: 25, unit: '', check: '5**2' }
+        hint: 'Сложите показатели.'
+        explain: '$5^{x + 2 - x} = 5^2 = 25$.'
+        f: [1]
+        sol: { method: 'Произведение степеней.', steps: ['$5^{x + (2 - x)} = 5^2 = 25$.'], answer: '25' }
+        src: b133
+      - type: single
+        cat: theory
+        q: 'Какая из функций убывает?'
+        opts: ['$y = 0{,}7^x$', '$y = 2^x$', '$y = \left(\frac32\right)^x$', '$y = 10^x$']
+        ans: a
+        hint: 'Основание меньше 1.'
+        explain: '$0 < 0{,}7 < 1$ — функция убывает; у остальных основание больше 1.'
+        f: [2]
+        src: b133
+      - type: single
+        cat: theory
+        q: 'Через какую точку проходит график любой функции $y = a^x$?'
+        opts: ['$(0; 1)$', '$(1; 0)$', '$(0; 0)$', '$(1; 1)$']
+        ans: a
+        hint: '$a^0$.'
+        explain: '$a^0 = 1$ при любом $a > 0$.'
+        src: b132
+
+  # ───────────────────────────── 1.13.2 ─────────────────────────────
+  - id: ma-1-13-2
+    num: '1.13.2'
+    title: Показательные уравнения
+    pages: [b133, b134, b135, b136, b137]
+    book:
+      place: 'Ч. 1, 1.13 «Показательная функция», пункт 1.13.2'
+      summary: 'Задания на показательные уравнения: приведение к общему основанию, вынесение общего множителя, замена $t = a^x$; найти корень, сумму или произведение корней.'
+    stage: verified
+    stageNote: 'Корни подставлены в исходные уравнения.'
+    sourcesChecked: '2026-10-25'
+    web: [*ca-66, *rs-pow]
+    theory:
+      - kind: rule
+        title: Общее основание
+        body: |
+          Так как $a^x$ ($a > 0$, $a \ne 1$) строго монотонна, $a^{f(x)} = a^{g(x)} \iff f(x) = g(x)$.
+          Обе части приводят к одному основанию: $4^x = 8 \Rightarrow 2^{2x} = 2^3 \Rightarrow x = \frac32$; $\left(\frac13\right)^x = 27 \Rightarrow 3^{-x} = 3^3$.
+          Уравнение $a^{f(x)} = b$ с $b \le 0$ корней не имеет.
+        src: b133
+      - kind: rule
+        title: Вынесение множителя и замена
+        body: |
+          - Если показатели отличаются на число: $3^{x+2} - 3^x = 3^x(9 - 1)$ — выносят меньшую степень.
+          - Если есть $a^{2x}$ и $a^x$: замена $t = a^x$, **$t > 0$**; отрицательные корни $t$ отбрасывают.
+          - $9^x = (3^x)^2$, $4^x = (2^x)^2$, $25^x = (5^x)^2$.
+        src: b134
+    formulas:
+      - title: Равенство степеней
+        tex: 'a^{f(x)} = a^{g(x)} \iff f(x) = g(x)\qquad (a > 0,\ a \ne 1)'
+        meaning: 'Следует из монотонности $a^x$.'
+        use: 'После приведения к общему основанию.'
+        src: b133
+      - title: Замена t = aˣ
+        tex: 'A a^{2x} + B a^x + C = 0,\quad t = a^x > 0:\ \ At^2 + Bt + C = 0'
+        meaning: '$t$ — новая переменная, только положительная.'
+        use: 'Уравнения вида $9^x - 4 \cdot 3^x + 3 = 0$.'
+        src: b134
+    examples:
+      - title: Общее основание
+        given: 'Решите уравнение $2^{x+1} = 32$.'
+        find: '$x$.'
+        method: '$32 = 2^5$.'
+        steps:
+          - '$2^{x+1} = 2^5 \Rightarrow x + 1 = 5$.'
+          - '$x = 4$.'
+        check: '$2^5 = 32$ ✓.'
+        answer: '$x = 4$'
+        src: b133
+      - title: Замена переменной
+        given: 'Решите уравнение $9^x - 4 \cdot 3^x + 3 = 0$.'
+        find: 'корни.'
+        method: '$t = 3^x > 0$.'
+        steps:
+          - '$t^2 - 4t + 3 = 0$: $t = 1$ или $t = 3$.'
+          - '$3^x = 1 \Rightarrow x = 0$; $3^x = 3 \Rightarrow x = 1$.'
+        check: '$1 - 4 + 3 = 0$; $9 - 12 + 3 = 0$ ✓.'
+        answer: '$0$; $1$'
+        src: b134
+      - title: Вынесение множителя
+        given: 'Решите уравнение $3^{x+2} - 3^x = 72$.'
+        find: '$x$.'
+        method: 'Вынести $3^x$.'
+        steps:
+          - '$3^x(9 - 1) = 72 \Rightarrow 3^x = 9$.'
+          - '$x = 2$.'
+        check: '$81 - 9 = 72$ ✓.'
+        answer: '$x = 2$'
+        src: b134
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Решите уравнение $5^{2x - 1} = 125$.'
+        num: { value: 2, unit: '', check: '(3+1)/2' }
+        hint: '$125 = 5^3$.'
+        explain: '$2x - 1 = 3$, $x = 2$.'
+        f: [1]
+        sol: { method: 'Общее основание.', steps: ['$5^{2x - 1} = 5^3$.', '$2x - 1 = 3 \Rightarrow x = 2$.'], answer: '2' }
+        src: b133
+      - type: numeric
+        cat: problem
+        q: 'Решите уравнение $4^x = 8$.'
+        num: { value: 1.5, unit: '', check: '3/2' }
+        hint: 'Основание 2.'
+        explain: '$2^{2x} = 2^3$, $x = 1{,}5$.'
+        f: [1]
+        sol: { method: 'Общее основание.', steps: ['$2^{2x} = 2^3$.', '$x = 1{,}5$.'], answer: '1,5' }
+        src: b133
+      - type: numeric
+        cat: problem
+        q: 'Решите уравнение $\left(\dfrac13\right)^x = 27$.'
+        num: { value: -3, unit: '', check: '-3' }
+        hint: '$\frac13 = 3^{-1}$.'
+        explain: '$3^{-x} = 3^3$, $x = -3$.'
+        f: [1]
+        sol: { method: 'Общее основание.', steps: ['$3^{-x} = 3^3$.', '$x = -3$.'], answer: '−3' }
+        src: b133
+      - type: numeric
+        cat: problem
+        q: 'Решите уравнение $2^{x+3} + 2^x = 72$.'
+        num: { value: 3, unit: '', check: 'Math.log2(72/9)' }
+        hint: 'Вынесите $2^x$.'
+        explain: '$2^x \cdot 9 = 72$, $2^x = 8$, $x = 3$.'
+        sol: { method: 'Вынесение множителя.', steps: ['$2^x(8 + 1) = 72$.', '$2^x = 8$, $x = 3$.'], answer: '3' }
+        src: b134
+      - type: numeric
+        cat: problem
+        q: 'Найдите сумму корней уравнения $4^x - 6 \cdot 2^x + 8 = 0$.'
+        num: { value: 3, unit: '', check: '1+2' }
+        hint: '$t = 2^x$.'
+        explain: '$t = 2$ или $4$; $x = 1$ или $2$; сумма $3$.'
+        f: [2]
+        sol: { method: 'Замена.', steps: ['$t^2 - 6t + 8 = 0$: $t = 2$, $t = 4$.', '$x = 1$, $x = 2$.', 'Сумма $3$.'], answer: '3' }
+        src: b134
+      - type: numeric
+        cat: problem
+        q: 'Найдите произведение корней уравнения $2^{x^2 - x} = 4$.'
+        num: { value: -2, unit: '', check: '2*(-1)' }
+        hint: '$x^2 - x = 2$.'
+        explain: 'Корни $2$ и $-1$, произведение $-2$.'
+        f: [1]
+        sol: { method: 'Общее основание.', steps: ['$x^2 - x - 2 = 0$.', '$x = 2$, $x = -1$.', 'Произведение $-2$.'], answer: '−2' }
+        src: b133
+      - type: numeric
+        cat: problem
+        q: 'Решите уравнение $9^x - 3^x - 6 = 0$.'
+        num: { value: 1, unit: '', check: 'Math.log(3)/Math.log(3)' }
+        hint: '$t = 3^x > 0$.'
+        explain: '$t^2 - t - 6 = 0$: $t = 3$ или $t = -2$ (не подходит); $x = 1$.'
+        f: [2]
+        sol: { method: 'Замена с условием $t > 0$.', steps: ['$t^2 - t - 6 = 0$: $t = 3$, $t = -2$.', '$t = -2 < 0$ отбрасываем.', '$3^x = 3 \Rightarrow x = 1$.'], answer: '1' }
+        src: b134
+      - type: single
+        cat: theory
+        q: 'Почему при замене $t = 3^x$ корень $t = -2$ отбрасывают?'
+        opts: ['$3^x > 0$ при всех $x$', '$3^x \ge 1$', '$t$ должно быть целым', 'его не отбрасывают']
+        ans: a
+        hint: 'Множество значений показательной функции.'
+        explain: 'Показательная функция принимает только положительные значения.'
+        f: [2]
+        src: b134
+
+  # ───────────────────────────── 1.13.3 ─────────────────────────────
+  - id: ma-1-13-3
+    num: '1.13.3'
+    title: Показательные неравенства
+    pages: [b137, b138, b139, b140]
+    book:
+      place: 'Ч. 1, 1.13 «Показательная функция», пункт 1.13.3'
+      summary: 'Задания на показательные неравенства: найти решения, наибольшее или наименьшее целое решение, число целых решений.'
+    stage: verified
+    stageNote: 'Целые решения пересчитаны перебором.'
+    sourcesChecked: '2026-10-25'
+    web: [*ca-62, *ca-66]
+    theory:
+      - kind: rule
+        title: Знак неравенства и основание
+        body: |
+          - $a > 1$: $a^{f(x)} > a^{g(x)} \iff f(x) > g(x)$ — знак **сохраняется**.
+          - $0 < a < 1$: $a^{f(x)} > a^{g(x)} \iff f(x) < g(x)$ — знак **меняется**.
+          - $a^{f(x)} > b$ при $b \le 0$ верно всегда; $a^{f(x)} < b$ при $b \le 0$ решений не имеет.
+          - Замена $t = a^x$: решают неравенство для $t$ с учётом $t > 0$ и возвращаются к $x$.
+        src: b137
+    formulas:
+      - title: Показательное неравенство
+        tex: 'a^{f} > a^{g} \iff \begin{cases} f > g, & a > 1, \\ f < g, & 0 < a < 1 \end{cases}'
+        meaning: '$f$, $g$ — выражения с $x$.'
+        use: 'После приведения к общему основанию.'
+        src: b137
+    examples:
+      - title: Основание больше 1
+        given: 'Решите неравенство $2^{x - 1} > 8$.'
+        find: 'множество решений.'
+        method: '$8 = 2^3$, знак сохраняется.'
+        steps:
+          - '$x - 1 > 3$.'
+          - '$x > 4$.'
+        check: '$x = 5$: $16 > 8$ ✓; $x = 4$: $8 > 8$ — нет ✓.'
+        answer: '$(4; +\infty)$'
+        src: b137
+      - title: Основание меньше 1
+        given: 'Решите неравенство $\left(\dfrac13\right)^{2x - 1} \ge \dfrac1{27}$.'
+        find: 'множество решений.'
+        method: '$\frac1{27} = \left(\frac13\right)^3$, знак меняется.'
+        steps:
+          - '$2x - 1 \le 3$.'
+          - '$x \le 2$.'
+        check: '$x = 2$: $\left(\frac13\right)^3 = \frac1{27}$ ✓; $x = 3$: $\frac1{243} < \frac1{27}$ ✓.'
+        answer: '$(-\infty; 2]$'
+        src: b137
+      - title: Замена переменной
+        given: 'Решите неравенство $4^x - 5 \cdot 2^x + 4 < 0$.'
+        find: 'множество решений.'
+        method: '$t = 2^x > 0$.'
+        steps:
+          - '$t^2 - 5t + 4 < 0 \iff 1 < t < 4$.'
+          - '$1 < 2^x < 4 \iff 0 < x < 2$.'
+        check: '$x = 1$: $4 - 10 + 4 = -2 < 0$ ✓.'
+        answer: '$(0; 2)$'
+        src: b138
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Найдите наименьшее целое решение неравенства $3^x > 81$.'
+        num: { value: 5, unit: '', check: '5' }
+        hint: '$81 = 3^4$.'
+        explain: '$x > 4$, ответ $5$.'
+        f: [1]
+        sol: { method: 'Основание больше 1.', steps: ['$3^x > 3^4 \Rightarrow x > 4$.', 'Наименьшее целое $5$.'], answer: '5' }
+        src: b137
+      - type: numeric
+        cat: problem
+        q: 'Найдите наибольшее целое решение неравенства $0{,}5^x \ge \dfrac1{16}$.'
+        num: { value: 4, unit: '', check: '4' }
+        hint: '$\frac1{16} = 0{,}5^4$, знак меняется.'
+        explain: '$x \le 4$.'
+        f: [1]
+        sol: { method: 'Основание меньше 1.', steps: ['$0{,}5^x \ge 0{,}5^4 \Rightarrow x \le 4$.'], answer: '4' }
+        src: b137
+      - type: numeric
+        cat: problem
+        q: 'Сколько целых решений у неравенства $1 \le 2^x \le 32$?'
+        num: { value: 6, unit: '', check: '5-0+1' }
+        hint: '$2^0 \le 2^x \le 2^5$.'
+        explain: '$0 \le x \le 5$ — шесть целых.'
+        f: [1]
+        sol: { method: 'Двойное неравенство.', steps: ['$0 \le x \le 5$.', 'Целые $0, \dots, 5$ — шесть.'], answer: '6' }
+        src: b137
+      - type: numeric
+        cat: problem
+        q: 'Сколько целых решений у неравенства $5^{x^2} < 625$?'
+        num: { value: 3, unit: '', check: '3' }
+        hint: '$625 = 5^4$.'
+        explain: '$x^2 < 4 \iff -2 < x < 2$: целые $-1, 0, 1$.'
+        f: [1]
+        sol: { method: 'Основание больше 1.', steps: ['$x^2 < 4$.', '$-2 < x < 2$: три целых.'], answer: '3' }
+        src: b137
+      - type: numeric
+        cat: problem
+        q: 'Сколько целых решений у неравенства $9^x - 10 \cdot 3^x + 9 \le 0$?'
+        num: { value: 3, unit: '', check: '3' }
+        hint: '$t = 3^x$: $t^2 - 10t + 9 \le 0$.'
+        explain: '$1 \le t \le 9 \iff 0 \le x \le 2$ — три целых.'
+        sol: { method: 'Замена.', steps: ['$1 \le 3^x \le 9$.', '$0 \le x \le 2$.', 'Целые $0, 1, 2$.'], answer: '3' }
+        src: b138
+      - type: numeric
+        cat: problem
+        q: 'Найдите наибольшее целое решение неравенства $\left(\dfrac12\right)^{x - 3} > 4$.'
+        num: { value: 0, unit: '', tolAbs: 0.001, check: '0' }
+        hint: '$4 = \left(\frac12\right)^{-2}$, знак меняется.'
+        explain: '$x - 3 < -2$, $x < 1$; наибольшее целое $0$.'
+        f: [1]
+        sol: { method: 'Основание меньше 1.', steps: ['$\left(\frac12\right)^{x - 3} > \left(\frac12\right)^{-2}$.', '$x - 3 < -2 \Rightarrow x < 1$.', 'Наибольшее целое $0$.'], answer: '0' }
+        src: b137
+      - type: single
+        cat: theory
+        q: 'Решения неравенства $2^x > -3$:'
+        opts: ['любое $x$', 'решений нет', '$x > -3$', '$x > 0$']
+        ans: a
+        hint: '$2^x > 0$.'
+        explain: 'Положительное число всегда больше $-3$.'
+        src: b137
+      - type: single
+        cat: theory
+        q: 'Как меняется знак неравенства при переходе от $a^f > a^g$ к $f$ и $g$, если $0 < a < 1$?'
+        opts: ['меняется на противоположный', 'сохраняется', 'становится равенством', 'зависит от $x$']
+        ans: a
+        hint: 'Функция $a^x$ убывает.'
+        explain: 'У убывающей функции большему значению соответствует меньший аргумент.'
+        f: [1]
+        src: b137

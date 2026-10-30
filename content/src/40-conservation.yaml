@@ -1,0 +1,886 @@
+subsection: cons
+topics:
+
+# ───────────────────────────────────────────────────────────────
+  - id: cons-momentum
+    title: Импульс тела. Изменение импульса
+    pages: [p31R, p32L]
+    theory:
+      - kind: text
+        title: Виды импульса
+        body: 'Существует два вида импульса: **импульс тела** и **импульс силы**.'
+        src: p31R
+      - kind: definition
+        title: Импульс тела
+        body: 'Импульс тела $\vec p = m\vec\upsilon$ [кг·м/с] — направлен так же, как скорость. $p_{рез}$ — результирующий (полный, общий) импульс.'
+        src: p31R
+      - kind: list
+        title: Частные случаи изменения импульса
+        body: |
+          $\varphi = 0$ (скорость не меняет направления): $\Delta p = m(\upsilon - \upsilon_0)$; если $\upsilon_0 = \upsilon$ — $\Delta p = 0$.
+          $\varphi = 180°$ (отскок назад): $\Delta p = m(\upsilon + \upsilon_0)$; если $\upsilon_0 = \upsilon$ — $\Delta p = 2m\upsilon$.
+          Круговое равномерное движение: за ¼ оборота $\Delta p = \sqrt2\,m\upsilon$; за ½ оборота $\Delta p = 2m\upsilon$; за полный оборот $\Delta p = 0$.
+        src: p32L
+    formulas:
+      - title: Импульс тела
+        tex: '\vec p = m\vec\upsilon'
+        sym: [p_imp, m, v]
+        boxed: true
+        src: p31R
+      - title: Результирующий импульс
+        tex: 'p_{рез} = p_1 + p_2\ (\uparrow\uparrow);\ \ p_{рез} = p_1 - p_2\ (\uparrow\downarrow);\ \ p_{рез} = \sqrt{p_1^2 + p_2^2}\ (\perp);\ \ p_{рез} = \sqrt{p_1^2 + p_2^2 + 2p_1p_2\cos\alpha}'
+        sym: [p_imp]
+        src: p31R
+      - title: Изменение импульса
+        tex: '\Delta p = m\sqrt{\upsilon^2 + \upsilon_0^2 - 2\upsilon_0\upsilon\cos\varphi}'
+        sym: [dp, m, v, v0, phi_turn]
+        boxed: true
+        src: p31R
+      - title: Изменение импульса при круговом равномерном движении
+        tex: '\Delta p = 2m\upsilon\sin\frac{\varphi}{2}'
+        sym: [dp, m, v, phi_turn]
+        cond: '\(\upsilon = \text{const}\)'
+        boxed: true
+        src: p32L
+    questions:
+      - type: numeric
+        cat: problem
+        q: Мяч массой 0,5 кг летит со скоростью 4 м/с. Найдите его импульс.
+        num: { value: 2, unit: 'кг·м/с', check: '0.5*4' }
+        hint: '$p = m\upsilon$.'
+        explain: Импульс тела.
+        f: [1]
+        sol: { given: ['m = 0,5 кг', 'υ = 4 м/с'], find: 'p', formula: 'p = m\upsilon', calc: 'p = 0{,}5\cdot4 = 2', answer: '2 кг·м/с' }
+        src: p31R
+      - type: numeric
+        cat: problem
+        q: Мяч массой 0,2 кг летел со скоростью 10 м/с и отскочил назад с той же по модулю скоростью. Найдите модуль изменения импульса.
+        num: { value: 4, unit: 'кг·м/с', check: '2*0.2*10' }
+        hint: Направление скорости изменилось на противоположное ($\varphi = 180°$).
+        explain: 'При $\varphi = 180°$ и $\upsilon_0 = \upsilon$: $\Delta p = 2m\upsilon$.'
+        f: [3]
+        sol: { given: ['m = 0,2 кг', 'υ₀ = υ = 10 м/с', 'φ = 180°'], find: 'Δp', formula: '\Delta p = 2m\upsilon', calc: '\Delta p = 2\cdot0{,}2\cdot10 = 4', answer: '4 кг·м/с' }
+        src: p32L
+      - type: numeric
+        cat: problem
+        q: Тело массой 2 кг равномерно движется по окружности со скоростью 3 м/с. Найдите модуль изменения импульса за четверть оборота.
+        num: { value: 8.485, unit: 'кг·м/с', check: '2*2*3*Math.sin(Math.PI/4)' }
+        hint: 'За ¼ оборота $\varphi = 90°$.'
+        explain: 'За ¼ оборота $\Delta p = \sqrt2\,m\upsilon$.'
+        f: [4]
+        sol: { given: ['m = 2 кг', 'υ = 3 м/с', 'φ = 90°'], find: 'Δp', formula: '\Delta p = 2m\upsilon\sin\frac{\varphi}{2}', calc: '\Delta p = 2\cdot2\cdot3\cdot\frac{\sqrt2}{2} = 6\sqrt2 \approx 8{,}49', answer: '≈ 8,49 кг·м/с' }
+        src: p32L
+      - type: numeric
+        cat: problem
+        q: То же тело (2 кг, 3 м/с) сделало полный оборот. Найдите изменение импульса.
+        num: { value: 0, unit: 'кг·м/с', check: '0', tolAbs: 0.001 }
+        hint: Куда направлена скорость после полного оборота?
+        explain: За полный оборот $\Delta p = 0$.
+        f: [4]
+        sol: { given: ['m = 2 кг', 'υ = 3 м/с', 'φ = 360°'], find: 'Δp', formula: '\Delta p = 2m\upsilon\sin\frac{\varphi}{2}', calc: '\Delta p = 2\cdot2\cdot3\cdot\sin180° = 0', answer: '0' }
+        src: p32L
+      - type: numeric
+        cat: problem
+        q: Импульсы двух тел 3 кг·м/с и 4 кг·м/с направлены перпендикулярно. Найдите суммарный импульс.
+        num: { value: 5, unit: 'кг·м/с', check: 'Math.sqrt(9+16)' }
+        hint: Перпендикулярные импульсы складываются по теореме Пифагора.
+        explain: '$p_{рез} = \sqrt{p_1^2+p_2^2}$.'
+        f: [2]
+        sol: { given: ['p₁ = 3', 'p₂ = 4', '⊥'], find: 'p_рез', formula: 'p_{рез} = \sqrt{p_1^2+p_2^2}', calc: 'p_{рез} = 5', answer: '5 кг·м/с' }
+        src: p31R
+
+# ───────────────────────────────────────────────────────────────
+  - id: cons-impulse
+    title: Импульс силы. Удары
+    pages: [p32R, p33L]
+    theory:
+      - kind: definition
+        title: Импульс силы
+        body: 'Произведение силы на длительность воздействия этой силы называется импульсом силы [Н·с] = [кг·м/с]. Импульс силы — это и есть изменение импульса тела.'
+        src: p32R
+      - kind: text
+        title: Упругий и неупругий удар о стенку
+        fig: wall-bounce
+        body: |
+          **Упругое ударение** (мяч отскакивает с той же скоростью): $\Delta p = I = 2m\upsilon$; под углом α — $\Delta p = 2m\upsilon\cos\alpha$.
+          **Неупругое столкновение** (мяч останавливается или прилипает): $\Delta p = I = m\upsilon$ — и при прямом ударе, и под углом.
+          $t$ — время контакта.
+        src: [p32R, p33L]
+    formulas:
+      - title: Импульс силы
+        tex: '\vec I = \vec F t'
+        sym: [I_imp, F, t]
+        boxed: true
+        src: p32R
+      - title: Импульс силы равен изменению импульса
+        tex: '\vec I = \Delta\vec p,\qquad \vec F = \frac{\Delta\vec p}{\Delta t}'
+        sym: [I_imp, dp, F, dt]
+        boxed: true
+        src: p32R
+      - title: Вывод второго закона Ньютона
+        tex: '\vec F = \frac{\vec p - \vec p_0}{\Delta t} = \frac{m\vec\upsilon - m\vec\upsilon_0}{\Delta t} = m\frac{\vec\upsilon - \vec\upsilon_0}{\Delta t} = m\vec a'
+        sym: [F, p_imp, m, v, v0, a]
+        boxed: true
+        src: p32R
+      - title: Упругий удар
+        tex: 'F = \frac{2m\upsilon}{t};\qquad \text{под углом: } F = \frac{2m\upsilon\cos\alpha}{t}'
+        sym: [F, m, v, t_c]
+        boxed: true
+        src: [p32R, p33L]
+      - title: Неупругий удар
+        tex: 'F = \frac{m\upsilon}{t}'
+        sym: [F, m, v, t_c]
+        boxed: true
+        src: p33L
+    questions:
+      - type: numeric
+        cat: problem
+        q: Сила 20 Н действует на тело в течение 3 с. Найдите импульс силы.
+        num: { value: 60, unit: 'Н·с', check: '20*3' }
+        hint: '$I = Ft$.'
+        explain: Импульс силы.
+        f: [1]
+        sol: { given: ['F = 20 Н', 't = 3 с'], find: 'I', formula: 'I = Ft', calc: 'I = 60', answer: '60 Н·с' }
+        src: p32R
+      - type: numeric
+        cat: problem
+        q: Мяч массой 0,5 кг летит со скоростью 10 м/с перпендикулярно стене и упруго отскакивает. Время контакта 0,05 с. Найдите среднюю силу удара.
+        num: { value: 200, unit: 'Н', check: '2*0.5*10/0.05' }
+        hint: При упругом ударе изменение импульса $2m\upsilon$.
+        explain: '$F = \frac{2m\upsilon}{t}$.'
+        f: [4]
+        sol: { given: ['m = 0,5 кг', 'υ = 10 м/с', 't = 0,05 с'], find: 'F', formula: 'F = \frac{2m\upsilon}{t}', calc: 'F = \frac{10}{0{,}05} = 200', answer: '200 Н' }
+        src: p32R
+      - type: numeric
+        cat: problem
+        q: Тот же мяч (0,5 кг, 10 м/с) ударяется о стену неупруго и останавливается за 0,05 с. Найдите среднюю силу удара.
+        num: { value: 100, unit: 'Н', check: '0.5*10/0.05' }
+        hint: При неупругом ударе $\Delta p = m\upsilon$.
+        explain: '$F = \frac{m\upsilon}{t}$ — вдвое меньше, чем при упругом ударе.'
+        f: [5]
+        sol: { given: ['m = 0,5 кг', 'υ = 10 м/с', 't = 0,05 с'], find: 'F', formula: 'F = \frac{m\upsilon}{t}', calc: 'F = \frac{5}{0{,}05} = 100', answer: '100 Н' }
+        src: p33L
+      - type: numeric
+        cat: problem
+        q: Мяч массой 0,5 кг со скоростью 10 м/с упруго ударяется о стену под углом α = 60° (угол между скоростью и перпендикуляром к стене, как на рисунке в конспекте). Время контакта 0,05 с. Найдите среднюю силу.
+        num: { value: 100, unit: 'Н', check: '2*0.5*10*0.5/0.05' }
+        hint: При ударе под углом в формулу добавляется $\cos\alpha$.
+        explain: '$F = \frac{2m\upsilon\cos\alpha}{t}$.'
+        f: [4]
+        sol: { given: ['m = 0,5 кг', 'υ = 10 м/с', 'α = 60°', 't = 0,05 с'], find: 'F', formula: 'F = \frac{2m\upsilon\cos\alpha}{t}', calc: 'F = \frac{2\cdot0{,}5\cdot10\cdot0{,}5}{0{,}05} = 100', answer: '100 Н' }
+        src: p33L
+      - type: single
+        cat: theory
+        q: Чему равен импульс силы (по конспекту)?
+        opts: ['Изменению импульса тела', 'Импульсу тела в начальный момент', 'Работе силы', 'Произведению массы на ускорение']
+        ans: a
+        hint: В рамке на стр. 32R записано $\vec I = \dots$
+        explain: 'Импульс силы — это и есть изменение импульса тела: $\vec I = \Delta\vec p$.'
+        f: [2]
+        src: p32R
+
+# ───────────────────────────────────────────────────────────────
+  - id: cons-work
+    title: Механическая работа
+    pages: [p33R]
+    theory:
+      - kind: definition
+        title: Механическая работа
+        body: Механическая работа, или работа силы, — это скалярная величина, произведение силы и перемещения тела под воздействием этой силы. $A$ — механическая работа [Дж] = [Н·м]; $\vec S$ — перемещение.
+        src: p33R
+      - kind: list
+        title: Знак работы
+        fig: work-sign
+        body: |
+          ① $0° \le \alpha < 90°$: $\cos\alpha > 0$, $A > 0$.
+          ② $\alpha = 90°$: $\cos\alpha = 0$, $A = 0$ (пример в конспекте — $F_{цб}$; второй пример читается неуверенно, см. E21).
+          ③ $90° < \alpha \le 180°$: $\cos\alpha < 0$, $A < 0$ (примеры — сила трения $F_{тр}$, сила сопротивления $F_с$).
+        src: p33R
+        errata: [E21]
+    formulas:
+      - title: Механическая работа
+        tex: 'A = F\cdot S\cdot\cos\alpha,\qquad \alpha = \angle(\vec F, \vec S)'
+        sym: [A, F, S, alpha_F]
+        boxed: true
+        src: p33R
+    questions:
+      - type: numeric
+        cat: problem
+        q: Сила 50 Н направлена под углом 60° к перемещению 10 м. Найдите работу силы.
+        num: { value: 250, unit: 'Дж', check: '50*10*0.5' }
+        hint: '$\cos60° = 0{,}5$.'
+        explain: '$A = FS\cos\alpha$.'
+        f: [1]
+        sol: { given: ['F = 50 Н', 'S = 10 м', 'α = 60°'], find: 'A', formula: 'A = FS\cos\alpha', calc: 'A = 50\cdot10\cdot0{,}5 = 250', answer: '250 Дж' }
+        src: p33R
+      - type: numeric
+        cat: problem
+        q: Сила 10 Н направлена против перемещения 5 м (α = 180°). Найдите работу силы.
+        num: { value: -50, unit: 'Дж', check: '10*5*Math.cos(Math.PI)' }
+        hint: '$\cos180° = -1$ — работа отрицательная.'
+        explain: 'Случай ③: $A < 0$.'
+        f: [1]
+        sol: { given: ['F = 10 Н', 'S = 5 м', 'α = 180°'], find: 'A', formula: 'A = FS\cos\alpha', calc: 'A = 10\cdot5\cdot(-1) = -50', answer: '−50 Дж' }
+        src: p33R
+      - type: single
+        cat: theory
+        q: Чему равна работа центробежной силы при равномерном движении по окружности?
+        opts: ['Нулю', 'Она положительна', 'Она отрицательна', 'Равна $m\upsilon^2$']
+        ans: a
+        hint: Какой угол между силой и перемещением в этом случае?
+        explain: 'В конспекте $F_{цб}$ — пример силы с $\alpha = 90°$, для которой $A = 0$.'
+        f: [1]
+        src: p33R
+      - type: single
+        cat: theory
+        q: Какой знак имеет работа силы трения (по конспекту)?
+        opts: ['Отрицательный', 'Положительный', 'Всегда равна нулю', 'Зависит от массы тела']
+        ans: a
+        hint: Сила трения направлена против движения.
+        explain: 'Сила трения — пример случая ③: $90° < \alpha \le 180°$, $A < 0$.'
+        src: p33R
+
+# ───────────────────────────────────────────────────────────────
+  - id: cons-kinetic
+    title: Энергия. Кинетическая энергия. Неупругое столкновение
+    pages: [p34L, p34R]
+    theory:
+      - kind: definition
+        title: Энергия
+        body: 'Энергия — это способность тел по выполнению работы. $E$, $W$ — энергия [Дж]. $W_к$ — кинетическая энергия (энергия движения); $W_п$ — потенциальная энергия (энергия положения). Кинетическая энергия не зависит от направления движения.'
+        src: p34L
+      - kind: text
+        title: Неупругое столкновение
+        fig: inelastic
+        body: 'Тела $m_1$ и $m_2$ после столкновения движутся вместе со скоростью $u$. Часть кинетической энергии переходит в теплоту $Q$.'
+        src: p34R
+    formulas:
+      - title: Работа и энергия
+        tex: 'A = \Delta W'
+        sym: [A, W]
+        src: p34L
+      - title: Кинетическая энергия
+        tex: 'W_к = \frac{m\upsilon^2}{2},\qquad W_к = \frac{p\upsilon}{2},\qquad W_к = \frac{p^2}{2m}'
+        sym: [W_k, m, v, p_imp]
+        boxed: true
+        src: p34L
+      - title: Теорема о кинетической энергии
+        tex: 'A = \Delta W_к = W_к - W_{к0} = \frac{m\upsilon^2}{2} - \frac{m\upsilon_0^2}{2} = \frac{m}{2}(\upsilon^2 - \upsilon_0^2)'
+        sym: [A, W_k, m, v, v0]
+        boxed: true
+        src: p34L
+      - title: Связь с работой силы
+        tex: 'S = \frac{\upsilon^2 - \upsilon_0^2}{2a}\;\Rightarrow\; A = \frac{m}{2}\cdot2aS = maS = F\cdot S'
+        sym: [S, v, v0, a, A, m, F]
+        src: p34L
+      - title: Скорость после неупругого столкновения
+        tex: 'u = \frac{m_1\upsilon_1 \pm m_2\upsilon_2}{m_1 + m_2}'
+        sym: [u, m, v1v2]
+        cond: '«+» — тела двигались в одну сторону, «−» — навстречу'
+        src: p34R
+      - title: Теплота при неупругом столкновении
+        tex: 'W_к^{до} = \frac{m_1\upsilon_1^2}{2} + \frac{m_2\upsilon_2^2}{2},\quad W_к^{после} = \frac{(m_1 + m_2)u^2}{2},\quad Q = W_к^{до} - W_к^{после}'
+        sym: [W_k, Q, m, v1v2, u]
+        src: p34R
+    questions:
+      - type: numeric
+        cat: problem
+        q: Тело массой 2 кг движется со скоростью 5 м/с. Найдите его кинетическую энергию.
+        num: { value: 25, unit: 'Дж', check: '2*25/2' }
+        hint: '$W_к = \frac{m\upsilon^2}{2}$.'
+        explain: Кинетическая энергия.
+        f: [2]
+        sol: { given: ['m = 2 кг', 'υ = 5 м/с'], find: 'Wк', formula: 'W_к = \frac{m\upsilon^2}{2}', calc: 'W_к = \frac{2\cdot25}{2} = 25', answer: '25 Дж' }
+        src: p34L
+      - type: numeric
+        cat: problem
+        q: Импульс тела 10 кг·м/с, масса 2 кг. Найдите кинетическую энергию.
+        num: { value: 25, unit: 'Дж', check: '100/(2*2)' }
+        hint: Есть формула кинетической энергии через импульс.
+        explain: '$W_к = \frac{p^2}{2m}$.'
+        f: [2]
+        sol: { given: ['p = 10 кг·м/с', 'm = 2 кг'], find: 'Wк', formula: 'W_к = \frac{p^2}{2m}', calc: 'W_к = \frac{100}{4} = 25', answer: '25 Дж' }
+        src: p34L
+      - type: numeric
+        cat: problem
+        q: Какую работу нужно совершить, чтобы разогнать автомобиль массой 1000 кг от 10 м/с до 20 м/с?
+        num: { value: 150000, unit: 'Дж', check: '1000/2*(400-100)' }
+        hint: Работа равна изменению кинетической энергии.
+        explain: '$A = \frac{m}{2}(\upsilon^2 - \upsilon_0^2)$.'
+        f: [3]
+        sol: { given: ['m = 1000 кг', 'υ₀ = 10 м/с', 'υ = 20 м/с'], find: 'A', formula: 'A = \frac{m}{2}(\upsilon^2-\upsilon_0^2)', calc: 'A = 500\cdot(400-100) = 150\,000', answer: '150 кДж' }
+        src: p34L
+      - type: numeric
+        cat: problem
+        q: Шар массой 2 кг, движущийся со скоростью 6 м/с, догоняет шар массой 1 кг, движущийся в ту же сторону со скоростью 3 м/с, и слипается с ним. Найдите скорость после столкновения.
+        num: { value: 5, unit: 'м/с', check: '(2*6+1*3)/(2+1)' }
+        hint: Тела движутся в одну сторону — в формуле знак «+».
+        explain: '$u = \frac{m_1\upsilon_1 + m_2\upsilon_2}{m_1+m_2}$.'
+        f: [5]
+        sol: { given: ['m₁ = 2 кг, υ₁ = 6 м/с', 'm₂ = 1 кг, υ₂ = 3 м/с'], find: 'u', formula: 'u = \frac{m_1\upsilon_1 + m_2\upsilon_2}{m_1+m_2}', calc: 'u = \frac{12+3}{3} = 5', answer: '5 м/с' }
+        src: p34R
+      - type: numeric
+        cat: problem
+        q: Сколько теплоты выделилось при столкновении из предыдущей задачи (2 кг · 6 м/с и 1 кг · 3 м/с, слипание)?
+        num: { value: 3, unit: 'Дж', check: '(2*36/2+1*9/2)-(3*25/2)' }
+        hint: Теплота — разность кинетических энергий до и после столкновения.
+        explain: '$Q = W_к^{до} - W_к^{после}$.'
+        f: [6]
+        sol: { given: ['m₁ = 2, υ₁ = 6', 'm₂ = 1, υ₂ = 3', 'u = 5 м/с'], find: 'Q', formula: 'Q = W_к^{до} - W_к^{после}', calc: 'W^{до} = 36 + 4{,}5 = 40{,}5;\ W^{после} = \frac{3\cdot25}{2} = 37{,}5;\ Q = 3', answer: '3 Дж' }
+        src: p34R
+      - type: single
+        cat: theory
+        q: Зависит ли кинетическая энергия от направления движения тела?
+        opts: ['Нет', 'Да, она векторная', 'Да, если тело движется вниз', 'Только при движении по окружности']
+        ans: a
+        hint: В конспекте рядом с формулами $W_к$ есть пометка про направление.
+        explain: '«$W_к \not\sim$ направление» — кинетическая энергия зависит только от модуля скорости.'
+        src: p34L
+
+# ───────────────────────────────────────────────────────────────
+  - id: cons-potential
+    title: Потенциальная энергия. Работа силы тяжести. Энергия пружины
+    pages: [p34R, p35L, p35R, p36L]
+    theory:
+      - kind: text
+        title: Материальная точка и протяжённое тело
+        body: 'Для материальной точки на высоте $h$: $W_п = mgh$; на поверхности $W_п = 0$ (относительно Земли). Для «нематериальной точки» (бруска) высоту отсчитывают до центра бруска: например, брусок лежит — $h = \frac{a}{2}$, стоит — $h = \frac{b}{2}$.'
+        src: [p34R, p35L]
+      - kind: text
+        title: Опрокидывание тела
+        body: 'При опрокидывании бруска через ребро его центр поднимается от высоты $\frac{a}{2}$ до половины диагонали $\frac{\sqrt{a^2+b^2}}{2}$. Работа равна разности потенциальных энергий.'
+        src: p35L
+      - kind: law
+        title: Работа силы тяжести
+        body: Работа силы тяжести зависит от изменения потенциальной энергии и не зависит от траектории движения ($A_{mg\,a} = A_{mg\,b}$). Тело опускается ($h_1 > h_2$) — $A_{mg} > 0$; поднимается ($h_1 < h_2$) — $A_{mg} < 0$.
+        src: p35R
+      - kind: note
+        title: Замечание к странице 36L
+        body: 'Формулы работы при растяжении пружины записаны с разными знаками (см. E15).'
+        src: p36L
+        errata: [E15]
+    formulas:
+      - title: Потенциальная энергия
+        tex: 'W_п = mgh'
+        sym: [W_p, m, g, h]
+        boxed: true
+        src: p34R
+      - title: Потенциальная энергия бруска
+        tex: 'W_п = mg\frac{a}{2},\qquad W_п = mg\left(\frac{a}{2} + h_0\right),\qquad W_п = mg\frac{b}{2}'
+        sym: [W_p, m, g, ab, h0]
+        src: p35L
+      - title: Опрокидывание бруска
+        tex: 'W_{п1} = mg\frac{a}{2},\quad W_{п2} = mg\frac{\sqrt{a^2 + b^2}}{2},\quad A = W_{п2} - W_{п1}'
+        sym: [W_p, m, g, ab, A]
+        src: p35L
+      - title: Работа силы тяжести
+        tex: 'A_{mg} = -\Delta W_п = -(mgh_2 - mgh_1) = mg(h_1 - h_2)'
+        sym: [A, W_p, m, g, h]
+        boxed: true
+        src: p35R
+      - title: Потенциальная энергия пружины
+        tex: 'W_п = \frac{k\Delta l^2}{2},\qquad W_п = \frac{F\Delta l}{2},\qquad W_п = \frac{F^2}{2k}'
+        sym: [W_p, k, dl, F]
+        src: p35R
+      - title: Работа при растяжении пружины
+        tex: 'A_{01} = W_{п1} - W_{п0} = \frac{k\Delta l_1^2}{2},\qquad A_{1,2} = \frac{k}{2}\left(\Delta l_1^2 - \Delta l_2^2\right)'
+        sym: [A, k, dl, W_p]
+        src: p36L
+        errata: [E15]
+    questions:
+      - type: numeric
+        cat: problem
+        q: Тело массой 3 кг находится на высоте 5 м над землёй. Найдите его потенциальную энергию ($g = 10$ м/с²).
+        num: { value: 150, unit: 'Дж', check: '3*10*5' }
+        hint: '$W_п = mgh$.'
+        explain: Потенциальная энергия относительно Земли.
+        f: [1]
+        sol: { given: ['m = 3 кг', 'h = 5 м'], find: 'Wп', formula: 'W_п = mgh', calc: 'W_п = 3\cdot10\cdot5 = 150', answer: '150 Дж' }
+        src: p34R
+      - type: numeric
+        cat: problem
+        q: Тело массой 2 кг опустилось с высоты 10 м до высоты 4 м. Найдите работу силы тяжести.
+        num: { value: 120, unit: 'Дж', check: '2*10*(10-4)' }
+        hint: Тело опускается — работа силы тяжести положительна.
+        explain: '$A_{mg} = mg(h_1 - h_2)$.'
+        f: [4]
+        sol: { given: ['m = 2 кг', 'h₁ = 10 м', 'h₂ = 4 м'], find: 'A', formula: 'A = mg(h_1 - h_2)', calc: 'A = 20\cdot6 = 120', answer: '120 Дж' }
+        src: p35R
+      - type: single
+        cat: theory
+        q: Зависит ли работа силы тяжести от траектории движения тела?
+        opts: ['Нет, только от начальной и конечной высоты', 'Да, по длинной траектории работа больше', 'Да, по кривой траектории работа меньше', 'Зависит от скорости тела']
+        ans: a
+        hint: На рисунке в конспекте две разные траектории a и b между теми же высотами.
+        explain: '$A_{mg\,a} = A_{mg\,b}$ — работа силы тяжести не зависит от траектории.'
+        f: [4]
+        src: p35R
+      - type: numeric
+        cat: problem
+        q: Пружина жёсткостью 400 Н/м растянута на 0,1 м. Найдите её потенциальную энергию.
+        num: { value: 2, unit: 'Дж', check: '400*0.01/2' }
+        hint: '$W_п = \frac{k\Delta l^2}{2}$.'
+        explain: Потенциальная энергия пружины.
+        f: [5]
+        sol: { given: ['k = 400 Н/м', 'Δl = 0,1 м'], find: 'Wп', formula: 'W_п = \frac{k\Delta l^2}{2}', calc: 'W_п = \frac{400\cdot0{,}01}{2} = 2', answer: '2 Дж' }
+        src: p35R
+      - type: numeric
+        cat: problem
+        q: Брусок массой 10 кг с размерами a = 0,3 м (высота, когда он лежит) и b = 0,4 м опрокидывают через ребро. Какую минимальную работу для этого нужно совершить? ($g = 10$ м/с²)
+        num: { value: 10, unit: 'Дж', check: '10*10*(Math.sqrt(0.09+0.16)/2-0.3/2)' }
+        hint: Центр бруска поднимается от $\frac{a}{2}$ до $\frac{\sqrt{a^2+b^2}}{2}$.
+        explain: 'Разность потенциальных энергий: $A = W_{п2} - W_{п1}$.'
+        f: [3]
+        sol: { given: ['m = 10 кг', 'a = 0,3 м', 'b = 0,4 м'], find: 'A', formula: 'A = mg\frac{\sqrt{a^2+b^2}}{2} - mg\frac{a}{2}', calc: 'A = 100\cdot(0{,}25 - 0{,}15) = 10', answer: '10 Дж' }
+        src: p35L
+
+# ───────────────────────────────────────────────────────────────
+  - id: cons-mech-energy
+    title: Закон сохранения механической энергии. Маятник
+    pages: [p36L, p36R, p38L, p38R]
+    theory:
+      - kind: law
+        title: Закон сохранения механической энергии
+        body: В закрытой системе полная механическая энергия одного тела или системы тел сохраняется. $W$ — механическая энергия, $W = W_к + W_п = \text{const}$.
+        src: [p36L, p36R]
+      - kind: rule
+        title: Высота, где W_к = W_п
+        fig: energy-fall
+        body: 'Для тела, брошенного вверх с $\upsilon_0$: $\frac{m\upsilon_0^2}{2} = W_к + W_п$; высота, на которой $W_к = W_п$, равна половине максимальной: $h = \frac{h_{max}}{2}$.'
+        src: p36R
+      - kind: text
+        title: Маятник
+        body: 'Нить длиной $l$ отклонена на угол α; груз поднят на высоту $h$. В нижней точке на груз действуют натяжение $T$ (вверх), сила тяжести $mg$ и центробежная $\frac{m\upsilon^2}{l}$ (вниз).'
+        src: p38L
+    formulas:
+      - title: Закон сохранения механической энергии
+        tex: 'W = W_к + W_п = \text{const},\qquad W_{к1} + W_{п1} = W_{к2} + W_{п2}'
+        sym: [W, W_k, W_p]
+        src: p36R
+      - title: Максимальная высота (бросок вверх)
+        tex: '\frac{m\upsilon_0^2}{2} + 0 = 0 + mgh_{max}\;\Rightarrow\; h_{max} = \frac{\upsilon_0^2}{2g}'
+        sym: [m, v0, g, H_max]
+        src: p36R
+      - title: Скорость падения (бросок вниз с высоты h)
+        tex: '\frac{m\upsilon_0^2}{2} + mgh = \frac{m\upsilon^2}{2} + 0\;\Rightarrow\; \upsilon = \sqrt{\upsilon_0^2 + 2gh}'
+        sym: [v, v0, g, h, m]
+        boxed: true
+        src: p36R
+      - title: Энергия брошенного вверх тела
+        tex: '\frac{m\upsilon_0^2}{2} = W_к + W_п'
+        sym: [m, v0, W_k, W_p]
+        boxed: true
+        src: p36R
+      - title: Высота, где W_к = W_п
+        tex: 'h = \frac{h_{max}}{2}'
+        sym: [h, H_max]
+        boxed: true
+        src: p36R
+      - title: Высота подъёма маятника
+        tex: '\cos\alpha = \frac{l - h}{l},\qquad h = l(1 - \cos\alpha),\qquad W_п = mgl(1 - \cos\alpha)'
+        sym: [l_p, h, alpha, W_p, m, g]
+        src: p38L
+      - title: Скорость маятника в нижней точке
+        tex: '\frac{m\upsilon^2}{2} = mgl(1 - \cos\alpha)\;\Rightarrow\;\upsilon = \sqrt{2gl(1 - \cos\alpha)}'
+        sym: [v, g, l_p, alpha, m]
+        boxed: true
+        src: [p38L, p38R]
+      - title: Натяжение нити в нижней точке
+        tex: 'T = mg + \frac{m\upsilon^2}{l},\qquad T = mg(3 - 2\cos\alpha)'
+        sym: [T_ten, m, g, v, l_p, alpha]
+        boxed: true
+        src: p38R
+    questions:
+      - type: numeric
+        cat: problem
+        q: Тело брошено вертикально вверх со скоростью 20 м/с. На какой высоте его кинетическая энергия равна потенциальной ($g = 10$ м/с²)?
+        num: { value: 10, unit: 'м', check: '(400/20)/2' }
+        hint: Найдите $h_{max}$ и используйте правило из рамки.
+        explain: '$h_{max} = \frac{\upsilon_0^2}{2g} = 20$ м; $h = \frac{h_{max}}{2}$.'
+        f: [2, 5]
+        sol: { given: ['υ₀ = 20 м/с'], find: 'h', formula: 'h = \frac{h_{max}}{2},\ h_{max} = \frac{\upsilon_0^2}{2g}', calc: 'h_{max} = 20;\ h = 10', answer: '10 м' }
+        src: p36R
+      - type: numeric
+        cat: problem
+        q: Тело бросили вниз с высоты 15 м со скоростью 10 м/с. Найдите скорость у земли (по закону сохранения энергии, $g = 10$ м/с²).
+        num: { value: 20, unit: 'м/с', check: 'Math.sqrt(100+2*10*15)' }
+        hint: 'Приравняйте полную энергию в начале и в конце.'
+        explain: '$\upsilon = \sqrt{\upsilon_0^2 + 2gh}$.'
+        f: [3]
+        sol: { given: ['h = 15 м', 'υ₀ = 10 м/с'], find: 'υ', formula: '\upsilon = \sqrt{\upsilon_0^2+2gh}', calc: '\upsilon = \sqrt{100+300} = 20', answer: '20 м/с' }
+        src: p36R
+      - type: numeric
+        cat: problem
+        q: Маятник длиной 0,9 м отклонили на 60° и отпустили. Найдите скорость груза в нижней точке ($g = 10$ м/с²).
+        num: { value: 3, unit: 'м/с', check: 'Math.sqrt(2*10*0.9*(1-0.5))' }
+        hint: '$\cos60° = 0{,}5$; груз поднят на $h = l(1-\cos\alpha)$.'
+        explain: '$\upsilon = \sqrt{2gl(1-\cos\alpha)}$.'
+        f: [7]
+        sol: { given: ['l = 0,9 м', 'α = 60°'], find: 'υ', formula: '\upsilon = \sqrt{2gl(1-\cos\alpha)}', calc: '\upsilon = \sqrt{2\cdot10\cdot0{,}9\cdot0{,}5} = 3', answer: '3 м/с' }
+        src: p38R
+      - type: numeric
+        cat: problem
+        q: Груз массой 0,2 кг на нити (маятник отклонён на 60°). Найдите натяжение нити в нижней точке ($g = 10$ м/с²).
+        num: { value: 4, unit: 'Н', check: '0.2*10*(3-2*0.5)' }
+        hint: В рамке есть формула натяжения через угол отклонения.
+        explain: '$T = mg(3 - 2\cos\alpha)$.'
+        f: [8]
+        sol: { given: ['m = 0,2 кг', 'α = 60°'], find: 'T', formula: 'T = mg(3-2\cos\alpha)', calc: 'T = 2\cdot(3-1) = 4', answer: '4 Н' }
+        src: p38R
+      - type: text
+        cat: theory
+        q: Сформулируйте закон сохранения механической энергии.
+        ref: В закрытой системе полная механическая энергия одного тела или системы тел сохраняется (W = Wк + Wп = const).
+        criteria: ['Закрытая (замкнутая) система', 'Полная механическая энергия (сумма кинетической и потенциальной) сохраняется']
+        hint: Ключевые слова — «закрытая система» и «полная механическая энергия».
+        explain: Закон со стр. 36L.
+        f: [1]
+        src: p36L
+
+# ───────────────────────────────────────────────────────────────
+  - id: cons-grav-energy
+    title: Гравитационная потенциальная энергия. Вторая космическая скорость
+    pages: [p37L, p37R]
+    theory:
+      - kind: text
+        title: Уход тела на бесконечность
+        body: 'Тело стартует с поверхности Земли со скоростью $\upsilon_0$ и удаляется на бесконечность со скоростью $\upsilon_\infty$. Чтобы тело покинуло Землю, нужно $\upsilon_0 \ge \upsilon_{II}$. В этой теме гравитационная постоянная обозначена γ.'
+        src: p37L
+    formulas:
+      - title: Гравитационная потенциальная энергия
+        tex: 'F_\gamma = \gamma\frac{m_1m_2}{R^2},\qquad W_п = -\gamma\frac{m_1m_2}{R}'
+        sym: [F, gamma, m, R_dist, W_p]
+        boxed: true
+        src: p37L
+      - title: Скорость на бесконечности
+        tex: '\frac{m\upsilon_0^2}{2} - \gamma\frac{M_З m}{R_З} = \frac{m\upsilon_\infty^2}{2}\;\Rightarrow\;\upsilon_\infty = \sqrt{\upsilon_0^2 - 2\gamma\frac{M_З}{R_З}}'
+        sym: [v_inf, v0, gamma, M_E, R_E, m]
+        boxed: true
+        src: p37L
+      - title: Связь со второй космической
+        tex: '\upsilon_\infty^2 = \upsilon_0^2 - \upsilon_{II}^2'
+        sym: [v_inf, v0, v_II]
+        boxed: true
+        src: p37L
+      - title: Вторая космическая скорость
+        tex: '\upsilon_0 \ge \sqrt{2\gamma\frac{M_З}{R_З}},\quad \gamma\frac{M_З}{R_З} = \upsilon_I^2,\quad \upsilon_{II} = \sqrt2\cdot\upsilon_I = 11{,}2\ \text{км/с}'
+        sym: [v0, gamma, M_E, R_E, v_I, v_II]
+        src: [p37L, p37R]
+    questions:
+      - type: numeric
+        cat: problem
+        q: Найдите вторую космическую скорость, если первая равна 7,9 км/с. Ответ в км/с.
+        num: { value: 11.17, unit: 'км/с', check: 'Math.sqrt(2)*7.9' }
+        hint: '$\upsilon_{II} = \sqrt2\cdot\upsilon_I$.'
+        explain: 'В конспекте: $\upsilon_{II} = 11{,}2$ км/с.'
+        f: [4]
+        sol: { given: ['υI = 7,9 км/с'], find: 'υII', formula: '\upsilon_{II} = \sqrt2\,\upsilon_I', calc: '\upsilon_{II} = 1{,}414\cdot7{,}9 \approx 11{,}2', answer: '≈ 11,2 км/с' }
+        src: p37L
+      - type: numeric
+        cat: problem
+        q: Тело стартует с Земли со скоростью 15 км/с. Найдите его скорость вдали от Земли (на бесконечности), если $\upsilon_{II} = 11{,}2$ км/с.
+        num: { value: 9.98, unit: 'км/с', check: 'Math.sqrt(225-11.2**2)' }
+        hint: '$\upsilon_\infty^2 = \upsilon_0^2 - \upsilon_{II}^2$.'
+        explain: Формула из рамки на стр. 37L.
+        f: [3]
+        sol: { given: ['υ₀ = 15 км/с', 'υII = 11,2 км/с'], find: 'υ∞', formula: '\upsilon_\infty = \sqrt{\upsilon_0^2 - \upsilon_{II}^2}', calc: '\upsilon_\infty = \sqrt{225 - 125{,}44} \approx 9{,}98', answer: '≈ 10 км/с' }
+        src: p37L
+      - type: single
+        cat: formula
+        q: Какой знак имеет гравитационная потенциальная энергия по формуле из конспекта?
+        opts: ['Отрицательный', 'Положительный', 'Может быть любым', 'Равна нулю']
+        ans: a
+        hint: Посмотрите на формулу в рамке на стр. 37L.
+        explain: '$W_п = -\gamma\frac{m_1m_2}{R}$ — со знаком «минус».'
+        f: [1]
+        src: p37L
+      - type: single
+        cat: theory
+        q: При каком условии тело покинет Землю (уйдёт на бесконечность)?
+        opts: ['$\upsilon_0 \ge \upsilon_{II}$', '$\upsilon_0 \ge \upsilon_I$', '$\upsilon_0 = 0$', '$\upsilon_0 < \upsilon_{II}$']
+        ans: a
+        hint: Подкоренное выражение в формуле $\upsilon_\infty$ должно быть неотрицательным.
+        explain: '$\upsilon_0^2 - 2\gamma\frac{M_З}{R_З} \ge 0$ ⇒ $\upsilon_0 \ge \upsilon_{II}$.'
+        f: [2, 4]
+        src: [p37L, p37R]
+
+# ───────────────────────────────────────────────────────────────
+  - id: cons-elastic
+    title: Упругое центральное столкновение
+    pages: [p37R, p38L]
+    theory:
+      - kind: text
+        title: Упругое столкновение
+        body: 'Шары $m_1$ ($\upsilon_1$) и $m_2$ ($\upsilon_2$) после столкновения движутся со скоростями $u_1$ и $u_2$. Сохраняются и импульс, и кинетическая энергия.'
+        src: p37R
+      - kind: rule
+        title: Одинаковые массы
+        fig: elastic-collision
+        body: При упругом столкновении тел с одинаковыми массами тела меняются скоростями, но их величина остаётся прежней.
+        src: p38L
+      - kind: rule
+        title: Движение навстречу
+        body: Если тела движутся навстречу, меняется только знак у $\upsilon_2$, т.к. второе тело движется в противоположном направлении.
+        src: p38L
+    formulas:
+      - title: Законы сохранения при упругом ударе
+        tex: '\begin{cases} m_1\upsilon_1 + m_2\upsilon_2 = m_1u_1 + m_2u_2 \\ \frac{m_1\upsilon_1^2}{2} + \frac{m_2\upsilon_2^2}{2} = \frac{m_1u_1^2}{2} + \frac{m_2u_2^2}{2} \end{cases}'
+        sym: [m, v1v2, u]
+        src: p37R
+      - title: Промежуточный результат
+        tex: '\upsilon_1 + u_1 = \upsilon_2 + u_2'
+        sym: [v1v2, u]
+        src: p37R
+      - title: Скорости после упругого удара
+        tex: 'u_1 = \frac{2m_2\upsilon_2 + \upsilon_1(m_1 - m_2)}{m_1 + m_2},\qquad u_2 = \frac{2m_1\upsilon_1 + \upsilon_2(m_2 - m_1)}{m_1 + m_2}'
+        sym: [u, m, v1v2]
+        boxed: true
+        src: p37R
+      - title: Одинаковые массы
+        tex: 'u_1 = \upsilon_2,\qquad u_2 = \upsilon_1'
+        sym: [u, v1v2]
+        cond: '\(m_1 = m_2\)'
+        boxed: true
+        src: p38L
+      - title: Тела движутся навстречу
+        tex: 'u_1 = \frac{-2m_2\upsilon_2 + \upsilon_1(m_1 - m_2)}{m_1 + m_2},\qquad u_2 = \frac{2m_1\upsilon_1 - \upsilon_2(m_2 - m_1)}{m_1 + m_2}'
+        sym: [u, m, v1v2]
+        cond: ось X направлена по скорости первого тела
+        boxed: true
+        src: p38L
+    questions:
+      - type: single
+        cat: theory
+        q: Что происходит при упругом центральном столкновении двух тел одинаковой массы?
+        opts: ['Тела обмениваются скоростями', 'Тела останавливаются', 'Тела движутся вместе', 'Скорости удваиваются']
+        ans: a
+        hint: В рамках на стр. 38L записано $u_1 = \dots$, $u_2 = \dots$
+        explain: '$u_1 = \upsilon_2$, $u_2 = \upsilon_1$.'
+        f: [4]
+        src: p38L
+      - type: numeric
+        cat: problem
+        q: Шар массой 2 кг со скоростью 3 м/с упруго налетает на покоящийся шар массой 1 кг. Найдите скорость второго шара после удара.
+        num: { value: 4, unit: 'м/с', check: '(2*2*3+0*(1-2))/(2+1)' }
+        hint: Второй шар покоился — $\upsilon_2 = 0$.
+        explain: Формула $u_2$ из рамки на стр. 37R.
+        f: [3]
+        sol: { given: ['m₁ = 2 кг, υ₁ = 3 м/с', 'm₂ = 1 кг, υ₂ = 0'], find: 'u₂', formula: 'u_2 = \frac{2m_1\upsilon_1 + \upsilon_2(m_2-m_1)}{m_1+m_2}', calc: 'u_2 = \frac{12}{3} = 4', answer: '4 м/с' }
+        src: p37R
+      - type: numeric
+        cat: problem
+        q: В условиях предыдущей задачи найдите скорость **первого** шара после удара.
+        num: { value: 1, unit: 'м/с', check: '(2*1*0+3*(2-1))/(2+1)' }
+        hint: Формула $u_1$ из той же рамки.
+        explain: 'Проверка импульса: $2\cdot1 + 1\cdot4 = 6 = 2\cdot3$.'
+        f: [3]
+        sol: { given: ['m₁ = 2 кг, υ₁ = 3 м/с', 'm₂ = 1 кг, υ₂ = 0'], find: 'u₁', formula: 'u_1 = \frac{2m_2\upsilon_2 + \upsilon_1(m_1-m_2)}{m_1+m_2}', calc: 'u_1 = \frac{0 + 3\cdot1}{3} = 1', answer: '1 м/с' }
+        src: p37R
+      - type: numeric
+        cat: problem
+        q: 'Шар массой 1 кг (4 м/с) и шар массой 3 кг (2 м/с) движутся навстречу и упруго сталкиваются. Найдите проекцию скорости первого шара после удара на его начальное направление.'
+        num: { value: -5, unit: 'м/с', check: '(-2*3*2+4*(1-3))/(1+3)' }
+        hint: При движении навстречу используйте формулу, где меняется знак у $\upsilon_2$.
+        explain: 'Знак «минус» — первый шар отскочил назад. Проверка: импульс до $4 - 6 = -2$, после $-5 + 3\cdot1 = -2$.'
+        f: [5]
+        sol: { given: ['m₁ = 1 кг, υ₁ = 4 м/с', 'm₂ = 3 кг, υ₂ = 2 м/с (навстречу)'], find: 'u₁', formula: 'u_1 = \frac{-2m_2\upsilon_2 + \upsilon_1(m_1-m_2)}{m_1+m_2}', calc: 'u_1 = \frac{-12 - 8}{4} = -5', answer: '−5 м/с' }
+        src: p38L
+      - type: multiple
+        cat: theory
+        q: Какие законы сохранения используются при выводе формул упругого столкновения? Выберите все.
+        opts: ['Закон сохранения импульса', 'Закон сохранения кинетической энергии', 'Закон Паскаля', 'Закон Архимеда']
+        ans: [a, b]
+        hint: Посмотрите на систему уравнений в начале темы.
+        explain: Первое уравнение системы — сохранение импульса, второе — сохранение кинетической энергии.
+        f: [1]
+        src: p37R
+
+# ───────────────────────────────────────────────────────────────
+  - id: cons-energy-friction
+    title: Закон сохранения энергии при трении и сопротивлении
+    pages: [p38R, p39L]
+    theory:
+      - kind: law
+        title: Закон сохранения энергии
+        body: Если в пространстве присутствует сила трения или сила сопротивления, то полная механическая энергия не сохраняется. Под воздействием трения, под воздействием сопротивления полная механическая энергия будет всегда уменьшаться по процессу движения. Потерянная механическая энергия затрачивается против сил трения или сопротивления, и данная энергия переходит в теплоту.
+        src: p38R
+    formulas:
+      - title: Убыль механической энергии
+        tex: 'W_{к1} + W_{п1} > W_{к2} + W_{п2},\qquad W_1 > W_2'
+        sym: [W_k, W_p, W]
+        cond: '\(F_{тр},\ F_с \ne 0\)'
+        src: p38R
+      - title: Баланс энергии с учётом трения
+        tex: 'W_{к1} + W_{п1} = W_{к2} + W_{п2} + A_{тр(сопр)},\qquad A_{тр(сопр)} = Q'
+        sym: [W_k, W_p, A_res, Q]
+        src: p38R
+      - title: Средняя сила сопротивления
+        tex: 'A_{сопр} = F_с\cdot S,\qquad F_с = \frac{A_{сопр}}{S}'
+        sym: [A_res, F_drag, S]
+        cond: S — путь
+        boxed: true
+        src: p39L
+    examples:
+      - title: Бросок вверх с сопротивлением воздуха
+        given: '$m = 2$ кг; $\upsilon_0 = 20$ м/с; тело поднялось на $h = 15$ м'
+        steps: ['$\frac{m\upsilon_0^2}{2} + 0 = 0 + mgh_{max} + A_{сопр}$', '$A_{сопр} = 100$ Дж']
+        src: p39L
+    questions:
+      - type: numeric
+        cat: problem
+        q: Тело массой 2 кг брошено вверх со скоростью 20 м/с и поднялось на 15 м. Какая работа совершена против силы сопротивления ($g = 10$ м/с²)?
+        num: { value: 100, unit: 'Дж', check: '2*400/2-2*10*15' }
+        hint: Начальная кинетическая энергия = потенциальная энергия в верхней точке + работа против сопротивления.
+        explain: Пример со стр. 39L.
+        f: [2]
+        sol: { given: ['m = 2 кг', 'υ₀ = 20 м/с', 'h = 15 м'], find: 'A_сопр', formula: '\frac{m\upsilon_0^2}{2} = mgh + A_{сопр}', calc: 'A_{сопр} = 400 - 300 = 100', answer: '100 Дж' }
+        src: p39L
+      - type: numeric
+        cat: problem
+        q: В условиях предыдущей задачи найдите среднюю силу сопротивления.
+        num: { value: 6.67, unit: 'Н', check: '100/15' }
+        hint: Работа силы сопротивления = сила × путь.
+        explain: '$F_с = \frac{A_{сопр}}{S}$, путь $S = 15$ м.'
+        f: [3]
+        sol: { given: ['A_сопр = 100 Дж', 'S = 15 м'], find: 'Fс', formula: 'F_с = \frac{A_{сопр}}{S}', calc: 'F_с = \frac{100}{15} \approx 6{,}67', answer: '≈ 6,7 Н' }
+        src: p39L
+      - type: numeric
+        cat: problem
+        q: Тело массой 1 кг брошено вверх со скоростью 10 м/с и поднялось на 4 м. Сколько механической энергии перешло в теплоту ($g = 10$ м/с²)?
+        num: { value: 10, unit: 'Дж', check: '1*100/2-1*10*4' }
+        hint: Сравните начальную кинетическую энергию с потенциальной в верхней точке.
+        explain: '$Q = A_{тр(сопр)} = W_1 - W_2$.'
+        f: [2]
+        sol: { given: ['m = 1 кг', 'υ₀ = 10 м/с', 'h = 4 м'], find: 'Q', formula: 'Q = \frac{m\upsilon_0^2}{2} - mgh', calc: 'Q = 50 - 40 = 10', answer: '10 Дж' }
+        src: p38R
+      - type: single
+        cat: theory
+        q: Куда девается механическая энергия, потерянная из-за трения или сопротивления?
+        opts: ['Переходит в теплоту', 'Исчезает бесследно', 'Переходит в потенциальную энергию', 'Увеличивает импульс тела']
+        ans: a
+        hint: Последнее предложение закона на стр. 38R.
+        explain: 'Потерянная механическая энергия затрачивается против сил трения или сопротивления и переходит в теплоту: $A_{тр(сопр)} = Q$.'
+        f: [2]
+        src: p38R
+
+# ───────────────────────────────────────────────────────────────
+  - id: cons-power
+    title: Мощность. КПД
+    pages: [p39L, p39R, p40L]
+    theory:
+      - kind: definition
+        title: Мощность
+        body: Работа, совершённая за единицу времени, называется мощностью. $N$ — мощность [Вт] = [Дж/с]. Дж = Вт·с; 1 кВт·ч — единица измерения электросчётчиков.
+        src: p39L
+      - kind: definition
+        title: КПД
+        body: 'КПД — коэффициент полезного действия: отношение полезной работы («цель») к затраченной («источник»), в процентах.'
+        src: p39R
+      - kind: note
+        title: КПД электрочайника
+        body: 'Формула КПД электрочайника содержит величины $c$, $\Delta t$, $I$, $R$ из тем теплоты и электричества — в конспекте они не расшифрованы (см. E18).'
+        src: p40L
+        errata: [E18]
+    formulas:
+      - title: Мощность
+        tex: 'N = \frac{A}{t},\qquad A = Nt'
+        sym: [N_pow, A, t]
+        src: p39L
+      - title: Киловатт-час
+        tex: '1\ \text{кВт}\cdot\text{ч} = 3{,}6\cdot10^6\ \text{Дж}'
+        sym: []
+        src: p39L
+      - title: Мощность при равномерном движении
+        tex: 'N = F\cdot\upsilon'
+        sym: [N_pow, F, v]
+        cond: '\(N = \text{const}\), \(\upsilon = \text{const}\)'
+        boxed: true
+        src: p39R
+      - title: Средняя мощность
+        tex: '\bar N = \frac{A_{об}}{t_{об}}'
+        sym: [N_pow, A, t]
+        boxed: true
+        src: p39R
+      - title: Мгновенная мощность
+        tex: 'N(t) = F\cdot\upsilon(t),\qquad \upsilon(t) = \upsilon_0 \pm at'
+        sym: [N_pow, F, v, v0, a, t]
+        boxed: true
+        src: p39R
+      - title: КПД
+        tex: '\eta = \frac{A_{полез}}{A_{зат}}\cdot100\%,\qquad \eta = \frac{\text{цель}}{\text{источник}}'
+        sym: [eta, A]
+        boxed: true
+        src: p39R
+      - title: КПД лифта
+        tex: '\eta = \frac{mgh}{N_{дв}\cdot t}\cdot100\%'
+        sym: [eta, m, g, h, N_pow, t]
+        boxed: true
+        src: p40L
+      - title: КПД электрочайника
+        tex: '\eta = \frac{cm\Delta t}{I^2Rt}\cdot100\%'
+        sym: [eta, kettle, m, t]
+        boxed: true
+        src: p40L
+        errata: [E18]
+      - title: КПД наклонной плоскости
+        tex: '\eta = \frac{\operatorname{tg}\alpha}{\operatorname{tg}\alpha + \mu}\cdot100\%,\qquad \eta = \frac{\sin\alpha}{\sin\alpha + \mu\cos\alpha}\cdot100\%'
+        sym: [eta, alpha, mu]
+        boxed: true
+        src: p40L
+    questions:
+      - type: numeric
+        cat: problem
+        q: Двигатель совершил работу 1200 Дж за 1 минуту. Найдите мощность.
+        num: { value: 20, unit: 'Вт', check: '1200/60' }
+        hint: Переведите минуты в секунды.
+        explain: '$N = A/t$.'
+        f: [1]
+        sol: { given: ['A = 1200 Дж', 't = 1 мин'], si: ['t = 60 с'], find: 'N', formula: 'N = \frac{A}{t}', calc: 'N = \frac{1200}{60} = 20', answer: '20 Вт' }
+        src: p39L
+      - type: numeric
+        cat: problem
+        q: Автомобиль движется равномерно со скоростью 20 м/с, сила тяги 2000 Н. Найдите мощность двигателя в кВт.
+        num: { value: 40, unit: 'кВт', check: '2000*20/1000' }
+        hint: При равномерном движении $N = F\upsilon$.
+        explain: '$N = F\upsilon = 40\,000$ Вт.'
+        f: [3]
+        sol: { given: ['F = 2000 Н', 'υ = 20 м/с'], find: 'N', formula: 'N = F\upsilon', calc: 'N = 40\,000\ \text{Вт} = 40\ \text{кВт}', answer: '40 кВт' }
+        src: p39R
+      - type: numeric
+        cat: problem
+        q: Сколько джоулей в 2 кВт·ч?
+        num: { value: 7200000, unit: 'Дж', check: '2*3.6e6' }
+        hint: 1 кВт·ч = 3,6·10⁶ Дж.
+        explain: Перевод единиц энергии.
+        f: [2]
+        sol: { calc: '2\cdot3{,}6\cdot10^6 = 7{,}2\cdot10^6', answer: '7,2·10⁶ Дж' }
+        src: p39L
+      - type: numeric
+        cat: problem
+        q: Лифт поднимает груз массой 500 кг на высоту 20 м за 25 с. Мощность двигателя 5 кВт. Найдите КПД ($g = 10$ м/с²). Ответ в процентах.
+        num: { value: 80, unit: '%', check: '500*10*20/(5000*25)*100' }
+        hint: Полезная работа — $mgh$, затраченная — $N_{дв}t$.
+        explain: '$\eta = \frac{mgh}{N_{дв}t}\cdot100\%$.'
+        f: [7]
+        sol: { given: ['m = 500 кг', 'h = 20 м', 't = 25 с', 'N = 5 кВт'], si: ['N = 5000 Вт'], find: 'η', formula: '\eta = \frac{mgh}{N_{дв}t}\cdot100\%', calc: '\eta = \frac{100\,000}{125\,000}\cdot100\% = 80\%', answer: '80 %' }
+        src: p40L
+      - type: numeric
+        cat: problem
+        q: 'Найдите КПД наклонной плоскости с углом 45° и коэффициентом трения 0,25. Ответ в процентах.'
+        num: { value: 80, unit: '%', check: '1/(1+0.25)*100' }
+        hint: '$\operatorname{tg}45° = 1$.'
+        explain: '$\eta = \frac{\operatorname{tg}\alpha}{\operatorname{tg}\alpha+\mu}\cdot100\%$.'
+        f: [9]
+        sol: { given: ['α = 45°', 'μ = 0,25'], find: 'η', formula: '\eta = \frac{\operatorname{tg}\alpha}{\operatorname{tg}\alpha+\mu}\cdot100\%', calc: '\eta = \frac{1}{1{,}25}\cdot100\% = 80\%', answer: '80 %' }
+        src: p40L
+      - type: matching
+        cat: theory
+        q: Сопоставьте величину и её единицу измерения (по конспекту).
+        pairs:
+          - ['Мощность', 'Вт']
+          - ['Работа', 'Дж']
+          - ['Импульс тела', 'кг·м/с']
+          - ['Давление', 'Па']
+        hint: Работа и энергия измеряются в одних единицах.
+        explain: 'Мощность — Вт (стр. 39L), работа — Дж (33R), импульс — кг·м/с (31R), давление — Па (19R).'
+        src: [p39L, p33R, p31R, p19R]

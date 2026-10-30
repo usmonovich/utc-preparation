@@ -1,0 +1,1900 @@
+# 1.15 Тригонометрия (книга, ч. 1, с. 156–201; с. 157 и далее — вторая часть книги).
+# Теория, формулы, примеры и задачи составлены по открытым источникам (ссылки — в web); задания книги не копируются.
+
+subsection: ma-1-15
+
+x-sources:
+  at-71: &at-71 { title: 'Algebra and Trigonometry 2e, 7.1 Angles', org: 'OpenStax, Rice University (открытый учебник)', url: 'https://openstax.org/books/algebra-and-trigonometry-2e/pages/7-1-angles', checked: '2026-10-25', note: 'адрес взят со страницы «Key Concepts» гл. 7; радианы, длина дуги' }
+  at-73: &at-73 { title: 'Algebra and Trigonometry 2e, 7.3 Unit Circle', org: 'OpenStax, Rice University', url: 'https://openstax.org/books/algebra-and-trigonometry-2e/pages/7-3-unit-circle', checked: '2026-10-25', note: 'синус и косинус на единичной окружности, опорный угол, знаки по четвертям' }
+  at-74: &at-74 { title: 'Algebra and Trigonometry 2e, 7.4 The Other Trigonometric Functions', org: 'OpenStax, Rice University', url: 'https://openstax.org/books/algebra-and-trigonometry-2e/pages/7-4-the-other-trigonometric-functions', checked: '2026-10-25' }
+  at-91: &at-91 { title: 'Algebra and Trigonometry 2e, 9.1 Verifying Trigonometric Identities and Using Trigonometric Identities to Simplify Trigonometric Expressions', org: 'OpenStax, Rice University', url: 'https://openstax.org/books/algebra-and-trigonometry-2e/pages/9-1-verifying-trigonometric-identities-and-using-trigonometric-identities-to-simplify-trigonometric-expressions', checked: '2026-10-25', note: 'основные тождества, чётность' }
+  at-92: &at-92 { title: 'Algebra and Trigonometry 2e, 9.2 Sum and Difference Identities', org: 'OpenStax, Rice University', url: 'https://openstax.org/books/algebra-and-trigonometry-2e/pages/9-2-sum-and-difference-identities', checked: '2026-10-25', note: 'формулы сложения, тождества дополнительных углов (cofunction)' }
+
+  at-93: &at-93 { title: 'Algebra and Trigonometry 2e, 9.3 Double-Angle, Half-Angle, and Reduction Formulas', org: 'OpenStax, Rice University', url: 'https://openstax.org/books/algebra-and-trigonometry-2e/pages/9-3-double-angle-half-angle-and-reduction-formulas', checked: '2026-10-25', note: 'адрес взят из предметного указателя книги' }
+  at-94: &at-94 { title: 'Algebra and Trigonometry 2e, 9.4 Sum-to-Product and Product-to-Sum Formulas', org: 'OpenStax, Rice University', url: 'https://openstax.org/books/algebra-and-trigonometry-2e/pages/9-4-sum-to-product-and-product-to-sum-formulas', checked: '2026-10-25', note: 'адрес взят из предметного указателя книги' }
+  at-81: &at-81 { title: 'Algebra and Trigonometry 2e, 8.1 Graphs of the Sine and Cosine Functions', org: 'OpenStax, Rice University', url: 'https://openstax.org/books/algebra-and-trigonometry-2e/pages/8-1-graphs-of-the-sine-and-cosine-functions', checked: '2026-10-25', note: 'период, амплитуда' }
+  at-83: &at-83 { title: 'Algebra and Trigonometry 2e, 8.3 Inverse Trigonometric Functions', org: 'OpenStax, Rice University', url: 'https://openstax.org/books/algebra-and-trigonometry-2e/pages/8-3-inverse-trigonometric-functions', checked: '2026-10-25' }
+  at-95: &at-95 { title: 'Algebra and Trigonometry 2e, 9.5 Solving Trigonometric Equations', org: 'OpenStax, Rice University', url: 'https://openstax.org/books/algebra-and-trigonometry-2e/pages/9-5-solving-trigonometric-equations', checked: '2026-10-25', note: 'адрес найден поиском' }
+  rs-teq: &rs-teq { title: 'Элементарная математика, § 36 «Простейшие тригонометрические уравнения»', org: 'РГРТУ (Рязанский радиотехнический университет), пособие для поступающих', url: 'https://rsreu.ru/component/docman/doc_download/1498-36-trigonom-uravn', checked: '2026-10-25' }
+  rs-tin: &rs-tin { title: 'Элементарная математика, § 39 «Простейшие тригонометрические неравенства»', org: 'РГРТУ, пособие для поступающих', url: 'https://rsreu.ru/component/docman/doc_download/2403-prostejshie-trigonometricheskie-neravenstva', checked: '2026-10-25' }
+
+topics:
+  # ───────────────────────────── 1.15.1 ─────────────────────────────
+  - id: ma-1-15-1
+    num: '1.15.1'
+    title: Начальные понятия
+    pages: [b156, b157, b158]
+    book:
+      place: 'Ч. 1, 1.15 «Тригонометрия», пункт 1.15.1 (продолжается во второй части книги)'
+      summary: 'Задания на радианную меру угла, знаки тригонометрических функций по четвертям и вычисление значений для углов 0°, 30°, 45°, 60°, 90°.'
+    stage: verified
+    stageNote: 'Значения проверены через Math.sin/Math.cos; знаки — по координатам точки на окружности.'
+    sourcesChecked: '2026-10-25'
+    web: [*at-71, *at-73, *at-74]
+    theory:
+      - kind: definition
+        title: Радианная мера угла
+        body: |
+          **Радиан** — центральный угол, опирающийся на дугу, длина которой равна радиусу. Полный оборот $360^\circ = 2\pi$ рад, $180^\circ = \pi$.
+          - Перевод: $\alpha_{\text{рад}} = \frac{\pi}{180}\alpha^\circ$; $\ \alpha^\circ = \frac{180}{\pi}\alpha_{\text{рад}}$ ($1$ рад $\approx 57{,}3^\circ$).
+          - Длина дуги $l = R\alpha$, площадь сектора $S = \frac12R^2\alpha$ ($\alpha$ — в радианах).
+        src: b156
+      - kind: definition
+        title: Синус и косинус на единичной окружности
+        body: |
+          Повернём точку $(1; 0)$ единичной окружности на угол $\alpha$ (против часовой стрелки — положительный угол). Её координаты:
+          $$x = \cos\alpha,\quad y = \sin\alpha;\qquad \operatorname{tg}\alpha = \frac{\sin\alpha}{\cos\alpha},\quad \operatorname{ctg}\alpha = \frac{\cos\alpha}{\sin\alpha}.$$
+          - $-1 \le \sin\alpha \le 1$, $-1 \le \cos\alpha \le 1$.
+          - Знаки: I четверть — все «+»; II — $\sin > 0$; III — $\operatorname{tg}, \operatorname{ctg} > 0$; IV — $\cos > 0$.
+        src: b157
+        fig: unit-circle
+      - kind: rule
+        title: Значения для основных углов
+        body: |
+          | $\alpha$ | $0$ | $30^\circ = \frac\pi6$ | $45^\circ = \frac\pi4$ | $60^\circ = \frac\pi3$ | $90^\circ = \frac\pi2$ |
+          | --- | --- | --- | --- | --- | --- |
+          | $\sin$ | $0$ | $\frac12$ | $\frac{\sqrt2}2$ | $\frac{\sqrt3}2$ | $1$ |
+          | $\cos$ | $1$ | $\frac{\sqrt3}2$ | $\frac{\sqrt2}2$ | $\frac12$ | $0$ |
+          | $\operatorname{tg}$ | $0$ | $\frac{\sqrt3}3$ | $1$ | $\sqrt3$ | — |
+        src: b157
+    formulas:
+      - title: Перевод градусов в радианы
+        tex: '\alpha_{\text{рад}} = \frac{\pi}{180^\circ}\,\alpha^\circ,\qquad 180^\circ = \pi'
+        meaning: '$\alpha^\circ$ — угол в градусах.'
+        use: '$150^\circ = \frac{5\pi}{6}$, $\frac{7\pi}{4} = 315^\circ$.'
+        src: b156
+      - title: Длина дуги и площадь сектора
+        tex: 'l = R\alpha,\qquad S = \frac12R^2\alpha'
+        meaning: '$R$ — радиус, $\alpha$ — центральный угол в радианах.'
+        use: 'Задачи на дуги и секторы.'
+        limits: 'Угол — только в радианах.'
+        src: b156
+      - title: Определения на единичной окружности
+        tex: '\cos\alpha = x,\quad \sin\alpha = y,\quad \operatorname{tg}\alpha = \frac{\sin\alpha}{\cos\alpha},\quad \operatorname{ctg}\alpha = \frac{\cos\alpha}{\sin\alpha}'
+        meaning: '$(x; y)$ — точка единичной окружности, повёрнутая на угол $\alpha$.'
+        use: 'Знаки и значения тригонометрических функций.'
+        limits: '$\operatorname{tg}$ не определён при $\cos\alpha = 0$, $\operatorname{ctg}$ — при $\sin\alpha = 0$.'
+        src: b157
+    examples:
+      - title: Перевод мер угла
+        given: 'Переведите $150^\circ$ в радианы и $\frac{7\pi}4$ — в градусы.'
+        find: 'меры углов.'
+        method: '$180^\circ = \pi$.'
+        steps:
+          - '$150^\circ = \frac{150}{180}\pi = \frac{5\pi}6$.'
+          - '$\frac{7\pi}{4} = \frac74 \cdot 180^\circ = 315^\circ$.'
+        check: '$\frac{5\pi}{6} \approx 2{,}618 \approx 150 \cdot 0{,}01745$ ✓.'
+        answer: '$\frac{5\pi}6$; $315^\circ$'
+        src: b156
+      - title: Знак произведения
+        given: 'Определите знак $\sin 200^\circ \cdot \cos 300^\circ \cdot \operatorname{tg} 100^\circ$.'
+        find: 'знак.'
+        method: 'Четверть каждого угла.'
+        steps:
+          - '$200^\circ$ — III четверть: $\sin < 0$; $300^\circ$ — IV: $\cos > 0$; $100^\circ$ — II: $\operatorname{tg} < 0$.'
+          - '$(-) \cdot (+) \cdot (-) = (+)$.'
+        check: '$-0{,}342 \cdot 0{,}5 \cdot (-5{,}671) \approx 0{,}970 > 0$ ✓.'
+        answer: 'положительно'
+        src: b157
+      - title: Значения основных углов
+        given: 'Вычислите $2\sin 30^\circ + \sqrt3\operatorname{tg} 60^\circ - \cos^2 45^\circ$.'
+        find: 'значение.'
+        method: 'Таблица значений.'
+        steps:
+          - '$2 \cdot \frac12 = 1$; $\sqrt3 \cdot \sqrt3 = 3$; $\left(\frac{\sqrt2}2\right)^2 = \frac12$.'
+          - '$1 + 3 - 0{,}5 = 3{,}5$.'
+        check: 'Численно: $1 + 3 - 0{,}5 = 3{,}5$ ✓.'
+        answer: '$3{,}5$'
+        src: b157
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Переведите угол $\dfrac{5\pi}9$ в градусы.'
+        num: { value: 100, unit: '°', check: '5/9*180' }
+        hint: '$\pi = 180^\circ$.'
+        explain: '$\frac59 \cdot 180^\circ = 100^\circ$.'
+        f: [1]
+        sol: { method: 'Перевод мер.', steps: ['$\frac{5}{9} \cdot 180^\circ = 100^\circ$.'], answer: '100°' }
+        src: b156
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $4\sin 30^\circ \cos 60^\circ$.'
+        num: { value: 1, unit: '', check: '4*Math.sin(Math.PI/6)*Math.cos(Math.PI/3)' }
+        hint: 'Оба множителя равны $\frac12$.'
+        explain: '$4 \cdot \frac12 \cdot \frac12 = 1$.'
+        sol: { method: 'Таблица значений.', steps: ['$\sin 30^\circ = \cos 60^\circ = \frac12$.', '$4 \cdot \frac14 = 1$.'], answer: '1' }
+        src: b157
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\operatorname{tg} 45^\circ + \operatorname{ctg} 45^\circ + \cos 0^\circ$.'
+        num: { value: 3, unit: '', check: '1+1+1' }
+        hint: 'Все три слагаемых равны 1.'
+        explain: '$1 + 1 + 1 = 3$.'
+        sol: { method: 'Таблица значений.', steps: ['$\operatorname{tg} 45^\circ = \operatorname{ctg} 45^\circ = 1$, $\cos 0 = 1$.', 'Сумма $3$.'], answer: '3' }
+        src: b157
+      - type: numeric
+        cat: problem
+        q: 'Найдите длину дуги окружности радиуса 6, если центральный угол равен $\dfrac\pi3$. Ответ округлите до сотых.'
+        num: { value: 6.28, unit: '', tolAbs: 0.01, check: '6*Math.PI/3' }
+        hint: '$l = R\alpha$.'
+        explain: '$6 \cdot \frac\pi3 = 2\pi \approx 6{,}28$.'
+        f: [2]
+        sol: { method: 'Длина дуги.', steps: ['$l = 6 \cdot \frac{\pi}{3} = 2\pi$.', '$2\pi \approx 6{,}28$.'], answer: '6,28' }
+        src: b156
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\sin^2 60^\circ + \cos^2 30^\circ$.'
+        num: { value: 1.5, unit: '', check: 'Math.sin(Math.PI/3)**2+Math.cos(Math.PI/6)**2' }
+        hint: 'Оба равны $\frac34$.'
+        explain: '$\frac34 + \frac34 = 1{,}5$ (это не $\sin^2 + \cos^2$ одного угла!).'
+        sol: { method: 'Таблица значений.', steps: ['$\sin 60^\circ = \cos 30^\circ = \frac{\sqrt3}{2}$.', '$\frac34 + \frac34 = 1{,}5$.'], answer: '1,5' }
+        src: b157
+      - type: numeric
+        cat: problem
+        q: 'Найдите площадь сектора круга радиуса 4 с центральным углом 1,5 рад.'
+        num: { value: 12, unit: '', check: '0.5*16*1.5' }
+        hint: '$S = \frac12R^2\alpha$.'
+        explain: '$\frac12 \cdot 16 \cdot 1{,}5 = 12$.'
+        f: [2]
+        sol: { method: 'Площадь сектора.', steps: ['$S = \frac12 \cdot 4^2 \cdot 1{,}5 = 12$.'], answer: '12' }
+        src: b156
+      - type: single
+        cat: theory
+        q: 'В какой четверти лежит угол 4 рад?'
+        opts: ['в III', 'во II', 'в IV', 'в I']
+        ans: a
+        hint: '$\pi \approx 3{,}14$, $\frac{3\pi}2 \approx 4{,}71$.'
+        explain: '$\pi < 4 < \frac{3\pi}2$ — третья четверть (около $229^\circ$).'
+        f: [1]
+        src: b156
+      - type: single
+        cat: theory
+        q: 'Каков знак $\cos 2$ (угол в радианах)?'
+        opts: ['отрицательный', 'положительный', '$\cos 2 = 0$', 'не определён']
+        ans: a
+        hint: '$\frac\pi2 \approx 1{,}57 < 2 < \pi$.'
+        explain: 'Угол 2 рад во II четверти, где косинус отрицателен ($\cos 2 \approx -0{,}416$).'
+        f: [3]
+        src: b157
+
+  # ───────────────────────────── 1.15.2 ─────────────────────────────
+  - id: ma-1-15-2
+    num: '1.15.2'
+    title: Основные тождества тригонометрии
+    pages: [b158, b159, b160]
+    book:
+      place: 'Ч. 2, 1.15 «Тригонометрия», пункт 1.15.2'
+      summary: 'Задания на основное тригонометрическое тождество и его следствия: найти значения функций по одной известной, упростить выражение, вычислить выражение по известному тангенсу.'
+    stage: verified
+    stageNote: 'Тождества проверены численно на сетке углов; ответы пересчитаны.'
+    sourcesChecked: '2026-10-25'
+    web: [*at-91, *at-73]
+    theory:
+      - kind: law
+        title: Основные тождества
+        body: |
+          $$\sin^2\alpha + \cos^2\alpha = 1,\qquad \operatorname{tg}\alpha \cdot \operatorname{ctg}\alpha = 1,$$
+          $$1 + \operatorname{tg}^2\alpha = \frac{1}{\cos^2\alpha},\qquad 1 + \operatorname{ctg}^2\alpha = \frac{1}{\sin^2\alpha}.$$
+          **Чётность**: $\cos(-\alpha) = \cos\alpha$ (чётная), $\sin(-\alpha) = -\sin\alpha$, $\operatorname{tg}(-\alpha) = -\operatorname{tg}\alpha$ (нечётные).
+        src: b158
+      - kind: rule
+        title: Значения по одной известной функции
+        body: |
+          Из $\sin^2\alpha + \cos^2\alpha = 1$ находят модуль второй функции, а **знак** — по четверти. Пример: $\sin\alpha = \frac35$, $\alpha$ во II четверти: $\cos\alpha = -\sqrt{1 - \frac9{25}} = -\frac45$, $\operatorname{tg}\alpha = -\frac34$.
+          Если известен $\operatorname{tg}\alpha$, дробь, **однородную** по $\sin$ и $\cos$, делят на $\cos\alpha$: $\frac{\sin\alpha + \cos\alpha}{\sin\alpha - \cos\alpha} = \frac{\operatorname{tg}\alpha + 1}{\operatorname{tg}\alpha - 1}$.
+        src: b159
+    formulas:
+      - title: Основное тригонометрическое тождество
+        tex: '\sin^2\alpha + \cos^2\alpha = 1'
+        meaning: 'Теорема Пифагора для точки единичной окружности.'
+        use: 'Найти $\cos$ по $\sin$ и наоборот; упрощение.'
+        src: b158
+      - title: Тангенс и косинус
+        tex: '1 + \operatorname{tg}^2\alpha = \frac{1}{\cos^2\alpha},\qquad 1 + \operatorname{ctg}^2\alpha = \frac{1}{\sin^2\alpha}'
+        meaning: 'Получаются делением основного тождества на $\cos^2\alpha$ или $\sin^2\alpha$.'
+        use: 'Найти $\cos\alpha$ по $\operatorname{tg}\alpha$.'
+        src: b158
+      - title: Чётность и нечётность
+        tex: '\cos(-\alpha) = \cos\alpha,\quad \sin(-\alpha) = -\sin\alpha,\quad \operatorname{tg}(-\alpha) = -\operatorname{tg}\alpha'
+        meaning: 'Симметрия единичной окружности относительно оси $Ox$.'
+        use: 'Избавиться от отрицательного угла.'
+        src: b158
+    examples:
+      - title: Косинус по синусу
+        given: '$\sin\alpha = \frac35$, $\frac\pi2 < \alpha < \pi$. Найдите $\cos\alpha$ и $\operatorname{tg}\alpha$.'
+        find: '$\cos\alpha$, $\operatorname{tg}\alpha$.'
+        method: 'Основное тождество и знак во II четверти.'
+        steps:
+          - '$\cos^2\alpha = 1 - \frac9{25} = \frac{16}{25}$; во II четверти $\cos < 0$: $\cos\alpha = -\frac45$.'
+          - '$\operatorname{tg}\alpha = \frac{3/5}{-4/5} = -\frac34$.'
+        check: '$\left(\frac35\right)^2 + \left(-\frac45\right)^2 = 1$ ✓.'
+        answer: '$\cos\alpha = -0{,}8$, $\operatorname{tg}\alpha = -0{,}75$'
+        src: b159
+      - title: Дробь по тангенсу
+        given: '$\operatorname{tg}\alpha = 2$. Найдите $\dfrac{\sin\alpha + \cos\alpha}{\sin\alpha - \cos\alpha}$.'
+        find: 'значение.'
+        method: 'Разделить числитель и знаменатель на $\cos\alpha$.'
+        steps:
+          - '$\frac{\operatorname{tg}\alpha + 1}{\operatorname{tg}\alpha - 1} = \frac{3}{1}$.'
+          - 'Ответ $3$.'
+        check: '$\alpha = \operatorname{arctg} 2$: $\frac{0{,}894 + 0{,}447}{0{,}894 - 0{,}447} = 3$ ✓.'
+        answer: '$3$'
+        src: b159
+      - title: Упрощение
+        given: 'Упростите $\sin^4\alpha - \cos^4\alpha + \cos^2\alpha$.'
+        find: 'выражение.'
+        method: 'Разность квадратов и основное тождество.'
+        steps:
+          - '$\sin^4\alpha - \cos^4\alpha = (\sin^2\alpha - \cos^2\alpha)(\sin^2\alpha + \cos^2\alpha) = \sin^2\alpha - \cos^2\alpha$.'
+          - '$\sin^2\alpha - \cos^2\alpha + \cos^2\alpha = \sin^2\alpha$.'
+        check: '$\alpha = 30^\circ$: $\frac1{16} - \frac9{16} + \frac34 = \frac14 = \sin^2 30^\circ$ ✓.'
+        answer: '$\sin^2\alpha$'
+        src: b160
+    questions:
+      - type: numeric
+        cat: problem
+        q: '$\cos\alpha = 0{,}6$, $\alpha$ — угол IV четверти. Найдите $\sin\alpha$.'
+        num: { value: -0.8, unit: '', check: '-Math.sqrt(1-0.36)' }
+        hint: 'В IV четверти синус отрицателен.'
+        explain: '$\sin\alpha = -\sqrt{1 - 0{,}36} = -0{,}8$.'
+        f: [1]
+        sol: { method: 'Основное тождество.', steps: ['$\sin^2\alpha = 0{,}64$.', 'IV четверть: $\sin\alpha = -0{,}8$.'], answer: '−0,8' }
+        src: b159
+      - type: numeric
+        cat: problem
+        q: '$\operatorname{tg}\alpha = 3$. Найдите $\dfrac{1}{\cos^2\alpha}$.'
+        num: { value: 10, unit: '', check: '1+9' }
+        hint: '$1 + \operatorname{tg}^2\alpha$.'
+        explain: '$1 + 9 = 10$.'
+        f: [2]
+        sol: { method: 'Следствие основного тождества.', steps: ['$\frac1{\cos^2\alpha} = 1 + \operatorname{tg}^2\alpha = 10$.'], answer: '10' }
+        src: b158
+      - type: numeric
+        cat: problem
+        q: 'Известно, что $\sin\alpha + \cos\alpha = 1{,}2$. Найдите $\sin\alpha\cos\alpha$.'
+        num: { value: 0.22, unit: '', check: '(1.44-1)/2' }
+        hint: 'Возведите равенство в квадрат.'
+        explain: '$1 + 2\sin\alpha\cos\alpha = 1{,}44$, $\sin\alpha\cos\alpha = 0{,}22$.'
+        f: [1]
+        sol: { method: 'Квадрат суммы и основное тождество.', steps: ['$(\sin\alpha + \cos\alpha)^2 = 1 + 2\sin\alpha\cos\alpha = 1{,}44$.', '$\sin\alpha\cos\alpha = 0{,}22$.'], answer: '0,22' }
+        src: b159
+      - type: numeric
+        cat: problem
+        q: '$\operatorname{tg}\alpha = 0{,}5$. Найдите $\dfrac{3\sin\alpha + \cos\alpha}{\sin\alpha - \cos\alpha}$.'
+        num: { value: -5, unit: '', check: '(3*0.5+1)/(0.5-1)' }
+        hint: 'Разделите на $\cos\alpha$.'
+        explain: '$\frac{1{,}5 + 1}{0{,}5 - 1} = -5$.'
+        sol: { method: 'Однородная дробь.', steps: ['$\frac{3\operatorname{tg}\alpha + 1}{\operatorname{tg}\alpha - 1} = \frac{2{,}5}{-0{,}5} = -5$.'], answer: '−5' }
+        src: b159
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\sin^2\alpha + \cos^2\alpha + \operatorname{tg}\alpha\operatorname{ctg}\alpha$ (при допустимых $\alpha$).'
+        num: { value: 2, unit: '', check: '1+1' }
+        hint: 'Два тождества.'
+        explain: '$1 + 1 = 2$.'
+        f: [1]
+        sol: { method: 'Основные тождества.', steps: ['$\sin^2\alpha + \cos^2\alpha = 1$, $\operatorname{tg}\alpha\operatorname{ctg}\alpha = 1$.', 'Сумма $2$.'], answer: '2' }
+        src: b158
+      - type: numeric
+        cat: problem
+        q: 'Упростите $(1 + \operatorname{tg}^2\alpha)\cos^2\alpha$.'
+        num: { value: 1, unit: '', check: '(1+Math.tan(0.7)**2)*Math.cos(0.7)**2' }
+        hint: '$1 + \operatorname{tg}^2\alpha = \frac1{\cos^2\alpha}$.'
+        explain: 'Получается $1$.'
+        f: [2]
+        sol: { method: 'Следствие тождества.', steps: ['$\frac{1}{\cos^2\alpha} \cdot \cos^2\alpha = 1$.'], answer: '1' }
+        src: b158
+      - type: single
+        cat: theory
+        q: 'Чему равно $\cos(-\alpha)$?'
+        opts: ['$\cos\alpha$', '$-\cos\alpha$', '$\sin\alpha$', '$-\sin\alpha$']
+        ans: a
+        hint: 'Косинус — абсцисса точки.'
+        explain: 'Поворот на $-\alpha$ даёт точку, симметричную относительно $Ox$, — абсцисса та же.'
+        f: [3]
+        src: b158
+      - type: single
+        cat: theory
+        q: 'Могут ли одновременно выполняться $\sin\alpha = 0{,}6$ и $\cos\alpha = 0{,}7$?'
+        opts: ['нет', 'да', 'да, если $\alpha$ в I четверти', 'да, если $\alpha$ тупой']
+        ans: a
+        hint: 'Проверьте основное тождество.'
+        explain: '$0{,}36 + 0{,}49 = 0{,}85 \ne 1$.'
+        f: [1]
+        src: b158
+
+  # ───────────────────────────── 1.15.3 ─────────────────────────────
+  - id: ma-1-15-3
+    num: '1.15.3'
+    title: Формулы приведения
+    pages: [b160, b161, b162]
+    book:
+      place: 'Ч. 2, 1.15 «Тригонометрия», пункт 1.15.3'
+      summary: 'Задания на формулы приведения: вычислить значения для углов вида $180^\circ \pm \alpha$, $360^\circ - \alpha$, больших углов, упростить выражения.'
+    stage: verified
+    stageNote: 'Каждая формула приведения проверена численно на сетке углов.'
+    sourcesChecked: '2026-10-25'
+    web: [*at-73, *at-92]
+    theory:
+      - kind: rule
+        title: Правило приведения
+        body: |
+          Для $f\left(\frac{\pi n}{2} \pm \alpha\right)$:
+          1. **Название**: если $n$ чётное ($\pi$, $2\pi$), функция не меняется; если нечётное ($\frac\pi2$, $\frac{3\pi}2$) — меняется на «кофункцию» ($\sin \leftrightarrow \cos$, $\operatorname{tg} \leftrightarrow \operatorname{ctg}$).
+          2. **Знак**: такой, как у исходной функции в той четверти, куда попадает угол, если считать $\alpha$ острым.
+          Пример: $\sin\left(\frac{3\pi}2 - \alpha\right)$: название меняется на $\cos$; угол в III четверти, где $\sin < 0$, — итог $-\cos\alpha$.
+        src: b160
+      - kind: rule
+        title: Периодичность
+        body: |
+          $\sin$ и $\cos$ повторяются через $2\pi$ ($360^\circ$), $\operatorname{tg}$ и $\operatorname{ctg}$ — через $\pi$ ($180^\circ$). Большой угол сначала уменьшают на целое число периодов: $\cos 750^\circ = \cos(750^\circ - 720^\circ) = \cos 30^\circ$.
+        src: b161
+    formulas:
+      - title: Приведение для π ± α
+        tex: '\sin(\pi \pm \alpha) = \mp\sin\alpha,\quad \cos(\pi \pm \alpha) = -\cos\alpha,\quad \operatorname{tg}(\pi \pm \alpha) = \pm\operatorname{tg}\alpha'
+        meaning: 'Название функции не меняется.'
+        use: 'Углы второй и третьей четверти: $150^\circ$, $210^\circ$, $240^\circ$.'
+        src: b160
+      - title: Приведение для π/2 ± α
+        tex: '\sin\left(\tfrac\pi2 \pm \alpha\right) = \cos\alpha,\quad \cos\left(\tfrac\pi2 \pm \alpha\right) = \mp\sin\alpha,\quad \operatorname{tg}\left(\tfrac\pi2 \pm \alpha\right) = \mp\operatorname{ctg}\alpha'
+        meaning: 'Функция меняется на кофункцию.'
+        use: 'Переход между синусом и косинусом.'
+        src: b160
+      - title: Периодичность
+        tex: '\sin(\alpha + 2\pi k) = \sin\alpha,\quad \cos(\alpha + 2\pi k) = \cos\alpha,\quad \operatorname{tg}(\alpha + \pi k) = \operatorname{tg}\alpha'
+        meaning: '$k$ — целое.'
+        use: 'Уменьшение больших углов.'
+        src: b161
+    examples:
+      - title: Угол второй четверти
+        given: 'Вычислите $\sin 150^\circ$.'
+        find: 'значение.'
+        method: '$150^\circ = 180^\circ - 30^\circ$.'
+        steps:
+          - 'Название не меняется; во II четверти $\sin > 0$.'
+          - '$\sin 150^\circ = \sin 30^\circ = \frac12$.'
+        check: '$\sin(5\pi/6) = 0{,}5$ ✓.'
+        answer: '$\frac12$'
+        src: b160
+      - title: Углы третьей и четвёртой четвертей
+        given: 'Вычислите $\cos 240^\circ$ и $\operatorname{tg} 300^\circ$.'
+        find: 'значения.'
+        method: 'Приведение к острому углу.'
+        steps:
+          - '$\cos 240^\circ = \cos(180^\circ + 60^\circ) = -\cos 60^\circ = -\frac12$.'
+          - '$\operatorname{tg} 300^\circ = \operatorname{tg}(360^\circ - 60^\circ) = -\operatorname{tg} 60^\circ = -\sqrt3$.'
+        check: 'Численно $-0{,}5$ и $-1{,}732$ ✓.'
+        answer: '$-\frac12$; $-\sqrt3$'
+        src: b161
+      - title: Буквенное выражение
+        given: 'Упростите $\sin\left(\frac{3\pi}2 - \alpha\right)$.'
+        find: 'выражение.'
+        method: 'Правило приведения.'
+        steps:
+          - '$\frac{3\pi}{2}$ — «вертикальный» угол: $\sin \to \cos$.'
+          - 'При остром $\alpha$ угол в III четверти, $\sin < 0$: $-\cos\alpha$.'
+        check: '$\alpha = 0{,}3$: $\sin(4{,}412) = -0{,}955 = -\cos 0{,}3$ ✓.'
+        answer: '$-\cos\alpha$'
+        src: b160
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\sin 210^\circ$.'
+        num: { value: -0.5, unit: '', check: 'Math.sin(210*Math.PI/180)' }
+        hint: '$210^\circ = 180^\circ + 30^\circ$.'
+        explain: '$-\sin 30^\circ = -0{,}5$.'
+        f: [1]
+        sol: { method: 'Приведение.', steps: ['$\sin(180^\circ + 30^\circ) = -\sin 30^\circ$.', '$-0{,}5$.'], answer: '−0,5' }
+        src: b160
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\cos 120^\circ + \sin 330^\circ$.'
+        num: { value: -1, unit: '', check: 'Math.cos(2*Math.PI/3)+Math.sin(11*Math.PI/6)' }
+        hint: '$120^\circ = 180^\circ - 60^\circ$, $330^\circ = 360^\circ - 30^\circ$.'
+        explain: '$-\frac12 - \frac12 = -1$.'
+        sol: { method: 'Приведение.', steps: ['$\cos 120^\circ = -\cos 60^\circ = -\frac12$.', '$\sin 330^\circ = -\sin 30^\circ = -\frac12$.', 'Сумма $-1$.'], answer: '−1' }
+        src: b161
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\operatorname{tg} 135^\circ$.'
+        num: { value: -1, unit: '', check: 'Math.tan(3*Math.PI/4)' }
+        hint: '$135^\circ = 180^\circ - 45^\circ$.'
+        explain: '$-\operatorname{tg} 45^\circ = -1$.'
+        f: [1]
+        sol: { method: 'Приведение.', steps: ['$\operatorname{tg}(180^\circ - 45^\circ) = -\operatorname{tg} 45^\circ = -1$.'], answer: '−1' }
+        src: b160
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\sin 1110^\circ$.'
+        num: { value: 0.5, unit: '', check: 'Math.sin(1110*Math.PI/180)' }
+        hint: '$1110^\circ = 3 \cdot 360^\circ + 30^\circ$.'
+        explain: '$\sin 30^\circ = 0{,}5$.'
+        f: [3]
+        sol: { method: 'Периодичность.', steps: ['$1110^\circ - 1080^\circ = 30^\circ$.', '$\sin 30^\circ = 0{,}5$.'], answer: '0,5' }
+        src: b161
+      - type: numeric
+        cat: problem
+        q: '$\cos\alpha = 0{,}3$. Найдите $\cos(\pi + \alpha) + \cos(\pi - \alpha)$.'
+        num: { value: -0.6, unit: '', check: '-2*0.3' }
+        hint: 'Оба слагаемых равны $-\cos\alpha$.'
+        explain: '$-0{,}3 - 0{,}3 = -0{,}6$.'
+        f: [1]
+        sol: { method: 'Приведение.', steps: ['$\cos(\pi \pm \alpha) = -\cos\alpha$.', '$-2 \cdot 0{,}3 = -0{,}6$.'], answer: '−0,6' }
+        src: b160
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\operatorname{ctg} 225^\circ$.'
+        num: { value: 1, unit: '', check: '1/Math.tan(5*Math.PI/4)' }
+        hint: 'Период котангенса $180^\circ$.'
+        explain: '$\operatorname{ctg}(180^\circ + 45^\circ) = \operatorname{ctg} 45^\circ = 1$.'
+        f: [3]
+        sol: { method: 'Периодичность.', steps: ['$\operatorname{ctg} 225^\circ = \operatorname{ctg} 45^\circ = 1$.'], answer: '1' }
+        src: b161
+      - type: single
+        cat: theory
+        q: 'Чему равно $\cos\left(\frac{3\pi}2 + \alpha\right)$?'
+        opts: ['$\sin\alpha$', '$-\sin\alpha$', '$\cos\alpha$', '$-\cos\alpha$']
+        ans: a
+        hint: 'Угол в IV четверти, где $\cos > 0$.'
+        explain: 'Название меняется на $\sin$, знак «+» (косинус в IV четверти положителен).'
+        f: [2]
+        src: b160
+      - type: single
+        cat: theory
+        q: 'Чему равно $\operatorname{tg}(\pi + \alpha)$?'
+        opts: ['$\operatorname{tg}\alpha$', '$-\operatorname{tg}\alpha$', '$\operatorname{ctg}\alpha$', '$-\operatorname{ctg}\alpha$']
+        ans: a
+        hint: 'Период тангенса — $\pi$.'
+        explain: '$\operatorname{tg}(\pi + \alpha) = \operatorname{tg}\alpha$.'
+        f: [1]
+        src: b160
+
+  # ───────────────────────────── 1.15.4 ─────────────────────────────
+  - id: ma-1-15-4
+    num: '1.15.4'
+    title: Формулы сложения
+    pages: [b162, b163, b164]
+    book:
+      place: 'Ч. 2, 1.15 «Тригонометрия», пункт 1.15.4'
+      summary: 'Задания на формулы синуса, косинуса и тангенса суммы и разности: свернуть выражение, вычислить значения для углов вроде $15^\circ$ и $75^\circ$, найти $\sin(\alpha + \beta)$ по данным.'
+    stage: verified
+    stageNote: 'Формулы проверены численно на сетке пар углов; ответы пересчитаны.'
+    sourcesChecked: '2026-10-25'
+    web: [*at-92]
+    theory:
+      - kind: law
+        title: Формулы сложения
+        body: |
+          $$\sin(\alpha \pm \beta) = \sin\alpha\cos\beta \pm \cos\alpha\sin\beta,$$
+          $$\cos(\alpha \pm \beta) = \cos\alpha\cos\beta \mp \sin\alpha\sin\beta,$$
+          $$\operatorname{tg}(\alpha \pm \beta) = \frac{\operatorname{tg}\alpha \pm \operatorname{tg}\beta}{1 \mp \operatorname{tg}\alpha\operatorname{tg}\beta}.$$
+          Обратите внимание на знак в формуле косинуса: он **противоположен** знаку в аргументе.
+          **Ошибка**: $\sin(\alpha + \beta) \ne \sin\alpha + \sin\beta$ ($\sin 90^\circ = 1$, а $\sin 30^\circ + \sin 60^\circ \approx 1{,}37$).
+        src: b162
+    formulas:
+      - title: Синус суммы и разности
+        tex: '\sin(\alpha \pm \beta) = \sin\alpha\cos\beta \pm \cos\alpha\sin\beta'
+        meaning: '$\alpha$, $\beta$ — любые углы.'
+        use: 'Свернуть выражение вида $\sin\alpha\cos\beta + \cos\alpha\sin\beta$; $\sin 75^\circ$.'
+        src: b162
+      - title: Косинус суммы и разности
+        tex: '\cos(\alpha \pm \beta) = \cos\alpha\cos\beta \mp \sin\alpha\sin\beta'
+        meaning: 'Знак в правой части противоположен знаку в аргументе.'
+        use: '$\cos 15^\circ = \cos(45^\circ - 30^\circ)$.'
+        src: b162
+      - title: Тангенс суммы и разности
+        tex: '\operatorname{tg}(\alpha \pm \beta) = \frac{\operatorname{tg}\alpha \pm \operatorname{tg}\beta}{1 \mp \operatorname{tg}\alpha\operatorname{tg}\beta}'
+        meaning: 'Все тангенсы определены, знаменатель $\ne 0$.'
+        use: 'Задачи с известными тангенсами.'
+        src: b163
+    examples:
+      - title: Синус 75°
+        given: 'Вычислите $\sin 75^\circ$.'
+        find: 'точное значение.'
+        method: '$75^\circ = 45^\circ + 30^\circ$.'
+        steps:
+          - '$\sin 45^\circ\cos 30^\circ + \cos 45^\circ\sin 30^\circ = \frac{\sqrt2}2 \cdot \frac{\sqrt3}2 + \frac{\sqrt2}2 \cdot \frac12$.'
+          - '$= \frac{\sqrt6 + \sqrt2}{4}$.'
+        check: '$\frac{2{,}449 + 1{,}414}{4} = 0{,}9659 = \sin 75^\circ$ ✓.'
+        answer: '$\frac{\sqrt6 + \sqrt2}{4}$'
+        src: b162
+      - title: Свернуть выражение
+        given: 'Вычислите $\cos 50^\circ\cos 10^\circ - \sin 50^\circ\sin 10^\circ$.'
+        find: 'значение.'
+        method: 'Формула косинуса суммы.'
+        steps:
+          - '$= \cos(50^\circ + 10^\circ) = \cos 60^\circ$.'
+          - '$= \frac12$.'
+        check: '$0{,}6428 \cdot 0{,}9848 - 0{,}7660 \cdot 0{,}1736 = 0{,}5$ ✓.'
+        answer: '$\frac12$'
+        src: b162
+      - title: Тангенс суммы
+        given: '$\operatorname{tg}\alpha = 2$, $\operatorname{tg}\beta = 3$. Найдите $\operatorname{tg}(\alpha + \beta)$.'
+        find: '$\operatorname{tg}(\alpha + \beta)$.'
+        method: 'Формула тангенса суммы.'
+        steps:
+          - '$\frac{2 + 3}{1 - 6} = \frac{5}{-5}$.'
+          - '$= -1$.'
+        check: '$\operatorname{arctg} 2 + \operatorname{arctg} 3 = 1{,}107 + 1{,}249 = 2{,}356 = \frac{3\pi}4$, $\operatorname{tg}\frac{3\pi}4 = -1$ ✓.'
+        answer: '$-1$'
+        src: b163
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\sin 20^\circ\cos 10^\circ + \cos 20^\circ\sin 10^\circ$.'
+        num: { value: 0.5, unit: '', check: 'Math.sin(Math.PI/6)' }
+        hint: 'Синус суммы.'
+        explain: '$\sin 30^\circ = 0{,}5$.'
+        f: [1]
+        sol: { method: 'Свернуть по формуле.', steps: ['$\sin(20^\circ + 10^\circ) = \sin 30^\circ = 0{,}5$.'], answer: '0,5' }
+        src: b162
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\cos 105^\circ$ (с точностью до 0,001).'
+        num: { value: -0.2588, unit: '', tolAbs: 0.001, check: 'Math.cos(105*Math.PI/180)' }
+        hint: '$105^\circ = 60^\circ + 45^\circ$.'
+        explain: '$\frac12 \cdot \frac{\sqrt2}2 - \frac{\sqrt3}2 \cdot \frac{\sqrt2}2 = \frac{\sqrt2 - \sqrt6}{4} \approx -0{,}259$.'
+        f: [2]
+        sol: { method: 'Косинус суммы.', steps: ['$\cos 60^\circ\cos 45^\circ - \sin 60^\circ\sin 45^\circ$.', '$= \frac{\sqrt2 - \sqrt6}{4} \approx -0{,}259$.'], answer: '−0,259' }
+        src: b162
+      - type: numeric
+        cat: problem
+        q: '$\operatorname{tg}\alpha = 3$, $\operatorname{tg}\beta = 1$. Найдите $\operatorname{tg}(\alpha - \beta)$.'
+        num: { value: 0.5, unit: '', check: '(3-1)/(1+3)' }
+        hint: 'Тангенс разности.'
+        explain: '$\frac{3 - 1}{1 + 3} = 0{,}5$.'
+        f: [3]
+        sol: { method: 'Тангенс разности.', steps: ['$\frac{3 - 1}{1 + 3 \cdot 1} = \frac24 = 0{,}5$.'], answer: '0,5' }
+        src: b163
+      - type: numeric
+        cat: problem
+        q: '$\sin\alpha = \frac35$, $\cos\beta = \frac5{13}$, $\alpha$ и $\beta$ — острые углы. Найдите $\sin(\alpha + \beta)$ (с точностью до 0,001).'
+        num: { value: 0.9692, unit: '', tolAbs: 0.001, check: '63/65' }
+        hint: 'Найдите $\cos\alpha = \frac45$ и $\sin\beta = \frac{12}{13}$.'
+        explain: '$\frac35 \cdot \frac5{13} + \frac45 \cdot \frac{12}{13} = \frac{63}{65} \approx 0{,}969$.'
+        f: [1]
+        sol: { method: 'Синус суммы.', steps: ['$\cos\alpha = \frac45$, $\sin\beta = \frac{12}{13}$.', '$\frac{15}{65} + \frac{48}{65} = \frac{63}{65}$.'], answer: '63/65 ≈ 0,969' }
+        src: b162
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\dfrac{\operatorname{tg} 25^\circ + \operatorname{tg} 20^\circ}{1 - \operatorname{tg} 25^\circ\operatorname{tg} 20^\circ}$.'
+        num: { value: 1, unit: '', check: 'Math.tan(Math.PI/4)' }
+        hint: 'Тангенс суммы.'
+        explain: '$\operatorname{tg} 45^\circ = 1$.'
+        f: [3]
+        sol: { method: 'Свернуть по формуле.', steps: ['$\operatorname{tg}(25^\circ + 20^\circ) = \operatorname{tg} 45^\circ = 1$.'], answer: '1' }
+        src: b163
+      - type: numeric
+        cat: problem
+        q: 'Найдите значение $\cos(\alpha + \beta)\cos\beta + \sin(\alpha + \beta)\sin\beta$ при $\alpha = 60^\circ$ и любом $\beta$.'
+        num: { value: 0.5, unit: '', check: 'Math.cos(Math.PI/3+0.4)*Math.cos(0.4)+Math.sin(Math.PI/3+0.4)*Math.sin(0.4)' }
+        hint: 'Косинус разности углов $\alpha + \beta$ и $\beta$.'
+        explain: '$\cos\big((\alpha + \beta) - \beta\big) = \cos\alpha = 0{,}5$.'
+        f: [2]
+        sol: { method: 'Косинус разности.', steps: ['$\cos\big((\alpha + \beta) - \beta\big) = \cos\alpha$.', '$\cos 60^\circ = 0{,}5$.'], answer: '0,5' }
+        src: b162
+      - type: single
+        cat: theory
+        q: 'Какая формула верна?'
+        opts: ['$\cos(\alpha - \beta) = \cos\alpha\cos\beta + \sin\alpha\sin\beta$', '$\cos(\alpha - \beta) = \cos\alpha\cos\beta - \sin\alpha\sin\beta$', '$\cos(\alpha - \beta) = \cos\alpha - \cos\beta$', '$\sin(\alpha - \beta) = \sin\alpha\cos\beta + \cos\alpha\sin\beta$']
+        ans: a
+        hint: 'В формуле косинуса знак противоположен знаку в аргументе.'
+        explain: 'Для разности — «плюс» между произведениями.'
+        f: [2]
+        src: b162
+      - type: single
+        cat: theory
+        q: 'Верно ли, что $\sin(\alpha + \beta) = \sin\alpha + \sin\beta$ при всех углах?'
+        opts: ['нет, например при $\alpha = 30^\circ$, $\beta = 60^\circ$', 'да', 'да, для острых углов', 'да, если $\alpha = \beta$']
+        ans: a
+        hint: 'Сравните $\sin 90^\circ$ и $\sin 30^\circ + \sin 60^\circ$.'
+        explain: '$1 \ne 0{,}5 + 0{,}866$. Верна формула синуса суммы.'
+        f: [1]
+        src: b162
+
+  # ───────────────────────────── 1.15.5 ─────────────────────────────
+  - id: ma-1-15-5
+    num: '1.15.5'
+    title: Формулы двойного угла
+    pages: [b164, b165, b166, b167, b168]
+    book:
+      place: 'Ч. 2, 1.15 «Тригонометрия», пункт 1.15.5'
+      summary: 'Задания на формулы двойного (и тройного) угла: вычислить $\sin 2\alpha$, $\cos 2\alpha$, $\operatorname{tg} 2\alpha$ по известным значениям, свернуть выражения, упростить.'
+    stage: verified
+    stageNote: 'Формулы проверены численно на сетке углов; ответы пересчитаны.'
+    sourcesChecked: '2026-10-25'
+    web: [*at-93]
+    theory:
+      - kind: law
+        title: Двойной угол
+        body: |
+          Из формул сложения при $\beta = \alpha$:
+          $$\sin 2\alpha = 2\sin\alpha\cos\alpha,\qquad \cos 2\alpha = \cos^2\alpha - \sin^2\alpha = 2\cos^2\alpha - 1 = 1 - 2\sin^2\alpha,$$
+          $$\operatorname{tg} 2\alpha = \frac{2\operatorname{tg}\alpha}{1 - \operatorname{tg}^2\alpha}.$$
+          Тройной угол: $\sin 3\alpha = 3\sin\alpha - 4\sin^3\alpha$, $\cos 3\alpha = 4\cos^3\alpha - 3\cos\alpha$.
+          **Ошибка**: $\sin 2\alpha \ne 2\sin\alpha$.
+        src: b164
+    formulas:
+      - title: Синус двойного угла
+        tex: '\sin 2\alpha = 2\sin\alpha\cos\alpha'
+        meaning: '$\alpha$ — любой угол.'
+        use: 'Свернуть $2\sin x\cos x$; найти $\sin 2\alpha$ по $\sin\alpha$ и $\cos\alpha$.'
+        src: b164
+      - title: Косинус двойного угла
+        tex: '\cos 2\alpha = \cos^2\alpha - \sin^2\alpha = 2\cos^2\alpha - 1 = 1 - 2\sin^2\alpha'
+        meaning: 'Три равносильные формы.'
+        use: 'Выбирают форму по тому, что известно: $\sin\alpha$ или $\cos\alpha$.'
+        src: b164
+      - title: Тангенс двойного угла
+        tex: '\operatorname{tg} 2\alpha = \frac{2\operatorname{tg}\alpha}{1 - \operatorname{tg}^2\alpha}'
+        meaning: '$\operatorname{tg}\alpha \ne \pm1$, $\cos\alpha \ne 0$.'
+        use: 'Задачи с известным тангенсом.'
+        src: b165
+    examples:
+      - title: По известному синусу
+        given: '$\sin\alpha = 0{,}6$, $\alpha$ — острый угол. Найдите $\sin 2\alpha$ и $\cos 2\alpha$.'
+        find: '$\sin 2\alpha$, $\cos 2\alpha$.'
+        method: '$\cos\alpha = 0{,}8$, затем формулы двойного угла.'
+        steps:
+          - '$\sin 2\alpha = 2 \cdot 0{,}6 \cdot 0{,}8 = 0{,}96$.'
+          - '$\cos 2\alpha = 1 - 2 \cdot 0{,}36 = 0{,}28$.'
+        check: '$0{,}96^2 + 0{,}28^2 = 0{,}9216 + 0{,}0784 = 1$ ✓.'
+        answer: '$0{,}96$; $0{,}28$'
+        src: b164
+      - title: Свернуть выражения
+        given: 'Вычислите $2\sin 15^\circ\cos 15^\circ$ и $\cos^2 15^\circ - \sin^2 15^\circ$.'
+        find: 'значения.'
+        method: 'Формулы двойного угла справа налево.'
+        steps:
+          - '$2\sin 15^\circ\cos 15^\circ = \sin 30^\circ = \frac12$.'
+          - '$\cos^2 15^\circ - \sin^2 15^\circ = \cos 30^\circ = \frac{\sqrt3}{2}$.'
+        check: '$2 \cdot 0{,}2588 \cdot 0{,}9659 = 0{,}5$ ✓.'
+        answer: '$\frac12$; $\frac{\sqrt3}2$'
+        src: b165
+      - title: Тангенс двойного угла
+        given: '$\operatorname{tg}\alpha = 3$. Найдите $\operatorname{tg} 2\alpha$.'
+        find: '$\operatorname{tg} 2\alpha$.'
+        method: 'Формула тангенса двойного угла.'
+        steps:
+          - '$\frac{2 \cdot 3}{1 - 9} = \frac{6}{-8}$.'
+          - '$= -0{,}75$.'
+        check: '$\operatorname{tg}(2\operatorname{arctg} 3) = \operatorname{tg}(2{,}498) = -0{,}75$ ✓.'
+        answer: '$-0{,}75$'
+        src: b165
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $2\sin 22{,}5^\circ\cos 22{,}5^\circ$ (с точностью до 0,001).'
+        num: { value: 0.7071, unit: '', tolAbs: 0.001, check: 'Math.sin(Math.PI/4)' }
+        hint: 'Синус двойного угла.'
+        explain: '$\sin 45^\circ = \frac{\sqrt2}2 \approx 0{,}707$.'
+        f: [1]
+        sol: { method: 'Свернуть.', steps: ['$2\sin 22{,}5^\circ\cos 22{,}5^\circ = \sin 45^\circ$.', '$\frac{\sqrt2}{2} \approx 0{,}707$.'], answer: '0,707' }
+        src: b165
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\cos^2 75^\circ - \sin^2 75^\circ$ (с точностью до 0,001).'
+        num: { value: -0.866, unit: '', tolAbs: 0.001, check: 'Math.cos(150*Math.PI/180)' }
+        hint: 'Косинус двойного угла.'
+        explain: '$\cos 150^\circ = -\frac{\sqrt3}2 \approx -0{,}866$.'
+        f: [2]
+        sol: { method: 'Свернуть.', steps: ['$\cos 150^\circ = -\cos 30^\circ$.', '$-\frac{\sqrt3}{2} \approx -0{,}866$.'], answer: '−0,866' }
+        src: b165
+      - type: numeric
+        cat: problem
+        q: '$\sin\alpha = \frac13$. Найдите $\cos 2\alpha$ (с точностью до 0,001).'
+        num: { value: 0.7778, unit: '', tolAbs: 0.001, check: '1-2/9' }
+        hint: '$\cos 2\alpha = 1 - 2\sin^2\alpha$.'
+        explain: '$1 - \frac29 = \frac79 \approx 0{,}778$.'
+        f: [2]
+        sol: { method: 'Форма через синус.', steps: ['$1 - 2 \cdot \frac19 = \frac79$.'], answer: '7/9 ≈ 0,778' }
+        src: b164
+      - type: numeric
+        cat: problem
+        q: 'Упростите $(\sin\alpha + \cos\alpha)^2 - \sin 2\alpha$.'
+        num: { value: 1, unit: '', check: '(Math.sin(0.7)+Math.cos(0.7))**2-Math.sin(1.4)' }
+        hint: 'Раскройте квадрат.'
+        explain: '$1 + 2\sin\alpha\cos\alpha - \sin 2\alpha = 1$.'
+        f: [1]
+        sol: { method: 'Квадрат суммы и двойной угол.', steps: ['$\sin^2\alpha + \cos^2\alpha + 2\sin\alpha\cos\alpha = 1 + \sin 2\alpha$.', '$1 + \sin 2\alpha - \sin 2\alpha = 1$.'], answer: '1' }
+        src: b166
+      - type: numeric
+        cat: problem
+        q: '$\operatorname{tg}\alpha = 0{,}5$. Найдите $\operatorname{tg} 2\alpha$ (с точностью до 0,01).'
+        num: { value: 1.3333, unit: '', tolAbs: 0.01, check: '1/(1-0.25)' }
+        hint: 'Формула тангенса двойного угла.'
+        explain: '$\frac{1}{0{,}75} = \frac43$.'
+        f: [3]
+        sol: { method: 'Тангенс двойного угла.', steps: ['$\frac{2 \cdot 0{,}5}{1 - 0{,}25} = \frac{1}{0{,}75} = \frac43$.'], answer: '4/3' }
+        src: b165
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\dfrac{8\sin 10^\circ\cos 10^\circ\cos 20^\circ\cos 40^\circ}{\cos 10^\circ}$.'
+        num: { value: 1, unit: '', check: '8*Math.sin(Math.PI/18)*Math.cos(Math.PI/9)*Math.cos(2*Math.PI/9)/Math.cos(Math.PI/18)*Math.cos(Math.PI/18)' }
+        hint: 'Трижды примените синус двойного угла.'
+        explain: '$8\sin 10^\circ\cos 10^\circ\cos 20^\circ\cos 40^\circ = \sin 80^\circ = \cos 10^\circ$.'
+        f: [1]
+        sol: { method: 'Последовательное «сворачивание».', steps: ['$2\sin 10^\circ\cos 10^\circ = \sin 20^\circ$; $2\sin 20^\circ\cos 20^\circ = \sin 40^\circ$; $2\sin 40^\circ\cos 40^\circ = \sin 80^\circ$.', '$\sin 80^\circ = \cos 10^\circ$, дробь равна 1.'], answer: '1' }
+        src: b166
+      - type: single
+        cat: theory
+        q: 'Какая формула верна?'
+        opts: ['$\cos 2\alpha = 2\cos^2\alpha - 1$', '$\cos 2\alpha = 2\cos\alpha$', '$\cos 2\alpha = 1 - 2\cos^2\alpha$', '$\cos 2\alpha = \cos^2\alpha + \sin^2\alpha$']
+        ans: a
+        hint: 'Подставьте $\alpha = 0$.'
+        explain: 'При $\alpha = 0$: $1 = 2 - 1$ ✓; остальные дают неверные значения.'
+        f: [2]
+        src: b164
+      - type: single
+        cat: theory
+        q: 'Чему равно $\sin 3\alpha$?'
+        opts: ['$3\sin\alpha - 4\sin^3\alpha$', '$3\sin\alpha$', '$4\sin^3\alpha - 3\sin\alpha$', '$\sin\alpha\cos 2\alpha$']
+        ans: a
+        hint: 'Проверьте при $\alpha = 30^\circ$: $\sin 90^\circ = 1$.'
+        explain: '$3 \cdot \frac12 - 4 \cdot \frac18 = 1$ ✓.'
+        src: b166
+
+  # ───────────────────────────── 1.15.6 ─────────────────────────────
+  - id: ma-1-15-6
+    num: '1.15.6'
+    title: Формулы для суммы и разности
+    pages: [b168, b169]
+    book:
+      place: 'Ч. 2, 1.15 «Тригонометрия», пункт 1.15.6'
+      summary: 'Задания на преобразование суммы и разности синусов (косинусов) в произведение и вычисление таких сумм.'
+    stage: verified
+    stageNote: 'Формулы проверены численно на сетке пар углов.'
+    sourcesChecked: '2026-10-25'
+    web: [*at-94]
+    theory:
+      - kind: law
+        title: Сумма и разность в произведение
+        body: |
+          $$\sin\alpha + \sin\beta = 2\sin\frac{\alpha + \beta}{2}\cos\frac{\alpha - \beta}{2},\qquad \sin\alpha - \sin\beta = 2\cos\frac{\alpha + \beta}{2}\sin\frac{\alpha - \beta}{2},$$
+          $$\cos\alpha + \cos\beta = 2\cos\frac{\alpha + \beta}{2}\cos\frac{\alpha - \beta}{2},\qquad \cos\alpha - \cos\beta = -2\sin\frac{\alpha + \beta}{2}\sin\frac{\alpha - \beta}{2}.$$
+          Удобны, когда нужно получить **произведение** (уравнения «$= 0$», сокращение дробей) или когда полусумма и полуразность углов — «хорошие» углы.
+        src: b168
+    formulas:
+      - title: Сумма и разность синусов
+        tex: '\sin\alpha \pm \sin\beta = 2\sin\frac{\alpha \pm \beta}{2}\cos\frac{\alpha \mp \beta}{2}'
+        meaning: '$\alpha$, $\beta$ — любые углы.'
+        use: '$\sin 75^\circ + \sin 15^\circ = 2\sin 45^\circ\cos 30^\circ$.'
+        src: b168
+      - title: Сумма и разность косинусов
+        tex: '\cos\alpha + \cos\beta = 2\cos\frac{\alpha + \beta}{2}\cos\frac{\alpha - \beta}{2},\quad \cos\alpha - \cos\beta = -2\sin\frac{\alpha + \beta}{2}\sin\frac{\alpha - \beta}{2}'
+        meaning: 'В разности косинусов — знак «минус» перед произведением.'
+        use: 'Сокращение дробей, уравнения.'
+        src: b168
+    examples:
+      - title: Сумма синусов
+        given: 'Вычислите $\sin 75^\circ + \sin 15^\circ$.'
+        find: 'значение.'
+        method: 'Полусумма $45^\circ$, полуразность $30^\circ$.'
+        steps:
+          - '$2\sin 45^\circ\cos 30^\circ = 2 \cdot \frac{\sqrt2}2 \cdot \frac{\sqrt3}2$.'
+          - '$= \frac{\sqrt6}{2} \approx 1{,}225$.'
+        check: '$0{,}9659 + 0{,}2588 = 1{,}2247$ ✓.'
+        answer: '$\frac{\sqrt6}2$'
+        src: b168
+      - title: Разность косинусов
+        given: 'Упростите $\cos 70^\circ - \cos 10^\circ$.'
+        find: 'выражение.'
+        method: 'Формула разности косинусов.'
+        steps:
+          - '$-2\sin 40^\circ\sin 30^\circ$.'
+          - '$= -\sin 40^\circ$.'
+        check: '$0{,}3420 - 0{,}9848 = -0{,}6428 = -\sin 40^\circ$ ✓.'
+        answer: '$-\sin 40^\circ$'
+        src: b168
+      - title: Сокращение дроби
+        given: 'Упростите $\dfrac{\sin 3\alpha + \sin\alpha}{\cos 3\alpha + \cos\alpha}$.'
+        find: 'выражение.'
+        method: 'Числитель и знаменатель — в произведения.'
+        steps:
+          - '$\frac{2\sin 2\alpha\cos\alpha}{2\cos 2\alpha\cos\alpha}$.'
+          - '$= \operatorname{tg} 2\alpha$.'
+        check: '$\alpha = 15^\circ$: $\frac{0{,}7071 + 0{,}2588}{0{,}7071 + 0{,}9659} = 0{,}5774 = \operatorname{tg} 30^\circ$ ✓.'
+        answer: '$\operatorname{tg} 2\alpha$'
+        src: b169
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\cos 75^\circ + \cos 15^\circ$ (с точностью до 0,001).'
+        num: { value: 1.2247, unit: '', tolAbs: 0.001, check: 'Math.cos(75*Math.PI/180)+Math.cos(15*Math.PI/180)' }
+        hint: '$2\cos 45^\circ\cos 30^\circ$.'
+        explain: '$\frac{\sqrt6}{2} \approx 1{,}225$.'
+        f: [2]
+        sol: { method: 'Сумма косинусов.', steps: ['$2\cos 45^\circ\cos 30^\circ = \frac{\sqrt6}{2}$.', '$\approx 1{,}225$.'], answer: '1,225' }
+        src: b168
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\sin 105^\circ - \sin 15^\circ$ (с точностью до 0,001).'
+        num: { value: 0.7071, unit: '', tolAbs: 0.001, check: 'Math.sin(105*Math.PI/180)-Math.sin(15*Math.PI/180)' }
+        hint: '$2\cos 60^\circ\sin 45^\circ$.'
+        explain: '$2 \cdot \frac12 \cdot \frac{\sqrt2}{2} = \frac{\sqrt2}2$.'
+        f: [1]
+        sol: { method: 'Разность синусов.', steps: ['$2\cos 60^\circ\sin 45^\circ = \frac{\sqrt2}{2} \approx 0{,}707$.'], answer: '0,707' }
+        src: b168
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\dfrac{\sin 50^\circ + \sin 10^\circ}{\cos 20^\circ}$.'
+        num: { value: 1, unit: '', check: '(Math.sin(50*Math.PI/180)+Math.sin(10*Math.PI/180))/Math.cos(20*Math.PI/180)' }
+        hint: 'Числитель $= 2\sin 30^\circ\cos 20^\circ$.'
+        explain: '$\cos 20^\circ$ сокращается, остаётся $2\sin 30^\circ = 1$.'
+        f: [1]
+        sol: { method: 'Сумма синусов.', steps: ['$\sin 50^\circ + \sin 10^\circ = 2\sin 30^\circ\cos 20^\circ = \cos 20^\circ$.', 'Дробь равна 1.'], answer: '1' }
+        src: b168
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\sin 15^\circ + \cos 15^\circ$ (с точностью до 0,001).'
+        num: { value: 1.2247, unit: '', tolAbs: 0.001, check: 'Math.sin(Math.PI/12)+Math.cos(Math.PI/12)' }
+        hint: '$\cos 15^\circ = \sin 75^\circ$.'
+        explain: '$\sin 15^\circ + \sin 75^\circ = 2\sin 45^\circ\cos 30^\circ = \frac{\sqrt6}2$.'
+        f: [1]
+        sol: { method: 'Приведение и сумма синусов.', steps: ['$\cos 15^\circ = \sin 75^\circ$.', '$\sin 75^\circ + \sin 15^\circ = \frac{\sqrt6}{2} \approx 1{,}225$.'], answer: '1,225' }
+        src: b168
+      - type: numeric
+        cat: problem
+        q: 'Найдите значение $\dfrac{\sin 3\alpha + \sin\alpha}{\cos 3\alpha + \cos\alpha}$ при $\alpha = 15^\circ$ (с точностью до 0,001).'
+        num: { value: 0.5774, unit: '', tolAbs: 0.001, check: 'Math.tan(Math.PI/6)' }
+        hint: 'Дробь равна $\operatorname{tg} 2\alpha$.'
+        explain: '$\operatorname{tg} 30^\circ = \frac{\sqrt3}{3} \approx 0{,}577$.'
+        f: [1, 2]
+        sol: { method: 'Упрощение и подстановка.', steps: ['Дробь $= \operatorname{tg} 2\alpha$.', '$\operatorname{tg} 30^\circ \approx 0{,}577$.'], answer: '0,577' }
+        src: b169
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\dfrac{\cos 10^\circ - \cos 70^\circ}{\sin 40^\circ}$.'
+        num: { value: 1, unit: '', check: '(Math.cos(Math.PI/18)-Math.cos(7*Math.PI/18))/Math.sin(2*Math.PI/9)' }
+        hint: 'Разность косинусов.'
+        explain: '$-2\sin 40^\circ\sin(-30^\circ) = \sin 40^\circ$; дробь равна 1.'
+        f: [2]
+        sol: { method: 'Разность косинусов.', steps: ['$\cos 10^\circ - \cos 70^\circ = -2\sin 40^\circ\sin(-30^\circ) = \sin 40^\circ$.', 'Дробь равна 1.'], answer: '1' }
+        src: b168
+      - type: single
+        cat: theory
+        q: 'Чему равно $\sin\alpha + \sin\beta$?'
+        opts: ['$2\sin\frac{\alpha + \beta}2\cos\frac{\alpha - \beta}2$', '$\sin(\alpha + \beta)$', '$2\cos\frac{\alpha + \beta}2\sin\frac{\alpha - \beta}2$', '$2\sin\frac{\alpha + \beta}2\sin\frac{\alpha - \beta}2$']
+        ans: a
+        hint: 'При $\alpha = \beta$ должно получиться $2\sin\alpha$.'
+        explain: 'При $\alpha = \beta$: $2\sin\alpha\cos 0 = 2\sin\alpha$ ✓.'
+        f: [1]
+        src: b168
+      - type: single
+        cat: theory
+        q: 'Какой знак стоит перед произведением в формуле $\cos\alpha - \cos\beta = \ldots\,\sin\frac{\alpha + \beta}2\sin\frac{\alpha - \beta}2$?'
+        opts: ['$-2$', '$+2$', '$-1$', '$+1$']
+        ans: a
+        hint: 'Проверьте $\alpha = 0$, $\beta = \pi$: $\cos 0 - \cos\pi = 2$.'
+        explain: '$-2\sin\frac\pi2\sin\left(-\frac\pi2\right) = 2$ ✓.'
+        f: [2]
+        src: b168
+
+  # ───────────────────────────── 1.15.7 ─────────────────────────────
+  - id: ma-1-15-7
+    num: '1.15.7'
+    title: Формулы для произведения
+    pages: [b169, b170]
+    book:
+      place: 'Ч. 2, 1.15 «Тригонометрия», пункт 1.15.7'
+      summary: 'Задания на преобразование произведения синусов и косинусов в сумму и вычисление таких произведений.'
+    stage: verified
+    stageNote: 'Формулы проверены численно на сетке пар углов.'
+    sourcesChecked: '2026-10-25'
+    web: [*at-94]
+    theory:
+      - kind: law
+        title: Произведение в сумму
+        body: |
+          $$\sin\alpha\sin\beta = \frac12\big[\cos(\alpha - \beta) - \cos(\alpha + \beta)\big],$$
+          $$\cos\alpha\cos\beta = \frac12\big[\cos(\alpha - \beta) + \cos(\alpha + \beta)\big],$$
+          $$\sin\alpha\cos\beta = \frac12\big[\sin(\alpha + \beta) + \sin(\alpha - \beta)\big].$$
+          Получаются сложением и вычитанием формул сложения. Применяют, чтобы вычислить произведение «неудобных» углов, сумма и разность которых — табличные.
+        src: b169
+    formulas:
+      - title: Произведение синусов и косинусов
+        tex: '\sin\alpha\sin\beta = \tfrac12\big[\cos(\alpha - \beta) - \cos(\alpha + \beta)\big],\quad \cos\alpha\cos\beta = \tfrac12\big[\cos(\alpha - \beta) + \cos(\alpha + \beta)\big]'
+        meaning: '$\alpha$, $\beta$ — любые углы.'
+        use: '$\sin 75^\circ\sin 15^\circ = \frac12(\cos 60^\circ - \cos 90^\circ)$.'
+        src: b169
+      - title: Синус на косинус
+        tex: '\sin\alpha\cos\beta = \tfrac12\big[\sin(\alpha + \beta) + \sin(\alpha - \beta)\big]'
+        meaning: 'Порядок углов важен в $\sin(\alpha - \beta)$.'
+        use: '$2\sin 3x\cos x = \sin 4x + \sin 2x$.'
+        src: b169
+    examples:
+      - title: Произведение синусов
+        given: 'Вычислите $\sin 75^\circ\sin 15^\circ$.'
+        find: 'значение.'
+        method: 'Произведение в сумму.'
+        steps:
+          - '$\frac12(\cos 60^\circ - \cos 90^\circ) = \frac12 \cdot \frac12$.'
+          - '$= \frac14$.'
+        check: '$0{,}9659 \cdot 0{,}2588 = 0{,}25$ ✓.'
+        answer: '$\frac14$'
+        src: b169
+      - title: Произведение косинусов
+        given: 'Вычислите $\cos 75^\circ\cos 15^\circ$.'
+        find: 'значение.'
+        method: 'Произведение в сумму.'
+        steps:
+          - '$\frac12(\cos 60^\circ + \cos 90^\circ) = \frac12 \cdot \frac12$.'
+          - '$= \frac14$.'
+        check: '$0{,}2588 \cdot 0{,}9659 = 0{,}25$ ✓.'
+        answer: '$\frac14$'
+        src: b169
+      - title: Буквенное выражение
+        given: 'Представьте $2\sin 3x\cos x$ в виде суммы.'
+        find: 'сумму.'
+        method: 'Формула синуса на косинус.'
+        steps:
+          - '$2 \cdot \frac12\big[\sin 4x + \sin 2x\big]$.'
+          - '$= \sin 4x + \sin 2x$.'
+        check: '$x = 0{,}3$: $2 \cdot 0{,}7833 \cdot 0{,}9553 = 1{,}4966$; $0{,}9320 + 0{,}5646 = 1{,}4966$ ✓.'
+        answer: '$\sin 4x + \sin 2x$'
+        src: b170
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\sin 75^\circ\cos 15^\circ$ (с точностью до 0,001).'
+        num: { value: 0.933, unit: '', tolAbs: 0.001, check: 'Math.sin(75*Math.PI/180)*Math.cos(15*Math.PI/180)' }
+        hint: '$\frac12(\sin 90^\circ + \sin 60^\circ)$.'
+        explain: '$\frac12\left(1 + \frac{\sqrt3}2\right) \approx 0{,}933$.'
+        f: [2]
+        sol: { method: 'Синус на косинус.', steps: ['$\frac12(\sin 90^\circ + \sin 60^\circ)$.', '$= \frac{2 + \sqrt3}{4} \approx 0{,}933$.'], answer: '0,933' }
+        src: b169
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $4\sin 15^\circ\sin 75^\circ$.'
+        num: { value: 1, unit: '', check: '4*Math.sin(Math.PI/12)*Math.sin(5*Math.PI/12)' }
+        hint: '$\sin 15^\circ\sin 75^\circ = \frac14$.'
+        explain: '$4 \cdot \frac14 = 1$.'
+        f: [1]
+        sol: { method: 'Произведение синусов.', steps: ['$\sin 15^\circ\sin 75^\circ = \frac12(\cos 60^\circ - \cos 90^\circ) = \frac14$.', '$4 \cdot \frac14 = 1$.'], answer: '1' }
+        src: b169
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\cos 105^\circ\cos 15^\circ$.'
+        num: { value: -0.25, unit: '', check: 'Math.cos(105*Math.PI/180)*Math.cos(15*Math.PI/180)' }
+        hint: '$\frac12(\cos 90^\circ + \cos 120^\circ)$.'
+        explain: '$\frac12\left(0 - \frac12\right) = -\frac14$.'
+        f: [1]
+        sol: { method: 'Произведение косинусов.', steps: ['$\frac12(\cos 90^\circ + \cos 120^\circ) = -\frac14$.'], answer: '−0,25' }
+        src: b169
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $2\cos 40^\circ\cos 20^\circ - \cos 20^\circ$.'
+        num: { value: 0.5, unit: '', check: '2*Math.cos(2*Math.PI/9)*Math.cos(Math.PI/9)-Math.cos(Math.PI/9)' }
+        hint: '$2\cos 40^\circ\cos 20^\circ = \cos 20^\circ + \cos 60^\circ$.'
+        explain: 'Остаётся $\cos 60^\circ = 0{,}5$.'
+        f: [1]
+        sol: { method: 'Произведение в сумму.', steps: ['$2\cos 40^\circ\cos 20^\circ = \cos 20^\circ + \cos 60^\circ$.', 'Минус $\cos 20^\circ$: $0{,}5$.'], answer: '0,5' }
+        src: b169
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\sin 52{,}5^\circ\sin 7{,}5^\circ$ (с точностью до 0,001).'
+        num: { value: 0.1036, unit: '', tolAbs: 0.001, check: 'Math.sin(52.5*Math.PI/180)*Math.sin(7.5*Math.PI/180)' }
+        hint: 'Разность углов $45^\circ$, сумма $60^\circ$.'
+        explain: '$\frac12(\cos 45^\circ - \cos 60^\circ) \approx 0{,}104$.'
+        f: [1]
+        sol: { method: 'Произведение синусов.', steps: ['$\frac12(\cos 45^\circ - \cos 60^\circ) = \frac{\sqrt2 - 1}{4}$.', '$\approx 0{,}104$.'], answer: '0,104' }
+        src: b169
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $8\cos 20^\circ\cos 40^\circ\cos 80^\circ$.'
+        num: { value: 1, unit: '', check: '8*Math.cos(Math.PI/9)*Math.cos(2*Math.PI/9)*Math.cos(4*Math.PI/9)' }
+        hint: 'Умножьте и разделите на $\sin 20^\circ$ и сворачивайте синус двойного угла.'
+        explain: '$\frac{8\sin 20^\circ\cos 20^\circ\cos 40^\circ\cos 80^\circ}{\sin 20^\circ} = \frac{\sin 160^\circ}{\sin 20^\circ} = 1$.'
+        sol: { method: 'Домножение на синус.', steps: ['$8\sin 20^\circ\cos 20^\circ\cos 40^\circ\cos 80^\circ = \sin 160^\circ$.', '$\sin 160^\circ = \sin 20^\circ$, значит, исходное выражение равно 1.'], answer: '1' }
+        src: b170
+      - type: single
+        cat: theory
+        q: 'Чему равно $\sin\alpha\cos\beta$?'
+        opts: ['$\frac12[\sin(\alpha + \beta) + \sin(\alpha - \beta)]$', '$\frac12[\cos(\alpha - \beta) - \cos(\alpha + \beta)]$', '$\sin(\alpha + \beta)$', '$\frac12[\sin(\alpha + \beta) - \sin(\alpha - \beta)]$']
+        ans: a
+        hint: 'Сложите формулы синуса суммы и разности.'
+        explain: '$\sin(\alpha + \beta) + \sin(\alpha - \beta) = 2\sin\alpha\cos\beta$.'
+        f: [2]
+        src: b169
+      - type: single
+        cat: theory
+        q: 'Зачем переводить произведение в сумму?'
+        opts: ['чтобы получить табличные углы или упростить выражение', 'чтобы найти период', 'это всегда обязательно', 'чтобы избавиться от квадратов']
+        ans: a
+        hint: '$\sin 75^\circ\sin 15^\circ$.'
+        explain: 'Сумма и разность «неудобных» углов часто оказываются табличными.'
+        src: b169
+
+  # ───────────────────────────── 1.15.8 ─────────────────────────────
+  - id: ma-1-15-8
+    num: '1.15.8'
+    title: Формулы половинного угла
+    pages: [b170, b171, b172, b173]
+    book:
+      place: 'Ч. 2, 1.15 «Тригонометрия», пункт 1.15.8'
+      summary: 'Задания на формулы половинного угла и понижения степени, выражение $\sin\alpha$ и $\cos\alpha$ через $\operatorname{tg}\frac\alpha2$.'
+    stage: verified
+    stageNote: 'Формулы проверены численно; знаки корней — по четверти половинного угла.'
+    sourcesChecked: '2026-10-25'
+    web: [*at-93]
+    theory:
+      - kind: law
+        title: Половинный угол и понижение степени
+        body: |
+          Из $\cos\alpha = 1 - 2\sin^2\frac\alpha2 = 2\cos^2\frac\alpha2 - 1$:
+          $$\sin^2\frac\alpha2 = \frac{1 - \cos\alpha}{2},\qquad \cos^2\frac\alpha2 = \frac{1 + \cos\alpha}{2},\qquad \operatorname{tg}\frac\alpha2 = \frac{\sin\alpha}{1 + \cos\alpha} = \frac{1 - \cos\alpha}{\sin\alpha}.$$
+          Знак $\sin\frac\alpha2$ и $\cos\frac\alpha2$ определяют по четверти **половинного** угла.
+          **Понижение степени**: $\sin^2 x = \frac{1 - \cos 2x}{2}$, $\cos^2 x = \frac{1 + \cos 2x}{2}$.
+        src: b170
+      - kind: rule
+        title: Выражение через тангенс половинного угла
+        body: |
+          При $t = \operatorname{tg}\frac\alpha2$:
+          $$\sin\alpha = \frac{2t}{1 + t^2},\qquad \cos\alpha = \frac{1 - t^2}{1 + t^2},\qquad \operatorname{tg}\alpha = \frac{2t}{1 - t^2}.$$
+          Это «универсальная подстановка»: все функции выражаются рационально через одну переменную $t$ (при $\alpha \ne \pi + 2\pi k$).
+        src: b171
+    formulas:
+      - title: Квадраты синуса и косинуса половинного угла
+        tex: '\sin^2\frac\alpha2 = \frac{1 - \cos\alpha}{2},\qquad \cos^2\frac\alpha2 = \frac{1 + \cos\alpha}{2}'
+        meaning: '$\alpha$ — любой угол.'
+        use: '$\cos 15^\circ = \sqrt{\frac{1 + \cos 30^\circ}{2}}$; понижение степени.'
+        limits: 'Знак после извлечения корня — по четверти $\frac\alpha2$.'
+        src: b170
+      - title: Тангенс половинного угла
+        tex: '\operatorname{tg}\frac\alpha2 = \frac{\sin\alpha}{1 + \cos\alpha} = \frac{1 - \cos\alpha}{\sin\alpha}'
+        meaning: 'Формулы без корня — знак получается сам.'
+        use: '$\operatorname{tg} 15^\circ = \frac{1 - \cos 30^\circ}{\sin 30^\circ} = 2 - \sqrt3$.'
+        src: b171
+      - title: Универсальная подстановка
+        tex: '\sin\alpha = \frac{2t}{1 + t^2},\quad \cos\alpha = \frac{1 - t^2}{1 + t^2},\quad t = \operatorname{tg}\frac\alpha2'
+        meaning: '$\alpha \ne \pi + 2\pi k$.'
+        use: 'Найти $\sin\alpha$, $\cos\alpha$ по $\operatorname{tg}\frac\alpha2$.'
+        src: b171
+    examples:
+      - title: Косинус 15°
+        given: 'Вычислите $\cos 15^\circ$.'
+        find: 'точное значение.'
+        method: 'Половинный угол от $30^\circ$.'
+        steps:
+          - '$\cos^2 15^\circ = \frac{1 + \frac{\sqrt3}2}{2} = \frac{2 + \sqrt3}{4}$.'
+          - '$15^\circ$ в I четверти: $\cos 15^\circ = \frac{\sqrt{2 + \sqrt3}}{2}$.'
+        check: '$\frac{\sqrt{3{,}732}}{2} = 0{,}9659$ ✓.'
+        answer: '$\frac{\sqrt{2 + \sqrt3}}2$'
+        src: b170
+      - title: Синус половинного угла
+        given: '$\cos\alpha = 0{,}28$, $0 < \alpha < \frac\pi2$. Найдите $\sin\frac\alpha2$.'
+        find: '$\sin\frac\alpha2$.'
+        method: 'Формула половинного угла.'
+        steps:
+          - '$\sin^2\frac\alpha2 = \frac{1 - 0{,}28}{2} = 0{,}36$.'
+          - '$\frac\alpha2$ в I четверти: $\sin\frac\alpha2 = 0{,}6$.'
+        check: '$\cos\alpha = 1 - 2 \cdot 0{,}36 = 0{,}28$ ✓.'
+        answer: '$0{,}6$'
+        src: b170
+      - title: Тангенс 22,5°
+        given: 'Вычислите $\operatorname{tg} 22{,}5^\circ$.'
+        find: 'точное значение.'
+        method: 'Формула без корня.'
+        steps:
+          - '$\frac{1 - \cos 45^\circ}{\sin 45^\circ} = \frac{1 - \frac{\sqrt2}2}{\frac{\sqrt2}2}$.'
+          - '$= \sqrt2 - 1$.'
+        check: '$\operatorname{tg} 22{,}5^\circ = 0{,}4142 = 1{,}4142 - 1$ ✓.'
+        answer: '$\sqrt2 - 1$'
+        src: b171
+    questions:
+      - type: numeric
+        cat: problem
+        q: '$\cos\alpha = \frac19$. Найдите $\sin^2\frac\alpha2$ (с точностью до 0,001).'
+        num: { value: 0.4444, unit: '', tolAbs: 0.001, check: '(1-1/9)/2' }
+        hint: '$\frac{1 - \cos\alpha}{2}$.'
+        explain: '$\frac{8/9}{2} = \frac49$.'
+        f: [1]
+        sol: { method: 'Половинный угол.', steps: ['$\frac{1 - \frac19}{2} = \frac49 \approx 0{,}444$.'], answer: '4/9' }
+        src: b170
+      - type: numeric
+        cat: problem
+        q: '$\cos\alpha = 0{,}5$, $0 < \alpha < \pi$. Найдите $\cos\frac\alpha2$ (с точностью до 0,001).'
+        num: { value: 0.866, unit: '', tolAbs: 0.001, check: 'Math.sqrt(0.75)' }
+        hint: '$\cos^2\frac\alpha2 = \frac{1 + \cos\alpha}{2}$; $\frac\alpha2$ — в I четверти.'
+        explain: '$\sqrt{0{,}75} \approx 0{,}866$.'
+        f: [1]
+        sol: { method: 'Половинный угол.', steps: ['$\cos^2\frac\alpha2 = 0{,}75$.', '$\frac\alpha2 \in (0; \frac\pi2)$: $\cos\frac\alpha2 = \sqrt{0{,}75} \approx 0{,}866$.'], answer: '0,866' }
+        src: b170
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\operatorname{tg} 15^\circ$ (с точностью до 0,001).'
+        num: { value: 0.2679, unit: '', tolAbs: 0.001, check: 'Math.tan(Math.PI/12)' }
+        hint: '$\frac{1 - \cos 30^\circ}{\sin 30^\circ}$.'
+        explain: '$2 - \sqrt3 \approx 0{,}268$.'
+        f: [2]
+        sol: { method: 'Тангенс половинного угла.', steps: ['$\frac{1 - \frac{\sqrt3}{2}}{\frac12} = 2 - \sqrt3$.', '$\approx 0{,}268$.'], answer: '0,268' }
+        src: b171
+      - type: numeric
+        cat: problem
+        q: '$\operatorname{tg}\frac\alpha2 = 2$. Найдите $\cos\alpha$.'
+        num: { value: -0.6, unit: '', check: '(1-4)/(1+4)' }
+        hint: 'Универсальная подстановка.'
+        explain: '$\frac{1 - 4}{1 + 4} = -0{,}6$.'
+        f: [3]
+        sol: { method: 'Универсальная подстановка.', steps: ['$\cos\alpha = \frac{1 - t^2}{1 + t^2} = \frac{-3}{5}$.'], answer: '−0,6' }
+        src: b171
+      - type: numeric
+        cat: problem
+        q: '$\operatorname{tg}\frac\alpha2 = \frac12$. Найдите $\sin\alpha$.'
+        num: { value: 0.8, unit: '', check: '1/(1+0.25)' }
+        hint: '$\sin\alpha = \frac{2t}{1 + t^2}$.'
+        explain: '$\frac{1}{1{,}25} = 0{,}8$.'
+        f: [3]
+        sol: { method: 'Универсальная подстановка.', steps: ['$\frac{2 \cdot \frac12}{1 + \frac14} = \frac{1}{1{,}25} = 0{,}8$.'], answer: '0,8' }
+        src: b171
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $2\sin^2\dfrac\pi8$ (с точностью до 0,001).'
+        num: { value: 0.2929, unit: '', tolAbs: 0.001, check: '2*Math.sin(Math.PI/8)**2' }
+        hint: 'Понижение степени: $2\sin^2 x = 1 - \cos 2x$.'
+        explain: '$1 - \cos\frac\pi4 = 1 - \frac{\sqrt2}2 \approx 0{,}293$.'
+        f: [1]
+        sol: { method: 'Понижение степени.', steps: ['$2\sin^2\frac\pi8 = 1 - \cos\frac\pi4$.', '$1 - 0{,}7071 \approx 0{,}293$.'], answer: '0,293' }
+        src: b170
+      - type: single
+        cat: theory
+        q: 'От чего зависит знак в формуле $\sin\frac\alpha2 = \pm\sqrt{\frac{1 - \cos\alpha}2}$?'
+        opts: ['от четверти, в которой лежит угол $\frac\alpha2$', 'от знака $\cos\alpha$', 'от четверти угла $\alpha$', 'всегда «+»']
+        ans: a
+        hint: 'Слева стоит синус половинного угла.'
+        explain: 'Знак выражения слева — это знак $\sin$ угла $\frac\alpha2$.'
+        f: [1]
+        src: b170
+      - type: single
+        cat: theory
+        q: 'Формула понижения степени для $\cos^2 x$:'
+        opts: ['$\frac{1 + \cos 2x}{2}$', '$\frac{1 - \cos 2x}{2}$', '$\frac{1 + \cos x}{2}$', '$2\cos 2x - 1$']
+        ans: a
+        hint: 'Проверьте при $x = 0$.'
+        explain: 'При $x = 0$: $\frac{1 + 1}{2} = 1 = \cos^2 0$ ✓.'
+        f: [1]
+        src: b170
+
+  # ───────────────────────────── 1.15.9 ─────────────────────────────
+  - id: ma-1-15-9
+    num: '1.15.9'
+    title: Арксинус, арккосинус, арктангенс и арккотангенс
+    pages: [b173, b174, b175, b176]
+    book:
+      place: 'Ч. 2, 1.15 «Тригонометрия», пункт 1.15.9'
+      summary: 'Задания на вычисление значений обратных тригонометрических функций, выражений вида $\cos(\arcsin a)$, $\arcsin(\sin x)$, на области определения.'
+    stage: verified
+    stageNote: 'Значения проверены через Math.asin/Math.acos/Math.atan.'
+    sourcesChecked: '2026-10-25'
+    web: [*at-83]
+    theory:
+      - kind: definition
+        title: Обратные тригонометрические функции
+        body: |
+          | функция | определена при | значения | смысл |
+          | --- | --- | --- | --- |
+          | $\arcsin a$ | $-1 \le a \le 1$ | $\left[-\frac\pi2; \frac\pi2\right]$ | угол, синус которого $a$ |
+          | $\arccos a$ | $-1 \le a \le 1$ | $[0; \pi]$ | угол, косинус которого $a$ |
+          | $\operatorname{arctg} a$ | любое $a$ | $\left(-\frac\pi2; \frac\pi2\right)$ | угол, тангенс которого $a$ |
+          | $\operatorname{arcctg} a$ | любое $a$ | $(0; \pi)$ | угол, котангенс которого $a$ |
+          Пример: $\arcsin\frac12 = \frac\pi6$ (а не $\frac{5\pi}6$ — он вне промежутка значений).
+        src: b173
+      - kind: law
+        title: Свойства
+        body: |
+          - $\arcsin(-a) = -\arcsin a$, $\operatorname{arctg}(-a) = -\operatorname{arctg} a$;
+          - $\arccos(-a) = \pi - \arccos a$, $\operatorname{arcctg}(-a) = \pi - \operatorname{arcctg} a$;
+          - $\arcsin a + \arccos a = \frac\pi2$, $\operatorname{arctg} a + \operatorname{arcctg} a = \frac\pi2$;
+          - $\sin(\arcsin a) = a$, но $\arcsin(\sin x) = x$ **только** при $x \in \left[-\frac\pi2; \frac\pi2\right]$;
+          - $\cos(\arcsin a) = \sqrt{1 - a^2}$ (косинус угла из $[-\frac\pi2; \frac\pi2]$ неотрицателен).
+        src: b174
+    formulas:
+      - title: Определение арксинуса и арккосинуса
+        tex: '\arcsin a = \varphi \iff \sin\varphi = a,\ \varphi \in \left[-\tfrac\pi2; \tfrac\pi2\right];\qquad \arccos a = \varphi \iff \cos\varphi = a,\ \varphi \in [0; \pi]'
+        meaning: '$|a| \le 1$.'
+        use: 'Вычисление значений; решение уравнений.'
+        src: b173
+      - title: Отрицательный аргумент
+        tex: '\arcsin(-a) = -\arcsin a,\quad \arccos(-a) = \pi - \arccos a,\quad \operatorname{arctg}(-a) = -\operatorname{arctg} a'
+        meaning: 'Следует из промежутков значений.'
+        use: '$\arccos\left(-\frac12\right) = \pi - \frac\pi3 = \frac{2\pi}3$.'
+        src: b174
+      - title: Тригонометрическая функция от обратной
+        tex: '\cos(\arcsin a) = \sqrt{1 - a^2},\qquad \sin(\arccos a) = \sqrt{1 - a^2}'
+        meaning: '$|a| \le 1$; корень неотрицателен, так как угол лежит в нужной четверти.'
+        use: 'Выражения вида $\sin(\arccos 0{,}6)$.'
+        src: b174
+    examples:
+      - title: Значения
+        given: 'Вычислите $\arcsin\frac12$, $\arccos\left(-\frac12\right)$, $\operatorname{arctg}(-\sqrt3)$.'
+        find: 'углы.'
+        method: 'Таблица и свойства.'
+        steps:
+          - '$\arcsin\frac12 = \frac\pi6$.'
+          - '$\arccos\left(-\frac12\right) = \pi - \frac\pi3 = \frac{2\pi}3$; $\operatorname{arctg}(-\sqrt3) = -\frac\pi3$.'
+        check: '$\sin\frac\pi6 = \frac12$, $\cos\frac{2\pi}3 = -\frac12$, $\operatorname{tg}\left(-\frac\pi3\right) = -\sqrt3$ ✓.'
+        answer: '$\frac\pi6$; $\frac{2\pi}3$; $-\frac\pi3$'
+        src: b173
+      - title: Косинус арксинуса
+        given: 'Вычислите $\cos\left(\arcsin\frac35\right)$.'
+        find: 'значение.'
+        method: '$\varphi = \arcsin\frac35$ — острый угол.'
+        steps:
+          - '$\sin\varphi = \frac35$, $\cos\varphi \ge 0$.'
+          - '$\cos\varphi = \sqrt{1 - \frac9{25}} = \frac45$.'
+        check: '$\cos(0{,}6435) = 0{,}8$ ✓.'
+        answer: '$\frac45$'
+        src: b174
+      - title: Арксинус синуса
+        given: 'Вычислите $\arcsin\left(\sin\frac{5\pi}6\right)$.'
+        find: 'угол.'
+        method: 'Найти угол из $\left[-\frac\pi2; \frac\pi2\right]$ с тем же синусом.'
+        steps:
+          - '$\sin\frac{5\pi}6 = \frac12$.'
+          - '$\arcsin\frac12 = \frac\pi6$ (а не $\frac{5\pi}6$).'
+        check: '$\frac\pi6 \in \left[-\frac\pi2; \frac\pi2\right]$ ✓.'
+        answer: '$\frac\pi6$'
+        src: b174
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Найдите $\arcsin\dfrac{\sqrt2}2$ в градусах.'
+        num: { value: 45, unit: '°', check: 'Math.asin(Math.SQRT2/2)*180/Math.PI' }
+        hint: 'Какой угол из $[-90^\circ; 90^\circ]$ имеет такой синус?'
+        explain: '$45^\circ$.'
+        f: [1]
+        sol: { method: 'Определение арксинуса.', steps: ['$\sin 45^\circ = \frac{\sqrt2}{2}$, $45^\circ \in [-90^\circ; 90^\circ]$.'], answer: '45°' }
+        src: b173
+      - type: numeric
+        cat: problem
+        q: 'Найдите $\arccos\left(-\dfrac{\sqrt3}2\right)$ в градусах.'
+        num: { value: 150, unit: '°', check: 'Math.acos(-Math.sqrt(3)/2)*180/Math.PI' }
+        hint: '$\arccos(-a) = \pi - \arccos a$.'
+        explain: '$180^\circ - 30^\circ = 150^\circ$.'
+        f: [2]
+        sol: { method: 'Отрицательный аргумент.', steps: ['$\arccos\frac{\sqrt3}{2} = 30^\circ$.', '$180^\circ - 30^\circ = 150^\circ$.'], answer: '150°' }
+        src: b174
+      - type: numeric
+        cat: problem
+        q: 'Найдите $\operatorname{arctg} 1 + \operatorname{arcctg} 1$ в градусах.'
+        num: { value: 90, unit: '°', check: '45+45' }
+        hint: '$\operatorname{arctg} a + \operatorname{arcctg} a = 90^\circ$.'
+        explain: '$45^\circ + 45^\circ = 90^\circ$.'
+        sol: { method: 'Свойство обратных функций.', steps: ['$\operatorname{arctg} 1 = \operatorname{arcctg} 1 = 45^\circ$.', 'Сумма $90^\circ$.'], answer: '90°' }
+        src: b174
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\sin(\arccos 0{,}6)$.'
+        num: { value: 0.8, unit: '', check: 'Math.sin(Math.acos(0.6))' }
+        hint: '$\sqrt{1 - a^2}$.'
+        explain: '$\sqrt{1 - 0{,}36} = 0{,}8$.'
+        f: [3]
+        sol: { method: 'Функция от обратной.', steps: ['$\varphi = \arccos 0{,}6 \in [0; \pi]$, $\sin\varphi \ge 0$.', '$\sin\varphi = 0{,}8$.'], answer: '0,8' }
+        src: b174
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\operatorname{tg}(\arcsin 0{,}6)$.'
+        num: { value: 0.75, unit: '', check: 'Math.tan(Math.asin(0.6))' }
+        hint: 'Найдите косинус этого угла.'
+        explain: '$\cos = 0{,}8$, $\operatorname{tg} = \frac{0{,}6}{0{,}8} = 0{,}75$.'
+        f: [3]
+        sol: { method: 'Функция от обратной.', steps: ['$\cos(\arcsin 0{,}6) = 0{,}8$.', '$\operatorname{tg} = 0{,}75$.'], answer: '0,75' }
+        src: b174
+      - type: numeric
+        cat: problem
+        q: 'Найдите $\arcsin\left(\sin\dfrac{2\pi}3\right)$ в градусах.'
+        num: { value: 60, unit: '°', check: 'Math.asin(Math.sin(2*Math.PI/3))*180/Math.PI' }
+        hint: 'Результат должен лежать в $[-90^\circ; 90^\circ]$.'
+        explain: '$\sin 120^\circ = \frac{\sqrt3}2$, $\arcsin\frac{\sqrt3}2 = 60^\circ$.'
+        f: [1]
+        sol: { method: 'Промежуток значений арксинуса.', steps: ['$\sin 120^\circ = \frac{\sqrt3}{2}$.', '$\arcsin\frac{\sqrt3}{2} = 60^\circ$.'], answer: '60°' }
+        src: b174
+      - type: single
+        cat: theory
+        q: 'При каких $a$ определён $\arcsin a$?'
+        opts: ['$-1 \le a \le 1$', 'при любых $a$', '$a \ge 0$', '$-\frac\pi2 \le a \le \frac\pi2$']
+        ans: a
+        hint: 'Синус принимает значения от $-1$ до $1$.'
+        explain: 'Аргумент арксинуса — значение синуса.'
+        f: [1]
+        src: b173
+      - type: single
+        cat: theory
+        q: 'Чему равно $\arccos(-a)$?'
+        opts: ['$\pi - \arccos a$', '$-\arccos a$', '$\arccos a$', '$\frac\pi2 - \arccos a$']
+        ans: a
+        hint: 'Значения арккосинуса лежат в $[0; \pi]$.'
+        explain: 'Например, $\arccos\left(-\frac12\right) = \frac{2\pi}{3} = \pi - \frac\pi3$.'
+        f: [2]
+        src: b174
+
+  # ───────────────────────────── 1.15.10 ─────────────────────────────
+  - id: ma-1-15-10
+    num: '1.15.10'
+    title: Тригонометрические уравнения
+    pages: [b176, b177, b178, b179, b180, b181, b182, b183, b184, b185, b186, b187]
+    book:
+      place: 'Ч. 2, 1.15 «Тригонометрия», пункт 1.15.10'
+      summary: 'Большой набор заданий на тригонометрические уравнения: простейшие, сводящиеся к квадратным, однородные, решаемые разложением на множители и введением вспомогательного угла; число и сумма корней на промежутке.'
+    stage: verified
+    stageNote: 'Корни проверены подстановкой; число корней на промежутках — перебором по сетке.'
+    sourcesChecked: '2026-10-25'
+    web: [*rs-teq, *at-95]
+    theory:
+      - kind: rule
+        title: Простейшие уравнения
+        body: |
+          $k$ — любое целое число.
+          - $\sin x = a$, $|a| \le 1$: $x = (-1)^k\arcsin a + \pi k$ (две серии: $\arcsin a + 2\pi k$ и $\pi - \arcsin a + 2\pi k$).
+          - $\cos x = a$, $|a| \le 1$: $x = \pm\arccos a + 2\pi k$.
+          - $\operatorname{tg} x = a$: $x = \operatorname{arctg} a + \pi k$ (любое $a$).
+          - Частные случаи: $\sin x = 0 \Rightarrow x = \pi k$; $\sin x = 1 \Rightarrow x = \frac\pi2 + 2\pi k$; $\cos x = 0 \Rightarrow x = \frac\pi2 + \pi k$; $\cos x = -1 \Rightarrow x = \pi + 2\pi k$.
+          - При $|a| > 1$ уравнения $\sin x = a$ и $\cos x = a$ корней не имеют.
+        src: b176
+        fig: sin-equation
+      - kind: rule
+        title: Основные методы
+        body: |
+          - **Замена**: $2\cos^2x - 3\cos x + 1 = 0$ — квадратное относительно $t = \cos x$, $|t| \le 1$.
+          - **Разложение на множители**: $\sin 2x = \cos x \iff \cos x(2\sin x - 1) = 0$. Нельзя делить на $\cos x$ — потеряются корни.
+          - **Однородные**: $a\sin x + b\cos x = 0$ — деление на $\cos x \ne 0$ даёт $\operatorname{tg} x = -\frac ba$.
+          - **Вспомогательный угол**: $a\sin x + b\cos x = \sqrt{a^2 + b^2}\,\sin(x + \varphi)$.
+          - **Корни на промежутке** перебирают по $k$ или отмечают на окружности.
+        src: b178
+    formulas:
+      - title: Решения простейших уравнений
+        tex: '\sin x = a:\ x = (-1)^k\arcsin a + \pi k;\quad \cos x = a:\ x = \pm\arccos a + 2\pi k;\quad \operatorname{tg} x = a:\ x = \operatorname{arctg} a + \pi k'
+        meaning: '$k \in \mathbb Z$; для синуса и косинуса $|a| \le 1$.'
+        use: 'Последний шаг любого тригонометрического уравнения.'
+        src: b176
+      - title: Вспомогательный угол
+        tex: 'a\sin x + b\cos x = \sqrt{a^2 + b^2}\,\sin(x + \varphi),\quad \cos\varphi = \frac{a}{\sqrt{a^2 + b^2}},\ \sin\varphi = \frac{b}{\sqrt{a^2 + b^2}}'
+        meaning: '$a$, $b$ не равны нулю одновременно.'
+        use: 'Уравнения $\sin x + \cos x = 1$; наибольшее значение $\sqrt{a^2 + b^2}$.'
+        src: b180
+    examples:
+      - title: Простейшее уравнение
+        given: 'Решите уравнение $2\sin x = 1$ и найдите корни на $[0; 2\pi]$.'
+        find: 'общее решение и корни на отрезке.'
+        method: '$\sin x = \frac12$.'
+        steps:
+          - '$x = (-1)^k\frac\pi6 + \pi k$, то есть $\frac\pi6 + 2\pi k$ или $\frac{5\pi}6 + 2\pi k$.'
+          - 'На $[0; 2\pi]$: $\frac\pi6$ и $\frac{5\pi}6$.'
+        check: '$\sin\frac{5\pi}6 = \frac12$ ✓.'
+        answer: '$x = (-1)^k\frac\pi6 + \pi k$; на отрезке $\frac\pi6$, $\frac{5\pi}6$'
+        src: b176
+      - title: Квадратное относительно косинуса
+        given: 'Решите уравнение $2\cos^2x - 3\cos x + 1 = 0$.'
+        find: 'общее решение.'
+        method: '$t = \cos x$.'
+        steps:
+          - '$2t^2 - 3t + 1 = 0$: $t = 1$ или $t = \frac12$.'
+          - '$\cos x = 1 \Rightarrow x = 2\pi k$; $\cos x = \frac12 \Rightarrow x = \pm\frac\pi3 + 2\pi k$.'
+        check: '$x = \frac\pi3$: $2 \cdot \frac14 - \frac32 + 1 = 0$ ✓.'
+        answer: '$x = 2\pi k$, $x = \pm\frac\pi3 + 2\pi k$'
+        src: b178
+      - title: Однородное уравнение
+        given: 'Решите уравнение $\sin x - \sqrt3\cos x = 0$.'
+        find: 'общее решение.'
+        method: 'Разделить на $\cos x$ (при $\cos x = 0$ равенство неверно).'
+        steps:
+          - '$\operatorname{tg} x = \sqrt3$.'
+          - '$x = \frac\pi3 + \pi k$.'
+        check: '$x = \frac{4\pi}3$: $-\frac{\sqrt3}2 - \sqrt3 \cdot \left(-\frac12\right) = 0$ ✓.'
+        answer: '$x = \frac\pi3 + \pi k$'
+        src: b179
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Сколько корней у уравнения $\sin x = \frac12$ на отрезке $[0; 2\pi]$?'
+        num: { value: 2, unit: '', check: '2' }
+        hint: 'Прямая $y = \frac12$ и одна волна синусоиды.'
+        explain: '$\frac\pi6$ и $\frac{5\pi}6$.'
+        f: [1]
+        sol: { method: 'Простейшее уравнение.', steps: ['Серии $\frac\pi6 + 2\pi k$ и $\frac{5\pi}6 + 2\pi k$.', 'На $[0; 2\pi]$ — по одному корню из каждой.'], answer: '2' }
+        src: b176
+      - type: numeric
+        cat: problem
+        q: 'Найдите наименьший положительный корень уравнения $\cos x = -\frac12$ (в градусах).'
+        num: { value: 120, unit: '°', check: 'Math.acos(-0.5)*180/Math.PI' }
+        hint: '$\arccos\left(-\frac12\right)$.'
+        explain: '$x = \pm 120^\circ + 360^\circ k$; наименьший положительный $120^\circ$.'
+        f: [1]
+        sol: { method: 'Простейшее уравнение.', steps: ['$\arccos\left(-\frac12\right) = 120^\circ$.', 'Наименьший положительный корень $120^\circ$.'], answer: '120°' }
+        src: b176
+      - type: numeric
+        cat: problem
+        q: 'Найдите сумму корней уравнения $\operatorname{tg} x = 1$ на отрезке $[0^\circ; 360^\circ]$ (в градусах).'
+        num: { value: 270, unit: '°', check: '45+225' }
+        hint: '$x = 45^\circ + 180^\circ k$.'
+        explain: '$45^\circ + 225^\circ = 270^\circ$.'
+        f: [1]
+        sol: { method: 'Серия с периодом $180^\circ$.', steps: ['$x = 45^\circ + 180^\circ k$.', 'На отрезке: $45^\circ$, $225^\circ$; сумма $270^\circ$.'], answer: '270°' }
+        src: b176
+      - type: numeric
+        cat: problem
+        q: 'Сколько корней у уравнения $2\sin^2x - \sin x - 1 = 0$ на промежутке $[0^\circ; 360^\circ)$?'
+        num: { value: 3, unit: '', check: '3' }
+        hint: '$t = \sin x$: $2t^2 - t - 1 = 0$.'
+        explain: '$\sin x = 1$ ($90^\circ$) или $\sin x = -\frac12$ ($210^\circ$, $330^\circ$).'
+        sol: { method: 'Замена.', steps: ['$t = 1$ или $t = -\frac12$.', '$\sin x = 1$: $90^\circ$.', '$\sin x = -\frac12$: $210^\circ$, $330^\circ$.'], answer: '3' }
+        src: b178
+      - type: numeric
+        cat: problem
+        q: 'Сколько корней у уравнения $\sin 2x = \cos x$ на отрезке $[0^\circ; 180^\circ]$?'
+        num: { value: 3, unit: '', check: '3' }
+        hint: '$\cos x(2\sin x - 1) = 0$; не делите на $\cos x$.'
+        explain: '$\cos x = 0$: $90^\circ$; $\sin x = \frac12$: $30^\circ$, $150^\circ$.'
+        sol: { method: 'Разложение на множители.', steps: ['$2\sin x\cos x - \cos x = \cos x(2\sin x - 1) = 0$.', '$90^\circ$; $30^\circ$; $150^\circ$ — три корня.'], answer: '3' }
+        src: b179
+      - type: numeric
+        cat: problem
+        q: 'Найдите наименьший положительный корень уравнения $\sin x + \cos x = 1$ (в градусах).'
+        num: { value: 90, unit: '°', check: '90' }
+        hint: '$\sin x + \cos x = \sqrt2\sin(x + 45^\circ)$.'
+        explain: '$\sin(x + 45^\circ) = \frac{\sqrt2}2$: $x = 360^\circ k$ или $x = 90^\circ + 360^\circ k$; наименьший положительный $90^\circ$.'
+        f: [2]
+        sol: { method: 'Вспомогательный угол.', steps: ['$\sqrt2\sin(x + 45^\circ) = 1$.', '$x + 45^\circ = 45^\circ$ или $135^\circ$ (+ $360^\circ k$).', 'Положительные корни: $90^\circ$, $360^\circ$, …; наименьший $90^\circ$.'], answer: '90°' }
+        src: b180
+      - type: single
+        cat: theory
+        q: 'Сколько корней у уравнения $\sin x = 1{,}5$?'
+        opts: ['ни одного', 'один', 'два', 'бесконечно много']
+        ans: a
+        hint: '$|\sin x| \le 1$.'
+        explain: 'Синус не превосходит 1.'
+        f: [1]
+        src: b176
+      - type: single
+        cat: theory
+        q: 'Общее решение уравнения $\cos x = a$ ($|a| \le 1$):'
+        opts: ['$x = \pm\arccos a + 2\pi k$', '$x = \arccos a + \pi k$', '$x = (-1)^k\arccos a + \pi k$', '$x = \pm\arccos a + \pi k$']
+        ans: a
+        hint: 'Две симметричные точки окружности, период $2\pi$.'
+        explain: 'Точки с абсциссой $a$ симметричны относительно $Ox$.'
+        f: [1]
+        src: b176
+
+  # ───────────────────────────── 1.15.11 ─────────────────────────────
+  - id: ma-1-15-11
+    num: '1.15.11'
+    title: Тригонометрические неравенства
+    pages: [b187, b188, b189, b190, b191]
+    book:
+      place: 'Ч. 2, 1.15 «Тригонометрия», пункт 1.15.11'
+      summary: 'Задания на простейшие тригонометрические неравенства и неравенства, сводящиеся к ним: найти множество решений, решения на промежутке.'
+    stage: verified
+    stageNote: 'Множества решений проверены перебором по сетке углов.'
+    sourcesChecked: '2026-10-25'
+    web: [*rs-tin, *at-81]
+    theory:
+      - kind: rule
+        title: Решение по окружности или графику
+        body: |
+          1. Решить соответствующее уравнение и отметить граничные точки на единичной окружности (или графике).
+          2. Выбрать дугу, где неравенство выполнено, и записать её **против часовой стрелки** (от меньшего угла к большему).
+          3. Добавить период: $2\pi k$ для $\sin$ и $\cos$, $\pi k$ для $\operatorname{tg}$.
+          Примеры:
+          - $\sin x > \frac12$: $\frac\pi6 + 2\pi k < x < \frac{5\pi}6 + 2\pi k$;
+          - $\cos x \le \frac12$: $\frac\pi3 + 2\pi k \le x \le \frac{5\pi}3 + 2\pi k$;
+          - $\operatorname{tg} x > 1$: $\frac\pi4 + \pi k < x < \frac\pi2 + \pi k$.
+          Если $|a| > 1$: $\sin x < a$ (при $a > 1$) — все $x$; $\sin x > a$ — решений нет.
+        src: b187
+    formulas:
+      - title: Простейшие неравенства с синусом и косинусом
+        tex: '\sin x > a\ (|a| < 1):\ \arcsin a + 2\pi k < x < \pi - \arcsin a + 2\pi k;\qquad \cos x > a:\ -\arccos a + 2\pi k < x < \arccos a + 2\pi k'
+        meaning: '$k \in \mathbb Z$.'
+        use: 'Запись ответа по дуге окружности.'
+        src: b187
+      - title: Неравенство с тангенсом
+        tex: '\operatorname{tg} x > a:\ \operatorname{arctg} a + \pi k < x < \frac\pi2 + \pi k'
+        meaning: 'Правая граница — точка, где тангенс не определён.'
+        use: 'Неравенства с $\operatorname{tg}$ и $\operatorname{ctg}$.'
+        src: b188
+    examples:
+      - title: Синус больше числа
+        given: 'Решите неравенство $\sin x > \frac12$.'
+        find: 'множество решений.'
+        method: 'Дуга окружности выше прямой $y = \frac12$.'
+        steps:
+          - 'Граничные точки $\frac\pi6$ и $\frac{5\pi}6$.'
+          - '$\frac\pi6 + 2\pi k < x < \frac{5\pi}6 + 2\pi k$.'
+        check: '$x = \frac\pi2$: $1 > \frac12$ ✓; $x = \pi$: $0$ — нет ✓.'
+        answer: '$\left(\frac\pi6 + 2\pi k; \frac{5\pi}6 + 2\pi k\right)$'
+        src: b187
+      - title: Косинус не больше числа
+        given: 'Решите неравенство $\cos x \le \frac12$.'
+        find: 'множество решений.'
+        method: 'Дуга левее прямой $x = \frac12$.'
+        steps:
+          - 'Граничные точки $\frac\pi3$ и $\frac{5\pi}3$ (против часовой стрелки).'
+          - '$\frac\pi3 + 2\pi k \le x \le \frac{5\pi}3 + 2\pi k$.'
+        check: '$x = \pi$: $-1 \le \frac12$ ✓; $x = 0$: $1 > \frac12$ — нет ✓.'
+        answer: '$\left[\frac\pi3 + 2\pi k; \frac{5\pi}3 + 2\pi k\right]$'
+        src: b188
+      - title: Тангенс
+        given: 'Решите неравенство $\operatorname{tg} x > 1$.'
+        find: 'множество решений.'
+        method: 'Тангенс возрастает на $\left(-\frac\pi2; \frac\pi2\right)$, период $\pi$.'
+        steps:
+          - '$\operatorname{tg} x = 1$ при $x = \frac\pi4$.'
+          - '$\frac\pi4 + \pi k < x < \frac\pi2 + \pi k$.'
+        check: '$x = 1{,}2$: $\operatorname{tg} 1{,}2 = 2{,}57 > 1$ ✓.'
+        answer: '$\left(\frac\pi4 + \pi k; \frac\pi2 + \pi k\right)$'
+        src: b188
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Множество решений неравенства $\sin x \ge \frac12$ на отрезке $[0^\circ; 360^\circ]$ — отрезок. Найдите его длину в градусах.'
+        num: { value: 120, unit: '°', check: '150-30' }
+        hint: 'Границы $30^\circ$ и $150^\circ$.'
+        explain: '$[30^\circ; 150^\circ]$, длина $120^\circ$.'
+        f: [1]
+        sol: { method: 'По окружности.', steps: ['$\sin x = \frac12$ при $30^\circ$ и $150^\circ$.', 'Решение $[30^\circ; 150^\circ]$, длина $120^\circ$.'], answer: '120°' }
+        src: b187
+      - type: numeric
+        cat: problem
+        q: 'Какова общая длина (в градусах) множества решений неравенства $\cos x > 0$ на отрезке $[0^\circ; 360^\circ]$?'
+        num: { value: 180, unit: '°', check: '90+90' }
+        hint: 'Косинус положителен в I и IV четвертях.'
+        explain: '$[0^\circ; 90^\circ) \cup (270^\circ; 360^\circ]$ — всего $180^\circ$.'
+        f: [1]
+        sol: { method: 'Знаки по четвертям.', steps: ['$[0^\circ; 90^\circ)$ и $(270^\circ; 360^\circ]$.', '$90^\circ + 90^\circ = 180^\circ$.'], answer: '180°' }
+        src: b187
+      - type: numeric
+        cat: problem
+        q: 'Найдите наименьшее натуральное $x$ (в радианах), при котором $\sin x < 0$.'
+        num: { value: 4, unit: '', check: '4' }
+        hint: '$\pi \approx 3{,}14$.'
+        explain: '$\sin 1, \sin 2, \sin 3 > 0$ (углы меньше $\pi$), $\sin 4 < 0$ ($\pi < 4 < 2\pi$).'
+        sol: { method: 'Сравнение с $\pi$.', steps: ['$\sin x < 0$ при $\pi < x < 2\pi$ (первый виток).', 'Наименьшее натуральное больше $\pi$ — это $4$.'], answer: '4' }
+        src: b187
+      - type: numeric
+        cat: problem
+        q: 'Найдите длину (в градусах) множества решений неравенства $\operatorname{tg} x > 1$ на интервале $(0^\circ; 90^\circ)$.'
+        num: { value: 45, unit: '°', check: '90-45' }
+        hint: '$\operatorname{tg} 45^\circ = 1$, тангенс возрастает.'
+        explain: '$(45^\circ; 90^\circ)$ — длина $45^\circ$.'
+        f: [2]
+        sol: { method: 'Монотонность тангенса.', steps: ['$\operatorname{tg} x > 1 \iff 45^\circ < x < 90^\circ$ на данном интервале.', 'Длина $45^\circ$.'], answer: '45°' }
+        src: b188
+      - type: numeric
+        cat: problem
+        q: 'Сколько целых чисел $x$ из отрезка $[0; 6]$ (углы в радианах) удовлетворяют неравенству $\cos x > 0$?'
+        num: { value: 4, unit: '', check: '[0,1,2,3,4,5,6].filter(x=>Math.cos(x)>0).length' }
+        hint: '$\cos x > 0$ при $|x| < \frac\pi2 \approx 1{,}57$ и при $\frac{3\pi}2 \approx 4{,}71 < x < 2\pi \approx 6{,}28$.'
+        explain: 'Подходят $0, 1, 5, 6$.'
+        f: [1]
+        sol: { method: 'Интервалы положительности косинуса.', steps: ['$[0; \frac\pi2)$: $0$, $1$.', '$(\frac{3\pi}2; 2\pi)$: $5$, $6$.', 'Всего четыре.'], answer: '4' }
+        src: b187
+      - type: single
+        cat: theory
+        q: 'Решения неравенства $\sin x > 2$:'
+        opts: ['решений нет', 'любое $x$', '$x > \arcsin 2$', '$x = \frac\pi2 + 2\pi k$']
+        ans: a
+        hint: 'Синус не больше 1.'
+        explain: '$\sin x \le 1 < 2$.'
+        src: b187
+      - type: single
+        cat: theory
+        q: 'Решения неравенства $\operatorname{tg} x > 0$:'
+        opts: ['$\pi k < x < \frac\pi2 + \pi k$', '$2\pi k < x < \pi + 2\pi k$', '$-\frac\pi2 + \pi k < x < \pi k$', 'любое $x$']
+        ans: a
+        hint: 'Тангенс положителен в I и III четвертях.'
+        explain: 'С периодом $\pi$: от $\pi k$ до $\frac\pi2 + \pi k$.'
+        f: [2]
+        src: b188
+      - type: single
+        cat: theory
+        q: 'Где выполняется неравенство $\cos x \ge -1$?'
+        opts: ['при всех $x$', 'ни при каких $x$', 'только при $x = \pi + 2\pi k$', 'при $x \ne \pi + 2\pi k$']
+        ans: a
+        hint: 'Множество значений косинуса.'
+        explain: '$-1 \le \cos x \le 1$ всегда.'
+        src: b187
+
+  # ───────────────────────────── 1.15.12 ─────────────────────────────
+  - id: ma-1-15-12
+    num: '1.15.12'
+    title: Смешанный раздел
+    pages: [b191, b192]
+    book:
+      place: 'Ч. 2, 1.15 «Тригонометрия», пункт 1.15.12'
+      summary: 'Смешанный набор задач по тригонометрии без новой теории в книге: упрощения, наибольшие и наименьшие значения тригонометрических выражений. Здесь собраны приёмы из 1.15.1–1.15.11.'
+    stage: verified
+    stageNote: 'Наибольшие и наименьшие значения проверены по сетке углов.'
+    sourcesChecked: '2026-10-25'
+    web: [*at-93, *at-95]
+    theory:
+      - kind: rule
+        title: Наибольшее и наименьшее значения
+        body: |
+          - $-1 \le \sin x \le 1$, поэтому $A\sin x + B$ принимает значения от $B - |A|$ до $B + |A|$.
+          - $a\sin x + b\cos x = \sqrt{a^2 + b^2}\sin(x + \varphi)$ — от $-\sqrt{a^2 + b^2}$ до $\sqrt{a^2 + b^2}$.
+          - $\sin x\cos x = \frac12\sin 2x$ — от $-\frac12$ до $\frac12$.
+          - $\sin^4x + \cos^4x = 1 - 2\sin^2x\cos^2x = 1 - \frac12\sin^2 2x$ — от $\frac12$ до $1$.
+        src: b191
+      - kind: rule
+        title: Общий план упрощения
+        body: |
+          1. Привести углы к одному (формулы двойного и половинного угла).
+          2. Привести функции к одной (основное тождество, $\operatorname{tg} = \frac{\sin}{\cos}$).
+          3. Разложить на множители или свернуть по формулам сложения.
+          Пример: $\frac{\sin 2\alpha}{1 + \cos 2\alpha} = \frac{2\sin\alpha\cos\alpha}{2\cos^2\alpha} = \operatorname{tg}\alpha$.
+        src: b191
+    formulas:
+      - title: Границы выражения a sin x + b cos x
+        tex: '-\sqrt{a^2 + b^2} \le a\sin x + b\cos x \le \sqrt{a^2 + b^2}'
+        meaning: 'Следует из формулы вспомогательного угла.'
+        use: 'Наибольшее и наименьшее значения.'
+        src: b191
+      - title: Тангенс через двойной угол
+        tex: '\frac{\sin 2\alpha}{1 + \cos 2\alpha} = \frac{1 - \cos 2\alpha}{\sin 2\alpha} = \operatorname{tg}\alpha'
+        meaning: 'При допустимых $\alpha$.'
+        use: 'Упрощение дробей с двойным углом.'
+        src: b191
+    examples:
+      - title: Упрощение дроби
+        given: 'Упростите $\dfrac{\sin 2\alpha}{1 + \cos 2\alpha}$.'
+        find: 'выражение.'
+        method: 'Формулы двойного угла.'
+        steps:
+          - '$\frac{2\sin\alpha\cos\alpha}{1 + 2\cos^2\alpha - 1} = \frac{2\sin\alpha\cos\alpha}{2\cos^2\alpha}$.'
+          - '$= \operatorname{tg}\alpha$.'
+        check: '$\alpha = 30^\circ$: $\frac{0{,}866}{1{,}5} = 0{,}577 = \operatorname{tg} 30^\circ$ ✓.'
+        answer: '$\operatorname{tg}\alpha$'
+        src: b191
+      - title: Наибольшее значение
+        given: 'Найдите наибольшее значение $3\sin x + 4\cos x$.'
+        find: 'наибольшее значение.'
+        method: 'Вспомогательный угол.'
+        steps:
+          - '$\sqrt{9 + 16} = 5$: $3\sin x + 4\cos x = 5\sin(x + \varphi)$.'
+          - 'Наибольшее значение $5$.'
+        check: 'При $\sin x = 0{,}6$, $\cos x = 0{,}8$: $1{,}8 + 3{,}2 = 5$ ✓.'
+        answer: '$5$'
+        src: b191
+      - title: Четвёртые степени
+        given: 'Найдите наименьшее значение $\sin^4x + \cos^4x$.'
+        find: 'наименьшее значение.'
+        method: 'Выделить квадрат суммы.'
+        steps:
+          - '$(\sin^2x + \cos^2x)^2 - 2\sin^2x\cos^2x = 1 - \frac12\sin^2 2x$.'
+          - '$\sin^2 2x \le 1 \Rightarrow$ наименьшее $\frac12$ (при $x = \frac\pi4$).'
+        check: '$x = 45^\circ$: $\frac14 + \frac14 = \frac12$ ✓.'
+        answer: '$\frac12$'
+        src: b191
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Найдите наибольшее значение $3\sin x - 4\cos x$.'
+        num: { value: 5, unit: '', check: 'Math.sqrt(9+16)' }
+        hint: '$\sqrt{a^2 + b^2}$.'
+        explain: '$\sqrt{9 + 16} = 5$.'
+        f: [1]
+        sol: { method: 'Вспомогательный угол.', steps: ['$\sqrt{3^2 + 4^2} = 5$.'], answer: '5' }
+        src: b191
+      - type: numeric
+        cat: problem
+        q: 'Найдите наименьшее значение $\sin^4x + \cos^4x$.'
+        num: { value: 0.5, unit: '', check: '1-0.5' }
+        hint: '$1 - \frac12\sin^2 2x$.'
+        explain: 'Наименьшее при $\sin^2 2x = 1$: $\frac12$.'
+        sol: { method: 'Квадрат суммы.', steps: ['$\sin^4x + \cos^4x = 1 - \frac12\sin^2 2x$.', 'Наименьшее $0{,}5$.'], answer: '0,5' }
+        src: b191
+      - type: numeric
+        cat: problem
+        q: 'Найдите значение $\dfrac{1 - \cos 2\alpha}{\sin 2\alpha}$ при $\alpha = 45^\circ$.'
+        num: { value: 1, unit: '', check: '(1-Math.cos(Math.PI/2))/Math.sin(Math.PI/2)' }
+        hint: 'Дробь равна $\operatorname{tg}\alpha$.'
+        explain: '$\operatorname{tg} 45^\circ = 1$.'
+        f: [2]
+        sol: { method: 'Упрощение.', steps: ['$\frac{2\sin^2\alpha}{2\sin\alpha\cos\alpha} = \operatorname{tg}\alpha$.', '$\operatorname{tg} 45^\circ = 1$.'], answer: '1' }
+        src: b191
+      - type: numeric
+        cat: problem
+        q: 'Найдите наибольшее значение $2\sin x + 1$.'
+        num: { value: 3, unit: '', check: '2+1' }
+        hint: '$\sin x \le 1$.'
+        explain: '$2 + 1 = 3$.'
+        sol: { method: 'Ограниченность синуса.', steps: ['$\sin x = 1$: $2 \cdot 1 + 1 = 3$.'], answer: '3' }
+        src: b191
+      - type: numeric
+        cat: problem
+        q: 'Найдите наибольшее значение $\sin x\cos x$.'
+        num: { value: 0.5, unit: '', check: '0.5*Math.sin(Math.PI/2)' }
+        hint: '$\sin x\cos x = \frac12\sin 2x$.'
+        explain: '$\frac12$.'
+        sol: { method: 'Двойной угол.', steps: ['$\frac12\sin 2x \le \frac12$.'], answer: '0,5' }
+        src: b191
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\cos^2\dfrac\pi8 - \sin^2\dfrac\pi8$ (с точностью до 0,001).'
+        num: { value: 0.7071, unit: '', tolAbs: 0.001, check: 'Math.cos(Math.PI/4)' }
+        hint: 'Косинус двойного угла.'
+        explain: '$\cos\frac\pi4 = \frac{\sqrt2}2$.'
+        sol: { method: 'Свернуть.', steps: ['$\cos\frac\pi4 = \frac{\sqrt2}{2} \approx 0{,}707$.'], answer: '0,707' }
+        src: b191
+      - type: single
+        cat: theory
+        q: 'Чему равно $\dfrac{\sin 2\alpha}{1 + \cos 2\alpha}$?'
+        opts: ['$\operatorname{tg}\alpha$', '$\operatorname{ctg}\alpha$', '$\sin\alpha$', '$2\operatorname{tg}\alpha$']
+        ans: a
+        hint: '$1 + \cos 2\alpha = 2\cos^2\alpha$.'
+        explain: '$\frac{2\sin\alpha\cos\alpha}{2\cos^2\alpha} = \operatorname{tg}\alpha$.'
+        f: [2]
+        src: b191
+      - type: single
+        cat: theory
+        q: 'Наибольшее значение $a\sin x + b\cos x$ равно…'
+        opts: ['$\sqrt{a^2 + b^2}$', '$a + b$', '$|a| + |b|$', '$\max(a, b)$']
+        ans: a
+        hint: 'Вспомогательный угол.'
+        explain: '$a\sin x + b\cos x = \sqrt{a^2 + b^2}\sin(x + \varphi)$; $|a| + |b|$ достигается не всегда.'
+        f: [1]
+        src: b191
+
+  # ───────────────────────────── 1.15.13 ─────────────────────────────
+  - id: ma-1-15-13
+    num: '1.15.13'
+    title: Тригонометрические функции и их свойства
+    pages: [b192, b193, b194, b195, b196, b197, b198, b199, b200, b201]
+    book:
+      place: 'Ч. 2, 1.15 «Тригонометрия», пункт 1.15.13'
+      summary: 'Задания на свойства функций $\sin x$, $\cos x$, $\operatorname{tg} x$: области определения и значений, период, чётность, нули, наибольшие и наименьшие значения.'
+    stage: verified
+    stageNote: 'Периоды и множества значений проверены численно.'
+    sourcesChecked: '2026-10-25'
+    web: [*at-81, *at-73]
+    theory:
+      - kind: definition
+        title: Свойства основных функций
+        body: |
+          | | $\sin x$ | $\cos x$ | $\operatorname{tg} x$ |
+          | --- | --- | --- | --- |
+          | $D$ | $\mathbb R$ | $\mathbb R$ | $x \ne \frac\pi2 + \pi k$ |
+          | $E$ | $[-1; 1]$ | $[-1; 1]$ | $\mathbb R$ |
+          | период | $2\pi$ | $2\pi$ | $\pi$ |
+          | чётность | нечётная | чётная | нечётная |
+          | нули | $\pi k$ | $\frac\pi2 + \pi k$ | $\pi k$ |
+        src: b192
+      - kind: rule
+        title: Период и множество значений сложных функций
+        body: |
+          - Период $A\sin(kx + b)$ и $A\cos(kx + b)$ равен $\frac{2\pi}{|k|}$; у $\operatorname{tg}(kx + b)$ — $\frac{\pi}{|k|}$.
+          - Множество значений $A\sin(kx + b) + B$: $[B - |A|; B + |A|]$.
+          - Произведение чётной и нечётной функций — нечётная функция; двух нечётных — чётная.
+        src: b194
+        fig: sine-period
+    formulas:
+      - title: Период
+        tex: 'T\big(\sin(kx + b)\big) = T\big(\cos(kx + b)\big) = \frac{2\pi}{|k|},\qquad T\big(\operatorname{tg}(kx + b)\big) = \frac{\pi}{|k|}'
+        meaning: '$k \ne 0$.'
+        use: 'Найти наименьший положительный период.'
+        src: b194
+      - title: Множество значений
+        tex: 'E\big(A\sin(kx + b) + B\big) = [B - |A|;\ B + |A|]'
+        meaning: 'То же для косинуса.'
+        use: 'Наибольшее и наименьшее значения.'
+        src: b195
+    examples:
+      - title: Период и значения
+        given: 'Найдите период и множество значений $y = 3\sin(2x - 1)$.'
+        find: '$T$, $E$.'
+        method: 'Формулы периода и множества значений.'
+        steps:
+          - '$T = \frac{2\pi}{2} = \pi$.'
+          - '$E = [-3; 3]$.'
+        check: '$y(x + \pi) = 3\sin(2x - 1 + 2\pi) = y(x)$ ✓.'
+        answer: '$T = \pi$, $E = [-3; 3]$'
+        src: b194
+      - title: Множество значений
+        given: 'Найдите множество значений $y = 2 - 3\cos x$.'
+        find: '$E(y)$.'
+        method: '$-1 \le \cos x \le 1$.'
+        steps:
+          - '$-3 \le -3\cos x \le 3$.'
+          - '$-1 \le 2 - 3\cos x \le 5$.'
+        check: '$x = 0$: $-1$; $x = \pi$: $5$ ✓.'
+        answer: '$[-1; 5]$'
+        src: b195
+      - title: Чётность
+        given: 'Исследуйте на чётность $y = x\sin x$ и $y = \sin x + \cos x$.'
+        find: 'чётность.'
+        method: 'Подставить $-x$.'
+        steps:
+          - '$(-x)\sin(-x) = x\sin x$ — чётная.'
+          - '$\sin(-x) + \cos(-x) = -\sin x + \cos x$ — ни чётная, ни нечётная.'
+        check: 'Вторая: $y\left(\frac\pi2\right) = 1$, $y\left(-\frac\pi2\right) = -1$ — не чётная; $y(0) = 1 \ne -y(0)$ — не нечётная ✓.'
+        answer: 'первая — чётная, вторая — общего вида'
+        src: b196
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Найдите период функции $y = \cos 4x$ в градусах.'
+        num: { value: 90, unit: '°', check: '360/4' }
+        hint: '$T = \frac{360^\circ}{|k|}$.'
+        explain: '$\frac{360^\circ}{4} = 90^\circ$.'
+        f: [1]
+        sol: { method: 'Формула периода.', steps: ['$T = \frac{2\pi}{4} = \frac\pi2 = 90^\circ$.'], answer: '90°' }
+        src: b194
+      - type: numeric
+        cat: problem
+        q: 'Найдите период функции $y = \operatorname{tg}\dfrac x3$ в градусах.'
+        num: { value: 540, unit: '°', check: '180*3' }
+        hint: 'Период тангенса $\frac{180^\circ}{|k|}$.'
+        explain: '$\frac{180^\circ}{1/3} = 540^\circ$.'
+        f: [1]
+        sol: { method: 'Формула периода.', steps: ['$T = \frac{\pi}{1/3} = 3\pi = 540^\circ$.'], answer: '540°' }
+        src: b194
+      - type: numeric
+        cat: problem
+        q: 'Найдите наибольшее значение $y = 5 - 2\sin x$.'
+        num: { value: 7, unit: '', check: '5+2' }
+        hint: 'Наибольшее при $\sin x = -1$.'
+        explain: '$5 + 2 = 7$.'
+        f: [2]
+        sol: { method: 'Множество значений.', steps: ['$-2 \le -2\sin x \le 2$.', 'Наибольшее $5 + 2 = 7$.'], answer: '7' }
+        src: b195
+      - type: numeric
+        cat: problem
+        q: 'Сколько нулей у функции $y = \sin x$ на отрезке $[0; 3\pi]$?'
+        num: { value: 4, unit: '', check: '4' }
+        hint: 'Нули — $\pi k$.'
+        explain: '$0, \pi, 2\pi, 3\pi$.'
+        sol: { method: 'Нули синуса.', steps: ['$x = \pi k$.', 'На $[0; 3\pi]$: $k = 0, 1, 2, 3$.'], answer: '4' }
+        src: b192
+      - type: numeric
+        cat: problem
+        q: 'Найдите сумму наибольшего и наименьшего значений функции $y = 3\cos x + 1$.'
+        num: { value: 2, unit: '', check: '4+(-2)' }
+        hint: '$E = [-2; 4]$.'
+        explain: '$4 + (-2) = 2$.'
+        f: [2]
+        sol: { method: 'Множество значений.', steps: ['$E = [1 - 3; 1 + 3] = [-2; 4]$.', 'Сумма $2$.'], answer: '2' }
+        src: b195
+      - type: numeric
+        cat: problem
+        q: 'Сколько целых чисел входит в множество значений функции $y = 4\sin x - 1$?'
+        num: { value: 9, unit: '', check: '3-(-5)+1' }
+        hint: '$E = [-5; 3]$.'
+        explain: 'Целые от $-5$ до $3$ — девять.'
+        f: [2]
+        sol: { method: 'Множество значений.', steps: ['$E = [-1 - 4; -1 + 4] = [-5; 3]$.', 'Девять целых.'], answer: '9' }
+        src: b195
+      - type: single
+        cat: theory
+        q: 'Какая из функций нечётная?'
+        opts: ['$y = \sin x\cos x$', '$y = \cos x$', '$y = x^2 + \cos x$', '$y = |\sin x|$']
+        ans: a
+        hint: 'Произведение нечётной и чётной функций.'
+        explain: '$\sin(-x)\cos(-x) = -\sin x\cos x$.'
+        src: b196
+      - type: single
+        cat: theory
+        q: 'Область определения функции $y = \operatorname{tg} x$:'
+        opts: ['$x \ne \frac\pi2 + \pi k$', '$x \ne \pi k$', 'все действительные числа', '$x \ne 2\pi k$']
+        ans: a
+        hint: '$\operatorname{tg} x = \frac{\sin x}{\cos x}$.'
+        explain: 'Косинус равен нулю при $x = \frac\pi2 + \pi k$.'
+        src: b192

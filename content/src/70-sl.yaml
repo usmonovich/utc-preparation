@@ -1,0 +1,183 @@
+subsection: sl
+topics:
+
+# ───────────────────────────────────────────────────────────────
+  - id: sl-elastic
+    title: Деформация твёрдых тел. Механическое напряжение
+    pages: [m17]
+    theory:
+      - kind: list
+        title: Обозначения
+        body: |
+          - $F$ — внешняя сила; $k$ — жёсткость;
+          - $\Delta l$ — изменение длины, абсолютная деформация;
+          - $E$ — модуль Юнга; $S$ — площадь поперечного сечения;
+          - $l_0$ — длина недеформированного состояния.
+        src: m17
+      - kind: text
+        title: Связь силы и абсолютной деформации
+        body: |
+          На графике $F(\Delta l)$:
+          - 0–1 — закон Гука (прямая пропорциональность);
+          - 1–2 — резкое понижение жёсткости;
+          - 3 — «предел жёсткости» (см. замечание M10);
+          - 4 — точка разрыва.
+        src: m17
+        errata: [M10]
+    formulas:
+      - title: Закон Гука и жёсткость
+        tex: 'F = k\Delta l,\qquad k = \frac{ES}{l_0},\qquad F = \frac{ES}{l_0}\Delta l'
+        sym: [F, k, dl, E_y, S_cs, l0]
+        src: m17
+      - title: Механическое напряжение
+        tex: '\sigma = \frac{F}{S},\qquad \frac{F}{S} = E\frac{\Delta l}{l_0}'
+        sym: [sigma_m, F, S_cs, E_y, dl, l0]
+        src: m17
+        errata: [M11]
+      - title: Относительная деформация (обозначение как в конспекте)
+        tex: 'E = \frac{\Delta l}{l_0}\cdot100\%'
+        sym: [eps_rel, dl, l0]
+        src: m17
+        errata: [M09]
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'На проволоку сечением 2·10⁻⁴ м² действует растягивающая сила 1000 Н. Найдите механическое напряжение.'
+        num: { value: 5000000, unit: 'Па', check: '1000/2e-4' }
+        hint: Механическое напряжение — сила на единицу площади сечения.
+        explain: '$\sigma = \frac FS$.'
+        f: [2]
+        sol: { given: ['F = 1000 Н', 'S = 2·10⁻⁴ м²'], find: 'σ', formula: '\sigma = \frac{F}{S}', calc: '\sigma = \frac{1000}{2\cdot10^{-4}} = 5\cdot10^6', answer: '5 МПа' }
+        src: m17
+      - type: numeric
+        cat: problem
+        q: Стержень длиной 1 м удлинился на 2 мм. Найдите относительную деформацию в процентах.
+        num: { value: 0.2, unit: '%', check: '0.002/1*100' }
+        hint: Переведите миллиметры в метры.
+        explain: 'Относительная деформация $\frac{\Delta l}{l_0}\cdot100\%$.'
+        f: [3]
+        sol: { given: ['l₀ = 1 м', 'Δl = 2 мм'], si: ['Δl = 0,002 м'], find: 'относительная деформация', formula: '\frac{\Delta l}{l_0}\cdot100\%', calc: '\frac{0{,}002}{1}\cdot100\% = 0{,}2\%', answer: '0,2 %' }
+        src: m17
+      - type: numeric
+        cat: problem
+        q: 'Стальную проволоку длиной 2 м и сечением 10⁻⁶ м² растягивают силой 2000 Н. Модуль Юнга 2·10¹¹ Па. Найдите удлинение в метрах.'
+        num: { value: 0.02, unit: 'м', check: '2000*2/(2e11*1e-6)' }
+        hint: 'Из $F = \frac{ES}{l_0}\Delta l$ выразите $\Delta l$.'
+        explain: '$\Delta l = \frac{Fl_0}{ES}$.'
+        f: [1]
+        sol: { given: ['l₀ = 2 м', 'S = 10⁻⁶ м²', 'F = 2000 Н', 'E = 2·10¹¹ Па'], find: 'Δl', formula: '\Delta l = \frac{Fl_0}{ES}', calc: '\Delta l = \frac{2000\cdot2}{2\cdot10^{11}\cdot10^{-6}} = 0{,}02', answer: '2 см' }
+        src: m17
+      - type: matching
+        cat: theory
+        q: Сопоставьте участок графика F(Δl) и его название в конспекте.
+        pairs:
+          - ['0–1', 'Закон Гука']
+          - ['1–2', 'Резкое понижение жёсткости']
+          - ['Точка 4', 'Точка разрыва']
+        hint: Подписи справа от графика на стр. m17.
+        explain: 'Стр. m17: 0–1 — закон Гука; 1–2 — резкое понижение жёсткости; 3 — предел; 4 — точка разрыва.'
+        src: m17
+      - type: single
+        cat: formula
+        q: Взяли проволоку из того же материала и того же сечения, но вдвое длиннее. Как изменится её жёсткость?
+        opts: ['Уменьшится в 2 раза', 'Увеличится в 2 раза', 'Не изменится', 'Уменьшится в 4 раза']
+        ans: a
+        hint: 'Посмотрите, где стоит $l_0$ в формуле $k = \frac{ES}{l_0}$.'
+        explain: 'Жёсткость обратно пропорциональна начальной длине.'
+        f: [1]
+        src: m17
+
+# ───────────────────────────────────────────────────────────────
+  - id: sl-surface
+    title: Поверхностное натяжение. Капиллярность
+    pages: [m17, m18]
+    theory:
+      - kind: text
+        title: Сила поверхностного натяжения
+        fig: drop
+        body: 'Сила поверхностного натяжения действует вдоль контура поверхности жидкости. Капля отрывается от трубки, когда её вес становится не меньше силы поверхностного натяжения: $mg \ge F_{повер}$. Для воды $\sigma = 73\cdot10^{-3}$ Н/м.'
+        src: [m17, m18]
+      - kind: text
+        title: Смачивание
+        fig: capillary
+        body: Жидкость может смачивать поверхность (капля растекается) или не смачивать её (капля собирается в шарик). В капиллярной трубке смачивающая жидкость поднимается на высоту h.
+        src: m18
+    formulas:
+      - title: Сила поверхностного натяжения
+        tex: 'F_{повер} = \sigma l,\qquad l = 2\pi R'
+        sym: [F, sigma_s, l_cont, R]
+        src: [m17, m18]
+      - title: Масса одной капли
+        tex: 'm_0 = \frac{\sigma\cdot2\pi R}{g}'
+        sym: [m0, sigma_s, R, g]
+        boxed: true
+        src: m18
+      - title: Высота подъёма в капилляре
+        tex: 'p_{пов} = \frac{2\sigma}{R},\qquad p = \rho gh,\qquad h = \frac{2\sigma}{\rho gR}'
+        sym: [p_lap, sigma_s, R, p, rho, g, h]
+        boxed: true
+        src: m18
+      - title: Поверхностная энергия
+        tex: 'W_{пов} = \sigma S'
+        sym: [W_surf, sigma_s, S_surf]
+        boxed: true
+        src: m18
+      - title: Энергия капли и пузыря
+        tex: 'W_{капли} = \sigma\cdot4\pi R^2,\qquad W_{пузыря} = \sigma\cdot8\pi R^2'
+        sym: [W_surf, sigma_s, R]
+        boxed: true
+        src: m18
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Найдите массу капли воды, отрывающейся от трубки радиусом 1 мм ($\sigma = 73\cdot10^{-3}$ Н/м, $g = 10$ м/с²).'
+        num: { value: 4.587e-5, unit: 'кг', check: '73e-3*2*Math.PI*1e-3/10' }
+        hint: 'Капля отрывается, когда $mg = \sigma\cdot2\pi R$.'
+        explain: '$m_0 = \frac{\sigma\cdot2\pi R}{g}$ ≈ 46 мг.'
+        f: [2]
+        sol: { given: ['R = 1 мм', 'σ = 73·10⁻³ Н/м'], si: ['R = 10⁻³ м'], find: 'm₀', formula: 'm_0 = \frac{\sigma\cdot2\pi R}{g}', calc: 'm_0 = \frac{73\cdot10^{-3}\cdot2\pi\cdot10^{-3}}{10} \approx 4{,}6\cdot10^{-5}', answer: '≈ 4,6·10⁻⁵ кг' }
+        src: m18
+      - type: numeric
+        cat: problem
+        q: 'На какую высоту поднимется вода в капилляре радиусом 0,5 мм? ($\sigma = 73\cdot10^{-3}$ Н/м, $\rho = 1000$ кг/м³, $g = 10$ м/с²) Ответ в сантиметрах.'
+        num: { value: 2.92, unit: 'см', check: '2*73e-3/(1000*10*0.5e-3)*100' }
+        hint: 'Давление поверхности $\frac{2\sigma}{R}$ уравновешивает давление столба $\rho gh$.'
+        explain: '$h = \frac{2\sigma}{\rho gR}$.'
+        f: [3]
+        sol: { given: ['R = 0,5 мм', 'σ = 73·10⁻³ Н/м'], si: ['R = 5·10⁻⁴ м'], find: 'h', formula: 'h = \frac{2\sigma}{\rho gR}', calc: 'h = \frac{2\cdot73\cdot10^{-3}}{1000\cdot10\cdot5\cdot10^{-4}} = 0{,}0292\ \text{м}', answer: '≈ 2,9 см' }
+        src: m18
+      - type: numeric
+        cat: problem
+        q: 'Найдите силу поверхностного натяжения воды, действующую по окружности радиусом 1 см ($\sigma = 73\cdot10^{-3}$ Н/м).'
+        num: { value: 0.004587, unit: 'Н', check: '73e-3*2*Math.PI*0.01' }
+        hint: Длина контура — длина окружности $2\pi R$.
+        explain: '$F = \sigma l = \sigma\cdot2\pi R$.'
+        f: [1]
+        sol: { given: ['R = 1 см', 'σ = 73·10⁻³ Н/м'], si: ['R = 0,01 м'], find: 'F', formula: 'F = \sigma\cdot2\pi R', calc: 'F = 73\cdot10^{-3}\cdot2\pi\cdot0{,}01 \approx 4{,}6\cdot10^{-3}', answer: '≈ 4,6 мН' }
+        src: m17
+      - type: numeric
+        cat: problem
+        q: Во сколько раз поверхностная энергия мыльного пузыря больше энергии капли того же радиуса (по формулам конспекта)?
+        num: { value: 2, unit: 'раз', check: '8/4' }
+        hint: Сравните $8\pi R^2$ и $4\pi R^2$.
+        explain: '$\frac{\sigma\cdot8\pi R^2}{\sigma\cdot4\pi R^2} = 2$.'
+        f: [5]
+        sol: { calc: '\frac{8\pi R^2}{4\pi R^2} = 2', answer: 'в 2 раза' }
+        src: m18
+      - type: numeric
+        cat: problem
+        q: 'Найдите поверхностную энергию капли воды радиусом 1 мм ($\sigma = 73\cdot10^{-3}$ Н/м).'
+        num: { value: 9.173e-7, unit: 'Дж', check: '73e-3*4*Math.PI*1e-6' }
+        hint: Площадь поверхности капли — $4\pi R^2$.
+        explain: '$W = \sigma\cdot4\pi R^2$.'
+        f: [5]
+        sol: { given: ['R = 1 мм', 'σ = 73·10⁻³ Н/м'], si: ['R = 10⁻³ м'], find: 'W', formula: 'W = \sigma\cdot4\pi R^2', calc: 'W = 73\cdot10^{-3}\cdot4\pi\cdot10^{-6} \approx 9{,}2\cdot10^{-7}', answer: '≈ 9,2·10⁻⁷ Дж' }
+        src: m18
+      - type: single
+        cat: theory
+        q: Чему равен коэффициент поверхностного натяжения воды по конспекту?
+        opts: ['$73\cdot10^{-3}$ Н/м', '$4200$ Н/м', '$1{,}38\cdot10^{-23}$ Н/м', '$7{,}3$ Н/м']
+        ans: a
+        hint: Значение записано под определением σ на стр. m18.
+        explain: '$\sigma_{вода} = 73\cdot10^{-3}$ Н/м.'
+        src: m18

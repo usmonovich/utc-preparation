@@ -1,0 +1,1371 @@
+# 1.16 Производная (книга, ч. 2, с. 201–215).
+# Теория, формулы, примеры и задачи составлены по открытым источникам (ссылки — в web); задания книги не копируются.
+
+subsection: ma-1-16
+
+x-sources:
+  c31: &c31 { title: 'Calculus Volume 1, 3.1 Defining the Derivative', org: 'OpenStax, Rice University (открытый учебник)', url: 'https://openstax.org/books/calculus-volume-1/pages/3-1-defining-the-derivative', checked: '2026-10-25', note: 'адрес взят из оглавления главы 3; производная как предел, касательная' }
+  c33: &c33 { title: 'Calculus Volume 1, 3.3 Differentiation Rules', org: 'OpenStax, Rice University', url: 'https://openstax.org/books/calculus-volume-1/pages/3-3-differentiation-rules', checked: '2026-10-25', note: 'производная суммы, произведения, частного' }
+  c34: &c34 { title: 'Calculus Volume 1, 3.4 Derivatives as Rates of Change', org: 'OpenStax, Rice University', url: 'https://openstax.org/books/calculus-volume-1/pages/3-4-derivatives-as-rates-of-change', checked: '2026-10-25', note: 'скорость и ускорение' }
+  c35: &c35 { title: 'Calculus Volume 1, 3.5 Derivatives of Trigonometric Functions', org: 'OpenStax, Rice University', url: 'https://openstax.org/books/calculus-volume-1/pages/3-5-derivatives-of-trigonometric-functions', checked: '2026-10-25' }
+  c36: &c36 { title: 'Calculus Volume 1, 3.6 The Chain Rule', org: 'OpenStax, Rice University', url: 'https://openstax.org/books/calculus-volume-1/pages/3-6-the-chain-rule', checked: '2026-10-25' }
+  c39: &c39 { title: 'Calculus Volume 1, 3.9 Derivatives of Exponential and Logarithmic Functions', org: 'OpenStax, Rice University', url: 'https://openstax.org/books/calculus-volume-1/pages/3-9-derivatives-of-exponential-and-logarithmic-functions', checked: '2026-10-25' }
+  c43: &c43 { title: 'Calculus Volume 1, 4.3 Maxima and Minima', org: 'OpenStax, Rice University', url: 'https://openstax.org/books/calculus-volume-1/pages/4-3-maxima-and-minima', checked: '2026-10-25', note: 'адрес взят из оглавления главы 4; критические точки, наибольшее и наименьшее на отрезке' }
+  c45: &c45 { title: 'Calculus Volume 1, 4.5 Derivatives and the Shape of a Graph', org: 'OpenStax, Rice University', url: 'https://openstax.org/books/calculus-volume-1/pages/4-5-derivatives-and-the-shape-of-a-graph', checked: '2026-10-25', note: 'возрастание и убывание, первый признак экстремума' }
+
+topics:
+  # ───────────────────────────── 1.16.1 ─────────────────────────────
+  - id: ma-1-16-1
+    num: '1.16.1'
+    title: Производная суммы и разности
+    pages: [b201, b202]
+    book:
+      place: 'Ч. 2, 1.16 «Производная», пункт 1.16.1'
+      summary: 'Задания на нахождение производных многочленов и сумм элементарных функций и на значение производной в точке.'
+    stage: verified
+    stageNote: 'Производные проверены численно разностным отношением.'
+    sourcesChecked: '2026-10-25'
+    web: [*c31, *c33, *c35, *c39]
+    theory:
+      - kind: definition
+        title: Производная
+        body: |
+          **Производная** функции $f$ в точке $x$ — предел отношения приращения функции к приращению аргумента:
+          $$f'(x) = \lim_{\Delta x \to 0}\frac{f(x + \Delta x) - f(x)}{\Delta x}.$$
+          Геометрически — угловой коэффициент касательной, физически — мгновенная скорость изменения.
+        src: b201
+      - kind: rule
+        title: Таблица производных
+        body: |
+          | $f(x)$ | $f'(x)$ | $f(x)$ | $f'(x)$ |
+          | --- | --- | --- | --- |
+          | $C$ | $0$ | $\sin x$ | $\cos x$ |
+          | $x^n$ | $nx^{n-1}$ | $\cos x$ | $-\sin x$ |
+          | $\sqrt x$ | $\frac{1}{2\sqrt x}$ | $\operatorname{tg} x$ | $\frac{1}{\cos^2x}$ |
+          | $\frac1x$ | $-\frac1{x^2}$ | $\operatorname{ctg} x$ | $-\frac{1}{\sin^2x}$ |
+          | $e^x$ | $e^x$ | $\ln x$ | $\frac1x$ |
+          | $a^x$ | $a^x\ln a$ | $\log_a x$ | $\frac{1}{x\ln a}$ |
+          **Правила**: $(u \pm v)' = u' \pm v'$, $(Cu)' = Cu'$.
+        src: b201
+    formulas:
+      - title: Производная степени
+        tex: '(x^n)'' = n x^{n-1}'
+        meaning: '$n$ — любое действительное число (при допустимых $x$).'
+        use: '$(\sqrt x)'' = (x^{1/2})'' = \frac{1}{2\sqrt x}$, $\left(\frac1x\right)'' = -\frac{1}{x^2}$.'
+        src: b201
+      - title: Производная суммы и постоянного множителя
+        tex: '(u \pm v)'' = u'' \pm v'',\qquad (Cu)'' = C u'''
+        meaning: '$u$, $v$ — дифференцируемые функции, $C$ — число.'
+        use: 'Дифференцирование многочленов почленно.'
+        src: b201
+      - title: Производные основных функций
+        tex: '(\sin x)'' = \cos x,\quad (\cos x)'' = -\sin x,\quad (e^x)'' = e^x,\quad (\ln x)'' = \frac1x'
+        meaning: 'Таблица производных.'
+        use: 'Вместе с правилами — любые суммы.'
+        src: b201
+    examples:
+      - title: Многочлен
+        given: '$f(x) = x^3 - 4x^2 + 5$. Найдите $f''(2)$.'
+        find: '$f''(2)$.'
+        method: 'Почленное дифференцирование.'
+        steps:
+          - '$f''(x) = 3x^2 - 8x$.'
+          - '$f''(2) = 12 - 16 = -4$.'
+        check: 'Разностное отношение: $\frac{f(2{,}001) - f(1{,}999)}{0{,}002} \approx -4$ ✓.'
+        answer: '$-4$'
+        src: b201
+      - title: Корень и дробь
+        given: '$f(x) = 2\sqrt x + \frac3x$. Найдите $f''(1)$.'
+        find: '$f''(1)$.'
+        method: 'Степени с дробным и отрицательным показателем.'
+        steps:
+          - '$f''(x) = \frac{1}{\sqrt x} - \frac{3}{x^2}$.'
+          - '$f''(1) = 1 - 3 = -2$.'
+        check: 'Численно $\approx -2{,}000$ ✓.'
+        answer: '$-2$'
+        src: b202
+      - title: Сумма разных функций
+        given: '$f(x) = 3\sin x - 2\cos x + e^x$. Найдите $f''(0)$.'
+        find: '$f''(0)$.'
+        method: 'Таблица производных.'
+        steps:
+          - '$f''(x) = 3\cos x + 2\sin x + e^x$.'
+          - '$f''(0) = 3 + 0 + 1 = 4$.'
+        check: 'Численно $\approx 4{,}000$ ✓.'
+        answer: '$4$'
+        src: b202
+    questions:
+      - type: numeric
+        cat: problem
+        q: '$f(x) = x^4 - 2x$. Найдите $f''(1)$.'
+        num: { value: 2, unit: '', check: '4-2' }
+        hint: '$(x^4)'' = 4x^3$.'
+        explain: '$f''(x) = 4x^3 - 2$, $f''(1) = 2$.'
+        f: [1, 2]
+        sol: { method: 'Почленно.', steps: ['$f''(x) = 4x^3 - 2$.', '$f''(1) = 2$.'], answer: '2' }
+        src: b201
+      - type: numeric
+        cat: problem
+        q: '$f(x) = 5x^3 + x$. Найдите $f''(-1)$.'
+        num: { value: 16, unit: '', check: '15+1' }
+        hint: '$f''(x) = 15x^2 + 1$.'
+        explain: '$15 + 1 = 16$.'
+        f: [1, 2]
+        sol: { method: 'Почленно.', steps: ['$f''(x) = 15x^2 + 1$.', '$f''(-1) = 16$.'], answer: '16' }
+        src: b201
+      - type: numeric
+        cat: problem
+        q: '$f(x) = \sqrt x$. Найдите $f''(4)$.'
+        num: { value: 0.25, unit: '', check: '1/(2*Math.sqrt(4))' }
+        hint: '$(\sqrt x)'' = \frac{1}{2\sqrt x}$.'
+        explain: '$\frac{1}{2 \cdot 2} = 0{,}25$.'
+        f: [1]
+        sol: { method: 'Таблица производных.', steps: ['$f''(4) = \frac{1}{2\sqrt4} = \frac14$.'], answer: '0,25' }
+        src: b201
+      - type: numeric
+        cat: problem
+        q: '$f(x) = \sin x + \cos x$. Найдите $f''(0)$.'
+        num: { value: 1, unit: '', check: 'Math.cos(0)-Math.sin(0)' }
+        hint: '$f''(x) = \cos x - \sin x$.'
+        explain: '$1 - 0 = 1$.'
+        f: [3]
+        sol: { method: 'Таблица производных.', steps: ['$f''(x) = \cos x - \sin x$.', '$f''(0) = 1$.'], answer: '1' }
+        src: b201
+      - type: numeric
+        cat: problem
+        q: '$f(x) = \ln x + x^2$. Найдите $f''(1)$.'
+        num: { value: 3, unit: '', check: '1/1+2' }
+        hint: '$(\ln x)'' = \frac1x$.'
+        explain: '$1 + 2 = 3$.'
+        f: [3]
+        sol: { method: 'Таблица производных.', steps: ['$f''(x) = \frac1x + 2x$.', '$f''(1) = 3$.'], answer: '3' }
+        src: b201
+      - type: numeric
+        cat: problem
+        q: '$f(x) = e^x - 3x$. Найдите $f''(0)$.'
+        num: { value: -2, unit: '', check: 'Math.exp(0)-3' }
+        hint: '$(e^x)'' = e^x$.'
+        explain: '$1 - 3 = -2$.'
+        f: [3]
+        sol: { method: 'Таблица производных.', steps: ['$f''(x) = e^x - 3$.', '$f''(0) = -2$.'], answer: '−2' }
+        src: b201
+      - type: single
+        cat: theory
+        q: 'Производная постоянной функции $y = 7$:'
+        opts: ['$0$', '$7$', '$7x$', '$1$']
+        ans: a
+        hint: 'Постоянная не меняется.'
+        explain: 'Скорость изменения постоянной равна нулю.'
+        src: b201
+      - type: single
+        cat: theory
+        q: 'Чему равна $(x^n)''$?'
+        opts: ['$nx^{n-1}$', '$x^{n-1}$', '$nx^n$', '$\frac{x^{n+1}}{n+1}$']
+        ans: a
+        hint: 'Проверьте на $x^2$.'
+        explain: '$(x^2)'' = 2x$. Последний вариант — первообразная.'
+        f: [1]
+        src: b201
+
+  # ───────────────────────────── 1.16.2 ─────────────────────────────
+  - id: ma-1-16-2
+    num: '1.16.2'
+    title: Производная произведения
+    pages: [b202, b203]
+    book:
+      place: 'Ч. 2, 1.16 «Производная», пункт 1.16.2'
+      summary: 'Задания на производную произведения функций и её значение в точке.'
+    stage: verified
+    stageNote: 'Производные проверены численно разностным отношением.'
+    sourcesChecked: '2026-10-25'
+    web: [*c33]
+    theory:
+      - kind: law
+        title: Правило произведения
+        body: |
+          $$(uv)' = u'v + uv'.$$
+          Для трёх множителей: $(uvw)' = u'vw + uv'w + uvw'$.
+          **Ошибка**: $(uv)' \ne u'v'$ — например, $(x \cdot x)' = 2x$, а $1 \cdot 1 = 1$.
+          Иногда проще сначала раскрыть скобки: $(2x - 1)(x + 3) = 2x^2 + 5x - 3$.
+        src: b202
+    formulas:
+      - title: Производная произведения
+        tex: '(uv)'' = u''v + uv'''
+        meaning: '$u$, $v$ — дифференцируемые функции.'
+        use: '$(x^2\sin x)'' = 2x\sin x + x^2\cos x$.'
+        src: b202
+    examples:
+      - title: Многочлен на синус
+        given: 'Найдите производную $y = x^2\sin x$.'
+        find: '$y''$.'
+        method: 'Правило произведения.'
+        steps:
+          - '$u = x^2$, $v = \sin x$; $u'' = 2x$, $v'' = \cos x$.'
+          - '$y'' = 2x\sin x + x^2\cos x$.'
+        check: '$x = 1$: $2 \cdot 0{,}8415 + 0{,}5403 = 2{,}2232$; разностное отношение $\approx 2{,}2232$ ✓.'
+        answer: '$2x\sin x + x^2\cos x$'
+        src: b202
+      - title: Произведение многочленов
+        given: '$f(x) = (x + 1)(x^2 - 3)$. Найдите $f''(1)$.'
+        find: '$f''(1)$.'
+        method: 'Правило произведения.'
+        steps:
+          - '$f''(x) = 1 \cdot (x^2 - 3) + (x + 1) \cdot 2x = 3x^2 + 2x - 3$.'
+          - '$f''(1) = 3 + 2 - 3 = 2$.'
+        check: 'Раскрыв скобки: $f = x^3 + x^2 - 3x - 3$, $f'' = 3x^2 + 2x - 3$ ✓.'
+        answer: '$2$'
+        src: b202
+      - title: Экспонента
+        given: '$f(x) = xe^x$. Найдите $f''(0)$.'
+        find: '$f''(0)$.'
+        method: 'Правило произведения.'
+        steps:
+          - '$f''(x) = e^x + xe^x = e^x(1 + x)$.'
+          - '$f''(0) = 1$.'
+        check: 'Численно $\approx 1{,}000$ ✓.'
+        answer: '$1$'
+        src: b203
+    questions:
+      - type: numeric
+        cat: problem
+        q: '$f(x) = x\ln x$. Найдите $f''(1)$.'
+        num: { value: 1, unit: '', check: 'Math.log(1)+1' }
+        hint: '$(x\ln x)'' = \ln x + 1$.'
+        explain: '$0 + 1 = 1$.'
+        f: [1]
+        sol: { method: 'Правило произведения.', steps: ['$f''(x) = 1 \cdot \ln x + x \cdot \frac1x = \ln x + 1$.', '$f''(1) = 1$.'], answer: '1' }
+        src: b202
+      - type: numeric
+        cat: problem
+        q: '$f(x) = (2x - 1)(x + 3)$. Найдите $f''(0)$.'
+        num: { value: 5, unit: '', check: '2*3+(-1)*1' }
+        hint: '$u''v + uv''$ при $x = 0$.'
+        explain: '$2 \cdot 3 + (-1) \cdot 1 = 5$.'
+        f: [1]
+        sol: { method: 'Правило произведения.', steps: ['$f''(x) = 2(x + 3) + (2x - 1)$.', '$f''(0) = 6 - 1 = 5$.'], answer: '5' }
+        src: b202
+      - type: numeric
+        cat: problem
+        q: '$f(x) = x^2e^x$. Найдите $f''(1)$ (с точностью до 0,01).'
+        num: { value: 8.1548, unit: '', tolAbs: 0.01, check: '3*Math.E' }
+        hint: '$f''(x) = e^x(2x + x^2)$.'
+        explain: '$3e \approx 8{,}15$.'
+        f: [1]
+        sol: { method: 'Правило произведения.', steps: ['$f''(x) = 2xe^x + x^2e^x$.', '$f''(1) = 3e \approx 8{,}15$.'], answer: '3e ≈ 8,15' }
+        src: b203
+      - type: numeric
+        cat: problem
+        q: '$f(x) = x\sin x$. Найдите $f''\left(\frac\pi2\right)$.'
+        num: { value: 1, unit: '', check: 'Math.sin(Math.PI/2)+Math.PI/2*Math.cos(Math.PI/2)' }
+        hint: '$\sin x + x\cos x$.'
+        explain: '$1 + \frac\pi2 \cdot 0 = 1$.'
+        f: [1]
+        sol: { method: 'Правило произведения.', steps: ['$f''(x) = \sin x + x\cos x$.', '$f''\left(\frac\pi2\right) = 1$.'], answer: '1' }
+        src: b202
+      - type: numeric
+        cat: problem
+        q: '$f(x) = x\sqrt x$. Найдите $f''(4)$.'
+        num: { value: 3, unit: '', check: '1.5*Math.sqrt(4)' }
+        hint: '$x\sqrt x = x^{3/2}$.'
+        explain: '$\frac32\sqrt4 = 3$.'
+        f: [1]
+        sol: { method: 'Степень (или произведение).', steps: ['$f(x) = x^{3/2}$, $f''(x) = \frac32 x^{1/2}$.', '$f''(4) = 3$.'], answer: '3' }
+        src: b202
+      - type: numeric
+        cat: problem
+        q: '$f(x) = (x^2 + 1)(x - 1)$. Найдите $f''(2)$.'
+        num: { value: 9, unit: '', check: '2*2*(2-1)+(4+1)' }
+        hint: '$2x(x - 1) + (x^2 + 1)$.'
+        explain: '$4 + 5 = 9$.'
+        f: [1]
+        sol: { method: 'Правило произведения.', steps: ['$f''(x) = 2x(x - 1) + x^2 + 1$.', '$f''(2) = 4 + 5 = 9$.'], answer: '9' }
+        src: b202
+      - type: single
+        cat: theory
+        q: 'Какое равенство верно?'
+        opts: ['$(uv)'' = u''v + uv''$', '$(uv)'' = u''v''$', '$(uv)'' = u''v - uv''$', '$(uv)'' = u'' + v''$']
+        ans: a
+        hint: 'Проверьте на $x \cdot x$.'
+        explain: '$(x \cdot x)'' = 1 \cdot x + x \cdot 1 = 2x$ ✓.'
+        f: [1]
+        src: b202
+      - type: single
+        cat: theory
+        q: 'Чему равна $(x\cos x)''$?'
+        opts: ['$\cos x - x\sin x$', '$-\sin x$', '$\cos x + x\sin x$', '$-x\sin x$']
+        ans: a
+        hint: '$(\cos x)'' = -\sin x$.'
+        explain: '$1 \cdot \cos x + x \cdot (-\sin x)$.'
+        f: [1]
+        src: b202
+
+  # ───────────────────────────── 1.16.3 ─────────────────────────────
+  - id: ma-1-16-3
+    num: '1.16.3'
+    title: Производная частного
+    pages: [b203]
+    book:
+      place: 'Ч. 2, 1.16 «Производная», пункт 1.16.3'
+      summary: 'Задания на производную дроби и её значение в точке.'
+    stage: verified
+    stageNote: 'Производные проверены численно разностным отношением.'
+    sourcesChecked: '2026-10-25'
+    web: [*c33, *c35]
+    theory:
+      - kind: law
+        title: Правило частного
+        body: |
+          $$\left(\frac uv\right)' = \frac{u'v - uv'}{v^2}\qquad (v \ne 0).$$
+          Порядок в числителе важен: сначала производная **числителя**. Частный случай: $\left(\frac1v\right)' = -\frac{v'}{v^2}$.
+          Так получается $(\operatorname{tg} x)' = \left(\frac{\sin x}{\cos x}\right)' = \frac{\cos^2x + \sin^2x}{\cos^2x} = \frac{1}{\cos^2x}$.
+        src: b203
+    formulas:
+      - title: Производная частного
+        tex: '\left(\frac uv\right)'' = \frac{u''v - uv''}{v^2}'
+        meaning: '$v \ne 0$.'
+        use: 'Производные дробей.'
+        src: b203
+      - title: Производная обратной величины
+        tex: '\left(\frac1v\right)'' = -\frac{v''}{v^2}'
+        meaning: 'Частный случай при $u = 1$.'
+        use: '$\left(\frac{1}{x^2 + 1}\right)'' = -\frac{2x}{(x^2 + 1)^2}$.'
+        src: b203
+    examples:
+      - title: Дробно-линейная функция
+        given: '$f(x) = \dfrac{x + 1}{x - 1}$. Найдите $f''(2)$.'
+        find: '$f''(2)$.'
+        method: 'Правило частного.'
+        steps:
+          - '$f''(x) = \frac{(x - 1) - (x + 1)}{(x - 1)^2} = -\frac{2}{(x - 1)^2}$.'
+          - '$f''(2) = -2$.'
+        check: 'Численно $\approx -2{,}000$ ✓.'
+        answer: '$-2$'
+        src: b203
+      - title: Тангенс
+        given: 'Выведите $(\operatorname{tg} x)''$.'
+        find: '$(\operatorname{tg} x)''$.'
+        method: '$\operatorname{tg} x = \frac{\sin x}{\cos x}$.'
+        steps:
+          - '$\frac{\cos x \cdot \cos x - \sin x \cdot (-\sin x)}{\cos^2x}$.'
+          - '$= \frac{1}{\cos^2x}$.'
+        check: '$x = 0{,}5$: $\frac{1}{0{,}7702} = 1{,}298$; разностное отношение $\approx 1{,}298$ ✓.'
+        answer: '$\frac{1}{\cos^2x}$'
+        src: b203
+      - title: Многочлен в числителе
+        given: '$f(x) = \dfrac{x^2}{x + 1}$. Найдите $f''(1)$.'
+        find: '$f''(1)$.'
+        method: 'Правило частного.'
+        steps:
+          - '$f''(x) = \frac{2x(x + 1) - x^2}{(x + 1)^2} = \frac{x^2 + 2x}{(x + 1)^2}$.'
+          - '$f''(1) = \frac34$.'
+        check: 'Численно $\approx 0{,}750$ ✓.'
+        answer: '$0{,}75$'
+        src: b203
+    questions:
+      - type: numeric
+        cat: problem
+        q: '$f(x) = \dfrac{1}{x^2 + 1}$. Найдите $f''(1)$.'
+        num: { value: -0.5, unit: '', check: '-2/4' }
+        hint: '$-\frac{v''}{v^2}$.'
+        explain: '$-\frac{2}{4} = -0{,}5$.'
+        f: [2]
+        sol: { method: 'Производная обратной величины.', steps: ['$f''(x) = -\frac{2x}{(x^2 + 1)^2}$.', '$f''(1) = -\frac24 = -0{,}5$.'], answer: '−0,5' }
+        src: b203
+      - type: numeric
+        cat: problem
+        q: '$f(x) = \dfrac{2x + 3}{x}$. Найдите $f''(1)$.'
+        num: { value: -3, unit: '', check: '-3/1' }
+        hint: '$\frac{2x + 3}{x} = 2 + \frac3x$.'
+        explain: '$f''(x) = -\frac{3}{x^2}$, $f''(1) = -3$.'
+        f: [1]
+        sol: { method: 'Упростить, затем дифференцировать.', steps: ['$f(x) = 2 + \frac3x$.', '$f''(x) = -\frac3{x^2}$, $f''(1) = -3$.'], answer: '−3' }
+        src: b203
+      - type: numeric
+        cat: problem
+        q: '$f(x) = \dfrac{x}{x + 2}$. Найдите $f''(0)$.'
+        num: { value: 0.5, unit: '', check: '2/4' }
+        hint: '$\frac{(x + 2) - x}{(x + 2)^2}$.'
+        explain: '$\frac{2}{4} = 0{,}5$.'
+        f: [1]
+        sol: { method: 'Правило частного.', steps: ['$f''(x) = \frac{2}{(x + 2)^2}$.', '$f''(0) = 0{,}5$.'], answer: '0,5' }
+        src: b203
+      - type: numeric
+        cat: problem
+        q: '$f(x) = \dfrac{\sin x}{x}$. Найдите $f''(\pi)$ (с точностью до 0,001).'
+        num: { value: -0.3183, unit: '', tolAbs: 0.001, check: '(Math.PI*Math.cos(Math.PI)-Math.sin(Math.PI))/Math.PI**2' }
+        hint: '$\frac{x\cos x - \sin x}{x^2}$.'
+        explain: '$\frac{-\pi}{\pi^2} = -\frac1\pi \approx -0{,}318$.'
+        f: [1]
+        sol: { method: 'Правило частного.', steps: ['$f''(x) = \frac{x\cos x - \sin x}{x^2}$.', '$f''(\pi) = \frac{-\pi - 0}{\pi^2} = -\frac1\pi$.'], answer: '−0,318' }
+        src: b203
+      - type: numeric
+        cat: problem
+        q: '$f(x) = \dfrac{e^x}{x}$. Найдите $f''(1)$.'
+        num: { value: 0, unit: '', tolAbs: 0.001, check: 'Math.E*(1-1)/1' }
+        hint: '$\frac{e^x(x - 1)}{x^2}$.'
+        explain: 'При $x = 1$ числитель равен 0.'
+        f: [1]
+        sol: { method: 'Правило частного.', steps: ['$f''(x) = \frac{e^x \cdot x - e^x}{x^2} = \frac{e^x(x - 1)}{x^2}$.', '$f''(1) = 0$.'], answer: '0' }
+        src: b203
+      - type: numeric
+        cat: problem
+        q: '$f(x) = \dfrac{x - 1}{x + 1}$. Найдите $f''(0)$.'
+        num: { value: 2, unit: '', check: '2/1' }
+        hint: '$\frac{(x + 1) - (x - 1)}{(x + 1)^2}$.'
+        explain: '$\frac{2}{1} = 2$.'
+        f: [1]
+        sol: { method: 'Правило частного.', steps: ['$f''(x) = \frac{2}{(x + 1)^2}$.', '$f''(0) = 2$.'], answer: '2' }
+        src: b203
+      - type: single
+        cat: theory
+        q: 'Какая формула верна?'
+        opts: ['$\left(\frac uv\right)'' = \frac{u''v - uv''}{v^2}$', '$\left(\frac uv\right)'' = \frac{u''}{v''}$', '$\left(\frac uv\right)'' = \frac{uv'' - u''v}{v^2}$', '$\left(\frac uv\right)'' = \frac{u''v + uv''}{v^2}$']
+        ans: a
+        hint: 'Проверьте на $\frac{x}{1}$.'
+        explain: 'При $v = 1$: $\frac{u'' \cdot 1 - u \cdot 0}{1} = u''$ ✓.'
+        f: [1]
+        src: b203
+      - type: single
+        cat: theory
+        q: 'Чему равна $(\operatorname{tg} x)''$?'
+        opts: ['$\frac{1}{\cos^2x}$', '$\frac{1}{\sin^2x}$', '$-\frac{1}{\cos^2x}$', '$\operatorname{ctg} x$']
+        ans: a
+        hint: 'Правило частного для $\frac{\sin x}{\cos x}$.'
+        explain: '$\frac{\cos^2x + \sin^2x}{\cos^2x}$.'
+        f: [1]
+        src: b203
+
+  # ───────────────────────────── 1.16.4 ─────────────────────────────
+  - id: ma-1-16-4
+    num: '1.16.4'
+    title: Производная сложной функции
+    pages: [b203, b204, b205, b206]
+    book:
+      place: 'Ч. 2, 1.16 «Производная», пункт 1.16.4'
+      summary: 'Задания на производную сложной функции: степени, корни, тригонометрические, показательные и логарифмические функции от выражений.'
+    stage: verified
+    stageNote: 'Производные проверены численно разностным отношением.'
+    sourcesChecked: '2026-10-25'
+    web: [*c36, *c39]
+    theory:
+      - kind: law
+        title: Правило цепочки
+        body: |
+          Если $y = f(g(x))$, то
+          $$y' = f'\big(g(x)\big) \cdot g'(x)$$
+          — производная «внешней» функции от «внутренней», умноженная на производную «внутренней».
+          Частые случаи: $\big((kx + b)^n\big)' = nk(kx + b)^{n-1}$; $(\sin kx)' = k\cos kx$; $(e^{g})' = e^{g}g'$; $(\ln g)' = \frac{g'}{g}$; $(\sqrt g)' = \frac{g'}{2\sqrt g}$.
+        src: b203
+    formulas:
+      - title: Производная сложной функции
+        tex: '\big(f(g(x))\big)'' = f''\big(g(x)\big)\cdot g''(x)'
+        meaning: '$g$ — внутренняя функция, $f$ — внешняя.'
+        use: 'Любые функции от выражений.'
+        src: b203
+      - title: Частные случаи
+        tex: '\big(e^{g}\big)'' = e^{g}g'',\qquad (\ln g)'' = \frac{g''}{g},\qquad \big(\sqrt g\big)'' = \frac{g''}{2\sqrt g}'
+        meaning: '$g = g(x)$, для логарифма $g > 0$, для корня $g > 0$.'
+        use: 'Показательные, логарифмические и иррациональные функции.'
+        src: b204
+    examples:
+      - title: Степень линейной функции
+        given: 'Найдите производную $y = (2x + 1)^5$.'
+        find: '$y''$.'
+        method: 'Внешняя — $t^5$, внутренняя — $2x + 1$.'
+        steps:
+          - '$5(2x + 1)^4 \cdot 2$.'
+          - '$= 10(2x + 1)^4$.'
+        check: '$x = 0$: $10$; разностное отношение $\approx 10{,}0$ ✓.'
+        answer: '$10(2x + 1)^4$'
+        src: b203
+      - title: Синус от kx
+        given: 'Найдите производную $y = \sin 3x$.'
+        find: '$y''$.'
+        method: 'Правило цепочки.'
+        steps:
+          - '$\cos 3x \cdot (3x)''$.'
+          - '$= 3\cos 3x$.'
+        check: '$x = 0$: $3$ ✓.'
+        answer: '$3\cos 3x$'
+        src: b204
+      - title: Корень из выражения
+        given: '$f(x) = \sqrt{x^2 + 9}$. Найдите $f''(4)$.'
+        find: '$f''(4)$.'
+        method: '$\frac{g''}{2\sqrt g}$.'
+        steps:
+          - '$f''(x) = \frac{2x}{2\sqrt{x^2 + 9}} = \frac{x}{\sqrt{x^2 + 9}}$.'
+          - '$f''(4) = \frac{4}{5} = 0{,}8$.'
+        check: 'Численно $\approx 0{,}800$ ✓.'
+        answer: '$0{,}8$'
+        src: b205
+    questions:
+      - type: numeric
+        cat: problem
+        q: '$f(x) = (3x - 1)^4$. Найдите $f''(1)$.'
+        num: { value: 96, unit: '', check: '4*2**3*3' }
+        hint: '$4(3x - 1)^3 \cdot 3$.'
+        explain: '$12 \cdot 8 = 96$.'
+        f: [1]
+        sol: { method: 'Правило цепочки.', steps: ['$f''(x) = 12(3x - 1)^3$.', '$f''(1) = 12 \cdot 8 = 96$.'], answer: '96' }
+        src: b203
+      - type: numeric
+        cat: problem
+        q: '$f(x) = e^{2x}$. Найдите $f''(0)$.'
+        num: { value: 2, unit: '', check: '2*Math.exp(0)' }
+        hint: '$(e^{2x})'' = 2e^{2x}$.'
+        explain: '$2$.'
+        f: [2]
+        sol: { method: 'Правило цепочки.', steps: ['$f''(x) = 2e^{2x}$.', '$f''(0) = 2$.'], answer: '2' }
+        src: b204
+      - type: numeric
+        cat: problem
+        q: '$f(x) = \ln(x^2 + 1)$. Найдите $f''(1)$.'
+        num: { value: 1, unit: '', check: '2/2' }
+        hint: '$\frac{2x}{x^2 + 1}$.'
+        explain: '$\frac22 = 1$.'
+        f: [2]
+        sol: { method: 'Логарифм сложной функции.', steps: ['$f''(x) = \frac{2x}{x^2 + 1}$.', '$f''(1) = 1$.'], answer: '1' }
+        src: b204
+      - type: numeric
+        cat: problem
+        q: '$f(x) = \cos 2x$. Найдите $f''\left(\frac\pi4\right)$.'
+        num: { value: -2, unit: '', check: '-2*Math.sin(Math.PI/2)' }
+        hint: '$-2\sin 2x$.'
+        explain: '$-2\sin\frac\pi2 = -2$.'
+        f: [1]
+        sol: { method: 'Правило цепочки.', steps: ['$f''(x) = -2\sin 2x$.', '$f''\left(\frac\pi4\right) = -2$.'], answer: '−2' }
+        src: b204
+      - type: numeric
+        cat: problem
+        q: '$f(x) = \sqrt{2x + 1}$. Найдите $f''(4)$ (с точностью до 0,001).'
+        num: { value: 0.3333, unit: '', tolAbs: 0.001, check: '2/(2*Math.sqrt(9))' }
+        hint: '$\frac{2}{2\sqrt{2x + 1}}$.'
+        explain: '$\frac{1}{\sqrt9} = \frac13$.'
+        f: [2]
+        sol: { method: 'Корень сложной функции.', steps: ['$f''(x) = \frac{1}{\sqrt{2x + 1}}$.', '$f''(4) = \frac13$.'], answer: '1/3' }
+        src: b205
+      - type: numeric
+        cat: problem
+        q: '$f(x) = \sin^2x$. Найдите $f''\left(\frac\pi4\right)$.'
+        num: { value: 1, unit: '', check: 'Math.sin(Math.PI/2)' }
+        hint: '$2\sin x\cos x = \sin 2x$.'
+        explain: '$\sin\frac\pi2 = 1$.'
+        f: [1]
+        sol: { method: 'Степень сложной функции.', steps: ['$f''(x) = 2\sin x \cdot \cos x = \sin 2x$.', '$f''\left(\frac\pi4\right) = 1$.'], answer: '1' }
+        src: b205
+      - type: single
+        cat: theory
+        q: 'Чему равна $(e^{x^2})''$?'
+        opts: ['$2xe^{x^2}$', '$e^{x^2}$', '$x^2e^{x^2 - 1}$', '$e^{2x}$']
+        ans: a
+        hint: 'Умножьте на производную показателя.'
+        explain: '$(e^{g})'' = e^{g} g''$, $g'' = 2x$.'
+        f: [2]
+        src: b204
+      - type: single
+        cat: theory
+        q: 'Чему равна $(\ln(3x))''$?'
+        opts: ['$\frac1x$', '$\frac3x$', '$\frac{1}{3x}$', '$3\ln x$']
+        ans: a
+        hint: '$\frac{g''}{g} = \frac{3}{3x}$.'
+        explain: 'Также видно из $\ln 3x = \ln 3 + \ln x$.'
+        f: [2]
+        src: b204
+
+  # ───────────────────────────── 1.16.5 ─────────────────────────────
+  - id: ma-1-16-5
+    num: '1.16.5'
+    title: Промежутки возрастания и убывания функции
+    pages: [b206, b207, b208]
+    book:
+      place: 'Ч. 2, 1.16 «Производная», пункт 1.16.5'
+      summary: 'Задания на нахождение промежутков возрастания и убывания функций с помощью производной, длины таких промежутков.'
+    stage: verified
+    stageNote: 'Промежутки проверены по знаку производной на сетке точек.'
+    sourcesChecked: '2026-10-25'
+    web: [*c45]
+    theory:
+      - kind: law
+        title: Признак монотонности
+        body: |
+          Если $f'(x) > 0$ на промежутке, $f$ на нём **возрастает**; если $f'(x) < 0$ — **убывает**.
+          Алгоритм:
+          1. Найти $f'(x)$ и критические точки ($f' = 0$ или не существует).
+          2. Определить знак $f'$ на промежутках между ними (метод интервалов).
+          3. Записать промежутки; концы, где функция определена и непрерывна, включают.
+          Отдельные точки с $f' = 0$ не мешают монотонности: $y = x^3$ возрастает на всей прямой, хотя $f'(0) = 0$.
+        src: b206
+    formulas:
+      - title: Знак производной и монотонность
+        tex: 'f''(x) > 0 \Rightarrow f\nearrow,\qquad f''(x) < 0 \Rightarrow f\searrow'
+        meaning: 'На промежутке, где выполнено неравенство.'
+        use: 'Нахождение промежутков монотонности.'
+        src: b206
+    examples:
+      - title: Кубическая функция
+        given: 'Найдите промежутки монотонности $f(x) = x^3 - 3x^2$.'
+        find: 'промежутки.'
+        method: 'Знак $f''(x) = 3x(x - 2)$.'
+        steps:
+          - 'Критические точки $0$ и $2$; знаки: «+», «−», «+».'
+          - 'Возрастает на $(-\infty; 0]$ и $[2; +\infty)$, убывает на $[0; 2]$.'
+        check: '$f(0) = 0 > f(1) = -2 > f(2) = -4$, $f(3) = 0$ ✓.'
+        answer: '↗ $(-\infty; 0]$, $[2; +\infty)$; ↘ $[0; 2]$'
+        src: b206
+      - title: Нечётная кубическая
+        given: 'Найдите промежутки монотонности $f(x) = x^3 - 12x$.'
+        find: 'промежутки.'
+        method: '$f''(x) = 3(x - 2)(x + 2)$.'
+        steps:
+          - 'Знаки: «+» при $x < -2$, «−» на $(-2; 2)$, «+» при $x > 2$.'
+          - 'Возрастает на $(-\infty; -2]$ и $[2; +\infty)$, убывает на $[-2; 2]$.'
+        check: '$f(-2) = 16$, $f(0) = 0$, $f(2) = -16$ ✓.'
+        answer: '↗ $(-\infty; -2]$, $[2; +\infty)$; ↘ $[-2; 2]$'
+        src: b207
+      - title: Четвёртая степень
+        given: 'Найдите промежутки монотонности $f(x) = x^4 - 2x^2$.'
+        find: 'промежутки.'
+        method: '$f''(x) = 4x(x - 1)(x + 1)$.'
+        steps:
+          - 'Знаки справа налево: «+» ($x > 1$), «−» ($0 < x < 1$), «+» ($-1 < x < 0$), «−» ($x < -1$).'
+          - 'Убывает на $(-\infty; -1]$ и $[0; 1]$, возрастает на $[-1; 0]$ и $[1; +\infty)$.'
+        check: '$f(-1) = -1$, $f(0) = 0$, $f(1) = -1$ ✓.'
+        answer: '↘ $(-\infty; -1]$, $[0; 1]$; ↗ $[-1; 0]$, $[1; +\infty)$'
+        src: b207
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Найдите длину промежутка убывания функции $f(x) = x^3 - 3x^2$.'
+        num: { value: 2, unit: '', check: '2-0' }
+        hint: '$f''(x) = 3x(x - 2) \le 0$.'
+        explain: '$[0; 2]$ — длина 2.'
+        f: [1]
+        sol: { method: 'Знак производной.', steps: ['$3x(x - 2) \le 0 \iff 0 \le x \le 2$.', 'Длина $2$.'], answer: '2' }
+        src: b206
+      - type: numeric
+        cat: problem
+        q: 'Сколько целых чисел лежит на промежутке убывания функции $f(x) = x^3 - 12x$?'
+        num: { value: 5, unit: '', check: '5' }
+        hint: 'Промежуток убывания $[-2; 2]$.'
+        explain: '$-2, -1, 0, 1, 2$.'
+        f: [1]
+        sol: { method: 'Знак производной.', steps: ['$3x^2 - 12 \le 0 \iff -2 \le x \le 2$.', 'Пять целых.'], answer: '5' }
+        src: b207
+      - type: numeric
+        cat: problem
+        q: 'Функция $f(x) = x^2 - 8x + 3$ возрастает на $[m; +\infty)$. Найдите $m$.'
+        num: { value: 4, unit: '', check: '8/2' }
+        hint: '$f''(x) = 2x - 8 \ge 0$.'
+        explain: '$x \ge 4$.'
+        f: [1]
+        sol: { method: 'Знак производной.', steps: ['$2x - 8 \ge 0 \iff x \ge 4$.'], answer: '4' }
+        src: b206
+      - type: numeric
+        cat: problem
+        q: 'Найдите длину промежутка убывания функции $f(x) = 2x^3 - 9x^2 + 12x$.'
+        num: { value: 1, unit: '', check: '2-1' }
+        hint: '$f''(x) = 6(x - 1)(x - 2)$.'
+        explain: 'Убывает на $[1; 2]$.'
+        f: [1]
+        sol: { method: 'Знак производной.', steps: ['$6(x - 1)(x - 2) \le 0 \iff 1 \le x \le 2$.', 'Длина $1$.'], answer: '1' }
+        src: b207
+      - type: numeric
+        cat: problem
+        q: 'Функция $f(x) = x - \ln x$ возрастает на $[m; +\infty)$. Найдите $m$.'
+        num: { value: 1, unit: '', check: '1' }
+        hint: '$f''(x) = 1 - \frac1x$, $x > 0$.'
+        explain: '$1 - \frac1x \ge 0 \iff x \ge 1$.'
+        f: [1]
+        sol: { method: 'Знак производной с учётом $x > 0$.', steps: ['$f''(x) = \frac{x - 1}{x}$.', 'При $x > 0$: $f'' \ge 0 \iff x \ge 1$.'], answer: '1' }
+        src: b207
+      - type: numeric
+        cat: problem
+        q: 'Найдите длину промежутка возрастания функции $f(x) = -x^3 + 3x$.'
+        num: { value: 2, unit: '', check: '1-(-1)' }
+        hint: '$f''(x) = 3 - 3x^2 \ge 0$.'
+        explain: '$[-1; 1]$ — длина 2.'
+        f: [1]
+        sol: { method: 'Знак производной.', steps: ['$3 - 3x^2 \ge 0 \iff -1 \le x \le 1$.', 'Длина $2$.'], answer: '2' }
+        src: b207
+      - type: single
+        cat: theory
+        q: 'Если $f''(x) > 0$ на интервале, то $f$ на нём…'
+        opts: ['возрастает', 'убывает', 'постоянна', 'имеет максимум']
+        ans: a
+        hint: 'Касательные «смотрят» вверх.'
+        explain: 'Положительная производная — функция растёт.'
+        f: [1]
+        src: b206
+      - type: single
+        cat: theory
+        q: 'Функция $y = x^3$ на всей прямой…'
+        opts: ['возрастает, хотя $y''(0) = 0$', 'убывает', 'имеет максимум в нуле', 'возрастает только при $x > 0$']
+        ans: a
+        hint: '$y'' = 3x^2 \ge 0$, ноль — в одной точке.'
+        explain: 'Производная обращается в ноль лишь в изолированной точке и знак не меняет.'
+        f: [1]
+        src: b206
+
+  # ───────────────────────────── 1.16.6 ─────────────────────────────
+  - id: ma-1-16-6
+    num: '1.16.6'
+    title: Экстремумы функции
+    pages: [b208, b209, b210]
+    book:
+      place: 'Ч. 2, 1.16 «Производная», пункт 1.16.6'
+      summary: 'Задания на точки максимума и минимума функций и значения функции в этих точках.'
+    stage: verified
+    stageNote: 'Точки экстремума проверены сменой знака производной и сравнением значений рядом.'
+    sourcesChecked: '2026-10-25'
+    web: [*c43, *c45]
+    theory:
+      - kind: law
+        title: Необходимое и достаточное условия
+        body: |
+          - **Необходимое**: в точке экстремума дифференцируемой функции $f'(x_0) = 0$ (точка **критическая**).
+          - **Достаточное**: если при переходе через $x_0$ производная меняет знак с «+» на «−», то $x_0$ — точка **максимума**; с «−» на «+» — **минимума**; если знак не меняется — экстремума нет.
+          Пример: у $f(x) = x^4 - 4x^3$ производная $4x^2(x - 3)$ обращается в ноль при $x = 0$, но знак там не меняется — экстремум только в $x = 3$.
+        src: b208
+        fig: extremum-sign
+    formulas:
+      - title: Признак экстремума
+        tex: 'f''(x_0) = 0,\quad f''\colon + \to - \Rightarrow \max,\qquad f''\colon - \to + \Rightarrow \min'
+        meaning: 'Смена знака производной при переходе через $x_0$ слева направо.'
+        use: 'Нахождение точек экстремума.'
+        limits: 'Равенство $f''(x_0) = 0$ без смены знака экстремума не даёт.'
+        src: b208
+    examples:
+      - title: Максимум и минимум
+        given: 'Найдите экстремумы $f(x) = x^3 - 3x$.'
+        find: 'точки и значения.'
+        method: '$f''(x) = 3(x - 1)(x + 1)$.'
+        steps:
+          - 'Знаки: «+», «−», «+» — максимум в $x = -1$, минимум в $x = 1$.'
+          - '$f(-1) = 2$, $f(1) = -2$.'
+        check: '$f(-1{,}1) = 1{,}969 < 2$, $f(-0{,}9) = 1{,}971 < 2$ ✓.'
+        answer: '$x_{\max} = -1$, $f_{\max} = 2$; $x_{\min} = 1$, $f_{\min} = -2$'
+        src: b208
+      - title: Критическая точка без экстремума
+        given: 'Найдите экстремумы $f(x) = x^4 - 4x^3$.'
+        find: 'точки экстремума.'
+        method: '$f''(x) = 4x^2(x - 3)$.'
+        steps:
+          - 'Критические точки $0$ и $3$; при $x = 0$ знак не меняется («−» с обеих сторон).'
+          - 'Минимум в $x = 3$: $f(3) = 81 - 108 = -27$.'
+        check: '$f(-0{,}1) = 0{,}0041 > 0 = f(0) > f(0{,}1) = -0{,}0039$ — монотонно ✓.'
+        answer: 'минимум $-27$ в $x = 3$; в $x = 0$ экстремума нет'
+        src: b209
+      - title: С экспонентой
+        given: 'Найдите экстремум $f(x) = xe^{-x}$.'
+        find: 'точку и значение.'
+        method: '$f''(x) = e^{-x}(1 - x)$.'
+        steps:
+          - '$e^{-x} > 0$; знак $1 - x$: «+» до 1, «−» после — максимум в $x = 1$.'
+          - '$f(1) = \frac1e \approx 0{,}368$.'
+        check: '$f(0{,}9) = 0{,}366$, $f(1{,}1) = 0{,}366$ ✓.'
+        answer: 'максимум $\frac1e$ в $x = 1$'
+        src: b209
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Найдите точку максимума функции $f(x) = x^3 - 3x^2$.'
+        num: { value: 0, unit: '', tolAbs: 0.001, check: '0' }
+        hint: '$f''(x) = 3x(x - 2)$.'
+        explain: 'Знак меняется с «+» на «−» в нуле.'
+        f: [1]
+        sol: { method: 'Смена знака производной.', steps: ['Критические точки $0$ и $2$.', 'В $x = 0$: «+» → «−» — максимум.'], answer: '0' }
+        src: b208
+      - type: numeric
+        cat: problem
+        q: 'Найдите минимум (значение) функции $f(x) = x^3 - 3x^2$.'
+        num: { value: -4, unit: '', check: '8-12' }
+        hint: 'Минимум в $x = 2$.'
+        explain: '$8 - 12 = -4$.'
+        f: [1]
+        sol: { method: 'Смена знака производной.', steps: ['В $x = 2$: «−» → «+» — минимум.', '$f(2) = -4$.'], answer: '−4' }
+        src: b208
+      - type: numeric
+        cat: problem
+        q: 'Найдите сумму значений функции $f(x) = x^3 - 12x$ в точках экстремума.'
+        num: { value: 0, unit: '', tolAbs: 0.001, check: '(-8+24)+(8-24)' }
+        hint: 'Экстремумы в $x = \pm2$.'
+        explain: '$16 + (-16) = 0$.'
+        f: [1]
+        sol: { method: 'Критические точки.', steps: ['$f''(x) = 3x^2 - 12 = 0 \Rightarrow x = \pm2$.', '$f(-2) = 16$, $f(2) = -16$; сумма $0$.'], answer: '0' }
+        src: b208
+      - type: numeric
+        cat: problem
+        q: 'Сколько точек экстремума у функции $f(x) = x^4 - 4x^3$?'
+        num: { value: 1, unit: '', check: '1' }
+        hint: 'В $x = 0$ знак производной не меняется.'
+        explain: 'Только $x = 3$.'
+        f: [1]
+        sol: { method: 'Проверка смены знака.', steps: ['$f''(x) = 4x^2(x - 3)$.', 'Смена знака только в $x = 3$.'], answer: '1' }
+        src: b209
+      - type: numeric
+        cat: problem
+        q: 'Найдите наименьшее значение функции $f(x) = x + \dfrac4x$ при $x > 0$.'
+        num: { value: 4, unit: '', check: '2+4/2' }
+        hint: '$f''(x) = 1 - \frac4{x^2}$.'
+        explain: 'Минимум в $x = 2$: $2 + 2 = 4$.'
+        f: [1]
+        sol: { method: 'Экстремум.', steps: ['$1 - \frac{4}{x^2} = 0 \Rightarrow x = 2$ ($x > 0$).', '«−» → «+»: минимум $f(2) = 4$.'], answer: '4' }
+        src: b209
+      - type: numeric
+        cat: problem
+        q: 'Найдите точку максимума функции $f(x) = -x^2 + 6x - 1$.'
+        num: { value: 3, unit: '', check: '6/2' }
+        hint: '$f''(x) = -2x + 6$.'
+        explain: '$x = 3$.'
+        f: [1]
+        sol: { method: 'Критическая точка.', steps: ['$-2x + 6 = 0 \Rightarrow x = 3$.', '«+» → «−»: максимум.'], answer: '3' }
+        src: b208
+      - type: single
+        cat: theory
+        q: 'Достаточно ли условия $f''(x_0) = 0$ для экстремума в $x_0$?'
+        opts: ['нет, нужна ещё смена знака $f''$', 'да, всегда', 'да, если $f$ — многочлен', 'да, если $x_0 = 0$']
+        ans: a
+        hint: 'Вспомните $y = x^3$.'
+        explain: 'У $x^3$ производная в нуле равна 0, но экстремума нет.'
+        f: [1]
+        src: b208
+      - type: single
+        cat: theory
+        q: 'Производная при переходе через $x_0$ меняет знак с «+» на «−». Значит, $x_0$ — …'
+        opts: ['точка максимума', 'точка минимума', 'не точка экстремума', 'точка разрыва']
+        ans: a
+        hint: 'Сначала рост, потом спад.'
+        explain: 'Функция возрастала, затем начала убывать — вершина «горки».'
+        f: [1]
+        src: b208
+
+  # ───────────────────────────── 1.16.7 ─────────────────────────────
+  - id: ma-1-16-7
+    num: '1.16.7'
+    title: Наибольшее и наименьшее значения функции на промежутке
+    pages: [b210, b211]
+    book:
+      place: 'Ч. 2, 1.16 «Производная», пункт 1.16.7'
+      summary: 'Задания на наибольшее и наименьшее значения функции на отрезке и на промежутке.'
+    stage: verified
+    stageNote: 'Ответы проверены перебором значений функции по сетке на отрезке.'
+    sourcesChecked: '2026-10-25'
+    web: [*c43]
+    theory:
+      - kind: rule
+        title: Алгоритм для отрезка
+        body: |
+          Непрерывная на отрезке $[a; b]$ функция достигает наибольшего и наименьшего значений — в критических точках внутри отрезка или на концах.
+          1. Найти $f'(x)$ и критические точки, **лежащие внутри** $[a; b]$.
+          2. Вычислить $f$ в этих точках и в $a$, $b$.
+          3. Выбрать наибольшее и наименьшее из полученных чисел.
+          На интервале или луче (без концов) значения на концах не берут — наибольшего или наименьшего может не быть.
+        src: b210
+    formulas:
+      - title: Наибольшее и наименьшее на отрезке
+        tex: '\max_{[a;b]} f = \max\{f(a),\ f(b),\ f(x_k)\},\qquad f''(x_k) = 0,\ x_k \in (a; b)'
+        meaning: 'То же для наименьшего значения.'
+        use: 'Любые задачи «найдите наибольшее/наименьшее значение на отрезке».'
+        src: b210
+    examples:
+      - title: Кубическая на отрезке
+        given: 'Найдите наибольшее и наименьшее значения $f(x) = x^3 - 3x$ на $[0; 2]$.'
+        find: '$\max$, $\min$.'
+        method: 'Значения в критических точках и на концах.'
+        steps:
+          - '$f''(x) = 3x^2 - 3 = 0$: $x = 1$ (точка $-1$ вне отрезка).'
+          - '$f(0) = 0$, $f(1) = -2$, $f(2) = 2$.'
+        check: 'Перебор по сетке даёт те же значения ✓.'
+        answer: '$\max = 2$, $\min = -2$'
+        src: b210
+      - title: Дробь
+        given: 'Найдите наибольшее и наименьшее значения $f(x) = x + \frac4x$ на $[1; 4]$.'
+        find: '$\max$, $\min$.'
+        method: 'Критическая точка $x = 2$.'
+        steps:
+          - '$f(1) = 5$, $f(2) = 4$, $f(4) = 5$.'
+          - '$\max = 5$, $\min = 4$.'
+        check: '$f(3) = 4{,}33$ — между ними ✓.'
+        answer: '$\max = 5$, $\min = 4$'
+        src: b210
+      - title: Две критические точки
+        given: 'Найдите наибольшее и наименьшее значения $f(x) = 2x^3 - 3x^2 - 12x + 1$ на $[-2; 3]$.'
+        find: '$\max$, $\min$.'
+        method: '$f''(x) = 6(x - 2)(x + 1)$.'
+        steps:
+          - 'Критические точки $-1$ и $2$ — обе внутри.'
+          - '$f(-2) = -3$, $f(-1) = 8$, $f(2) = -19$, $f(3) = -8$.'
+        check: 'Перебор по сетке: максимум 8, минимум −19 ✓.'
+        answer: '$\max = 8$, $\min = -19$'
+        src: b211
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Найдите наибольшее значение функции $f(x) = x^3 - 3x$ на отрезке $[-2; 0]$.'
+        num: { value: 2, unit: '', check: 'Math.max(-8+6,-1+3,0)' }
+        hint: 'Критическая точка $x = -1$.'
+        explain: '$f(-2) = -2$, $f(-1) = 2$, $f(0) = 0$.'
+        f: [1]
+        sol: { method: 'Сравнение значений.', steps: ['$f(-2) = -2$, $f(-1) = 2$, $f(0) = 0$.', 'Наибольшее $2$.'], answer: '2' }
+        src: b210
+      - type: numeric
+        cat: problem
+        q: 'Найдите наименьшее значение функции $f(x) = x^2 - 4x + 5$ на отрезке $[0; 3]$.'
+        num: { value: 1, unit: '', check: '4-8+5' }
+        hint: 'Вершина $x = 2$ внутри отрезка.'
+        explain: '$f(2) = 1$; $f(0) = 5$, $f(3) = 2$.'
+        f: [1]
+        sol: { method: 'Сравнение значений.', steps: ['$f''(x) = 2x - 4 = 0 \Rightarrow x = 2$.', '$f(0) = 5$, $f(2) = 1$, $f(3) = 2$.'], answer: '1' }
+        src: b210
+      - type: numeric
+        cat: problem
+        q: 'Найдите наибольшее значение функции $f(x) = x^4 - 2x^2$ на отрезке $[-2; 1]$.'
+        num: { value: 8, unit: '', check: '16-8' }
+        hint: 'Не забудьте конец $x = -2$.'
+        explain: '$f(-2) = 8$ — больше значений в критических точках ($-1$, $0$, $-1$).'
+        f: [1]
+        sol: { method: 'Сравнение значений.', steps: ['Критические точки $-1, 0, 1$.', '$f(-2) = 8$, $f(-1) = -1$, $f(0) = 0$, $f(1) = -1$.', 'Наибольшее $8$ — на конце.'], answer: '8' }
+        src: b211
+      - type: numeric
+        cat: problem
+        q: 'Найдите наименьшее значение функции $f(x) = e^x - x$ на отрезке $[-1; 1]$.'
+        num: { value: 1, unit: '', check: 'Math.exp(0)-0' }
+        hint: '$f''(x) = e^x - 1$.'
+        explain: '$f(0) = 1$; на концах $\approx 1{,}37$ и $\approx 1{,}72$.'
+        f: [1]
+        sol: { method: 'Сравнение значений.', steps: ['$e^x - 1 = 0 \Rightarrow x = 0$.', '$f(-1) = e^{-1} + 1 \approx 1{,}37$, $f(0) = 1$, $f(1) = e - 1 \approx 1{,}72$.'], answer: '1' }
+        src: b211
+      - type: numeric
+        cat: problem
+        q: 'Найдите наибольшее значение функции $f(x) = \sin x + \cos x$ на отрезке $\left[0; \frac\pi2\right]$ (с точностью до 0,001).'
+        num: { value: 1.4142, unit: '', tolAbs: 0.001, check: 'Math.SQRT2' }
+        hint: '$f''(x) = \cos x - \sin x = 0$ при $x = \frac\pi4$.'
+        explain: '$f\left(\frac\pi4\right) = \sqrt2$; на концах $1$.'
+        f: [1]
+        sol: { method: 'Сравнение значений.', steps: ['Критическая точка $\frac\pi4$.', '$f(0) = 1$, $f\left(\frac\pi4\right) = \sqrt2$, $f\left(\frac\pi2\right) = 1$.'], answer: '√2 ≈ 1,414' }
+        src: b211
+      - type: numeric
+        cat: problem
+        q: 'Найдите произведение наибольшего и наименьшего значений функции $f(x) = x^3 - 3x$ на отрезке $[0; 2]$.'
+        num: { value: -4, unit: '', check: '2*(-2)' }
+        hint: 'См. пример: $\max = 2$, $\min = -2$.'
+        explain: '$2 \cdot (-2) = -4$.'
+        f: [1]
+        sol: { method: 'Сравнение значений.', steps: ['$f(0) = 0$, $f(1) = -2$, $f(2) = 2$.', '$2 \cdot (-2) = -4$.'], answer: '−4' }
+        src: b210
+      - type: single
+        cat: theory
+        q: 'Где непрерывная функция может принимать наибольшее значение на отрезке?'
+        opts: ['в критической точке внутри отрезка или на конце', 'только в критической точке', 'только на концах', 'только там, где $f''(x) > 0$']
+        ans: a
+        hint: 'Вспомните $x^4 - 2x^2$ на $[-2; 1]$.'
+        explain: 'Наибольшее может оказаться на конце, даже если внутри есть экстремумы.'
+        f: [1]
+        src: b210
+      - type: single
+        cat: theory
+        q: 'Нужно ли учитывать критические точки, лежащие вне отрезка?'
+        opts: ['нет', 'да, всегда', 'да, если они ближе к концам', 'только для многочленов']
+        ans: a
+        hint: 'Значения вне отрезка не рассматриваются.'
+        explain: 'Сравнивают только значения в точках отрезка.'
+        f: [1]
+        src: b210
+
+  # ───────────────────────────── 1.16.8 ─────────────────────────────
+  - id: ma-1-16-8
+    num: '1.16.8'
+    title: Угловой коэффициент касательной
+    pages: [b211, b212, b213]
+    book:
+      place: 'Ч. 2, 1.16 «Производная», пункт 1.16.8'
+      summary: 'Задания на геометрический смысл производной: угловой коэффициент и угол наклона касательной, точки с заданным наклоном касательной.'
+    stage: verified
+    stageNote: 'Угловые коэффициенты проверены численно.'
+    sourcesChecked: '2026-10-25'
+    web: [*c31]
+    theory:
+      - kind: law
+        title: Геометрический смысл производной
+        body: |
+          Угловой коэффициент касательной к графику $y = f(x)$ в точке $x_0$ равен производной:
+          $$k = f'(x_0) = \operatorname{tg}\alpha,$$
+          где $\alpha$ — угол наклона касательной к оси $Ox$. Касательная — предельное положение секущей $PQ$, когда точка $Q$ приближается к $P$.
+          - Касательная **параллельна** прямой $y = mx + b$, если $f'(x_0) = m$.
+          - Касательная **горизонтальна**, если $f'(x_0) = 0$.
+        src: b211
+        fig: tangent-slope
+    formulas:
+      - title: Угловой коэффициент касательной
+        tex: 'k = f''(x_0) = \operatorname{tg}\alpha'
+        meaning: '$x_0$ — абсцисса точки касания, $\alpha$ — угол наклона.'
+        use: 'Угол наклона касательной, точки с заданным наклоном.'
+        src: b211
+    examples:
+      - title: Коэффициент в точке
+        given: 'Найдите угловой коэффициент касательной к $y = x^2$ в точке $x_0 = 1$.'
+        find: '$k$.'
+        method: '$k = f''(x_0)$.'
+        steps:
+          - '$f''(x) = 2x$.'
+          - '$k = 2$.'
+        check: 'Секущая через $x = 1$ и $x = 1{,}001$: $\frac{1{,}002001 - 1}{0{,}001} = 2{,}001$ ✓.'
+        answer: '$2$'
+        src: b211
+      - title: Угол наклона
+        given: 'Под каким углом к оси $Ox$ наклонена касательная к $y = \frac{x^3}3$ в точке $x_0 = 1$?'
+        find: '$\alpha$.'
+        method: '$\operatorname{tg}\alpha = f''(1)$.'
+        steps:
+          - '$f''(x) = x^2$, $f''(1) = 1$.'
+          - '$\operatorname{tg}\alpha = 1 \Rightarrow \alpha = 45^\circ$.'
+        check: '$\operatorname{arctg} 1 = 45^\circ$ ✓.'
+        answer: '$45^\circ$'
+        src: b212
+      - title: Горизонтальная касательная
+        given: 'В какой точке касательная к $y = x^2 - 4x$ горизонтальна?'
+        find: '$x_0$.'
+        method: '$f''(x_0) = 0$.'
+        steps:
+          - '$2x - 4 = 0$.'
+          - '$x_0 = 2$ (вершина параболы).'
+        check: '$x_0 = -\frac{b}{2a} = 2$ ✓.'
+        answer: '$x_0 = 2$'
+        src: b212
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Найдите угловой коэффициент касательной к $y = x^3 - 2x$ в точке $x_0 = 1$.'
+        num: { value: 1, unit: '', check: '3-2' }
+        hint: '$y'' = 3x^2 - 2$.'
+        explain: '$3 - 2 = 1$.'
+        f: [1]
+        sol: { method: 'Производная в точке.', steps: ['$y'' = 3x^2 - 2$.', '$k = 1$.'], answer: '1' }
+        src: b211
+      - type: numeric
+        cat: problem
+        q: 'Найдите угол (в градусах) наклона касательной к $y = \sqrt3\ln x$ в точке $x_0 = 1$.'
+        num: { value: 60, unit: '°', check: 'Math.atan(Math.sqrt(3))*180/Math.PI' }
+        hint: '$k = \frac{\sqrt3}{x_0}$.'
+        explain: '$\operatorname{tg}\alpha = \sqrt3 \Rightarrow \alpha = 60^\circ$.'
+        f: [1]
+        sol: { method: 'Угол наклона.', steps: ['$y'' = \frac{\sqrt3}{x}$, $k = \sqrt3$.', '$\alpha = 60^\circ$.'], answer: '60°' }
+        src: b212
+      - type: numeric
+        cat: problem
+        q: 'В какой точке касательная к $y = x^2 - 6x + 1$ параллельна прямой $y = 2x + 5$? Укажите абсциссу.'
+        num: { value: 4, unit: '', check: '(2+6)/2' }
+        hint: '$2x - 6 = 2$.'
+        explain: '$x_0 = 4$.'
+        f: [1]
+        sol: { method: 'Параллельность — равные угловые коэффициенты.', steps: ['$y'' = 2x - 6 = 2$.', '$x_0 = 4$.'], answer: '4' }
+        src: b212
+      - type: numeric
+        cat: problem
+        q: 'Найдите угловой коэффициент касательной к $y = \sin x$ в точке $x_0 = 0$.'
+        num: { value: 1, unit: '', check: 'Math.cos(0)' }
+        hint: '$(\sin x)'' = \cos x$.'
+        explain: '$\cos 0 = 1$.'
+        f: [1]
+        sol: { method: 'Производная в точке.', steps: ['$k = \cos 0 = 1$.'], answer: '1' }
+        src: b211
+      - type: numeric
+        cat: problem
+        q: 'Сколько точек графика $y = x^3 - 3x$ имеют горизонтальную касательную?'
+        num: { value: 2, unit: '', check: '2' }
+        hint: '$3x^2 - 3 = 0$.'
+        explain: '$x = \pm1$.'
+        sol: { method: 'Условие $f''(x_0) = 0$.', steps: ['$3x^2 - 3 = 0 \Rightarrow x = \pm1$.', 'Две точки.'], answer: '2' }
+        src: b212
+      - type: numeric
+        cat: problem
+        q: 'Найдите угловой коэффициент касательной к $y = \ln x$ в точке $x_0 = 0{,}5$.'
+        num: { value: 2, unit: '', check: '1/0.5' }
+        hint: '$(\ln x)'' = \frac1x$.'
+        explain: '$\frac{1}{0{,}5} = 2$.'
+        f: [1]
+        sol: { method: 'Производная в точке.', steps: ['$k = \frac{1}{0{,}5} = 2$.'], answer: '2' }
+        src: b211
+      - type: single
+        cat: theory
+        q: 'Что равно производной $f''(x_0)$ геометрически?'
+        opts: ['угловому коэффициенту касательной в точке $x_0$', 'значению функции в точке $x_0$', 'площади под графиком', 'длине касательной']
+        ans: a
+        hint: 'Предел наклона секущих.'
+        explain: '$f''(x_0) = \operatorname{tg}\alpha$.'
+        f: [1]
+        src: b211
+      - type: single
+        cat: theory
+        q: 'Касательная к графику параллельна оси $Ox$. Чему равна производная в точке касания?'
+        opts: ['нулю', 'единице', 'бесконечности', 'значению функции']
+        ans: a
+        hint: 'Угол наклона $0^\circ$.'
+        explain: '$\operatorname{tg} 0^\circ = 0$.'
+        f: [1]
+        src: b212
+
+  # ───────────────────────────── 1.16.9 ─────────────────────────────
+  - id: ma-1-16-9
+    num: '1.16.9'
+    title: Уравнение касательной
+    pages: [b213, b214]
+    book:
+      place: 'Ч. 2, 1.16 «Производная», пункт 1.16.9'
+      summary: 'Задания на уравнение касательной к графику функции в заданной точке и касательной с заданным наклоном.'
+    stage: verified
+    stageNote: 'Уравнения касательных проверены: точка касания лежит на прямой, наклон совпадает с производной.'
+    sourcesChecked: '2026-10-25'
+    web: [*c31]
+    theory:
+      - kind: law
+        title: Уравнение касательной
+        body: |
+          Касательная к графику $y = f(x)$ в точке $x_0$:
+          $$y = f(x_0) + f'(x_0)(x - x_0).$$
+          Алгоритм: 1) $f(x_0)$; 2) $f'(x)$ и $f'(x_0)$; 3) подставить и привести к виду $y = kx + b$.
+          Если задан наклон $k$, точку касания находят из уравнения $f'(x_0) = k$.
+        src: b213
+    formulas:
+      - title: Уравнение касательной
+        tex: 'y = f(x_0) + f''(x_0)(x - x_0)'
+        meaning: '$x_0$ — абсцисса точки касания.'
+        use: 'Составление уравнения касательной.'
+        src: b213
+    examples:
+      - title: Касательная к параболе
+        given: 'Составьте уравнение касательной к $y = x^2$ в точке $x_0 = 1$.'
+        find: 'уравнение.'
+        method: 'Формула касательной.'
+        steps:
+          - '$f(1) = 1$, $f''(1) = 2$.'
+          - '$y = 1 + 2(x - 1) = 2x - 1$.'
+        check: '$x^2 - (2x - 1) = (x - 1)^2 \ge 0$ — прямая касается параболы в одной точке ✓.'
+        answer: '$y = 2x - 1$'
+        src: b213
+      - title: Касательная к кубической параболе
+        given: 'Составьте уравнение касательной к $y = x^3$ в точке $x_0 = -1$.'
+        find: 'уравнение.'
+        method: 'Формула касательной.'
+        steps:
+          - '$f(-1) = -1$, $f''(-1) = 3$.'
+          - '$y = -1 + 3(x + 1) = 3x + 2$.'
+        check: '$x = -1$: $-3 + 2 = -1$ ✓.'
+        answer: '$y = 3x + 2$'
+        src: b213
+      - title: Экспонента
+        given: 'Составьте уравнение касательной к $y = e^x$ в точке $x_0 = 0$.'
+        find: 'уравнение.'
+        method: 'Формула касательной.'
+        steps:
+          - '$f(0) = 1$, $f''(0) = 1$.'
+          - '$y = 1 + x$.'
+        check: '$e^{0{,}01} = 1{,}01005 \approx 1{,}01$ ✓.'
+        answer: '$y = x + 1$'
+        src: b214
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Касательная к $y = x^2 + 3x$ в точке $x_0 = 1$ имеет уравнение $y = kx + b$. Найдите $b$.'
+        num: { value: -1, unit: '', check: '4-5*1' }
+        hint: '$f(1) = 4$, $f''(1) = 5$.'
+        explain: '$y = 4 + 5(x - 1) = 5x - 1$.'
+        f: [1]
+        sol: { method: 'Формула касательной.', steps: ['$f(1) = 4$, $f''(x) = 2x + 3$, $f''(1) = 5$.', '$y = 5x - 1$, $b = -1$.'], answer: '−1' }
+        src: b213
+      - type: numeric
+        cat: problem
+        q: 'Касательная к $y = x^3 - x$ в точке $x_0 = 2$: $y = kx + b$. Найдите $b$.'
+        num: { value: -16, unit: '', check: '6-11*2' }
+        hint: '$f(2) = 6$, $f''(2) = 11$.'
+        explain: '$y = 6 + 11(x - 2) = 11x - 16$.'
+        f: [1]
+        sol: { method: 'Формула касательной.', steps: ['$f(2) = 6$, $f''(2) = 12 - 1 = 11$.', '$y = 11x - 16$.'], answer: '−16' }
+        src: b213
+      - type: numeric
+        cat: problem
+        q: 'Касательная к $y = \sqrt x$ в точке $x_0 = 4$: $y = kx + b$. Найдите $b$.'
+        num: { value: 1, unit: '', check: '2-0.25*4' }
+        hint: '$f(4) = 2$, $f''(4) = \frac14$.'
+        explain: '$y = 2 + \frac14(x - 4) = \frac x4 + 1$.'
+        f: [1]
+        sol: { method: 'Формула касательной.', steps: ['$f(4) = 2$, $f''(4) = \frac14$.', '$y = \frac{x}{4} + 1$.'], answer: '1' }
+        src: b213
+      - type: numeric
+        cat: problem
+        q: 'В какой точке касательная к $y = \ln x$ в точке $x_0 = 1$ пересекает ось $Ox$? Укажите абсциссу.'
+        num: { value: 1, unit: '', check: '1' }
+        hint: 'Касательная $y = x - 1$.'
+        explain: '$x - 1 = 0 \Rightarrow x = 1$.'
+        f: [1]
+        sol: { method: 'Формула касательной.', steps: ['$f(1) = 0$, $f''(1) = 1$: $y = x - 1$.', 'Пересечение с $Ox$: $x = 1$.'], answer: '1' }
+        src: b214
+      - type: numeric
+        cat: problem
+        q: 'Найдите площадь треугольника, образованного касательной к $y = \dfrac1x$ в точке $x_0 = 1$ и осями координат.'
+        num: { value: 2, unit: '', check: '2*2/2' }
+        hint: 'Касательная $y = -x + 2$.'
+        explain: 'Отрезки на осях по 2, площадь $\frac{2 \cdot 2}{2} = 2$.'
+        f: [1]
+        sol: { method: 'Касательная и оси.', steps: ['$f(1) = 1$, $f''(1) = -1$: $y = 2 - x$.', 'Точки $(2; 0)$ и $(0; 2)$, площадь $2$.'], answer: '2' }
+        src: b214
+      - type: numeric
+        cat: problem
+        q: 'Касательная к $y = x^2$ параллельна прямой $y = 4x + 1$. Её уравнение $y = 4x + b$. Найдите $b$.'
+        num: { value: -4, unit: '', check: '4-4*2' }
+        hint: '$2x_0 = 4$.'
+        explain: '$x_0 = 2$, $f(2) = 4$: $y = 4 + 4(x - 2) = 4x - 4$.'
+        f: [1]
+        sol: { method: 'Касательная с заданным наклоном.', steps: ['$2x_0 = 4 \Rightarrow x_0 = 2$.', '$y = 4 + 4(x - 2) = 4x - 4$.'], answer: '−4' }
+        src: b214
+      - type: single
+        cat: theory
+        q: 'Уравнение касательной к $y = f(x)$ в точке $x_0$:'
+        opts: ['$y = f(x_0) + f''(x_0)(x - x_0)$', '$y = f''(x_0)x$', '$y = f(x_0)(x - x_0)$', '$y = f''(x)(x - x_0)$']
+        ans: a
+        hint: 'Прямая через $(x_0; f(x_0))$ с наклоном $f''(x_0)$.'
+        explain: 'Уравнение прямой через точку с заданным угловым коэффициентом.'
+        f: [1]
+        src: b213
+      - type: single
+        cat: theory
+        q: 'Касательная к $y = x^2$ в точке $x_0 = 0$:'
+        opts: ['$y = 0$', '$y = x$', '$x = 0$', '$y = 2x$']
+        ans: a
+        hint: '$f(0) = 0$, $f''(0) = 0$.'
+        explain: 'Ось $Ox$ касается параболы в вершине.'
+        f: [1]
+        src: b213
+
+  # ───────────────────────────── 1.16.10 ─────────────────────────────
+  - id: ma-1-16-10
+    num: '1.16.10'
+    title: Механический смысл производной
+    pages: [b214, b215]
+    book:
+      place: 'Ч. 2, 1.16 «Производная», пункт 1.16.10'
+      summary: 'Задания на скорость и ускорение точки, движущейся по заданному закону $s(t)$: значение в момент времени, момент остановки, скорость при нулевом ускорении.'
+    stage: verified
+    stageNote: 'Скорости и ускорения пересчитаны дифференцированием и численно.'
+    sourcesChecked: '2026-10-25'
+    web: [*c34]
+    theory:
+      - kind: law
+        title: Скорость и ускорение
+        body: |
+          Если точка движется по прямой по закону $s = s(t)$, то
+          $$v(t) = s'(t),\qquad a(t) = v'(t) = s''(t).$$
+          - Точка **останавливается** (меняет направление), когда $v(t) = 0$.
+          - $v > 0$ — движение в положительном направлении, $v < 0$ — в отрицательном.
+          - Это та же связь, что в физике: скорость — производная координаты, ускорение — производная скорости.
+        src: b214
+    formulas:
+      - title: Скорость и ускорение
+        tex: 'v(t) = s''(t),\qquad a(t) = v''(t) = s''''(t)'
+        meaning: '$s(t)$ — координата, $t$ — время.'
+        use: 'Задачи о движении по заданному закону.'
+        src: b214
+    examples:
+      - title: Скорость и ускорение в момент
+        given: '$s(t) = t^3 - 2t^2 + 3$. Найдите скорость и ускорение при $t = 2$.'
+        find: '$v(2)$, $a(2)$.'
+        method: 'Дифференцирование.'
+        steps:
+          - '$v(t) = 3t^2 - 4t$, $v(2) = 4$.'
+          - '$a(t) = 6t - 4$, $a(2) = 8$.'
+        check: 'Численно $\frac{s(2{,}001) - s(1{,}999)}{0{,}002} \approx 4$ ✓.'
+        answer: '$v = 4$, $a = 8$'
+        src: b214
+      - title: Остановка
+        given: '$s(t) = 6t - t^2$. В какой момент точка остановится?'
+        find: '$t$.'
+        method: '$v(t) = 0$.'
+        steps:
+          - '$v(t) = 6 - 2t$.'
+          - '$6 - 2t = 0 \Rightarrow t = 3$.'
+        check: '$v(2{,}9) > 0$, $v(3{,}1) < 0$ — направление меняется ✓.'
+        answer: '$t = 3$'
+        src: b214
+      - title: Колебание
+        given: '$s(t) = 2\sin t$. Найдите скорость при $t = 0$.'
+        find: '$v(0)$.'
+        method: 'Производная синуса.'
+        steps:
+          - '$v(t) = 2\cos t$.'
+          - '$v(0) = 2$.'
+        check: '$\frac{2\sin 0{,}001}{0{,}001} \approx 2$ ✓.'
+        answer: '$2$'
+        src: b215
+    questions:
+      - type: numeric
+        cat: problem
+        q: '$s(t) = t^2 + 3t$. Найдите скорость при $t = 2$.'
+        num: { value: 7, unit: '', check: '2*2+3' }
+        hint: '$v = 2t + 3$.'
+        explain: '$4 + 3 = 7$.'
+        f: [1]
+        sol: { method: '$v = s''$.', steps: ['$v(t) = 2t + 3$.', '$v(2) = 7$.'], answer: '7' }
+        src: b214
+      - type: numeric
+        cat: problem
+        q: '$s(t) = t^3 - 6t^2 + 9t$. В какой момент точка впервые останавливается?'
+        num: { value: 1, unit: '', check: '1' }
+        hint: '$v = 3(t - 1)(t - 3)$.'
+        explain: 'Первый ноль скорости — $t = 1$.'
+        f: [1]
+        sol: { method: '$v(t) = 0$.', steps: ['$v(t) = 3t^2 - 12t + 9 = 3(t - 1)(t - 3)$.', 'Первая остановка $t = 1$.'], answer: '1' }
+        src: b214
+      - type: numeric
+        cat: problem
+        q: '$s(t) = t^3$. Найдите ускорение при $t = 2$.'
+        num: { value: 12, unit: '', check: '6*2' }
+        hint: '$a = 6t$.'
+        explain: '$12$.'
+        f: [1]
+        sol: { method: '$a = s''''$.', steps: ['$v = 3t^2$, $a = 6t$.', '$a(2) = 12$.'], answer: '12' }
+        src: b214
+      - type: numeric
+        cat: problem
+        q: '$s(t) = 4t - \dfrac{t^2}2$. Найдите скорость при $t = 2$.'
+        num: { value: 2, unit: '', check: '4-2' }
+        hint: '$v = 4 - t$.'
+        explain: '$4 - 2 = 2$.'
+        f: [1]
+        sol: { method: '$v = s''$.', steps: ['$v(t) = 4 - t$.', '$v(2) = 2$.'], answer: '2' }
+        src: b214
+      - type: numeric
+        cat: problem
+        q: '$s(t) = t^3 - 6t^2$. В какой момент ускорение равно нулю?'
+        num: { value: 2, unit: '', check: '12/6' }
+        hint: '$a = 6t - 12$.'
+        explain: '$t = 2$.'
+        f: [1]
+        sol: { method: '$a = s''''$.', steps: ['$v = 3t^2 - 12t$, $a = 6t - 12$.', '$a = 0 \Rightarrow t = 2$.'], answer: '2' }
+        src: b214
+      - type: numeric
+        cat: problem
+        q: '$s(t) = t^3 - 6t^2 + 10t$. Найдите скорость в момент, когда ускорение равно нулю.'
+        num: { value: -2, unit: '', check: '3*4-12*2+10' }
+        hint: 'Сначала момент $a = 0$.'
+        explain: '$a = 6t - 12 = 0 \Rightarrow t = 2$; $v(2) = 12 - 24 + 10 = -2$.'
+        f: [1]
+        sol: { method: 'Скорость и ускорение.', steps: ['$a = 6t - 12 = 0 \Rightarrow t = 2$.', '$v(t) = 3t^2 - 12t + 10$, $v(2) = -2$.'], answer: '−2' }
+        src: b215
+      - type: single
+        cat: theory
+        q: 'Чем является производная закона движения $s(t)$?'
+        opts: ['мгновенной скоростью', 'ускорением', 'пройденным путём', 'средней скоростью']
+        ans: a
+        hint: 'Скорость изменения координаты.'
+        explain: '$v(t) = s''(t)$.'
+        f: [1]
+        src: b214
+      - type: single
+        cat: theory
+        q: 'Когда точка, движущаяся по прямой, меняет направление движения?'
+        opts: ['когда скорость меняет знак (проходя через 0)', 'когда ускорение равно 0', 'когда $s(t) = 0$', 'никогда']
+        ans: a
+        hint: 'Знак скорости — направление.'
+        explain: 'Смена знака $v(t)$ означает разворот.'
+        f: [1]
+        src: b214

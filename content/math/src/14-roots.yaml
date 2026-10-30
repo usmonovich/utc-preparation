@@ -1,0 +1,620 @@
+# 1.4 Корни (книга, ч. 1, с. 32–44).
+# Теория, формулы, примеры и задачи составлены по открытым источникам (ссылки — в web); задания книги не копируются.
+
+subsection: ma-1-4
+
+x-sources:
+  rs-root: &rs-root { title: 'Элементарная математика, § 9 «Арифметический корень»', org: 'РГРТУ (Рязанский радиотехнический университет), пособие для поступающих', url: 'https://rsreu.ru/component/docman/doc_download/1471-9-arifmetich-koren', checked: '2026-10-25', note: 'формулы PDF частично искажены; использованы определение и свойства корня' }
+  rs-frac: &rs-frac { title: 'Элементарная математика, § 8 «Степень с дробным показателем»', org: 'РГРТУ, пособие для поступающих', url: 'https://rsreu.ru/component/docman/doc_download/1470-8-stepen-s-drobnym-pokazatelem', checked: '2026-10-25' }
+  rs-mod: &rs-mod { title: 'Элементарная математика, § 11 «Модуль действительного числа»', org: 'РГРТУ, пособие для поступающих', url: 'https://rsreu.ru/component/docman/doc_download/1473-11-modul-deystv-chisla', checked: '2026-10-25' }
+  os-9k: &os-9k { title: 'Elementary Algebra, гл. 9 «Key Concepts» (квадратные корни, корни n-й степени)', org: 'OpenStax, Rice University (открытый учебник)', url: 'https://openstax.org/books/elementary-algebra/pages/9-key-concepts', checked: '2026-10-25' }
+  os-92: &os-92 { title: 'Elementary Algebra, 9.2 Simplify Square Roots', org: 'OpenStax, Rice University', url: 'https://openstax.org/books/elementary-algebra/pages/9-2-simplify-square-roots', checked: '2026-10-25', note: 'адрес найден поиском' }
+  os-98: &os-98 { title: 'Elementary Algebra, 9.8 Rational Exponents', org: 'OpenStax, Rice University', url: 'https://openstax.org/books/elementary-algebra/pages/9-8-rational-exponents', checked: '2026-10-25', note: 'адрес найден поиском' }
+
+topics:
+  # ───────────────────────────── 1.4.1 ─────────────────────────────
+  - id: ma-1-4-1
+    num: '1.4.1'
+    title: Применение формул
+    pages: [b032, b033, b034]
+    book:
+      place: 'Ч. 1, 1.4 «Корни», пункт 1.4.1'
+      summary: 'Книга выписывает свойства квадратного корня: $(\sqrt a)^2 = a$, $\sqrt{ab} = \sqrt a \sqrt b$, $\sqrt{a/b} = \sqrt a / \sqrt b$, внесение множителя под корень (отдельно при $a \ge 0$ и $a \le 0$) и $\sqrt{a^2} = |a|$. Задания — на применение этих формул.'
+    stage: verified
+    stageNote: 'Свойства проверены численно на сетке значений, включая отрицательные $a$ для $\sqrt{a^2} = |a|$.'
+    sourcesChecked: '2026-10-25'
+    web: [*rs-root, *os-9k, *rs-mod]
+    theory:
+      - kind: definition
+        title: Арифметический квадратный корень
+        body: |
+          **Арифметический квадратный корень** из числа $a \ge 0$ — такое **неотрицательное** число $b$, что $b^2 = a$: $\sqrt{49} = 7$ (а не $\pm 7$). У уравнения $x^2 = 49$ два решения $\pm 7$, но знак $\sqrt{\ }$ обозначает только неотрицательное.
+          Корень из отрицательного числа среди действительных чисел не существует.
+        src: b032
+      - kind: law
+        title: Свойства корня
+        body: |
+          При $a \ge 0$, $b \ge 0$:
+          - $(\sqrt a)^2 = a$;
+          - $\sqrt{ab} = \sqrt a \cdot \sqrt b$; $\ \sqrt{\frac{a}{b}} = \frac{\sqrt a}{\sqrt b}$ ($b > 0$);
+          - **для любого** $a$: $\sqrt{a^2} = |a|$. Например, $\sqrt{(-5)^2} = 5$, $\sqrt{(1 - \sqrt3)^2} = \sqrt3 - 1$.
+        src: b032
+      - kind: rule
+        title: Вынесение и внесение множителя
+        body: |
+          - Вынесение: $\sqrt{a^2 b} = |a|\sqrt b$ ($b \ge 0$): $\sqrt{72} = \sqrt{36 \cdot 2} = 6\sqrt2$.
+          - Внесение: $a\sqrt b = \sqrt{a^2 b}$ при $a \ge 0$, но $a\sqrt b = -\sqrt{a^2 b}$ при $a < 0$ (под корень вносится только положительный множитель, минус остаётся снаружи): $-3\sqrt2 = -\sqrt{18}$.
+          - Внесение помогает **сравнивать** числа: $3\sqrt5 = \sqrt{45}$ и $5\sqrt2 = \sqrt{50}$, поэтому $3\sqrt5 < 5\sqrt2$.
+        src: b032
+    formulas:
+      - title: Корень из произведения и частного
+        tex: '\sqrt{ab} = \sqrt a \cdot \sqrt b,\qquad \sqrt{\frac{a}{b}} = \frac{\sqrt a}{\sqrt b}'
+        meaning: '$a \ge 0$, $b \ge 0$ (в частном $b > 0$).'
+        use: 'Упрощение корней: извлекать корень из множителей-квадратов; перемножать корни: $\sqrt2 \cdot \sqrt8 = \sqrt{16} = 4$.'
+        limits: 'Для отрицательных множителей неверно: $\sqrt{(-4)(-9)} = 6$, а $\sqrt{-4}$ не существует. Для суммы неверно: $\sqrt{a + b} \ne \sqrt a + \sqrt b$.'
+        src: b032
+      - title: Корень из квадрата
+        tex: '\sqrt{a^2} = |a|'
+        meaning: '$a$ — любое действительное число.'
+        use: 'Упрощение $\sqrt{(x - 3)^2} = |x - 3|$; затем модуль раскрывают по знаку выражения.'
+        limits: 'Запись $\sqrt{a^2} = a$ верна только при $a \ge 0$.'
+        src: b032
+      - title: Внесение множителя под корень
+        tex: 'a\sqrt b = \begin{cases} \sqrt{a^2 b}, & a \ge 0, \\ -\sqrt{a^2 b}, & a < 0 \end{cases}'
+        meaning: '$b \ge 0$.'
+        use: 'Сравнение чисел вида $a\sqrt b$; упрощение выражений.'
+        src: b032
+    examples:
+      - title: Корень из квадрата выражения
+        given: 'Упростите $\sqrt{(1 - \sqrt3)^2} + \sqrt{(2 - \sqrt3)^2}$.'
+        find: 'значение выражения.'
+        method: '$\sqrt{a^2} = |a|$: нужно определить знак каждого выражения.'
+        steps:
+          - '$\sqrt3 \approx 1{,}73$: $1 - \sqrt3 < 0$, поэтому $|1 - \sqrt3| = \sqrt3 - 1$.'
+          - '$2 - \sqrt3 > 0$: $|2 - \sqrt3| = 2 - \sqrt3$.'
+          - 'Сумма: $\sqrt3 - 1 + 2 - \sqrt3 = 1$.'
+        check: 'Численно: $0{,}732 + 0{,}268 = 1{,}000$.'
+        answer: '$1$'
+        src: b032
+      - title: Произведение корней
+        given: 'Вычислите $\sqrt{18} \cdot \sqrt{50}$ и $\dfrac{\sqrt{75}}{\sqrt3}$.'
+        find: 'значения.'
+        method: 'Объединить под один корень по свойствам произведения и частного.'
+        steps:
+          - '$\sqrt{18 \cdot 50} = \sqrt{900} = 30$.'
+          - '$\sqrt{75 : 3} = \sqrt{25} = 5$.'
+        check: '$\sqrt{18} = 3\sqrt2$, $\sqrt{50} = 5\sqrt2$: $3 \cdot 5 \cdot 2 = 30$.'
+        answer: '$30$ и $5$'
+        src: b032
+      - title: Сравнение чисел с корнями
+        given: 'Что больше: $3\sqrt5$ или $5\sqrt2$?'
+        find: 'большее число.'
+        method: 'Внести множители под корень и сравнить подкоренные выражения.'
+        steps:
+          - '$3\sqrt5 = \sqrt{9 \cdot 5} = \sqrt{45}$.'
+          - '$5\sqrt2 = \sqrt{25 \cdot 2} = \sqrt{50}$.'
+          - '$45 < 50$, значит, $3\sqrt5 < 5\sqrt2$.'
+        check: '$3\sqrt5 \approx 6{,}71$, $5\sqrt2 \approx 7{,}07$.'
+        answer: '$5\sqrt2$ больше'
+        src: b032
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\sqrt{8} \cdot \sqrt{18}$.'
+        num: { value: 12, unit: '', check: 'Math.sqrt(8*18)' }
+        hint: 'Перемножьте под одним корнем.'
+        explain: '$\sqrt{144} = 12$.'
+        f: [1]
+        sol: { method: 'Корень из произведения.', steps: ['$\sqrt8 \cdot \sqrt{18} = \sqrt{144}$.', '$\sqrt{144} = 12$.'], answer: '12' }
+        src: b032
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\sqrt{(-7)^2} - \sqrt{3^2}$.'
+        num: { value: 4, unit: '', check: 'Math.abs(-7)-3' }
+        hint: '$\sqrt{a^2} = |a|$.'
+        explain: '$|-7| - 3 = 4$.'
+        f: [2]
+        sol: { method: 'Корень из квадрата — модуль.', steps: ['$\sqrt{(-7)^2} = |-7| = 7$.', '$7 - 3 = 4$.'], answer: '4' }
+        src: b032
+      - type: numeric
+        cat: problem
+        q: 'Упростите $\sqrt{(\sqrt5 - 3)^2} + \sqrt5$.'
+        num: { value: 3, unit: '', check: 'Math.abs(Math.sqrt(5)-3)+Math.sqrt(5)' }
+        hint: 'Определите знак $\sqrt5 - 3$.'
+        explain: '$\sqrt5 < 3$, поэтому $|\sqrt5 - 3| = 3 - \sqrt5$; сумма $3$.'
+        f: [2]
+        sol: { method: 'Модуль по знаку выражения.', steps: ['$\sqrt5 \approx 2{,}24 < 3$.', '$|\sqrt5 - 3| = 3 - \sqrt5$.', '$3 - \sqrt5 + \sqrt5 = 3$.'], answer: '3' }
+        src: b032
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\dfrac{\sqrt{98}}{\sqrt2} + \sqrt{0{,}25}$.'
+        num: { value: 7.5, unit: '', check: 'Math.sqrt(98/2)+Math.sqrt(0.25)' }
+        hint: 'Корень из частного и корень из десятичной дроби.'
+        explain: '$\sqrt{49} + 0{,}5 = 7{,}5$.'
+        f: [1]
+        sol: { method: 'Свойства корня.', steps: ['$\frac{\sqrt{98}}{\sqrt2} = \sqrt{49} = 7$.', '$\sqrt{0{,}25} = 0{,}5$.', '$7 + 0{,}5 = 7{,}5$.'], answer: '7,5' }
+        src: b032
+      - type: numeric
+        cat: problem
+        q: 'Вынесите множитель из-под корня: $\sqrt{72} = k\sqrt2$. Найдите $k$.'
+        num: { value: 6, unit: '', check: 'Math.sqrt(72/2)' }
+        hint: 'Найдите наибольший множитель 72, являющийся полным квадратом.'
+        explain: '$72 = 36 \cdot 2$, $\sqrt{72} = 6\sqrt2$.'
+        sol: { method: 'Вынесение множителя.', steps: ['$72 = 36 \cdot 2$.', '$\sqrt{36 \cdot 2} = 6\sqrt2$.'], answer: '6' }
+        src: b032
+      - type: single
+        cat: problem
+        q: 'Какое число больше остальных?'
+        opts: ['$2\sqrt{7}$', '$3\sqrt3$', '$\sqrt{26}$', '$4\sqrt{1{,}5}$']
+        ans: a
+        hint: 'Внесите множители под корень.'
+        explain: '$2\sqrt7 = \sqrt{28}$, $3\sqrt3 = \sqrt{27}$, $\sqrt{26}$, $4\sqrt{1{,}5} = \sqrt{24}$ — наибольшее $\sqrt{28}$.'
+        f: [3]
+        sol: { method: 'Сравнение подкоренных выражений.', steps: ['$\sqrt{28}$, $\sqrt{27}$, $\sqrt{26}$, $\sqrt{24}$.', 'Корень больше у большего подкоренного числа.'], answer: '2√7' }
+        src: b032
+      - type: single
+        cat: theory
+        q: 'Чему равно $\sqrt{a^2}$ при $a < 0$?'
+        opts: ['$-a$', '$a$', '$a^2$', 'не определено']
+        ans: a
+        hint: 'Корень — неотрицательное число.'
+        explain: '$\sqrt{a^2} = |a| = -a$ при $a < 0$ (например, $\sqrt{(-3)^2} = 3 = -(-3)$).'
+        f: [2]
+        src: b032
+      - type: single
+        cat: theory
+        q: 'Как правильно внести множитель под корень: $-2\sqrt3 = \ ?$'
+        opts: ['$-\sqrt{12}$', '$\sqrt{12}$', '$\sqrt{-12}$', '$-\sqrt{6}$']
+        ans: a
+        hint: 'Под корень вносится только положительный множитель.'
+        explain: '$-2\sqrt3 = -(2\sqrt3) = -\sqrt{4 \cdot 3} = -\sqrt{12}$.'
+        f: [3]
+        src: b032
+
+  # ───────────────────────────── 1.4.2 ─────────────────────────────
+  - id: ma-1-4-2
+    num: '1.4.2'
+    title: Квадратные корни. Задачи на вычисление
+    pages: [b034, b035, b036, b037]
+    book:
+      place: 'Ч. 1, 1.4 «Корни», пункт 1.4.2'
+      summary: 'Книга приводит формулу «сложного радикала» $\sqrt{a \pm \sqrt b}$. Задания: вычислить разности и суммы корней вида $\sqrt{9 - 2\sqrt{20}}$, освободиться от иррациональности в знаменателе, найти значение выражения с корнями.'
+    stage: verified
+    stageNote: 'Все преобразования корней проверены численно с точностью 10⁻¹².'
+    sourcesChecked: '2026-10-25'
+    web: [*os-92, *os-9k, *rs-root]
+    theory:
+      - kind: rule
+        title: Освобождение от иррациональности в знаменателе
+        body: |
+          - Если в знаменателе $\sqrt b$ — домножают на $\sqrt b$: $\frac{6}{\sqrt3} = \frac{6\sqrt3}{3} = 2\sqrt3$.
+          - Если $\sqrt a \pm \sqrt b$ (или $c \pm \sqrt b$) — домножают на **сопряжённое** выражение и применяют разность квадратов: $\frac{1}{\sqrt3 + \sqrt2} = \frac{\sqrt3 - \sqrt2}{3 - 2} = \sqrt3 - \sqrt2$.
+        src: b034
+      - kind: rule
+        title: Сложный радикал как полный квадрат
+        body: |
+          Выражение вида $\sqrt{m \pm 2\sqrt n}$ часто можно записать как $|\sqrt x \pm \sqrt y|$, если $x + y = m$, $xy = n$: тогда $m \pm 2\sqrt n = (\sqrt x \pm \sqrt y)^2$.
+          Пример: $9 - 2\sqrt{20}$: $x + y = 9$, $xy = 20$ → $x = 5$, $y = 4$. $9 - 2\sqrt{20} = (\sqrt5 - 2)^2$, поэтому $\sqrt{9 - 2\sqrt{20}} = \sqrt5 - 2$ (это число положительно).
+        src: b034
+        fig: sqrt-two-line
+      - kind: text
+        title: Иррациональные числа
+        body: '$\sqrt2$, $\sqrt3$, $\sqrt5$ — иррациональные числа: их нельзя записать дробью $\frac{p}{q}$, десятичная запись бесконечна и непериодична. Корень из натурального числа либо целый (если число — полный квадрат), либо иррациональный. Точку $\sqrt2$ можно построить на прямой: это диагональ квадрата со стороной 1 (см. анимацию).'
+        src: b034
+    formulas:
+      - title: Сопряжённые выражения
+        tex: '(\sqrt a - \sqrt b)(\sqrt a + \sqrt b) = a - b'
+        meaning: '$a, b \ge 0$.'
+        use: 'Освободиться от иррациональности в знаменателе вида $\sqrt a \pm \sqrt b$.'
+        variants: '$\frac{1}{\sqrt a + \sqrt b} = \frac{\sqrt a - \sqrt b}{a - b}$ ($a \ne b$).'
+        src: b034
+      - title: Сложный радикал
+        tex: '\sqrt{x + y \pm 2\sqrt{xy}} = |\sqrt x \pm \sqrt y|'
+        meaning: '$x, y \ge 0$.'
+        use: 'Подобрать $x$ и $y$ по сумме и произведению, когда под корнем стоит $m \pm 2\sqrt n$.'
+        variants: 'Общая формула книги: $\sqrt{a \pm \sqrt b} = \sqrt{\frac{a + A}{2}} \pm \sqrt{\frac{a - A}{2}}$, где $A = \sqrt{a^2 - b}$ ($a > 0$, $a^2 \ge b \ge 0$).'
+        src: b034
+    examples:
+      - title: Сложный радикал
+        given: 'Вычислите $\sqrt{9 - 2\sqrt{20}} + \sqrt{9 + 2\sqrt{20}}$.'
+        find: 'значение.'
+        method: 'Подобрать $x + y = 9$, $xy = 20$, записать подкоренные выражения как квадраты.'
+        steps:
+          - '$x = 5$, $y = 4$: $9 \pm 2\sqrt{20} = (\sqrt5 \pm 2)^2$.'
+          - '$\sqrt{(\sqrt5 - 2)^2} = |\sqrt5 - 2| = \sqrt5 - 2$ (так как $\sqrt5 > 2$); $\sqrt{(\sqrt5 + 2)^2} = \sqrt5 + 2$.'
+          - 'Сумма: $2\sqrt5$.'
+        check: 'Численно: $\sqrt{9 - 8{,}944} + \sqrt{17{,}944} \approx 0{,}236 + 4{,}236 = 4{,}472 \approx 2\sqrt5$.'
+        answer: '$2\sqrt5$'
+        src: b034
+      - title: Иррациональность в знаменателе
+        given: 'Упростите $\dfrac{4}{\sqrt5 - 1} - \sqrt5$.'
+        find: 'значение.'
+        method: 'Домножить дробь на сопряжённое $\sqrt5 + 1$.'
+        steps:
+          - '$\frac{4(\sqrt5 + 1)}{(\sqrt5 - 1)(\sqrt5 + 1)} = \frac{4(\sqrt5 + 1)}{4} = \sqrt5 + 1$.'
+          - '$\sqrt5 + 1 - \sqrt5 = 1$.'
+        check: '$4 : 1{,}236 \approx 3{,}236$; $3{,}236 - 2{,}236 = 1$.'
+        answer: '$1$'
+        src: b034
+      - title: Сумма с корнями
+        given: 'Вычислите $\dfrac{1}{\sqrt2 + 1} + \dfrac{1}{\sqrt3 + \sqrt2} + \dfrac{1}{2 + \sqrt3}$.'
+        find: 'значение.'
+        method: 'Освободиться от иррациональности в каждом знаменателе — получится телескопическая сумма.'
+        steps:
+          - '$\frac{1}{\sqrt{k+1} + \sqrt k} = \sqrt{k + 1} - \sqrt k$ (знаменатель после домножения равен 1).'
+          - 'Сумма: $(\sqrt2 - 1) + (\sqrt3 - \sqrt2) + (2 - \sqrt3)$.'
+          - 'Остаётся $2 - 1 = 1$.'
+        check: 'Численно: $0{,}4142 + 0{,}3178 + 0{,}2679 = 0{,}9999\ldots \approx 1$.'
+        answer: '$1$'
+        src: b034
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Известно, что $\sqrt{11 - 2\sqrt{30}} + \sqrt5 = \sqrt k$. Найдите $k$.'
+        num: { value: 6, unit: '', check: 'Math.round((Math.sqrt(11-2*Math.sqrt(30))+Math.sqrt(5))**2)' }
+        hint: '$11 = 6 + 5$, $30 = 6 \cdot 5$.'
+        explain: '$11 - 2\sqrt{30} = (\sqrt6 - \sqrt5)^2$, корень равен $\sqrt6 - \sqrt5$; плюс $\sqrt5$ — получается $\sqrt6$.'
+        f: [2]
+        sol: { method: 'Сложный радикал как полный квадрат.', steps: ['$11 - 2\sqrt{30} = (\sqrt6)^2 - 2\sqrt6\sqrt5 + (\sqrt5)^2 = (\sqrt6 - \sqrt5)^2$.', '$\sqrt{(\sqrt6 - \sqrt5)^2} = \sqrt6 - \sqrt5$ (положительно, так как $6 > 5$).', '$\sqrt6 - \sqrt5 + \sqrt5 = \sqrt6$, $k = 6$.'], answer: '6' }
+        src: b034
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $(\sqrt{27} - \sqrt{12}) \cdot \sqrt3$.'
+        num: { value: 3, unit: '', check: '(Math.sqrt(27)-Math.sqrt(12))*Math.sqrt(3)' }
+        hint: 'Вынесите множители: $\sqrt{27} = 3\sqrt3$, $\sqrt{12} = 2\sqrt3$.'
+        explain: '$(3\sqrt3 - 2\sqrt3) \cdot \sqrt3 = \sqrt3 \cdot \sqrt3 = 3$.'
+        sol: { method: 'Вынесение множителя и приведение подобных.', steps: ['$\sqrt{27} - \sqrt{12} = 3\sqrt3 - 2\sqrt3 = \sqrt3$.', '$\sqrt3 \cdot \sqrt3 = 3$.'], answer: '3' }
+        src: b034
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\dfrac{1}{\sqrt5 - 2} - \sqrt5$.'
+        num: { value: 2, unit: '', check: '1/(Math.sqrt(5)-2)-Math.sqrt(5)' }
+        hint: 'Домножьте дробь на $\sqrt5 + 2$.'
+        explain: '$\frac{\sqrt5 + 2}{5 - 4} = \sqrt5 + 2$; минус $\sqrt5$ — получается $2$.'
+        f: [1]
+        sol: { method: 'Сопряжённое выражение.', steps: ['$\frac{1}{\sqrt5 - 2} \cdot \frac{\sqrt5 + 2}{\sqrt5 + 2} = \frac{\sqrt5 + 2}{1}$.', '$\sqrt5 + 2 - \sqrt5 = 2$.'], answer: '2' }
+        src: b034
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $(\sqrt7 - \sqrt3)(\sqrt7 + \sqrt3)$.'
+        num: { value: 4, unit: '', check: '(Math.sqrt(7)-Math.sqrt(3))*(Math.sqrt(7)+Math.sqrt(3))' }
+        hint: 'Разность квадратов.'
+        explain: '$7 - 3 = 4$.'
+        f: [1]
+        sol: { method: 'Сопряжённые множители.', steps: ['$(\sqrt7)^2 - (\sqrt3)^2 = 7 - 3 = 4$.'], answer: '4' }
+        src: b034
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\sqrt{6 + 2\sqrt5} - \sqrt5$.'
+        num: { value: 1, unit: '', check: 'Math.sqrt(6+2*Math.sqrt(5))-Math.sqrt(5)' }
+        hint: '$6 = 5 + 1$, $5 = 5 \cdot 1$.'
+        explain: '$6 + 2\sqrt5 = (\sqrt5 + 1)^2$, корень $\sqrt5 + 1$; минус $\sqrt5$ — получается 1.'
+        f: [2]
+        sol: { method: 'Сложный радикал.', steps: ['$(\sqrt5 + 1)^2 = 5 + 2\sqrt5 + 1 = 6 + 2\sqrt5$.', '$\sqrt5 + 1 - \sqrt5 = 1$.'], answer: '1' }
+        src: b034
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $(2\sqrt3)^2 + (3\sqrt2)^2$.'
+        num: { value: 30, unit: '', check: '(2*Math.sqrt(3))**2+(3*Math.sqrt(2))**2' }
+        hint: '$(a\sqrt b)^2 = a^2 b$.'
+        explain: '$4 \cdot 3 + 9 \cdot 2 = 12 + 18 = 30$.'
+        sol: { method: 'Степень произведения.', steps: ['$(2\sqrt3)^2 = 4 \cdot 3 = 12$.', '$(3\sqrt2)^2 = 9 \cdot 2 = 18$.', '$12 + 18 = 30$.'], answer: '30' }
+        src: b034
+      - type: single
+        cat: theory
+        q: 'Какое из чисел иррациональное?'
+        opts: ['$\sqrt{12}$', '$\sqrt{0{,}49}$', '$\sqrt2 \cdot \sqrt{18}$', '$\sqrt{2\frac14}$']
+        ans: a
+        hint: 'Вычислите каждое число.'
+        explain: '$\sqrt{12} = 2\sqrt3$ — иррациональное. Остальные: $0{,}7$; $\sqrt{36} = 6$; $\sqrt{\frac94} = \frac32$.'
+        src: b034
+      - type: single
+        cat: theory
+        q: 'Чему равно $\dfrac{1}{\sqrt3 + \sqrt2}$?'
+        opts: ['$\sqrt3 - \sqrt2$', '$\sqrt3 + \sqrt2$', '$\frac{1}{\sqrt5}$', '$\frac{\sqrt3 - \sqrt2}{5}$']
+        ans: a
+        hint: 'Домножьте на сопряжённое выражение.'
+        explain: '$\frac{\sqrt3 - \sqrt2}{(\sqrt3)^2 - (\sqrt2)^2} = \frac{\sqrt3 - \sqrt2}{1}$.'
+        f: [1]
+        src: b034
+
+  # ───────────────────────────── 1.4.3 ─────────────────────────────
+  - id: ma-1-4-3
+    num: '1.4.3'
+    title: Упрощение выражений
+    pages: [b037, b038, b039]
+    book:
+      place: 'Ч. 1, 1.4 «Корни», пункт 1.4.3'
+      summary: 'Задания на упрощение буквенных выражений с корнями: сокращение дробей, разложение через $\sqrt a$, нахождение значения выражения после упрощения.'
+    stage: verified
+    stageNote: 'Упрощения проверены подстановкой нескольких допустимых значений.'
+    sourcesChecked: '2026-10-25'
+    web: [*os-9k, *os-92, *rs-root]
+    theory:
+      - kind: rule
+        title: Корень как новая переменная
+        body: |
+          При $a, b \ge 0$ удобно смотреть на $\sqrt a$ и $\sqrt b$ как на новые переменные: $a = (\sqrt a)^2$. Тогда работают формулы сокращённого умножения:
+          - $a - b = (\sqrt a - \sqrt b)(\sqrt a + \sqrt b)$;
+          - $a \pm 2\sqrt{ab} + b = (\sqrt a \pm \sqrt b)^2$;
+          - $a\sqrt a \pm b\sqrt b = (\sqrt a \pm \sqrt b)(a \mp \sqrt{ab} + b)$ (сумма/разность кубов);
+          - $a + \sqrt a = \sqrt a(\sqrt a + 1)$.
+        src: b037
+      - kind: rule
+        title: Допустимые значения
+        body: |
+          - Под корнем чётной степени — неотрицательное выражение: $\sqrt{x - 3}$ имеет смысл при $x \ge 3$.
+          - Знаменатель не равен нулю: в $\frac{x - 9}{\sqrt x - 3}$ значение $x = 9$ недопустимо, хотя после сокращения получается $\sqrt x + 3$.
+          - Корень из квадрата раскрывают через модуль: $\sqrt{(x - 2)^2} = |x - 2|$, знак — по условию на $x$.
+        src: b037
+    formulas:
+      - title: Разность как произведение сопряжённых
+        tex: 'a - b = (\sqrt a - \sqrt b)(\sqrt a + \sqrt b)'
+        meaning: '$a, b \ge 0$.'
+        use: 'Сокращение дробей вида $\frac{a - b}{\sqrt a - \sqrt b} = \sqrt a + \sqrt b$ ($a \ne b$).'
+        src: b037
+      - title: Полный квадрат с корнями
+        tex: 'a \pm 2\sqrt{ab} + b = (\sqrt a \pm \sqrt b)^2'
+        meaning: '$a, b \ge 0$.'
+        use: 'Свернуть трёхчлен с корнем в квадрат; сокращение дробей.'
+        src: b037
+      - title: Сумма и разность «кубов» с корнями
+        tex: 'a\sqrt a \pm b\sqrt b = (\sqrt a \pm \sqrt b)(a \mp \sqrt{ab} + b)'
+        meaning: '$a, b \ge 0$; $a\sqrt a = (\sqrt a)^3$.'
+        use: 'Сокращение дробей вида $\frac{x\sqrt x + 8}{\sqrt x + 2}$.'
+        src: b037
+    examples:
+      - title: Сокращение дроби с корнем
+        given: 'Упростите $\dfrac{x - 9}{\sqrt x + 3}$.'
+        find: 'упрощённое выражение.'
+        method: 'Представить $x - 9$ как разность квадратов $(\sqrt x)^2 - 3^2$.'
+        steps:
+          - 'Допустимые значения: $x \ge 0$ (знаменатель $\sqrt x + 3 > 0$ всегда).'
+          - '$x - 9 = (\sqrt x - 3)(\sqrt x + 3)$.'
+          - 'Сокращаем: $\sqrt x - 3$.'
+        check: 'При $x = 16$: $\frac{7}{7} = 1$ и $4 - 3 = 1$.'
+        answer: '$\sqrt x - 3$, $x \ge 0$'
+        src: b037
+      - title: Полный квадрат в числителе
+        given: 'Упростите $\dfrac{(\sqrt a + \sqrt b)^2 - 4\sqrt{ab}}{\sqrt a - \sqrt b}$, $a, b \ge 0$, $a \ne b$.'
+        find: 'упрощённое выражение.'
+        method: 'Раскрыть квадрат, привести подобные и свернуть в $(\sqrt a - \sqrt b)^2$.'
+        steps:
+          - '$(\sqrt a + \sqrt b)^2 - 4\sqrt{ab} = a + 2\sqrt{ab} + b - 4\sqrt{ab} = a - 2\sqrt{ab} + b$.'
+          - '$a - 2\sqrt{ab} + b = (\sqrt a - \sqrt b)^2$.'
+          - 'Сокращаем на $\sqrt a - \sqrt b$: получаем $\sqrt a - \sqrt b$.'
+        check: 'При $a = 16$, $b = 9$: $\frac{49 - 48}{1} = 1$ и $4 - 3 = 1$.'
+        answer: '$\sqrt a - \sqrt b$'
+        src: b037
+      - title: «Сумма кубов» с корнем
+        given: 'Найдите значение $\dfrac{x\sqrt x + 8}{\sqrt x + 2}$ при $x = 9$, предварительно упростив.'
+        find: 'значение.'
+        method: '$x\sqrt x + 8 = (\sqrt x)^3 + 2^3$ — сумма кубов.'
+        steps:
+          - '$(\sqrt x)^3 + 2^3 = (\sqrt x + 2)(x - 2\sqrt x + 4)$.'
+          - 'После сокращения: $x - 2\sqrt x + 4$.'
+          - 'При $x = 9$: $9 - 6 + 4 = 7$.'
+        check: 'Без упрощения: $\frac{27 + 8}{3 + 2} = \frac{35}{5} = 7$.'
+        answer: '$7$'
+        src: b037
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Найдите значение $\dfrac{x - 4}{\sqrt x - 2}$ при $x = 7{,}29$.'
+        num: { value: 4.7, unit: '', check: '(7.29-4)/(Math.sqrt(7.29)-2)' }
+        hint: 'Сократите дробь на $\sqrt x - 2$.'
+        explain: 'Дробь равна $\sqrt x + 2$; $\sqrt{7{,}29} = 2{,}7$, ответ $4{,}7$.'
+        f: [1]
+        sol: { method: 'Разность квадратов в числителе.', steps: ['$x - 4 = (\sqrt x - 2)(\sqrt x + 2)$.', 'Дробь $= \sqrt x + 2$ (при $x \ne 4$).', '$\sqrt{7{,}29} + 2 = 2{,}7 + 2 = 4{,}7$.'], answer: '4,7' }
+        src: b037
+      - type: numeric
+        cat: problem
+        q: 'Найдите значение $\dfrac{a - 2\sqrt{ab} + b}{\sqrt a - \sqrt b}$ при $a = 16$, $b = 9$.'
+        num: { value: 1, unit: '', check: '(16-2*Math.sqrt(144)+9)/(4-3)' }
+        hint: 'Числитель — полный квадрат.'
+        explain: 'Дробь равна $\sqrt a - \sqrt b = 4 - 3 = 1$.'
+        f: [2]
+        sol: { method: 'Свернуть числитель в квадрат и сократить.', steps: ['$a - 2\sqrt{ab} + b = (\sqrt a - \sqrt b)^2$.', 'Дробь $= \sqrt a - \sqrt b$.', '$4 - 3 = 1$.'], answer: '1' }
+        src: b037
+      - type: numeric
+        cat: problem
+        q: 'Найдите значение $\dfrac{\sqrt x - 1}{x - 1}$ при $x = 9$.'
+        num: { value: 0.25, unit: '', check: '(3-1)/(9-1)' }
+        hint: '$x - 1 = (\sqrt x - 1)(\sqrt x + 1)$.'
+        explain: 'Дробь равна $\frac{1}{\sqrt x + 1} = \frac14 = 0{,}25$.'
+        f: [1]
+        sol: { method: 'Разложить знаменатель и сократить.', steps: ['$\frac{\sqrt x - 1}{(\sqrt x - 1)(\sqrt x + 1)} = \frac{1}{\sqrt x + 1}$.', 'При $x = 9$: $\frac{1}{3 + 1} = 0{,}25$.'], answer: '0,25' }
+        src: b037
+      - type: numeric
+        cat: problem
+        q: 'Найдите значение $\dfrac{x\sqrt x - 1}{\sqrt x - 1}$ при $x = 4$.'
+        num: { value: 7, unit: '', check: '(4*2-1)/(2-1)' }
+        hint: 'Числитель — разность кубов $(\sqrt x)^3 - 1$.'
+        explain: 'Дробь равна $x + \sqrt x + 1 = 4 + 2 + 1 = 7$.'
+        f: [3]
+        sol: { method: 'Разность кубов.', steps: ['$(\sqrt x)^3 - 1 = (\sqrt x - 1)(x + \sqrt x + 1)$.', 'После сокращения: $x + \sqrt x + 1 = 7$.'], answer: '7' }
+        src: b037
+      - type: numeric
+        cat: problem
+        q: 'Упростите $\sqrt{(x - 5)^2} + \sqrt{(x - 1)^2}$ при $1 \le x \le 5$. Ответ — число.'
+        num: { value: 4, unit: '', check: 'Math.abs(3-5)+Math.abs(3-1)' }
+        hint: '$\sqrt{A^2} = |A|$; определите знаки $x - 5$ и $x - 1$ на отрезке.'
+        explain: 'При $1 \le x \le 5$: $|x - 5| = 5 - x$, $|x - 1| = x - 1$; сумма $4$.'
+        sol: { method: 'Модуль по знаку выражения.', steps: ['$x - 5 \le 0$: $|x - 5| = 5 - x$.', '$x - 1 \ge 0$: $|x - 1| = x - 1$.', '$5 - x + x - 1 = 4$.'], check: 'При $x = 2$: $3 + 1 = 4$.', answer: '4' }
+        src: b037
+      - type: single
+        cat: theory
+        q: 'При каких $x$ имеет смысл выражение $\dfrac{\sqrt{x - 3}}{x - 5}$?'
+        opts: ['$x \ge 3$, $x \ne 5$', '$x > 3$', '$x \ne 5$', '$x \ge 3$']
+        ans: a
+        hint: 'Подкоренное выражение неотрицательно, знаменатель не равен нулю.'
+        explain: '$x - 3 \ge 0 \Rightarrow x \ge 3$; $x - 5 \ne 0 \Rightarrow x \ne 5$.'
+        src: b037
+      - type: single
+        cat: theory
+        q: 'Чему равно $(\sqrt a + \sqrt b)(\sqrt a - \sqrt b)$ при $a, b \ge 0$?'
+        opts: ['$a - b$', '$a + b$', '$\sqrt{a - b}$', '$a - 2\sqrt{ab} + b$']
+        ans: a
+        hint: 'Разность квадратов.'
+        explain: '$(\sqrt a)^2 - (\sqrt b)^2 = a - b$.'
+        f: [1]
+        src: b037
+
+  # ───────────────────────────── 1.4.4 ─────────────────────────────
+  - id: ma-1-4-4
+    num: '1.4.4'
+    title: Корень n-й степени. Степень с рациональным показателем
+    pages: [b039, b040, b041, b042, b043, b044]
+    book:
+      place: 'Ч. 1, 1.4 «Корни», пункт 1.4.4'
+      summary: 'Задания: вычислить корни n-й степени и степени с дробным показателем, упростить выражения со степенями вида $a^{1/2}$, $a^{-2/3}$, сравнить числа.'
+    stage: verified
+    stageNote: 'Ответы пересчитаны; свойства корней проверены численно.'
+    sourcesChecked: '2026-10-25'
+    web: [*rs-root, *rs-frac, *os-9k, *os-98]
+    theory:
+      - kind: definition
+        title: Корень n-й степени
+        body: |
+          - **Арифметический корень** $n$-й степени ($n \ge 2$) из $a \ge 0$ — неотрицательное число $b$, для которого $b^n = a$: $\sqrt[4]{81} = 3$, $\sqrt[3]{0{,}008} = 0{,}2$.
+          - Для **нечётного** $n$ корень определён и из отрицательных чисел: $\sqrt[3]{-8} = -2$, $\sqrt[5]{-32} = -2$.
+          - $\sqrt[n]{a^n} = |a|$ при чётном $n$ и $\sqrt[n]{a^n} = a$ при нечётном.
+        src: b039
+      - kind: law
+        title: Свойства корней
+        body: |
+          При $a, b \ge 0$, натуральных $m, n, k$:
+          - $\sqrt[n]{ab} = \sqrt[n]a \sqrt[n]b$, $\ \sqrt[n]{\frac ab} = \frac{\sqrt[n]a}{\sqrt[n]b}$ ($b > 0$);
+          - $\left(\sqrt[n]a\right)^m = \sqrt[n]{a^m}$, $\ \sqrt[m]{\sqrt[n]a} = \sqrt[mn]a$;
+          - $\sqrt[nk]{a^{mk}} = \sqrt[n]{a^m}$ — показатели корня и степени можно сокращать на общий множитель.
+        src: b039
+      - kind: definition
+        title: Степень с рациональным показателем
+        body: |
+          Для $a > 0$ и $\frac{m}{n}$ ($n \ge 2$): $a^{\frac mn} = \sqrt[n]{a^m} = \left(\sqrt[n]a\right)^m$; $a^{-\frac mn} = \frac{1}{a^{m/n}}$. Для $a = 0$ определены только положительные дробные степени ($0^{m/n} = 0$).
+          Все свойства степеней сохраняются: $a^x a^y = a^{x+y}$, $(a^x)^y = a^{xy}$ и т. д.
+          **Отрицательное основание в дробной степени не определено** (по школьному определению): $(-8)^{1/3}$ не пишут, хотя $\sqrt[3]{-8} = -2$.
+        src: b040
+    formulas:
+      - title: Степень с рациональным показателем
+        tex: 'a^{\frac mn} = \sqrt[n]{a^m} = \left(\sqrt[n]a\right)^m,\qquad a^{-\frac mn} = \frac{1}{a^{\frac mn}}'
+        meaning: '$a > 0$, $m$ — целое, $n \ge 2$ — натуральное.'
+        use: 'Перевод корней в степени и обратно; вычисления: удобнее сначала извлечь корень, потом возводить в степень: $27^{2/3} = 3^2 = 9$.'
+        limits: 'Основание должно быть положительным; $0^{m/n} = 0$ только при $\frac mn > 0$.'
+        src: b040
+      - title: Свойства корней n-й степени
+        tex: '\sqrt[n]{ab} = \sqrt[n]a\,\sqrt[n]b,\qquad \sqrt[m]{\sqrt[n]a} = \sqrt[mn]a,\qquad \sqrt[nk]{a^{mk}} = \sqrt[n]{a^m}'
+        meaning: '$a, b \ge 0$; $m, n, k$ — натуральные, $m, n \ge 2$.'
+        use: 'Упрощение корней, приведение к одному показателю.'
+        src: b039
+      - title: Корень из степени
+        tex: '\sqrt[n]{a^n} = \begin{cases} |a|, & n\ \text{чётное}, \\ a, & n\ \text{нечётное} \end{cases}'
+        meaning: '$a$ — любое действительное число.'
+        use: 'Упрощение $\sqrt[4]{(x - 3)^4} = |x - 3|$, $\sqrt[3]{(x - 3)^3} = x - 3$.'
+        src: b039
+    examples:
+      - title: Дробные степени
+        given: 'Вычислите $27^{\frac23} + 16^{-\frac34}$.'
+        find: 'значение.'
+        method: 'Представить основания как степени: $27 = 3^3$, $16 = 2^4$, — и умножить показатели.'
+        steps:
+          - '$27^{2/3} = (3^3)^{2/3} = 3^2 = 9$.'
+          - '$16^{-3/4} = (2^4)^{-3/4} = 2^{-3} = \frac18$.'
+          - '$9 + \frac18 = 9{,}125$.'
+        check: 'Калькулятор: $27^{0{,}6667} \approx 9{,}000$, $16^{-0{,}75} = 0{,}125$.'
+        answer: '$9{,}125$'
+        src: b040
+      - title: Корни нечётной и чётной степени
+        given: 'Вычислите $\sqrt[3]{-125} + \sqrt[4]{81} - \sqrt[6]{(-2)^6}$.'
+        find: 'значение.'
+        method: 'Корень нечётной степени сохраняет знак, корень чётной степени из $a^n$ — это $|a|$.'
+        steps:
+          - '$\sqrt[3]{-125} = -5$ (так как $(-5)^3 = -125$).'
+          - '$\sqrt[4]{81} = 3$; $\sqrt[6]{(-2)^6} = |-2| = 2$.'
+          - '$-5 + 3 - 2 = -4$.'
+        check: '$(-5)^3 = -125$, $3^4 = 81$, $(-2)^6 = 64 = 2^6$.'
+        answer: '$-4$'
+        src: b039
+      - title: Упрощение со степенями
+        given: 'Упростите $a^{\frac12} \cdot a^{\frac13} : a^{\frac16}$ ($a > 0$) и найдите значение при $a = 8$.'
+        find: 'степень $a$ и значение.'
+        method: 'Сложить и вычесть показатели.'
+        steps:
+          - '$\frac12 + \frac13 - \frac16 = \frac{3 + 2 - 1}{6} = \frac23$.'
+          - '$a^{2/3}$ при $a = 8$: $8^{2/3} = (\sqrt[3]8)^2 = 4$.'
+        check: '$\sqrt8 \cdot \sqrt[3]8 : \sqrt[6]8 = 2{,}828 \cdot 2 : 1{,}414 = 4$.'
+        answer: '$a^{2/3}$; при $a = 8$ — $4$'
+        src: b040
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $8^{\frac23} \cdot 4^{-\frac12}$.'
+        num: { value: 2, unit: '', check: '8**(2/3)*4**(-1/2)' }
+        hint: '$8 = 2^3$, $4 = 2^2$.'
+        explain: '$2^2 \cdot 2^{-1} = 2$.'
+        f: [1]
+        sol: { method: 'Свести к основанию 2.', steps: ['$8^{2/3} = 2^{3 \cdot 2/3} = 2^2 = 4$.', '$4^{-1/2} = 2^{-1} = \frac12$.', '$4 \cdot \frac12 = 2$.'], answer: '2' }
+        src: b040
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\sqrt[5]{-32} + \sqrt[3]{27}$.'
+        num: { value: 1, unit: '', check: '-2+3' }
+        hint: 'Корень нечётной степени из отрицательного числа — отрицательное число.'
+        explain: '$-2 + 3 = 1$.'
+        f: [3]
+        sol: { method: 'Определение корня n-й степени.', steps: ['$(-2)^5 = -32$, значит, $\sqrt[5]{-32} = -2$.', '$3^3 = 27$, $\sqrt[3]{27} = 3$.', '$-2 + 3 = 1$.'], answer: '1' }
+        src: b039
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $(0{,}04)^{-1{,}5}$.'
+        num: { value: 125, unit: '', check: '0.04**-1.5' }
+        hint: '$0{,}04 = \frac{1}{25}$, $-1{,}5 = -\frac32$.'
+        explain: '$\left(\frac{1}{25}\right)^{-3/2} = 25^{3/2} = 5^3 = 125$.'
+        f: [1]
+        sol: { method: 'Отрицательная дробная степень.', steps: ['$(0{,}04)^{-3/2} = 25^{3/2}$.', '$25^{3/2} = (\sqrt{25})^3 = 125$.'], answer: '125' }
+        src: b040
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\sqrt[4]{16 \cdot 81}$.'
+        num: { value: 6, unit: '', check: '(16*81)**0.25' }
+        hint: 'Корень из произведения.'
+        explain: '$\sqrt[4]{16} \cdot \sqrt[4]{81} = 2 \cdot 3 = 6$.'
+        f: [2]
+        sol: { method: 'Корень из произведения.', steps: ['$\sqrt[4]{16} = 2$, $\sqrt[4]{81} = 3$.', '$2 \cdot 3 = 6$.'], answer: '6' }
+        src: b039
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\sqrt[3]{\sqrt{64}}$.'
+        num: { value: 2, unit: '', check: '64**(1/6)' }
+        hint: 'Корень из корня: показатели перемножаются.'
+        explain: '$\sqrt[6]{64} = 2$ (так как $2^6 = 64$); или $\sqrt{64} = 8$, $\sqrt[3]8 = 2$.'
+        f: [2]
+        sol: { method: 'Корень из корня.', steps: ['$\sqrt[3]{\sqrt{64}} = \sqrt[6]{64}$.', '$2^6 = 64$, ответ $2$.'], answer: '2' }
+        src: b039
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $81^{0{,}75} - 32^{0{,}4}$.'
+        num: { value: 23, unit: '', check: '81**0.75-32**0.4' }
+        hint: '$0{,}75 = \frac34$, $0{,}4 = \frac25$.'
+        explain: '$(\sqrt[4]{81})^3 - (\sqrt[5]{32})^2 = 27 - 4 = 23$.'
+        f: [1]
+        sol: { method: 'Перевести десятичные показатели в дроби.', steps: ['$81^{3/4} = 3^3 = 27$.', '$32^{2/5} = 2^2 = 4$.', '$27 - 4 = 23$.'], answer: '23' }
+        src: b040
+      - type: single
+        cat: theory
+        q: 'Какое из выражений не определено (в действительных числах, по школьному определению степени)?'
+        opts: ['$(-8)^{\frac13}$', '$\sqrt[3]{-8}$', '$8^{\frac13}$', '$0^{\frac13}$']
+        ans: a
+        hint: 'Степень с дробным показателем определяется только для неотрицательного основания.'
+        explain: '$(-8)^{1/3}$ не определено: основание отрицательное. При этом $\sqrt[3]{-8} = -2$ существует, $8^{1/3} = 2$, $0^{1/3} = 0$.'
+        f: [1]
+        src: b040
+      - type: single
+        cat: theory
+        q: 'Чему равно $\sqrt[4]{a^4}$?'
+        opts: ['$|a|$', '$a$', '$-a$', '$a^2$']
+        ans: a
+        hint: 'Корень чётной степени — неотрицательное число.'
+        explain: 'При чётном $n$: $\sqrt[n]{a^n} = |a|$; например, $\sqrt[4]{(-3)^4} = 3$.'
+        f: [3]
+        src: b039

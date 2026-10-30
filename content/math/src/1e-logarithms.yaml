@@ -1,0 +1,571 @@
+# 1.14 Логарифмическая функция (книга, ч. 1, с. 140–156).
+# Теория, формулы, примеры и задачи составлены по открытым источникам (ссылки — в web); задания книги не копируются.
+
+subsection: ma-1-14
+
+x-sources:
+  ca-63: &ca-63 { title: 'College Algebra 2e, 6.3 Logarithmic Functions', org: 'OpenStax, Rice University (открытый учебник)', url: 'https://openstax.org/books/college-algebra-2e/pages/6-3-logarithmic-functions', checked: '2026-10-25', note: 'адрес взят из предметного указателя книги' }
+  ca-64: &ca-64 { title: 'College Algebra 2e, 6.4 Graphs of Logarithmic Functions', org: 'OpenStax, Rice University', url: 'https://openstax.org/books/college-algebra-2e/pages/6-4-graphs-of-logarithmic-functions', checked: '2026-10-25' }
+  ca-65: &ca-65 { title: 'College Algebra 2e, 6.5 Logarithmic Properties', org: 'OpenStax, Rice University', url: 'https://openstax.org/books/college-algebra-2e/pages/6-5-logarithmic-properties', checked: '2026-10-25', note: 'свойства логарифмов, переход к новому основанию' }
+  ca-66: &ca-66 { title: 'College Algebra 2e, 6.6 Exponential and Logarithmic Equations', org: 'OpenStax, Rice University', url: 'https://openstax.org/books/college-algebra-2e/pages/6-6-exponential-and-logarithmic-equations', checked: '2026-10-25', note: 'посторонние корни логарифмических уравнений' }
+
+topics:
+  # ───────────────────────────── 1.14.1 ─────────────────────────────
+  - id: ma-1-14-1
+    num: '1.14.1'
+    title: Логарифмическая функция и её свойства
+    pages: [b140, b141, b142]
+    book:
+      place: 'Ч. 1, 1.14 «Логарифмическая функция», пункт 1.14.1'
+      summary: 'Задания на определение логарифма, вычисление простейших логарифмов, область определения логарифмической функции и сравнение логарифмов.'
+    stage: verified
+    stageNote: 'Значения логарифмов проверены возведением в степень; области определения — подстановкой.'
+    sourcesChecked: '2026-10-25'
+    web: [*ca-63, *ca-64]
+    theory:
+      - kind: definition
+        title: Логарифм
+        body: |
+          **Логарифм** числа $b$ по основанию $a$ — показатель степени, в которую нужно возвести $a$, чтобы получить $b$:
+          $$\log_a b = c \iff a^c = b\qquad (a > 0,\ a \ne 1,\ b > 0).$$
+          - Основное тождество: $a^{\log_a b} = b$.
+          - $\log_a 1 = 0$, $\log_a a = 1$, $\log_a a^c = c$.
+          - $\lg b = \log_{10} b$, $\ln b = \log_e b$.
+          Логарифм отрицательного числа и нуля не определён.
+        src: b140
+      - kind: definition
+        title: Функция y = logₐx
+        body: |
+          - $D = (0; +\infty)$, $E = \mathbb R$; график проходит через $(1; 0)$.
+          - Это функция, **обратная** к $y = a^x$; графики симметричны относительно $y = x$.
+          - $a > 1$ — возрастает ($\log_a x < 0$ при $0 < x < 1$, $> 0$ при $x > 1$); $0 < a < 1$ — убывает.
+        src: b141
+        fig: log-exp-mirror
+    formulas:
+      - title: Определение и основное тождество
+        tex: '\log_a b = c \iff a^c = b,\qquad a^{\log_a b} = b'
+        meaning: '$a > 0$, $a \ne 1$, $b > 0$.'
+        use: 'Вычисление логарифмов, упрощение выражений.'
+        src: b140
+      - title: Сравнение логарифмов
+        tex: 'a > 1:\ \log_a x_1 > \log_a x_2 \iff x_1 > x_2 > 0;\qquad 0 < a < 1:\ \iff 0 < x_1 < x_2'
+        meaning: 'Монотонность логарифмической функции.'
+        use: 'Сравнение чисел, логарифмические неравенства.'
+        src: b141
+    examples:
+      - title: Вычисление логарифмов
+        given: 'Вычислите $\log_2 32$, $\log_3 \frac19$, $\log_{1/2} 8$.'
+        find: 'значения.'
+        method: 'В какую степень возвести основание?'
+        steps:
+          - '$2^5 = 32 \Rightarrow 5$.'
+          - '$3^{-2} = \frac19 \Rightarrow -2$.'
+          - '$\left(\frac12\right)^{-3} = 8 \Rightarrow -3$.'
+        check: 'Обратное возведение в степень даёт исходные числа ✓.'
+        answer: '$5$; $-2$; $-3$'
+        src: b140
+      - title: Область определения
+        given: 'Найдите область определения $y = \log_3(x^2 - 4x)$.'
+        find: '$D(y)$.'
+        method: 'Аргумент логарифма положителен.'
+        steps:
+          - '$x^2 - 4x > 0 \iff x(x - 4) > 0$.'
+          - '$x < 0$ или $x > 4$.'
+        check: '$x = 5$: $\log_3 5$ ✓; $x = 2$: $\log_3(-4)$ — не определён ✓.'
+        answer: '$(-\infty; 0) \cup (4; +\infty)$'
+        src: b141
+      - title: Сравнение
+        given: 'Сравните $\log_{0{,}5} 3$ и $\log_{0{,}5} 5$.'
+        find: 'знак.'
+        method: 'Основание меньше 1 — функция убывает.'
+        steps:
+          - 'Основание $0{,}5 < 1$ — $\log_{0{,}5} x$ убывает.'
+          - '$3 < 5 \Rightarrow \log_{0{,}5} 3 > \log_{0{,}5} 5$.'
+        check: '$\approx -1{,}585 > -2{,}322$ ✓.'
+        answer: '$\log_{0{,}5} 3 > \log_{0{,}5} 5$'
+        src: b141
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\log_5 125$.'
+        num: { value: 3, unit: '', check: 'Math.log(125)/Math.log(5)' }
+        hint: '$5^? = 125$.'
+        explain: '$5^3 = 125$.'
+        f: [1]
+        sol: { method: 'Определение логарифма.', steps: ['$5^3 = 125 \Rightarrow \log_5 125 = 3$.'], answer: '3' }
+        src: b140
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $3^{\log_3 7}$.'
+        num: { value: 7, unit: '', check: '3**(Math.log(7)/Math.log(3))' }
+        hint: 'Основное логарифмическое тождество.'
+        explain: '$a^{\log_a b} = b$.'
+        f: [1]
+        sol: { method: 'Основное тождество.', steps: ['$3^{\log_3 7} = 7$.'], answer: '7' }
+        src: b140
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\log_{1/3} 81$.'
+        num: { value: -4, unit: '', check: 'Math.log(81)/Math.log(1/3)' }
+        hint: '$\left(\frac13\right)^{-4} = 81$.'
+        explain: '$-4$.'
+        f: [1]
+        sol: { method: 'Определение логарифма.', steps: ['$\left(\frac13\right)^c = 81 = \left(\frac13\right)^{-4}$.', '$c = -4$.'], answer: '−4' }
+        src: b140
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\log_4 2$.'
+        num: { value: 0.5, unit: '', check: 'Math.log(2)/Math.log(4)' }
+        hint: '$4^{1/2} = 2$.'
+        explain: '$\frac12$.'
+        f: [1]
+        sol: { method: 'Определение логарифма.', steps: ['$4^{1/2} = 2 \Rightarrow \log_4 2 = 0{,}5$.'], answer: '0,5' }
+        src: b140
+      - type: numeric
+        cat: problem
+        q: 'Сколько целых чисел входит в область определения $y = \lg(9 - x^2)$?'
+        num: { value: 5, unit: '', check: '5' }
+        hint: '$9 - x^2 > 0$.'
+        explain: '$-3 < x < 3$: целые $-2, \dots, 2$.'
+        sol: { method: 'Аргумент логарифма положителен.', steps: ['$x^2 < 9 \iff -3 < x < 3$.', 'Пять целых.'], answer: '5' }
+        src: b141
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\lg 0{,}001$.'
+        num: { value: -3, unit: '', check: 'Math.log10(0.001)' }
+        hint: '$0{,}001 = 10^{-3}$.'
+        explain: '$-3$.'
+        f: [1]
+        sol: { method: 'Десятичный логарифм.', steps: ['$10^{-3} = 0{,}001$.'], answer: '−3' }
+        src: b140
+      - type: single
+        cat: theory
+        q: 'При каких $x$ выполнено $\log_2 x < 0$?'
+        opts: ['$0 < x < 1$', '$x < 0$', '$x < 1$', '$x > 1$']
+        ans: a
+        hint: 'Не забудьте область определения.'
+        explain: 'Функция возрастает и равна 0 при $x = 1$; при этом $x > 0$.'
+        f: [2]
+        src: b141
+      - type: single
+        cat: theory
+        q: 'Когда определён $\log_a b$?'
+        opts: ['$a > 0$, $a \ne 1$, $b > 0$', '$a > 0$, $b > 0$', '$a \ne 1$, $b \ne 0$', 'при любых $a$, $b$']
+        ans: a
+        hint: 'Основание положительно и не равно 1.'
+        explain: 'При $a = 1$ степень всегда равна 1; при $a \le 0$ степень не определена для всех $x$; $a^c > 0$, поэтому $b > 0$.'
+        f: [1]
+        src: b140
+
+  # ───────────────────────────── 1.14.2 ─────────────────────────────
+  - id: ma-1-14-2
+    num: '1.14.2'
+    title: Преобразование логарифмических выражений
+    pages: [b142, b143, b144, b145, b146, b147]
+    book:
+      place: 'Ч. 1, 1.14 «Логарифмическая функция», пункт 1.14.2'
+      summary: 'Задания на вычисление и упрощение выражений с логарифмами по их свойствам: сумма и разность логарифмов, логарифм степени, переход к новому основанию.'
+    stage: verified
+    stageNote: 'Все значения пересчитаны через натуральные логарифмы.'
+    sourcesChecked: '2026-10-25'
+    web: [*ca-65]
+    theory:
+      - kind: law
+        title: Свойства логарифмов
+        body: |
+          При $a > 0$, $a \ne 1$, $x, y > 0$:
+          - $\log_a(xy) = \log_a x + \log_a y$; $\ \log_a\frac xy = \log_a x - \log_a y$;
+          - $\log_a x^k = k\log_a x$; $\ \log_{a^m} x = \frac1m \log_a x$;
+          - переход к новому основанию: $\log_a x = \frac{\log_c x}{\log_c a}$; в частности, $\log_a b \cdot \log_b a = 1$, $\log_a b \cdot \log_b c = \log_a c$;
+          - $a^{\log_b c} = c^{\log_b a}$.
+          **Ошибки**: $\log_a(x + y) \ne \log_a x + \log_a y$; $\frac{\log_a x}{\log_a y} \ne \log_a \frac xy$.
+        src: b142
+    formulas:
+      - title: Логарифм произведения и частного
+        tex: '\log_a(xy) = \log_a x + \log_a y,\qquad \log_a \frac xy = \log_a x - \log_a y'
+        meaning: '$x, y > 0$.'
+        use: 'Объединение или разложение логарифмов.'
+        limits: 'Для $\log_a(xy)$ при $x, y < 0$ нужно писать $\log_a|x| + \log_a|y|$.'
+        src: b142
+      - title: Логарифм степени
+        tex: '\log_a x^k = k \log_a x,\qquad \log_{a^m} x = \frac1m\log_a x'
+        meaning: '$x > 0$, $m \ne 0$.'
+        use: '$\log_{\sqrt2} 8 = 2\log_2 8 = 6$.'
+        src: b143
+      - title: Переход к новому основанию
+        tex: '\log_a x = \frac{\log_c x}{\log_c a},\qquad \log_a b \cdot \log_b a = 1'
+        meaning: '$c > 0$, $c \ne 1$.'
+        use: 'Логарифмы с разными основаниями, вычисления на калькуляторе.'
+        src: b144
+    examples:
+      - title: Сумма логарифмов
+        given: 'Вычислите $\log_6 4 + \log_6 9$.'
+        find: 'значение.'
+        method: 'Логарифм произведения.'
+        steps:
+          - '$\log_6 4 + \log_6 9 = \log_6(4 \cdot 9) = \log_6 36$.'
+          - '$6^2 = 36$, значит, $\log_6 36 = 2$.'
+        check: '$6^2 = 36$ ✓.'
+        answer: '$2$'
+        src: b142
+      - title: Отношение логарифмов
+        given: 'Вычислите $\dfrac{\log_3 8}{\log_3 2}$.'
+        find: 'значение.'
+        method: 'Переход к основанию 2 (или логарифм степени).'
+        steps:
+          - 'По формуле перехода $\frac{\log_3 8}{\log_3 2} = \log_2 8$.'
+          - '$\log_2 8 = 3$, так как $2^3 = 8$.'
+        check: '$\log_3 8 = 3\log_3 2$ ✓.'
+        answer: '$3$'
+        src: b144
+      - title: Степень с логарифмом в показателе
+        given: 'Вычислите $5^{\log_{25} 9}$.'
+        find: 'значение.'
+        method: '$\log_{25} 9 = \log_{5^2} 3^2 = \log_5 3$.'
+        steps:
+          - '$\log_{25} 9 = \frac22 \log_5 3 = \log_5 3$.'
+          - '$5^{\log_5 3} = 3$.'
+        check: '$\log_{25} 9 = \frac{\ln 9}{\ln 25} \approx 0{,}6826$, $5^{0{,}6826} \approx 3{,}000$ ✓.'
+        answer: '$3$'
+        src: b143
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\lg 25 + \lg 4$.'
+        num: { value: 2, unit: '', check: 'Math.log10(25)+Math.log10(4)' }
+        hint: 'Логарифм произведения.'
+        explain: '$\lg 100 = 2$.'
+        f: [1]
+        sol: { method: 'Логарифм произведения.', steps: ['$\lg(25 \cdot 4) = \lg 100 = 2$.'], answer: '2' }
+        src: b142
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\log_3 54 - \log_3 2$.'
+        num: { value: 3, unit: '', check: 'Math.log(27)/Math.log(3)' }
+        hint: 'Логарифм частного.'
+        explain: '$\log_3 27 = 3$.'
+        f: [1]
+        sol: { method: 'Логарифм частного.', steps: ['$\log_3 \frac{54}{2} = \log_3 27 = 3$.'], answer: '3' }
+        src: b142
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\log_2 7 \cdot \log_7 8$.'
+        num: { value: 3, unit: '', check: '(Math.log(7)/Math.log(2))*(Math.log(8)/Math.log(7))' }
+        hint: '$\log_a b \cdot \log_b c = \log_a c$.'
+        explain: '$\log_2 8 = 3$.'
+        f: [3]
+        sol: { method: 'Переход к новому основанию.', steps: ['$\frac{\ln 7}{\ln 2} \cdot \frac{\ln 8}{\ln 7} = \frac{\ln 8}{\ln 2} = 3$.'], answer: '3' }
+        src: b144
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $2\log_5 10 - \log_5 4$.'
+        num: { value: 2, unit: '', check: '(2*Math.log(10)-Math.log(4))/Math.log(5)' }
+        hint: '$2\log_5 10 = \log_5 100$.'
+        explain: '$\log_5 \frac{100}{4} = \log_5 25 = 2$.'
+        f: [2]
+        sol: { method: 'Логарифм степени и частного.', steps: ['$\log_5 100 - \log_5 4 = \log_5 25$.', '$= 2$.'], answer: '2' }
+        src: b143
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $9^{\log_3 5}$.'
+        num: { value: 25, unit: '', check: '9**(Math.log(5)/Math.log(3))' }
+        hint: '$9 = 3^2$.'
+        explain: '$(3^{\log_3 5})^2 = 25$.'
+        f: [2]
+        sol: { method: 'Основное тождество.', steps: ['$9^{\log_3 5} = 3^{2\log_3 5} = (3^{\log_3 5})^2 = 5^2 = 25$.'], answer: '25' }
+        src: b143
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\log_{\sqrt2} 8$.'
+        num: { value: 6, unit: '', check: 'Math.log(8)/Math.log(Math.sqrt(2))' }
+        hint: '$\sqrt2 = 2^{1/2}$.'
+        explain: '$2\log_2 8 = 6$.'
+        f: [2]
+        sol: { method: 'Логарифм по основанию-степени.', steps: ['$\log_{2^{1/2}} 8 = 2\log_2 8 = 6$.'], answer: '6' }
+        src: b143
+      - type: numeric
+        cat: problem
+        q: 'Вычислите $\dfrac{\log_2 9}{\log_2 3}$.'
+        num: { value: 2, unit: '', check: 'Math.log(9)/Math.log(3)' }
+        hint: 'Это не $\log_2 3$!'
+        explain: '$\log_3 9 = 2$.'
+        f: [3]
+        sol: { method: 'Переход к новому основанию.', steps: ['$\frac{\log_2 9}{\log_2 3} = \log_3 9 = 2$.'], answer: '2' }
+        src: b144
+      - type: single
+        cat: theory
+        q: 'Какое равенство верно при всех допустимых значениях?'
+        opts: ['$\log_a(xy) = \log_a x + \log_a y$', '$\log_a(x + y) = \log_a x + \log_a y$', '$\frac{\log_a x}{\log_a y} = \log_a(x - y)$', '$\log_a x^k = (\log_a x)^k$']
+        ans: a
+        hint: 'Логарифм превращает умножение в сложение.'
+        explain: 'Остальные — типичные ошибки: верно $\log_a x^k = k\log_a x$.'
+        f: [1]
+        src: b142
+
+  # ───────────────────────────── 1.14.3 ─────────────────────────────
+  - id: ma-1-14-3
+    num: '1.14.3'
+    title: Логарифмические уравнения
+    pages: [b147, b148, b149, b150, b151, b152]
+    book:
+      place: 'Ч. 1, 1.14 «Логарифмическая функция», пункт 1.14.3'
+      summary: 'Задания на логарифмические уравнения: по определению логарифма, потенцирование, сумма логарифмов, замена $t = \log_a x$, неизвестное в основании.'
+    stage: verified
+    stageNote: 'Корни подставлены в исходные уравнения, посторонние отброшены.'
+    sourcesChecked: '2026-10-25'
+    web: [*ca-66, *ca-65]
+    theory:
+      - kind: rule
+        title: Основные приёмы
+        body: |
+          - **По определению**: $\log_a f(x) = c \iff f(x) = a^c$.
+          - **Потенцирование**: $\log_a f(x) = \log_a g(x) \iff f(x) = g(x) > 0$.
+          - **Замена**: $t = \log_a x$ в уравнениях вида $\log_a^2 x + p\log_a x + q = 0$.
+          - **Неизвестное в основании**: $\log_x b = c \iff x^c = b$, $x > 0$, $x \ne 1$.
+        src: b147
+      - kind: rule
+        title: Проверка и ОДЗ
+        body: |
+          Объединение логарифмов **расширяет** область определения: $\log_3 x + \log_3(x - 8)$ требует $x > 8$, а $\log_3\big(x(x - 8)\big)$ — только $x(x - 8) > 0$. Поэтому после решения обязательно проверяют, что все аргументы исходных логарифмов положительны.
+        src: b148
+    formulas:
+      - title: Простейшее уравнение
+        tex: '\log_a f(x) = c \iff f(x) = a^c'
+        meaning: '$a > 0$, $a \ne 1$; условие $f > 0$ выполняется автоматически.'
+        use: 'Уравнения с одним логарифмом.'
+        src: b147
+      - title: Равенство логарифмов
+        tex: '\log_a f(x) = \log_a g(x) \iff \begin{cases} f(x) = g(x), \\ f(x) > 0 \end{cases}'
+        meaning: 'Положительность одного из аргументов достаточна.'
+        use: 'Потенцирование.'
+        src: b147
+    examples:
+      - title: По определению
+        given: 'Решите уравнение $\log_2(x - 3) = 3$.'
+        find: '$x$.'
+        method: '$x - 3 = 2^3$.'
+        steps:
+          - 'По определению: $x - 3 = 2^3 = 8$.'
+          - '$x = 11$ (аргумент $8 > 0$).'
+        check: '$\log_2 8 = 3$ ✓.'
+        answer: '$x = 11$'
+        src: b147
+      - title: Сумма логарифмов
+        given: 'Решите уравнение $\log_3 x + \log_3(x - 8) = 2$.'
+        find: 'корни.'
+        method: 'Объединить и проверить ОДЗ $x > 8$.'
+        steps:
+          - '$\log_3\big(x(x - 8)\big) = 2 \Rightarrow x^2 - 8x - 9 = 0$.'
+          - '$x = 9$ или $x = -1$; $x = -1$ не входит в ОДЗ.'
+        check: '$\log_3 9 + \log_3 1 = 2 + 0 = 2$ ✓.'
+        answer: '$x = 9$'
+        src: b148
+      - title: Замена
+        given: 'Решите уравнение $\lg^2 x - 3\lg x + 2 = 0$.'
+        find: 'корни.'
+        method: '$t = \lg x$.'
+        steps:
+          - '$t^2 - 3t + 2 = 0$: $t = 1$, $t = 2$.'
+          - '$x = 10$, $x = 100$.'
+        check: '$1 - 3 + 2 = 0$; $4 - 6 + 2 = 0$ ✓.'
+        answer: '$10$; $100$'
+        src: b149
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Решите уравнение $\log_5(2x + 1) = 2$.'
+        num: { value: 12, unit: '', check: '(25-1)/2' }
+        hint: '$2x + 1 = 5^2$.'
+        explain: '$2x + 1 = 25$, $x = 12$.'
+        f: [1]
+        sol: { method: 'По определению.', steps: ['$2x + 1 = 25$.', '$x = 12$.'], answer: '12' }
+        src: b147
+      - type: numeric
+        cat: problem
+        q: 'Найдите произведение корней уравнения $\log_2(x^2 - 1) = 3$.'
+        num: { value: -9, unit: '', check: '3*(-3)' }
+        hint: '$x^2 - 1 = 8$.'
+        explain: '$x = \pm3$, оба подходят; произведение $-9$.'
+        f: [1]
+        sol: { method: 'По определению.', steps: ['$x^2 - 1 = 8 \Rightarrow x^2 = 9$.', '$x = \pm3$ ($x^2 - 1 = 8 > 0$).', 'Произведение $-9$.'], answer: '−9' }
+        src: b147
+      - type: numeric
+        cat: problem
+        q: 'Решите уравнение $\lg(x + 2) + \lg(x - 1) = 1$.'
+        num: { value: 3, unit: '', check: '3' }
+        hint: 'ОДЗ: $x > 1$.'
+        explain: '$(x + 2)(x - 1) = 10 \Rightarrow x^2 + x - 12 = 0$: $3$ и $-4$; подходит $3$.'
+        sol: { method: 'Сумма логарифмов с проверкой ОДЗ.', steps: ['$x > 1$.', '$x^2 + x - 2 = 10 \Rightarrow x^2 + x - 12 = 0$.', '$x = 3$ (корень $-4$ вне ОДЗ).'], check: '$\lg 5 + \lg 2 = \lg 10 = 1$.', answer: '3' }
+        src: b148
+      - type: numeric
+        cat: problem
+        q: 'Решите уравнение $\log_3(x + 1) = \log_3(2x - 5)$.'
+        num: { value: 6, unit: '', check: '1+5' }
+        hint: 'Приравняйте аргументы.'
+        explain: '$x + 1 = 2x - 5 \Rightarrow x = 6$; аргументы $7 > 0$.'
+        f: [2]
+        sol: { method: 'Потенцирование.', steps: ['$x + 1 = 2x - 5$.', '$x = 6$, $x + 1 = 7 > 0$.'], answer: '6' }
+        src: b147
+      - type: numeric
+        cat: problem
+        q: 'Найдите сумму корней уравнения $\log_2^2 x - 5\log_2 x + 6 = 0$.'
+        num: { value: 12, unit: '', check: '4+8' }
+        hint: '$t = \log_2 x$.'
+        explain: '$t = 2$ или $3$; $x = 4$ или $8$; сумма $12$.'
+        sol: { method: 'Замена.', steps: ['$t^2 - 5t + 6 = 0$: $t = 2$, $t = 3$.', '$x = 4$, $x = 8$.', 'Сумма $12$.'], answer: '12' }
+        src: b149
+      - type: numeric
+        cat: problem
+        q: 'Решите уравнение $\log_x 16 = 2$.'
+        num: { value: 4, unit: '', check: 'Math.sqrt(16)' }
+        hint: '$x^2 = 16$, $x > 0$, $x \ne 1$.'
+        explain: '$x = 4$ ($x = -4$ не может быть основанием).'
+        sol: { method: 'Неизвестное в основании.', steps: ['$x^2 = 16$.', '$x > 0 \Rightarrow x = 4$.'], answer: '4' }
+        src: b150
+      - type: numeric
+        cat: problem
+        q: 'Решите уравнение $\log_4(x - 1) = \dfrac12$.'
+        num: { value: 3, unit: '', check: '4**0.5+1' }
+        hint: '$4^{1/2} = 2$.'
+        explain: '$x - 1 = 2$, $x = 3$.'
+        f: [1]
+        sol: { method: 'По определению.', steps: ['$x - 1 = 4^{1/2} = 2$.', '$x = 3$.'], answer: '3' }
+        src: b147
+      - type: single
+        cat: theory
+        q: 'Почему после решения логарифмического уравнения корни проверяют?'
+        opts: ['преобразования могут расширить область определения и дать посторонние корни', 'логарифмы всегда дают иррациональные корни', 'корни могут быть потеряны при возведении в квадрат', 'проверка не нужна']
+        ans: a
+        hint: 'Сравните ОДЗ $\log x + \log(x - 8)$ и $\log x(x - 8)$.'
+        explain: 'После объединения логарифмов допустимы значения, при которых исходные аргументы отрицательны.'
+        src: b148
+
+  # ───────────────────────────── 1.14.4 ─────────────────────────────
+  - id: ma-1-14-4
+    num: '1.14.4'
+    title: Логарифмические неравенства
+    pages: [b152, b153, b154, b155, b156]
+    book:
+      place: 'Ч. 1, 1.14 «Логарифмическая функция», пункт 1.14.4'
+      summary: 'Задания на логарифмические неравенства: решения с учётом области определения, наибольшее/наименьшее целое решение, число и сумма целых решений.'
+    stage: verified
+    stageNote: 'Целые решения пересчитаны перебором с проверкой области определения.'
+    sourcesChecked: '2026-10-25'
+    web: [*ca-64, *ca-66]
+    theory:
+      - kind: rule
+        title: Логарифмическое неравенство
+        body: |
+          - $a > 1$: $\log_a f > \log_a g \iff f > g > 0$.
+          - $0 < a < 1$: $\log_a f > \log_a g \iff 0 < f < g$ — знак меняется.
+          - Число $c$ записывают как логарифм: $c = \log_a a^c$. Например, $\log_2(x - 1) < 3 \iff 0 < x - 1 < 8$.
+          - **Область определения** (все аргументы $> 0$) учитывается всегда — часто именно она даёт одну из границ.
+        src: b152
+    formulas:
+      - title: Неравенство с логарифмами
+        tex: '\log_a f > \log_a g \iff \begin{cases} f > g > 0, & a > 1, \\ 0 < f < g, & 0 < a < 1 \end{cases}'
+        meaning: '$f$, $g$ — выражения с $x$.'
+        use: 'После приведения обеих частей к логарифмам с одним основанием.'
+        src: b152
+    examples:
+      - title: Основание больше 1
+        given: 'Решите неравенство $\log_2(x - 1) < 3$.'
+        find: 'промежуток.'
+        method: '$3 = \log_2 8$, плюс ОДЗ.'
+        steps:
+          - '$0 < x - 1 < 8$.'
+          - '$1 < x < 9$.'
+        check: '$x = 5$: $\log_2 4 = 2 < 3$ ✓; $x = 1$ — не определено ✓.'
+        answer: '$(1; 9)$'
+        src: b152
+      - title: Основание меньше 1
+        given: 'Решите неравенство $\log_{1/3}(x - 2) \ge -2$.'
+        find: 'промежуток.'
+        method: '$-2 = \log_{1/3} 9$, знак меняется.'
+        steps:
+          - '$0 < x - 2 \le 9$.'
+          - '$2 < x \le 11$.'
+        check: '$x = 11$: $\log_{1/3} 9 = -2$ ✓; $x = 12$: $\log_{1/3} 10 < -2$ ✓.'
+        answer: '$(2; 11]$'
+        src: b153
+      - title: Логарифмы в обеих частях
+        given: 'Решите неравенство $\lg x > \lg(5 - x)$.'
+        find: 'промежуток.'
+        method: 'Основание 10 > 1: $x > 5 - x > 0$.'
+        steps:
+          - 'Область определения: $x > 0$, $5 - x > 0 \Rightarrow 0 < x < 5$.'
+          - '$x > 5 - x \Rightarrow x > 2{,}5$; итого $2{,}5 < x < 5$.'
+        check: '$x = 3$: $\lg 3 > \lg 2$ ✓.'
+        answer: '$(2{,}5; 5)$'
+        src: b153
+    questions:
+      - type: numeric
+        cat: problem
+        q: 'Сколько целых решений у неравенства $\log_3(x + 1) \le 2$?'
+        num: { value: 9, unit: '', check: '8-0+1' }
+        hint: '$0 < x + 1 \le 9$.'
+        explain: '$-1 < x \le 8$: целые $0, \dots, 8$ — девять.'
+        f: [1]
+        sol: { method: 'С учётом области определения.', steps: ['$0 < x + 1 \le 9$.', '$-1 < x \le 8$.', 'Девять целых.'], answer: '9' }
+        src: b152
+      - type: numeric
+        cat: problem
+        q: 'Найдите наименьшее целое решение неравенства $\log_2 x > 3$.'
+        num: { value: 9, unit: '', check: '9' }
+        hint: '$x > 2^3$.'
+        explain: '$x > 8$, ответ $9$.'
+        f: [1]
+        sol: { method: 'Основание больше 1.', steps: ['$x > 8$.', 'Наименьшее целое $9$.'], answer: '9' }
+        src: b152
+      - type: numeric
+        cat: problem
+        q: 'Найдите наибольшее целое решение неравенства $\log_{0{,}5}(x - 1) > -2$.'
+        num: { value: 4, unit: '', check: '4' }
+        hint: '$-2 = \log_{0{,}5} 4$, знак меняется.'
+        explain: '$0 < x - 1 < 4$, $1 < x < 5$; ответ $4$.'
+        f: [1]
+        sol: { method: 'Основание меньше 1.', steps: ['$0 < x - 1 < 4$.', '$1 < x < 5$, наибольшее целое $4$.'], answer: '4' }
+        src: b153
+      - type: numeric
+        cat: problem
+        q: 'Найдите целое решение неравенства $\log_5(x^2 - 4) < \log_5(3x)$.'
+        num: { value: 3, unit: '', check: '3' }
+        hint: '$0 < x^2 - 4 < 3x$.'
+        explain: '$x > 2$ и $x^2 - 3x - 4 < 0 \iff -1 < x < 4$: $(2; 4)$, целое $3$.'
+        f: [1]
+        sol: { method: 'Логарифмы в обеих частях.', steps: ['$x^2 - 4 > 0$ и $3x > 0 \Rightarrow x > 2$.', '$x^2 - 4 < 3x \iff -1 < x < 4$.', 'Решение $(2; 4)$, целое $3$.'], answer: '3' }
+        src: b153
+      - type: numeric
+        cat: problem
+        q: 'Сколько целых решений у неравенства $\lg^2 x - \lg x - 2 \le 0$?'
+        num: { value: 100, unit: '', check: '100' }
+        hint: '$t = \lg x$: $-1 \le t \le 2$.'
+        explain: '$0{,}1 \le x \le 100$: целые $1, \dots, 100$.'
+        sol: { method: 'Замена.', steps: ['$t^2 - t - 2 \le 0 \iff -1 \le t \le 2$.', '$0{,}1 \le x \le 100$.', 'Целых — 100.'], answer: '100' }
+        src: b154
+      - type: numeric
+        cat: problem
+        q: 'Найдите сумму целых решений неравенства $\log_2 x + \log_2(x - 2) \le 3$.'
+        num: { value: 7, unit: '', check: '3+4' }
+        hint: 'ОДЗ $x > 2$; $x(x - 2) \le 8$.'
+        explain: '$x^2 - 2x - 8 \le 0 \iff -2 \le x \le 4$; с ОДЗ $(2; 4]$: $3 + 4 = 7$.'
+        sol: { method: 'Сумма логарифмов и ОДЗ.', steps: ['$x > 2$.', '$x^2 - 2x \le 8 \iff -2 \le x \le 4$.', 'Целые $3$ и $4$, сумма $7$.'], answer: '7' }
+        src: b154
+      - type: single
+        cat: theory
+        q: 'Решения неравенства $\log_{0{,}5} x > 0$:'
+        opts: ['$0 < x < 1$', '$x > 1$', '$x < 1$', '$x > 0$']
+        ans: a
+        hint: 'Основание меньше 1, $0 = \log_{0{,}5} 1$.'
+        explain: 'Функция убывает: $\log_{0{,}5} x > \log_{0{,}5} 1 \iff 0 < x < 1$.'
+        f: [1]
+        src: b153
+      - type: single
+        cat: theory
+        q: 'Решения неравенства $\log_2 x > -5$:'
+        opts: ['$x > \frac1{32}$', '$x > -32$', '$x > 0$', '$x > -5$']
+        ans: a
+        hint: '$-5 = \log_2 2^{-5}$.'
+        explain: '$x > 2^{-5} = \frac1{32}$ (это автоматически даёт $x > 0$).'
+        f: [1]
+        src: b152
