@@ -1,0 +1,12 @@
+{
+  "sourcePack": "content/pack.json",
+  "sourceSha256": "0aec9092e414c69f52e993912fab5553db468c80251770ce3e75d22986dc5366",
+  "overlay": "content/release/overlays/physics",
+  "createdAt": "2026-10-30T16:33:07.610Z",
+  "kept": {
+    "theory": 550,
+    "formulas": 734,
+    "examples": 39,
+    "questions": 1141
+  }
+}

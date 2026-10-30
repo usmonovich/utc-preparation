@@ -13,6 +13,10 @@
 ![Android](https://img.shields.io/badge/Android-target%20SDK%2036-3ddc84?logo=android&logoColor=white)
 ![Тесты](https://img.shields.io/badge/тесты-221%20unit%20%2B%2033%20e2e-2a47c7)
 
+### [▶ Открыть приложение в браузере](https://usmonovich.github.io/utc-preparation/)
+
+<sub>Работает на компьютере, Android и iPhone. На телефоне: «Поделиться» → «На экран „Домой“» — и приложение откроется как обычное.</sub>
+
 </div>
 
 ---
@@ -153,7 +157,7 @@ store/                  значки, тексты для магазинов, п
 
 ## Статус
 
-Версия 1.0. Веб-версия и сборка для Android работают и проверены; в Google Play и App Store приложение пока **не опубликовано**. Синхронизация через Supabase написана, но на живом сервере не проверена.
+Версия 1.0. [Веб-версия](https://usmonovich.github.io/utc-preparation/) собирается автоматически при каждом обновлении ветки `main` (GitHub Actions → GitHub Pages); сборка для Android проверена на телефоне. В Google Play и App Store приложение пока **не опубликовано**. Синхронизация через Supabase написана, но на живом сервере не проверена.
 
 ## Автор
 

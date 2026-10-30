@@ -1,0 +1,12 @@
+{
+  "sourcePack": "content/math/pack.json",
+  "sourceSha256": "afa39862058fe0f75464ee0acc3c888647c659fd47b31b642f9bc4b483dd5450",
+  "overlay": "content/release/overlays/math",
+  "createdAt": "2026-10-30T16:33:07.713Z",
+  "kept": {
+    "theory": 248,
+    "formulas": 302,
+    "examples": 393,
+    "questions": 1048
+  }
+}

@@ -6,7 +6,7 @@ ios/App/build/
 .env
 *.keystore
 *.jks
-release/
+/release/
 android/local.properties
 # хеш PIN администратора — только у владельца
 .admin-pin
